@@ -1,10 +1,19 @@
 <?php
 
-namespace App\Entities;
+namespace Seracademico\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\CorRaca;
+use Seracademico\Entities\Endereco;
+use Seracademico\Entities\Estado;
+use Seracademico\Entities\EstadoCivil;
+use Seracademico\Entities\Exame;
+use Seracademico\Entities\InstituicaoMedio;
+use Seracademico\Entities\Profissao;
+use Seracademico\Entities\TipoSanguinio;
+use Seracademico\Entities\Turno;
 
 class Aluno extends Model implements Transformable
 {
@@ -52,4 +61,73 @@ class Aluno extends Model implements Transformable
         'instituicao_superior_id'
     ];
 
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class, 'enderecos_id');
+    }
+
+    public function sexo()
+    {
+        return $this->belongsTo(Sexo::class, 'sexos_id');
+    }
+
+    public function turno()
+    {
+        return $this->belongsTo(Turno::class, 'turnos_id');
+    }
+
+    public function grauInstrucao()
+    {
+        return $this->belongsTo(GrauInstrucao::class, 'grau_instrucoes_id');
+    }
+
+    public function profissao()
+    {
+        return $this->belongsTo(Profissao::class, 'profissoes_id');
+    }
+
+    public function religiao()
+    {
+        return $this->belongsTo(Religiao::class, 'religioes_id');
+    }
+
+    public function estadoCivil()
+    {
+        return $this->belongsTo(EstadoCivil::class, 'estados_civis_id');
+    }
+
+    public function tipoSanguinio()
+    {
+        return $this->belongsTo(TipoSanguinio::class, 'tipos_sanguinios_id');
+    }
+
+    public function corRaca()
+    {
+        return $this->belongsTo(CorRaca::class, 'cores_racas_id');
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'estados_id');
+    }
+
+    public function exame1()
+    {
+        return $this->belongsTo(Exame::class, 'exames1_id');
+    }
+
+    public function exame2()
+    {
+        return $this->belongsTo(Exame::class, 'exames2_id');
+    }
+
+    public function instituicaoMedio()
+    {
+        return $this->belongsTo(InstituicaoMedio::class, 'instituicao_medio_id');
+    }
+
+    public function instituicaoSuperior()
+    {
+        return $this->belongsTo(InstituicaoMedio::class, 'instituicao_superior_id');
+    }
 }
