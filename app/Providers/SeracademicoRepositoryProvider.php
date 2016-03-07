@@ -64,8 +64,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\GrauIntrucaoRepository::class,
-            \Seracademico\Repositories\GrauIntrucaoRepositoryEloquent::class
+            \Seracademico\Repositories\GrauInstrucaoRepository ::class,
+            \Seracademico\Repositories\GrauInstrucaoRepositoryEloquent::class
         );
 
         $this->app->bind(
