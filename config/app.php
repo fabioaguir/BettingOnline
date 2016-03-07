@@ -146,6 +146,7 @@ return [
         Seracademico\Providers\RouteServiceProvider::class,
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        \Seracademico\Providers\SeracademicoRepositoryProvider::class,
 
     ],
 
