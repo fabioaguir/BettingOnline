@@ -141,6 +141,7 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
 
 
+
         /*
          * Application Service Providers...
          */
@@ -151,6 +152,16 @@ return [
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \Seracademico\Providers\SeracademicoRepositoryProvider::class,
+
+        /*
+        * Laravel Framework Service Providers...
+         * https://github.com/romanbican/roles
+        */
+        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
+        Bican\Roles\RolesServiceProvider::class,
+
+
 
     ],
 
@@ -204,6 +215,8 @@ return [
         //Form
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Form'      => Illuminate\Html\FormFacade::class,
+
+
 
     ],
 
