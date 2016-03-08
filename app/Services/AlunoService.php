@@ -5,6 +5,7 @@ namespace Seracademico\Services;
 use Seracademico\Entities\Aluno;
 use Seracademico\Repositories\AlunoRepository;
 use Seracademico\Validators\AlunoValidator;
+use Seracademico\Entities;
 
 class AlunoService
 {
@@ -21,6 +22,11 @@ class AlunoService
         $this->repository = $repository;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
     public function find($id)
     {
         #Recuperando o registro no banco de dados
@@ -69,6 +75,28 @@ class AlunoService
         }
 
         #Retorno
+        return $result;
+    }
+
+    /**
+     * @param array $models
+     * @return array
+     */
+    public function load(array $models) : array
+    {
+        #Declarando variáveis de uso
+        $result = [];
+
+        #Criando e executando as consultas
+        foreach ($models as $model) {
+            #qualificando o namespace
+            $nameModel = "Seracademico\\Entities\\$model";
+
+            #Recuperando o registro e armazenando no array
+            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+        }
+
+        #retorno
         return $result;
     }
 }

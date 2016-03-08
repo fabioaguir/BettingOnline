@@ -25,6 +25,28 @@ class AlunoController extends Controller
     private $validator;
 
     /**
+     * @var array
+     */
+    private $loadFields = [
+        'Curso',
+        'Turma',
+        'Turno',
+        'Curriculo',
+        'Sexo',
+        'EstadoCivil',
+        'GrauIntrucao',
+        'Profissao',
+        'CorRaca',
+        'TipoSanguinio',
+        'Nacionalidade',
+        'Naturalidade',
+        'Estado',
+        'Cidade',
+        'Bairro',
+        'InstituicaoSuperior'
+    ];
+
+    /**
      * @param AlunoService $service
      */
     public function __construct(AlunoService $service, AlunoValidator $validator)
@@ -60,7 +82,11 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        return view('aluno.create');
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('aluno.create', compact('loadFields'));
     }
 
     /**
