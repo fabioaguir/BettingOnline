@@ -8,17 +8,21 @@
 
     <title>Gestão Acadêmica</title>
 
-    <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/animate.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/style.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" >
+    <link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
     <link href="{{asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('/css/jquery.datetimepicker.css')}}" />
+    <link href="{{asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
 
     @yield('css')
 </head>
@@ -37,14 +41,14 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Secretaria</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.alunos.grid') }}">Alunos</a></li>
+                        <li><a href="{{ route('seracademico.aluno.index') }}">Alunos</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Cadastros</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.user.grid') }}">Usuários</a></li>
+                        <li><a href="#">Usuários</a></li>
                     </ul>
                 </li>
             </ul>
@@ -75,7 +79,7 @@
                                 <li><a href="profile.html">Perfil</a></li>
                                 <li><a href="contacts.html">Notificações</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{{ route('seracademico.logout') }}">Logout</a></li>
+                                <li><a href="#">Logout</a></li>
                             </ul>
                         </div>
                     </li>
@@ -93,16 +97,21 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="{{ asset('/js/jquery.js')}}" type="text/javascript"></script>
+<script src="//code.jquery.com/jquery.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript" ></script>
 <script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>
-<script src="{{ asset('/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
+
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="/vendor/datatables/buttons.server-side.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>

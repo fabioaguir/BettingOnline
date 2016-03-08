@@ -138,9 +138,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         //Form
-        Illuminate\Html\HtmlServiceProvider::class,
-
-
+       // Illuminate\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -157,12 +156,10 @@ return [
         * Laravel Framework Service Providers...
          * https://github.com/romanbican/roles
         */
-        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
-        Illuminate\Auth\AuthServiceProvider::class,
-        Bican\Roles\RolesServiceProvider::class,
-
-
-
+       Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+       Illuminate\Auth\AuthServiceProvider::class,
+       Bican\Roles\RolesServiceProvider::class,
+       Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -213,8 +210,13 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         //Form
-        'Html'      => Illuminate\Html\HtmlFacade::class,
-        'Form'      => Illuminate\Html\FormFacade::class,
+        //'Html'      => Illuminate\Html\HtmlFacade::class,
+       // 'Form'      => Illuminate\Html\FormFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
+        //DataTable
+        'Datatables' => Yajra\Datatables\Datatables::class,
 
 
 

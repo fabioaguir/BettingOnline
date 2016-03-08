@@ -3,20 +3,11 @@
         <div class="row">
             <div class="form-group col-md-8">
                 {!! Form::label('nome', 'Nome *') !!}
-                {!! Form::text('alunos[nome]', isset($cliente['nome']) ? $cliente['nome'] : "", array('class' => 'form-control')) !!}
+                {!! Form::text('nome', null, array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('nascimento', 'Nascimento ') !!}
-                <?php
-                /*if(isset($cliente['dataNasciemento'])) {
-                    $date2 = explode('T', $cliente['dataNasciemento']);
-                    $data2 = \DateTime::createFromFormat('Y-m-d', $date2[0]);
-                    $dataFromat2 = $data2->format('d/m/Y');
-                } else {
-                    $dataFromat2 = "";
-                }*/
-                ?>
-                {!! Form::text('', '', array('class' => 'form-control datepicker')) !!}
+                {!! Form::text('nascimento', null, array('class' => 'form-control datepicker')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('sexo', 'Sexo ') !!}

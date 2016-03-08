@@ -5,10 +5,12 @@ namespace Seracademico\Http\Controllers;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Seracademico\Entities\Aluno;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\AlunoService;
 use Seracademico\Validators\AlunoValidator;
+use Yajra\Datatables\Datatables;
 
 class AlunoController extends Controller
 {
@@ -37,6 +39,20 @@ class AlunoController extends Controller
     public function index()
     {
         return view('aluno.index');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $alunos = \DB::table('fac_alunos')->select(['id', 'nome', 'cpf']);
+
+        #Editando a grid
+        return Datatables::of($alunos)->addColumn('action', function ($aluno) {
+                return '<a href="edit/'.$aluno->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+        })->make(true);
     }
 
     /**
