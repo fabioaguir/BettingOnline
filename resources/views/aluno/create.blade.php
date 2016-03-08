@@ -32,7 +32,7 @@
                 @endif
             @endif--}}
 
-            {!! Form::open(['route'=>'seracademico.alunos.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route'=>'seracademico.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormAluno')
             {!! Form::close() !!}
         </div>

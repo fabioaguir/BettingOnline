@@ -122,6 +122,7 @@ class AlunoController extends Controller
     {
         try {
             $aluno = $this->service->find($id);
+            //dd(compact('aluno'));
 
             return view('aluno.edit', compact('aluno'));
         } catch (\Throwable $e) {
