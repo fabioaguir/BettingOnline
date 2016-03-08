@@ -7,11 +7,11 @@
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('nascimento', 'Nascimento ') !!}
-                {!! Form::text('nascimento', null, array('class' => 'form-control datepicker')) !!}
+                {!! Form::text('data_nasciemento', null, array('class' => 'form-control datepicker')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('sexo', 'Sexo ') !!}
-                {!! Form::select('', array(), '', array('class' => 'form-control')) !!}
+                {!! Form::select('sexos_id', array(), null, array('class' => 'form-control')) !!}
             </div>
         </div>
         <div class="row">
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
-                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                {!! Form::text('matricula', null , array('class' => 'form-control')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
             <div class="form-group col-md-1">
@@ -99,30 +99,30 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-2">
-                                {!! Form::label('estadoCivil', 'Estado Civil ') !!}
-                                {!! Form::select('', array(), '',array('class' => 'form-control')) !!}
+                                {!! Form::label('estado_civis_id', 'Estado Civil ') !!}
+                                {!! Form::select('estado_civis_id', array(), null,array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('grauInstrucao', 'Grau de instrução') !!}
-                                {!! Form::select('', array(), '',array('class' => 'form-control')) !!}
+                                {!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}
+                                {!! Form::select('grau_instrucoes_id', array(), null,array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                {!! Form::label('profissao', 'Profissão ') !!}
-                                {!! Form::select('', array(), '',array('class' => 'form-control')) !!}
+                                {!! Form::label('profissoes_id', 'Profissão ') !!}
+                                {!! Form::select('profissoes_id', array(), null,array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('corRaca', 'Cor/Raça') !!}
-                                {!! Form::select('', array(), '',array('class' => 'form-control')) !!}
+                                {!! Form::label('cores_racas_id', 'Cor/Raça') !!}
+                                {!! Form::select('cores_racas_id', array(), null,array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('tipoSanguineo', 'Tipo Sanguíneo') !!}
-                                {!! Form::select('', array(), '', array('class' => 'form-control')) !!}
+                                {!! Form::label('tipos_sanguinios_id', 'Tipo Sanguíneo') !!}
+                                {!! Form::select('tipos_sanguinios_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                                 {!! Form::label('nacionalidade', 'Nacionalidade ') !!}
-                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                {!! Form::text('nacionalidade', null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('ufNascimento', 'UF Nascimento') !!}
@@ -130,7 +130,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('naturalidade', 'Naturalidade ') !!}
-                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                {!! Form::text('naturalidade', null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-archive"></i> Outros dados</legend>
@@ -145,12 +145,12 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('nomePai', 'Nome Pai ') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('nome_pai', 'Nome Pai ') !!}
+                                                {!! Form::text('nome_pai', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('nomeMae', 'Nome Mãe ') !!}
-                                                {!! Form::text('','', array('class' => 'form-control')) !!}
+                                                {!! Form::label('nome_mae', 'Nome Mãe ') !!}
+                                                {!! Form::text('nome_mae',null, array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -166,54 +166,46 @@
                                         <div class="row">
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('identidade', 'Identidade ') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::text('identidade', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('orgaoRG', 'Orgão RG ') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('orgao_rg', 'Orgão RG ') !!}
+                                                {!! Form::text('orgao_rg', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('ufExp', 'UF') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('uf_exp', 'UF') !!}
+                                                {!! Form::text('uf_exp', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('dataExpedicao', 'Data expedição') !!}
-                                                <?php
-                                               /* if(isset($cliente['dataExpedicao'])) {
-                                                    $date = explode('T', $cliente['dataExpedicao']);
-                                                    $data = \DateTime::createFromFormat('Y-m-d', $date[0]);
-                                                    $dataFromat = $data->format('d/m/Y');
-                                                } else {
-                                                    $dataFromat = "";
-                                                }*/
-                                                ?>
-                                                {!! Form::text('', '', array('class' => 'form-control datepicker')) !!}
+                                                {!! Form::label('data_expedicao', 'Data expedição') !!}
+
+                                                {!! Form::text('data_expedicao', null , array('class' => 'form-control datepicker')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('cpf', 'CPF *') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
+                                                {!! Form::text('cpf', null, array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('tituloEleitoral', 'Título Eleitoral') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('titulo_eleitoral', 'Título Eleitoral') !!}
+                                                {!! Form::text('titulo_eleitoral', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
                                                 {!! Form::label('zona', 'Zona') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::text('zona', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
                                                 {!! Form::label('secao', 'Seção') !!}
-                                                {!! Form::text('', isset($cliente['secao']) ? $cliente['secao'] : "", array('class' => 'form-control')) !!}
+                                                {!! Form::text('secao', null , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('reservista', 'Reservista') !!}
-                                                {!! Form::text('alunos[resevista]', isset($cliente['resevista']) ? $cliente['resevista'] : "", array('class' => 'form-control')) !!}
+                                                {!! Form::text('reservista', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('categoriaReser', 'Categoria Reservista') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('categoria_reser', 'Categoria Reservista') !!}
+                                                {!! Form::text('categoria_reser', null, array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -247,8 +239,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('outraDef', 'Outra') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('outra_def', 'Outra') !!}
+                                                {!! Form::text('outra_def', null, array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -265,29 +257,29 @@
                         <div class="row">
                             <div class="form-group col-md-10">
                                 {!! Form::label('endereco', 'Endereço ') !!}
-                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                {!! Form::text('endereco', null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('numero', 'Número') !!}
-                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                {!! Form::text('numero', null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                {!! Form::label('uf', 'UF ') !!}
-                                {!! Form::select('uf', array(), '', array('class' => 'form-control', 'id' => 'estado')) !!}
+                                {!! Form::label('estados_id', 'UF ') !!}
+                                {!! Form::select('estados_id', $loadFields['estado'], null, array('class' => 'form-control', 'id' => 'estado')) !!}
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                {!! Form::select('cidade', array(), '',array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                {!! Form::select('cidade', array(), null,array('class' => 'form-control', 'id' => 'cidade')) !!}
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('bairro', 'Bairro ') !!}
-                                {!! Form::select('', array(), '',array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                {!! Form::select('bairro', array(), null,array('class' => 'form-control', 'id' => 'bairro')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('cep', 'CEP ') !!}
-                                {!! Form::text('', '', array('class' => 'form-control cep')) !!}
+                                {!! Form::text('cep', null, array('class' => 'form-control cep')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-phone"></i> Contato</legend>
@@ -303,19 +295,19 @@
                                         <div class="row">
                                             <div class="form-group col-md-5">
                                                 {!! Form::label('email', 'E-mail') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::text('email', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('telFixo', 'Telefone fixo') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::label('tel_fixo', 'Telefone fixo') !!}
+                                                {!! Form::text('tel_fixo', null , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('celular', 'Celular') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::text('celular', null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('celular2', 'Celular 2') !!}
-                                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                                {!! Form::text('celular2', null, array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -329,40 +321,40 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-12">
-                                                {!! Form::label('nomeEmp', 'Nome da empresa') !!}
-                                                {!! Form::text('',"" , array('class' => 'form-control')) !!}
+                                                {!! Form::label('nome_emp', 'Nome da empresa') !!}
+                                                {!! Form::text('nome_emp',null, array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('uf', 'UF ') !!}
-                                                {!! Form::select('ufPro', array(), '', array('class' => 'form-control', 'id' => 'estadoPro')) !!}
+                                                {!! Form::label('uf_pro', 'UF ') !!}
+                                                {!! Form::select('uf_pro', array(), null, array('class' => 'form-control', 'id' => 'estadoPro')) !!}
                                             </div>
                                             <div class="form-group col-md-4">
                                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                                {!! Form::select('cidadePro', array(), '',array('class' => 'form-control', 'id' => 'cidadePro')) !!}
+                                                {!! Form::select('cidadePro', array(), null,array('class' => 'form-control', 'id' => 'cidadePro')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('bairro', 'Bairro ') !!}
-                                                {!! Form::select('', array(), '',array('class' => 'form-control', 'id' => 'bairroPro')) !!}
+                                                {!! Form::select('', array(), null,array('class' => 'form-control', 'id' => 'bairroPro')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('cepPro', 'CEP') !!}
-                                                {!! Form::text('',"" , array('class' => 'form-control')) !!}
+                                                {!! Form::label('cep_pro', 'CEP') !!}
+                                                {!! Form::text('cep_pro',null , array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-8">
-                                                {!! Form::label('emailInstitucional', 'E-mail institucional') !!}
-                                                {!! Form::text('',"" , array('class' => 'form-control')) !!}
+                                                {!! Form::label('email_institucional', 'E-mail institucional') !!}
+                                                {!! Form::text('email_institucional',null , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('telFixoPro', 'Telefone Fixo') !!}
-                                                {!! Form::text('', "" , array('class' => 'form-control')) !!}
+                                                {!! Form::label('tel_fixo_pro', 'Telefone Fixo') !!}
+                                                {!! Form::text('tel_fixo_pro', null , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('celPro', 'Celular') !!}
-                                                {!! Form::text('',"" , array('class' => 'form-control')) !!}
+                                                {!! Form::label('cel_pro', 'Celular') !!}
+                                                {!! Form::text('cel_pro',null , array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -386,14 +378,14 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('anoConlusao', 'Ano Conclusão') !!}
-                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                {!! Form::label('ano_conlusao', 'Ano Conclusão') !!}
+                                {!! Form::text('ano_conlusao', null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {!! Form::label('outraEscola', 'Outra Escola') !!}
-                                {!! Form::text('', '', array('class' => 'form-control')) !!}
+                                {!! Form::label('outra_escola', 'Outra Escola') !!}
+                                {!! Form::text('outra_escola', null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="panel-group" id="accordion">
@@ -408,7 +400,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 {!! Form::label('1Exame', '1º Exame') !!}
-                                                {!! Form::select('', array(), '', array('class' => 'form-control')) !!}
+                                                {!! Form::select('', array(), null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('data1', 'Data') !!}
@@ -425,13 +417,13 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('nota1', 'Nota') !!}
-                                                {!! Form::text('alunos[notaExameNacionalUm]', isset($cliente['notaExameNacionalUm']) ? $cliente['notaExameNacionalUm'] : "", array('class' => 'form-control')) !!}
+                                                {!! Form::text('nota1', null , array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 {!! Form::label('2Exame', '2º Exame') !!}
-                                                {!! Form::select('', array(), '', array('class' => 'form-control')) !!}
+                                                {!! Form::select('', array(), null, array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('data2', 'Data') !!}
@@ -448,7 +440,7 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('nota2', 'Nota') !!}
-                                                {!! Form::text('','', array('class' => 'form-control')) !!}
+                                                {!! Form::text('nota2',null, array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
