@@ -40,6 +40,7 @@
                     </div>
                 @endif
             @endif
+
             {!! Form::model($aluno, ['route'=> ['seracademico.aluno.update', $aluno->id], 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormAluno')
                 {{--<a href="{{ route('seracademico.report.contratoAluno', ['id' => $aluno->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}

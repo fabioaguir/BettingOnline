@@ -10,7 +10,7 @@ class GrauInstrucao extends Model implements Transformable
 {
     use TransformableTrait;
 
-    private $table = "grau_instrucoes";
+    protected $table = "grau_instrucoes";
 
     protected $fillable = [
         'nome'

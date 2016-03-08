@@ -48,7 +48,7 @@ class AlunoService
     public function store(array $data) : Aluno
     {
         #Criando no banco de dados
-        $result =  $this->repository->create($data['aluno']);
+        $result =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
         if(!$result) {
@@ -67,7 +67,7 @@ class AlunoService
     public function update(array $data, int $id) : Aluno
     {
         #Atualizando no banco de dados
-        $result = $this->repository->update($data['aluno'], $id);
+        $result = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$result) {

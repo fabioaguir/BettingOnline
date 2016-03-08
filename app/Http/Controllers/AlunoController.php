@@ -28,18 +28,13 @@ class AlunoController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Curso',
-        'Turma',
         'Turno',
-        'Curriculo',
         'Sexo',
         'EstadoCivil',
-        'GrauIntrucao',
+        'GrauInstrucao',
         'Profissao',
         'CorRaca',
         'TipoSanguinio',
-        'Nacionalidade',
-        'Naturalidade',
         'Estado',
         'Cidade',
         'Bairro',
@@ -100,7 +95,7 @@ class AlunoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            $this->validator->with($data['aluno'])->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -109,7 +104,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) {dd($e->getMessage());
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -121,10 +116,14 @@ class AlunoController extends Controller
     public function edit($id)
     {
         try {
+            #Recuperando o aluno
             $aluno = $this->service->find($id);
-            //dd(compact('aluno'));
 
-            return view('aluno.edit', compact('aluno'));
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
+
+            #retorno para view
+            return view('aluno.edit', compact('aluno', 'loadFields'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -142,7 +141,7 @@ class AlunoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            $this->validator->with($data['aluno'])->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
