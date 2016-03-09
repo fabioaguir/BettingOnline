@@ -44,12 +44,12 @@
                         <input type="checkbox" name="" checked id="status" value="">
                     @else
                         @if(isset($cliente['status']) && $cliente['status'] == true)
-                            <input type="checkbox"  name="" checked id="status" value="{{$cliente['status']}}">
+                            <input type="checkbox" name="" checked id="status" value="{{$cliente['status']}}">
                         @else
                             <input type="checkbox" name="alunos[status]" id="status" value="">
                         @endif
                     @endif
-                    <label for="op1">  Ativar  </label>
+                    <label for="op1"> Ativar </label>
                 </div>
             </div>
 
@@ -59,8 +59,8 @@
         <div class="fileinput fileinput-new" data-provides="fileinput">
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                 @if (isset($cliente['img']) && $cliente['img'] != null)
-                    <div id="midias" >
-                        <img id="logo"  src="" class="ajuste-img" alt="Foto"  height="300" width="150"/><br />
+                    <div id="midias">
+                        <img id="logo" src="" class="ajuste-img" alt="Foto" height="300" width="150"/><br/>
                         <button type="button" class="btn btn-danger removerFoto">Remover Foto</button>
                     </div>
                 @endif
@@ -72,26 +72,36 @@
                     <input type="file" name="img">
                     <input type="hidden" name="imgAtual" value="">
                 </span>
-                <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
+                <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6"
+                   data-dismiss="fileinput">Remover</a>
             </div>
         </div>
     </div>
 </div>
 <hr class="hr-line-dashed"/>
+
+
 <div class="row">
     <div class="col-md-12">
+
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i>  Dados pessoais</a>
+                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Dados pessoais</a>
             </li>
             <li role="presentation">
-                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>  Informações para contato</a>
+                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Informações para contato</a>
             </li>
             <li role="presentation">
-                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>  Ensino Médio</a>
+                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Ensino Superior</a>
             </li>
+            <li role="presentation">
+                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
+            </li>
+
         </ul>
+        <!-- End Nav tabs -->
+
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="dados">
@@ -101,11 +111,11 @@
                         <div class="row">
                             <div class="form-group col-md-2">
                                 {!! Form::label('estado_civis_id', 'Estado Civil ') !!}
-                                {!! Form::select('estado_civis_id', array(), Session::getOldInput('estado_civis_id'),array('class' => 'form-control')) !!}
+                                {!! Form::select('estado_civis_id', $loadFields['estadocivil'], Session::getOldInput('estado_civis_id'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}
-                                {!! Form::select('grau_instrucoes_id', array(), Session::getOldInput('grau_instrucoes_id'),array('class' => 'form-control')) !!}
+                                {!! Form::select('grau_instrucoes_id', $loadFields['grauinstrucao'], Session::getOldInput('grau_instrucoes_id'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('profissoes_id', 'Profissão ') !!}
@@ -113,11 +123,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('cores_racas_id', 'Cor/Raça') !!}
-                                {!! Form::select('cores_racas_id', array(), Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
+                                {!! Form::select('cores_racas_id', $loadFields['corraca'], Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('tipos_sanguinios_id', 'Tipo Sanguíneo') !!}
-                                {!! Form::select('tipos_sanguinios_id', array(), Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
+                                {!! Form::select('tipos_sanguinios_id', $loadFields['tiposanguinio'] , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -139,7 +149,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i class="fa fa-plus-circle"></i>  Filiação</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i
+                                                    class="fa fa-plus-circle"></i> Filiação</a>
                                     </h4>
                                 </div>
                                 <div id="filiacao" class="panel-collapse collapse">
@@ -159,7 +170,8 @@
 
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i class="fa fa-plus-circle"></i>  Documentos</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i
+                                                    class="fa fa-plus-circle"></i> Documentos</a>
                                     </h4>
                                 </div>
                                 <div id="collapseTwo" class="panel-collapse collapse">
@@ -214,7 +226,8 @@
 
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#deficiencia"> <i class="fa fa-plus-circle"></i>  Deficiencia</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#deficiencia"> <i
+                                                    class="fa fa-plus-circle"></i> Deficiencia</a>
                                     </h4>
                                 </div>
                                 <div id="deficiencia" class="panel-collapse collapse">
@@ -228,14 +241,14 @@
                                                 {!! Form::label('tipoDef', 'Tipo') !!}
                                                 <div class="checkbox checkbox-primary">
                                                     <input type="checkbox" id="inlineCheckbox1" value="option1">
-                                                    <label for="inlineCheckbox1">  Física  </label>
+                                                    <label for="inlineCheckbox1"> Física </label>
                                                     <div class="checkbox checkbox-primary checkbox-inline">
                                                         <input type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label for="inlineCheckbox2">  Auditiva  </label>
+                                                        <label for="inlineCheckbox2"> Auditiva </label>
                                                     </div>
                                                     <div class="checkbox checkbox-primary checkbox-inline">
                                                         <input type="checkbox" id="inlineCheckbox3" value="option3">
-                                                        <label for="inlineCheckbox3">  Visual  </label>
+                                                        <label for="inlineCheckbox3"> Visual </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -272,11 +285,11 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                {!! Form::select('cidade', $loadFields['cidade'], Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
-                                {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                {!! Form::select('endereco[bairros_id]', $loadFields['bairro'], Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('endereco[cep]', 'CEP ') !!}
@@ -288,7 +301,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#contato1"> <i class="fa fa-plus-circle"></i>  Contato pessoal</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#contato1"> <i
+                                                    class="fa fa-plus-circle"></i> Contato pessoal</a>
                                     </h4>
                                 </div>
                                 <div id="contato1" class="panel-collapse collapse">
@@ -315,7 +329,8 @@
                                 </div>
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i class="fa fa-plus-circle"></i>  Contato profissional</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i
+                                                    class="fa fa-plus-circle"></i> Contato profissional</a>
                                     </h4>
                                 </div>
                                 <div id="endprof" class="panel-collapse collapse">
@@ -370,7 +385,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-5">
+                                <label for="firmacaoacad_id">Formação Acadêmica</label>
+                                <select id="firmacaoacad_id" class="form-control">
+                                    @if(isset($cliente['instituicao']))
+                                        <option value="{{ ''  }}" selected="selected">{{ ''  }}</option>
+                                    @endif
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-5">
                                 <label for="instituicao">Instituição</label>
                                 <select id="instituicao" class="form-control">
                                     @if(isset($cliente['instituicao']))
@@ -378,6 +402,7 @@
                                     @endif
                                 </select>
                             </div>
+
                             <div class="form-group col-md-2">
                                 {!! Form::label('ano_conlusao', 'Ano Conclusão') !!}
                                 {!! Form::text('ano_conlusao', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
@@ -389,68 +414,18 @@
                                 {!! Form::text('outra_escola', Session::getOldInput('outra_escola'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> <i class="fa fa-play-circle"></i>   Exames</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                {!! Form::label('1Exame', '1º Exame') !!}
-                                                {!! Form::select('1Exame', array(), Session::getOldInput('nome'), array('class' => 'form-control')) !!}
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('data1', 'Data') !!}
-                                                <?php
-                                                /*if(isset($cliente['dataExameNacionalUm'])) {
-                                                    $date3 = explode('T', $cliente['dataExameNacionalUm']);
-                                                    $data3 = \DateTime::createFromFormat('Y-m-d', $date2[0]);
-                                                    $dataFromat3 = $data3->format('d/m/Y');
-                                                } else {
-                                                    $dataFromat3 = "";
-                                                }*/
-                                                ?>
-                                                {!! Form::text('data1', Session::getOldInput('nome'), array('class' => 'form-control datepicker')) !!}
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('nota1', 'Nota') !!}
-                                                {!! Form::text('nota1', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                {!! Form::label('2Exame', '2º Exame') !!}
-                                                {!! Form::select('2Exame', array(), Session::getOldInput('nome'), array('class' => 'form-control')) !!}
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('data2', 'Data') !!}
-                                                <?php
-                                                /*if(isset($cliente['dataExameNacionalDois'])) {
-                                                    $date4 = explode('T', $cliente['dataExameNacionalDois']);
-                                                    $data4 = \DateTime::createFromFormat('Y-m-d', $date2[0]);
-                                                    $dataFromat4 = $data4->format('d/m/Y');
-                                                } else {
-                                                    $dataFromat4 = "";
-                                                }*/
-                                                ?>
-                                                {!! Form::text('data2', Session::getOldInput('nome') , array('class' => 'form-control datepicker')) !!}
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('nota2', 'Nota') !!}
-                                                {!! Form::text('nota2',Session::getOldInput('nome'), array('class' => 'form-control')) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
+
+
+            <div role="tabpanel" class="tab-pane" id="documentosObrig">
+                <br/>
+
+            </div>
+
+
         </div>
     </div>
     <div class="col-md-10"></div>

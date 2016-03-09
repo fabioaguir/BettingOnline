@@ -38,7 +38,8 @@ class AlunoController extends Controller
         'Estado',
         'Cidade',
         'Bairro',
-        'InstituicaoSuperior'
+        'InstituicaoSuperior',
+        'CorRaca'
     ];
 
     /**
@@ -125,6 +126,7 @@ class AlunoController extends Controller
             #retorno para view
             return view('aluno.edit', compact('aluno', 'loadFields'));
         } catch (\Throwable $e) {
+
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -149,8 +151,10 @@ class AlunoController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
+            dd($e);
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) {
+            dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
