@@ -257,12 +257,12 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-10">
-                                {!! Form::label('enderecos_id', 'Endereço ') !!}
-                                {!! Form::text('enderecos_id', Session::getOldInput('enderecos_id'), array('class' => 'form-control')) !!}
+                                {!! Form::label('endereco[logradouro]', 'Endereço ') !!}
+                                {!! Form::text('endereco[logradouro]', Session::getOldInput('endereco[logradouro]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('numero', 'Número') !!}
-                                {!! Form::text('numero', Session::getOldInput('numero'), array('class' => 'form-control')) !!}
+                                {!! Form::label('endereco[numero]', 'Número') !!}
+                                {!! Form::text('endereco[numero]', Session::getOldInput('endereco[numero]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -275,12 +275,12 @@
                                 {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
                             </div>
                             <div class="form-group col-md-3">
-                                {!! Form::label('bairro', 'Bairro ') !!}
-                                {!! Form::select('bairro', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
+                                {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('cep', 'CEP ') !!}
-                                {!! Form::text('cep', Session::getOldInput('cep'), array('class' => 'form-control cep')) !!}
+                                {!! Form::label('endereco[cep]', 'CEP ') !!}
+                                {!! Form::text('endereco[cep]', Session::getOldInput('endereco[cep]'), array('class' => 'form-control cep')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-phone"></i> Contato</legend>

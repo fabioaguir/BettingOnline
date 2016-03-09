@@ -4,6 +4,7 @@ namespace Seracademico\Services;
 
 use Seracademico\Entities\Aluno;
 use Seracademico\Repositories\AlunoRepository;
+use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Validators\AlunoValidator;
 use Seracademico\Entities;
 
@@ -15,11 +16,18 @@ class AlunoService
     private $repository;
 
     /**
-     * @param AlunoRepository $repository
+     * @var EnderecoRepository
      */
-    public function __construct(AlunoRepository $repository)
+    private $enderecoRepository;
+
+    /**
+     * @param AlunoRepository $repository
+     * @param EnderecoRepository $enderecoRepository
+     */
+    public function __construct(AlunoRepository $repository, EnderecoRepository $enderecoRepository)
     {
-        $this->repository = $repository;
+        $this->repository         = $repository;
+        $this->enderecoRepository = $enderecoRepository;
     }
 
     /**
@@ -30,7 +38,7 @@ class AlunoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $result = $this->repository->find($id);
+        $result = $this->repository->with('endereco')->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$result) {
@@ -48,6 +56,12 @@ class AlunoService
     public function store(array $data) : Aluno
     {
         #Criando no banco de dados
+        $endereco = $this->enderecoRepository->create($data['endereco']);
+
+        #Setando o id do endereco
+        $data['enderecos_id'] = $endereco->id;
+
+        #Salvando o registro pincipal
         $result =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
@@ -67,15 +81,16 @@ class AlunoService
     public function update(array $data, int $id) : Aluno
     {
         #Atualizando no banco de dados
-        $result = $this->repository->update($data, $id);
+        $aluno    = $this->repository->update($data, $id);
+        $endereco = $this->enderecoRepository->update($data['endereco'], $aluno->endereco->id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$result) {
+        if(!$aluno || !$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $result;
+        return $aluno;
     }
 
     /**

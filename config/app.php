@@ -138,7 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         //Form
-       // Illuminate\Html\HtmlServiceProvider::class,
+       //Illuminate\Html\HtmlServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
         /*

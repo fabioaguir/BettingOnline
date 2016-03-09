@@ -104,7 +104,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {dd($e->getMessage());
+        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -15,8 +15,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('create', ['as' => 'create', 'uses' => 'AlunoController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'AlunoController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
-            Route::post('update', ['as' => 'update', 'uses' => 'AlunoController@update']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
         });
+
+        Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
+            Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);
+        });
+
 
 //    Route::get('report/contratoAluno/{id}', ['as' => 'report.contratoAluno', 'uses' => 'ReportController@contratoAluno']);
 //    Route::get('user/save/', ['as' => 'user.save', 'uses' => 'UserController@save']);
