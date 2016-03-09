@@ -26,11 +26,11 @@
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('turno', 'Turno ') !!}
-                {!! Form::select('', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
+                {!! Form::select('turno', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('currículo', 'Currículo') !!}
-                {!! Form::select('', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
+                {!! Form::select('currículo', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
@@ -127,7 +127,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('ufNascimento', 'UF Nascimento') !!}
-                                {!! Form::select('', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
+                                {!! Form::select('ufNascimento', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('naturalidade', 'Naturalidade ') !!}
@@ -222,7 +222,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('deficiente', 'Deficiente? ') !!}
-                                                {!! Form::select('', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
+                                                {!! Form::select('deficiente', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-4">
                                                 {!! Form::label('tipoDef', 'Tipo') !!}
