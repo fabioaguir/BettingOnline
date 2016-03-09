@@ -160,6 +160,14 @@ return [
        Illuminate\Auth\AuthServiceProvider::class,
        Bican\Roles\RolesServiceProvider::class,
        Yajra\Datatables\DatatablesServiceProvider::class,
+
+        /*
+        * Application Service Providers...
+         * https://github.com/mcamara/laravel-localization
+        */
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class
+
+
     ],
 
     /*
@@ -217,6 +225,9 @@ return [
 
         //DataTable
         'Datatables' => Yajra\Datatables\Datatables::class,
+
+        //https://github.com/mcamara/laravel-localization
+        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
 
 
 

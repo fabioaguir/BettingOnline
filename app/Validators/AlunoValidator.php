@@ -10,7 +10,10 @@ class AlunoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome' => 'required'
+            'nome' => 'required',
+            'turma'  => 'required',
+            'matricula'  => 'required'
+
         ],
         ValidatorInterface::RULE_UPDATE => [],
    ];

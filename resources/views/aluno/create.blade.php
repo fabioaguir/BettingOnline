@@ -10,27 +10,30 @@
                 Cadastrar Aluno
             </h4>
         </div>
+
+        <ul class="language_bar_chooser">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <li>
+                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                        {{{ $properties['native'] }}}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
         <div class="ibox-content">
-            {{--@if (isset($return) && $return !=  null)
-                @if($return['success'] == false && $return[0]['fields'] != null)
-                    <div class="alert alert-warning">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        @foreach ($return[0]['fields'] as $nome => $erro)
-                            {{ $erro }}<br>
-                        @endforeach
-                    </div>
-                @elseif($return['success'] == false)
-                    <div class="alert alert-danger">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ $return['message'] }}<br>
-                    </div>
-                @elseif($return['success'] == true)
-                    <div class="alert alert-success">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ $return['message'] }}<br>
-                    </div>
-                @endif
-            @endif--}}
+
+            @if(Session::has('message'))
+                <div class="alert alert-success"><em> {!! session('message') !!}</em></div>
+            @endif
+
+            @if(Session::has('errors'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @foreach($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
 
             {!! Form::open(['route'=>'seracademico.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormAluno')
