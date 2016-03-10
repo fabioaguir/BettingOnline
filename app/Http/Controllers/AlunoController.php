@@ -36,8 +36,6 @@ class AlunoController extends Controller
         'CorRaca',
         'TipoSanguinio',
         'Estado',
-        'Cidade',
-        'Bairro',
         'InstituicaoSuperior',
         'CorRaca'
     ];
@@ -120,13 +118,14 @@ class AlunoController extends Controller
             #Recuperando o aluno
             $aluno = $this->service->find($id);
 
+            $endereco   = $aluno->endereco->find($aluno['enderecos_id']);
+            //$bairro     = $endereco->bairro->find($endereco['bairros_id']);
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
-
+            //dd($endereco);
             #retorno para view
             return view('aluno.edit', compact('aluno', 'loadFields'));
         } catch (\Throwable $e) {
-
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

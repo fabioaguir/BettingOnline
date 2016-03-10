@@ -285,11 +285,11 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                {!! Form::select('cidade', $loadFields['cidade'], Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
-                                {!! Form::select('endereco[bairros_id]', $loadFields['bairro'], Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('endereco[cep]', 'CEP ') !!}
