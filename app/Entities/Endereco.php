@@ -22,6 +22,6 @@ class Endereco extends Model implements Transformable
 
     public function bairro()
     {
-        return $this->belongsTo(Bairro::class);
+        return $this->belongsTo(Bairro::class, 'bairros_id');
     }
 }
