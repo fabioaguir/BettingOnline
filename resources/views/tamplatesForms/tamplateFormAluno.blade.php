@@ -285,7 +285,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                @if(isset($aluno))
+                                @if(isset($aluno->endereco->bairro->cidade))
                                     {!! Form::select('cidade', array($aluno->endereco->bairro->cidade->id => $aluno->endereco->bairro->cidade->nome), $aluno->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
                                 @else
                                     {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
@@ -293,7 +293,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
-                                @if(isset($aluno))
+                                @if(isset($aluno->endereco->bairro))
                                     {!! Form::select('endereco[bairros_id]', array($aluno->endereco->bairro->id => $aluno->endereco->bairro->nome), $aluno->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
                                 @else
                                     {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
@@ -396,18 +396,18 @@
                             <div class="form-group col-md-5">
                                 <label for="firmacaoacad_id">Formação Acadêmica</label>
                                 <select id="firmacaoacad_id" class="form-control">
-                                    @if(isset($cliente['instituicao']))
-                                        <option value="{{ ''  }}" selected="selected">{{ ''  }}</option>
-                                    @endif
+                                    {{--@if(isset($cliente['instituicao']))--}}
+                                        {{--<option value="{{ ''  }}" selected="selected">{{ ''  }}</option>--}}
+                                    {{--@endif--}}
                                 </select>
                             </div>
 
                             <div class="form-group col-md-5">
                                 <label for="instituicao">Instituição</label>
-                                <select id="instituicao" class="form-control">
-                                    @if(isset($cliente['instituicao']))
-                                        <option value="{{ ''  }}" selected="selected">{{ ''  }}</option>
-                                    @endif
+                                <select id="instituicao" class="form-control" name="fac_instituicoes_id">
+                                   @if(isset($aluno) && $aluno->instituicao != null)
+                                        <option value="{{ $aluno->instituicao->id  }}" selected="selected">{{ $aluno->instituicao->nome }}</option>
+                                   @endif
                                 </select>
                             </div>
 

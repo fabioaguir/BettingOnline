@@ -36,7 +36,6 @@ class AlunoController extends Controller
         'CorRaca',
         'TipoSanguinio',
         'Estado',
-        'InstituicaoSuperior',
         'CorRaca'
     ];
 
@@ -126,7 +125,7 @@ class AlunoController extends Controller
 
             #retorno para view
             return view('aluno.edit', compact('aluno', 'loadFields'));
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

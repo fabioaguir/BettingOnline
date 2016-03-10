@@ -61,13 +61,12 @@ class Aluno extends Model implements Transformable
         'estados_id',
         'exames1_id',
         'exames2_id',
-        'instituicao_medio_id',
-        'instituicao_superior_id',
         'uf_nascimento_id',
         'deficiencia_fisica',
         'deficiencia_auditiva',
         'deficiencia_visual',
-        'deficiencia_outra'
+        'deficiencia_outra',
+        'fac_instituicoes_id'
     ];
 
     public function endereco()
@@ -135,14 +134,9 @@ class Aluno extends Model implements Transformable
         return $this->belongsTo(Exame::class, 'exames2_id');
     }
 
-    public function instituicaoMedio()
+    public function instituicao()
     {
-        return $this->belongsTo(InstituicaoMedio::class, 'instituicao_medio_id');
-    }
-
-    public function instituicaoSuperior()
-    {
-        return $this->belongsTo(InstituicaoMedio::class, 'instituicao_superior_id');
+        return $this->belongsTo(Instituicao::class, "fac_instituicoes_id");
     }
 
 }
