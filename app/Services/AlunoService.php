@@ -38,15 +38,15 @@ class AlunoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $result = $this->repository->with('endereco')->find($id);
+        $aluno = $this->repository->with('endereco')->find($id);
 
         #Verificando se o registro foi encontrado
-        if(!$result) {
+        if(!$aluno) {
             throw new \Exception('Aluno não encontrado!');
         }
 
         #retorno
-        return $result;
+        return $aluno;
     }
 
     /**
@@ -62,15 +62,15 @@ class AlunoService
         $data['enderecos_id'] = $endereco->id;
 
         #Salvando o registro pincipal
-        $result =  $this->repository->create($data);
+        $aluno =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$result) {
+        if(!$aluno) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $result;
+        return $aluno;
     }
 
     /**
