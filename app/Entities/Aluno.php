@@ -131,5 +131,4 @@ class Aluno extends Model implements Transformable
         return $this->belongsTo(InstituicaoMedio::class, 'instituicao_superior_id');
     }
 
-    public function getdata_nasciemento
 }

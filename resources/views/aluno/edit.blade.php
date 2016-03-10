@@ -14,10 +14,10 @@
 
 
             @if(Session::has('message'))
-                <div class="alert alert-danger">
-                    {{ Session::get('message') }}<br>
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <em> {!! session('message') !!}</em>
                 </div>
-
             @endif
 
             @if (isset($return) && $return !=  null)
