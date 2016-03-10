@@ -24,6 +24,6 @@ class Bairro extends Model implements Transformable
 
     public function cidade()
     {
-        return $this->belongsTo(Cidade::class);
+        return $this->belongsTo(Cidade::class, "cidades_id");
     }
 }

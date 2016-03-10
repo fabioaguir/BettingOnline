@@ -24,6 +24,6 @@ class Cidade extends Model implements Transformable
 
     public function estado()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(Estado::class, "estados_id");
     }
 }
