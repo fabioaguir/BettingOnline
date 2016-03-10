@@ -135,8 +135,8 @@
                                 {!! Form::text('nacionalidade', Session::getOldInput('nacionalidade'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
-                                {!! Form::label('ufNascimento', 'UF Nascimento') !!}
-                                {!! Form::select('ufNascimento', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
+                                {!! Form::label('uf_nascimento_id', 'UF Nascimento') !!}
+                                {!! Form::select('uf_nascimento_id', $loadFields['estado'], Session::getOldInput('uf_nascimento_id'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('naturalidade', 'Naturalidade ') !!}
@@ -232,28 +232,29 @@
                                 <div id="deficiencia" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="form-group col-md-2">
-                                                {!! Form::label('deficiente', 'Deficiente? ') !!}
-                                                {!! Form::select('deficiente', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
-                                            </div>
+
                                             <div class="form-group col-md-4">
-                                                {!! Form::label('tipoDef', 'Tipo') !!}
-                                                <div class="checkbox checkbox-primary">
-                                                    <input type="checkbox" id="inlineCheckbox1" value="option1">
-                                                    <label for="inlineCheckbox1"> Física </label>
+                                                {!! Form::label('tipoDef', 'Deficiências') !!}
+                                                    <div class="checkbox checkbox-primary">
+                                                        {!! Form::hidden('deficiencia_fisica', 0) !!}
+                                                        {!! Form::checkbox('deficiencia_fisica', 1, null, array('class' => 'form-control')) !!}
+                                                        {!! Form::label('deficiencia_fisica', 'Física') !!}
                                                     <div class="checkbox checkbox-primary checkbox-inline">
-                                                        <input type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label for="inlineCheckbox2"> Auditiva </label>
+                                                        {!! Form::hidden('deficiencia_auditiva', 0) !!}
+                                                        {!! Form::checkbox('deficiencia_auditiva', 1, null, array('class' => 'form-control')) !!}
+                                                        {!! Form::label('deficiencia_auditiva', 'Auditivas', false) !!}
                                                     </div>
                                                     <div class="checkbox checkbox-primary checkbox-inline">
-                                                        <input type="checkbox" id="inlineCheckbox3" value="option3">
-                                                        <label for="inlineCheckbox3"> Visual </label>
+                                                        {!! Form::hidden('deficiencia_visual', 0) !!}
+                                                        {!! Form::checkbox('deficiencia_visual', 1, null, array('class' => 'form-control')) !!}
+                                                        {!! Form::label('deficiencia_visual', 'Visuais', false) !!}
+                                                    </div>
+                                                    <div class="checkbox checkbox-primary checkbox-inline">
+                                                        {!! Form::hidden('deficiencia_outra', 0) !!}
+                                                        {!! Form::checkbox('deficiencia_outra', 1, null,array('class' => 'form-control')) !!}
+                                                        {!! Form::label('deficiencia_outra', 'Outras') !!}
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                {!! Form::label('outra_def', 'Outra') !!}
-                                                {!! Form::text('outra_def', Session::getOldInput('outra_def'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -284,11 +285,19 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                @if(isset($aluno))
+                                    {!! Form::select('cidade', array($aluno->endereco->bairro->cidade->id => $aluno->endereco->bairro->cidade->nome), $aluno->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                @else
+                                    {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                @endif
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
-                                {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                @if(isset($aluno))
+                                    {!! Form::select('endereco[bairros_id]', array($aluno->endereco->bairro->id => $aluno->endereco->bairro->nome), $aluno->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                @else
+                                    {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                @endif
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('endereco[cep]', 'CEP ') !!}
@@ -312,8 +321,8 @@
                                                 {!! Form::text('email', Session::getOldInput('email'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('tel_fixo', 'Telefone fixo') !!}
-                                                {!! Form::text('tel_fixo', Session::getOldInput('tel_fixo') , array('class' => 'form-control')) !!}
+                                                {!! Form::label('telefone_fixo', 'Telefone fixo') !!}
+                                                {!! Form::text('telefone_fixo', Session::getOldInput('telefone_fixo') , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('celular', 'Celular') !!}

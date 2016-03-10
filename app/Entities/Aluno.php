@@ -24,6 +24,10 @@ class Aluno extends Model implements Transformable
     protected $fillable = [
         'matricula',
         'nome',
+        'email',
+        'telefone_fixo',
+        'celular',
+        'celular2',
         'nome_pai',
         'nome_social',
         'nome_mae',
@@ -58,7 +62,12 @@ class Aluno extends Model implements Transformable
         'exames1_id',
         'exames2_id',
         'instituicao_medio_id',
-        'instituicao_superior_id'
+        'instituicao_superior_id',
+        'uf_nascimento_id',
+        'deficiencia_fisica',
+        'deficiencia_auditiva',
+        'deficiencia_visual',
+        'deficiencia_outra'
     ];
 
     public function endereco()
@@ -109,6 +118,11 @@ class Aluno extends Model implements Transformable
     public function estado()
     {
         return $this->belongsTo(Estado::class, 'estados_id');
+    }
+
+    public function ufNascimento()
+    {
+        return $this->belongsTo(Estado::class, 'uf_nascimento_id');
     }
 
     public function exame1()
