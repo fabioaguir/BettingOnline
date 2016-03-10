@@ -98,7 +98,7 @@
 
 <!-- Mainly scripts -->
 <script src="{{ asset('/js/jquery-2.1.1.js')}}"></script>
-<script src="{{ asset('/js/jquery-ui.js')}}" type="text/javascript" ></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript" ></script>
 <script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>

@@ -5,10 +5,10 @@ namespace Seracademico\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface InstituicaoMedioRepository
+ * Interface InstituicaoRepository
  * @package namespace App\Repositories;
  */
-interface InstituicaoMedioRepository extends RepositoryInterface
+interface InstituicaoRepository extends RepositoryInterface
 {
     //
 }
