@@ -55,10 +55,13 @@ class AlunoService
      */
     public function store(array $data) : Aluno
     {
+        #tratamento de dados do aluno
+        $data     = $this->tratamentoCamposAluno($data);
+
         #Criando no banco de dados
         $endereco = $this->enderecoRepository->create($data['endereco']);
 
-        #Setando o id do endereco
+        #setando o endereco
         $data['enderecos_id'] = $endereco->id;
 
         #Salvando o registro pincipal
@@ -80,6 +83,9 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
+        #tratamento de dados do aluno
+        $data     = $this->tratamentoCamposAluno($data);
+
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
         $endereco = $this->enderecoRepository->update($data['endereco'], $aluno->endereco->id);
@@ -113,5 +119,62 @@ class AlunoService
 
         #retorno
         return $result;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    private function tratamentoCamposAluno($data)
+    {
+        #tratamento de datas do aluno
+        $data['data_expedicao']           = $this->convertDate($data['data_expedicao'], 'en');
+        $data['data_nasciemento']         = $this->convertDate($data['data_nasciemento'], 'en');
+        //$data['data_exame_nacional_um']   = $this->convertDate($data['data_exame_nacional_um'], 'pt-BR');
+        //$data['data_exame_nacional_dois'] = $this->convertDate($data['data_exame_nacional_dois'], 'pt-BR');
+
+        #retorno
+        return $data;
+    }
+
+    /**
+     * @param $date
+     * @return bool|string
+     */
+    public function convertDate($date, $format)
+    {
+        #declarando variável de retorno
+        $result = "";
+
+        #convertendo a data
+        if (!empty($date) && !empty($format)) {
+            #Fazendo o tratamento por idioma
+            switch ($format) {
+                case 'pt-BR' : $result = date_create_from_format('Y-m-d', $date); break;
+                case 'en'    : $result = date_create_from_format('d/m/Y', $date); break;
+            }
+        }
+
+        #retorno
+        return $result;
+    }
+
+    /**
+     * @param Aluno $aluno
+     */
+    public function getAlunoWithDateFormatPtBr(Aluno $aluno)
+    {
+        #validando as datas
+        $aluno->data_expedicao   = $aluno->data_expedicao == '0000-00-00' ? "" : $aluno->data_expedicao;
+        $aluno->data_nasciemento = $aluno->data_nasciemento == '0000-00-00' ? "" : $aluno->data_nasciemento;
+
+        #tratando as datas
+        $aluno->data_expedicao   = date('d/m/Y', strtotime($aluno->data_expedicao));
+        $aluno->data_nasciemento = date('d/m/Y', strtotime($aluno->data_nasciemento));
+        //$aluno->data_exame_nacional_um   = date('d/m/Y', strtotime($aluno->data_exame_nacional_um));
+        //$aluno->data_exame_nacional_dois = date('d/m/Y', strtotime($aluno->data_exame_nacional_dois));
+
+        #return
+        return $aluno;
     }
 }

@@ -4,11 +4,10 @@
             <div class="form-group col-md-8">
                 {!! Form::label('nome', 'Nome *') !!}
                 {!! Form::text('nome',  Session::getOldInput('nome') , array('class' => 'form-control')) !!}
-
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('data_nasciemento', 'Nascimento ') !!}
-                {!! Form::text('data_nasciemento', Session::getOldInput('data_nasciemento'), array('class' => 'form-control datepicker')) !!}
+                {!! Form::text('data_nasciemento', null, array('class' => 'form-control datepicker')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('sexo', 'Sexo ') !!}
@@ -192,7 +191,7 @@
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('data_expedicao', 'Data expedição') !!}
 
-                                                {!! Form::text('data_expedicao', Session::getOldInput('data_expedicao') , array('class' => 'form-control datepicker')) !!}
+                                                {!! Form::text('data_expedicao', null , array('class' => 'form-control datepicker')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
