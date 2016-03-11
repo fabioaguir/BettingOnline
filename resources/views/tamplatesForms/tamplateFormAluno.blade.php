@@ -394,11 +394,11 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-5">
-                                <label for="firmacaoacad_id">Formação Acadêmica</label>
-                                <select id="firmacaoacad_id" class="form-control">
-                                    {{--@if(isset($cliente['instituicao']))--}}
-                                        {{--<option value="{{ ''  }}" selected="selected">{{ ''  }}</option>--}}
-                                    {{--@endif--}}
+                                <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
+                                <select id="formacao" name="fac_cursos_superiores_id" class="form-control">
+                                    @if(isset($aluno) && $aluno->cursoSuperior != null)
+                                        <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
+                                    @endif
                                 </select>
                             </div>
 
@@ -412,8 +412,8 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('ano_conlusao', 'Ano Conclusão') !!}
-                                {!! Form::text('ano_conlusao', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                                {!! Form::label('ano_conclusao_superior', 'Ano Conclusão') !!}
+                                {!! Form::text('ano_conclusao_superior', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
