@@ -285,7 +285,8 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                @if(isset($aluno->endereco->bairro->cidade))
+
+                                @if(isset($aluno->endereco->bairro->cidade->id))
                                     {!! Form::select('cidade', array($aluno->endereco->bairro->cidade->id => $aluno->endereco->bairro->cidade->nome), $aluno->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
                                 @else
                                     {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
@@ -293,7 +294,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
-                                @if(isset($aluno->endereco->bairro))
+                                @if(isset($aluno->endereco->bairro->id))
                                     {!! Form::select('endereco[bairros_id]', array($aluno->endereco->bairro->id => $aluno->endereco->bairro->nome), $aluno->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
                                 @else
                                     {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
