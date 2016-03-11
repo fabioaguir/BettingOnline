@@ -66,7 +66,8 @@ class Aluno extends Model implements Transformable
         'deficiencia_auditiva',
         'deficiencia_visual',
         'deficiencia_outra',
-        'fac_instituicoes_id'
+        'fac_instituicoes_id',
+        'fac_cursos_superiores_id'
     ];
 
     public function endereco()
@@ -139,4 +140,8 @@ class Aluno extends Model implements Transformable
         return $this->belongsTo(Instituicao::class, "fac_instituicoes_id");
     }
 
+    public function cursoSuperior()
+    {
+        return $this->belongsTo(CursoSuperior::class, 'fac_cursos_superiores_id');
+    }
 }

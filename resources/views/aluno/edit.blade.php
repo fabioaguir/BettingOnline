@@ -167,6 +167,45 @@
                     }
                 }
             });
+
+            //consulta via select2
+            $("#formacao").select2({
+                placeholder: 'Selecione uma formação acadêmica',
+                width: 400,
+                ajax: {
+                    type: 'POST',
+                    url: "{{ route('seracademico.util.select2')  }}",
+                    dataType: 'json',
+                    delay: 250,
+                    crossDomain: true,
+                    data: function (params) {
+                        return {
+                            'search':     params.term, // search term
+                            'tableName':  'fac_cursos_superiores',
+                            'fieldName':  'nome',
+                            'page':       params.page
+                        };
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                    processResults: function (data, params) {
+
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    }
+                }
+            });
         </script>
     @stop
 @stop
