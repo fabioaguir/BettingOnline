@@ -67,7 +67,8 @@ class Aluno extends Model implements Transformable
         'deficiencia_visual',
         'deficiencia_outra',
         'fac_instituicoes_id',
-        'fac_cursos_superiores_id'
+        'fac_cursos_superiores_id',
+        'ano_conclusao_superior',
     ];
 
     public function endereco()

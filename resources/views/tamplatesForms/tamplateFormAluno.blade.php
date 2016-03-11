@@ -412,8 +412,8 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('ano_conlusao', 'Ano Conclusão') !!}
-                                {!! Form::text('ano_conlusao', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                                {!! Form::label('ano_conclusao_superior', 'Ano Conclusão') !!}
+                                {!! Form::text('ano_conclusao_superior', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
