@@ -155,4 +155,16 @@ class AlunoController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function contrato(Request $request, $id)
+    {
+        $aluno = $this->service->find($id);
+
+        return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno])->stream();
+    }
 }

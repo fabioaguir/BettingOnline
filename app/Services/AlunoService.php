@@ -38,7 +38,20 @@ class AlunoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $aluno = $this->repository->with('endereco')->find($id);
+
+        $relacionamentos = [
+            'endereco.bairro.cidade.estado',
+            'estadoCivil',
+            'sexo',
+            'turno',
+            'grauInstrucao',
+            'profissao',
+            'corRaca',
+            'estado',
+            'ufNascimento',
+        ];
+
+        $aluno = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$aluno) {
