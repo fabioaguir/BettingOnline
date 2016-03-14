@@ -1,17 +1,17 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace $NAMESPACE$Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Seracademico\Http\Requests;
-use Seracademico\Services\EmpresaService;
+use $NAMESPACE$Http\Requests;
+use $NAMESPACE$Services\$CLASS$Service;
 use Yajra\Datatables\Datatables;
 
-class EmpresaController extends Controller
+class $CLASS$Controller extends Controller
 {
     /**
-     * @var EmpresaService
+     * @var $CLASS$Service
      */
     private $service;
 
@@ -21,9 +21,9 @@ class EmpresaController extends Controller
     private $loadFields = [];
 
     /**
-     * @param EmpresaService $service
+     * @param $CLASS$Service $service
      */
-    public function __construct(EmpresaService $service)
+    public function __construct($CLASS$Service $service)
     {
         $this->service    = $service;
     }

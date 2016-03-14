@@ -165,7 +165,12 @@ return [
         * Application Service Providers...
          * https://github.com/mcamara/laravel-localization
         */
-        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+
+        /*
+         * Meu Crud
+         */
+        Serbinario\L5scaffold\GeneratorsServiceProvider::class,
 
 
     ],

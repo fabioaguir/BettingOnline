@@ -1,17 +1,17 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace $NAMESPACE$Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\EmpresaRepository;
-use Seracademico\Entities\Empresa;
+use $NAMESPACE$Repositories\$CLASS$Repository;
+use $NAMESPACE$Entities\$CLASS$;
 
 /**
- * Class EmpresaRepositoryEloquent
+ * Class $CLASS$RepositoryEloquent
  * @package namespace App\Repositories;
  */
-class EmpresaRepositoryEloquent extends BaseRepository implements EmpresaRepository
+class $CLASS$RepositoryEloquent extends BaseRepository implements $CLASS$Repository
 {
     /**
      * Specify Model class name
@@ -20,10 +20,10 @@ class EmpresaRepositoryEloquent extends BaseRepository implements EmpresaReposit
      */
     public function model()
     {
-        return Empresa::class;
+        return $CLASS$::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria

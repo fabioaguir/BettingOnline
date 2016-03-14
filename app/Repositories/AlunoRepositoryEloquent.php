@@ -4,7 +4,6 @@ namespace Seracademico\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\AlunoRepository;
 use Seracademico\Entities\Aluno;
 use Seracademico\Validators\AlunoValidator;;
 
