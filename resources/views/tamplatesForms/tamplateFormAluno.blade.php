@@ -418,7 +418,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {!! Form::label('outra_escola', 'Outra Escola') !!}
+                                {!! Form::label('outra_escola', 'Outra Instituição') !!}
                                 {!! Form::text('outra_escola', Session::getOldInput('outra_escola'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
@@ -430,6 +430,68 @@
 
             <div role="tabpanel" class="tab-pane" id="documentosObrig">
                 <br/>
+
+                <div class="form-group col-md-4">
+                    <div class="checkbox checkbox-primary">
+                        @if(!isset($cliente['id']))
+                            <input type="checkbox" name="" checked id="status" value="">
+                        @else
+                            @if(isset($cliente['status']) && $cliente['status'] == true)
+                                <input type="checkbox" name="" checked id="status" value="{{$cliente['status']}}">
+                            @else
+                                <input type="checkbox" name="alunos[status]" id="status" value="">
+                            @endif
+                        @endif
+                        <label for="op1"> RG </label>
+                    </div>
+
+                    <div class="checkbox checkbox-primary">
+                        @if(!isset($cliente['id']))
+                            <input type="checkbox" name="" checked id="status" value="">
+                        @else
+                            @if(isset($cliente['status']) && $cliente['status'] == true)
+                                <input type="checkbox" name="" checked id="status" value="{{$cliente['status']}}">
+                            @else
+                                <input type="checkbox" name="alunos[status]" id="status" value="">
+                            @endif
+                        @endif
+                        <label for="op1"> CPF </label>
+                    </div>
+
+                    <!-- Certidão de Nascimento ou Casamento -->
+                    <div class="checkbox checkbox-primary">
+                        @if(!isset($cliente['id']))
+                            <input type="checkbox" name="" checked id="status" value="">
+                        @else
+                            @if(isset($cliente['status']) && $cliente['status'] == true)
+                                <input type="checkbox" name="" checked id="status" value="{{$cliente['status']}}">
+                            @else
+                                <input type="checkbox" name="alunos[status]" id="status" value="">
+                            @endif
+                        @endif
+                        <label for="op1"> Certidão de Nascimento ou Casamento </label>
+                    </div>
+                    <!-- Fim Certidão de Nascimento ou Casamento -->
+
+
+                    <!-- Título de Eleitor e último comprovante de votação -->
+                    <div class="checkbox checkbox-primary">
+                        @if(!isset($cliente['id']))
+                            <input type="checkbox" name="" checked id="status" value="">
+                        @else
+                            @if(isset($cliente['status']) && $cliente['status'] == true)
+                                <input type="checkbox" name="" checked id="status" value="{{$cliente['status']}}">
+                            @else
+                                <input type="checkbox" name="alunos[status]" id="status" value="">
+                            @endif
+                        @endif
+                        <label for="op1"> Título de Eleitor </label>
+                    </div>
+                    <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                </div>
+
+
 
             </div>
 

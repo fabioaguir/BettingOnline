@@ -126,6 +126,7 @@
             //consulta via select2
             $("#instituicao").select2({
                 placeholder: 'Selecione uma instituição',
+                minimumInputLength: 3,
                 width: 400,
                 ajax: {
                     type: 'POST',
@@ -167,6 +168,7 @@
             //consulta via select2
             $("#formacao").select2({
                 placeholder: 'Selecione uma formação acadêmica',
+                minimumInputLength: 3,
                 width: 400,
                 ajax: {
                     type: 'POST',
