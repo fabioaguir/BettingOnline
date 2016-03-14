@@ -29,5 +29,8 @@ class Kernel extends HttpKernel
         'auth' => \Seracademico\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Seracademico\Http\Middleware\RedirectIfAuthenticated::class,
+        'role' => \Bican\Roles\Middleware\VerifyRole::class,
+        'permission' => \Bican\Roles\Middleware\VerifyPermission::class,
+        'level' => \Bican\Roles\Middleware\VerifyLevel::class,
     ];
 }

@@ -285,7 +285,6 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-
                                 @if(isset($aluno->endereco->bairro->cidade->id))
                                     {!! Form::select('cidade', array($aluno->endereco->bairro->cidade->id => $aluno->endereco->bairro->cidade->nome), $aluno->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
                                 @else
@@ -397,7 +396,7 @@
                             <div class="form-group col-md-5">
                                 <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
                                 <select id="formacao" name="fac_cursos_superiores_id" class="form-control">
-                                    @if(isset($aluno) && $aluno->cursoSuperior != null)
+                                    @if(isset($aluno->id) && $aluno->cursoSuperior != null)
                                         <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
                                     @endif
                                 </select>
@@ -406,7 +405,7 @@
                             <div class="form-group col-md-5">
                                 <label for="instituicao">Instituição</label>
                                 <select id="instituicao" class="form-control" name="fac_instituicoes_id">
-                                   @if(isset($aluno) && $aluno->instituicao != null)
+                                   @if(isset($aluno->id) && $aluno->instituicao != null)
                                         <option value="{{ $aluno->instituicao->id  }}" selected="selected">{{ $aluno->instituicao->nome }}</option>
                                    @endif
                                 </select>

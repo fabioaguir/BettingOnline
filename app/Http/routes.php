@@ -3,12 +3,19 @@
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
-    Route::group(['prefix' => 'seracademico', 'as' => 'seracademico.'], function () {
+    Route::group(['prefix' => 'auth'], function () {
+        Route::get('login', 'Auth\AuthController@getLogin');
+        Route::post('login', 'Auth\AuthController@postLogin');
+        Route::get('logout', 'Auth\AuthController@getLogout');
+    });
+
+    Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
 //    Route::get('login'  , ['as' => 'login', 'uses' => 'SecurityController@login']);
 //    Route::get('logout'  , ['as' => 'logout', 'uses' => 'SecurityController@logout']);
 //    Route::post('check'  , ['as' => 'check', 'uses' => 'SecurityController@check']);
 //    Route::get('index'  , ['as' => 'index', 'middleware'=>'security:ROLE_ADMIN', 'uses' => 'DefaultController@index']);
 //    Route::get('update2'  , ['as' => 'update2', 'middleware'=>'security:ROLE_ADMIN', 'uses' => 'DefaultController@update2']);
+        Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
         Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'AlunoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'AlunoController@grid']);

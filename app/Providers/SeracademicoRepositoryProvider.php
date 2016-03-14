@@ -103,5 +103,15 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\TurnoRepository::class,
             \Seracademico\Repositories\TurnoRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\TipoSanguinioRepository::class,
+            \Seracademico\Repositories\TipoSanguinioRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\EmpresaRepository::class,
+            \Seracademico\Repositories\EmpresaRepositoryEloquent::class
+        );
     }
 }
