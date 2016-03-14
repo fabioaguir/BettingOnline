@@ -24,6 +24,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'AlunoController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
+            Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'AlunoController@contrato']);
         });
 
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

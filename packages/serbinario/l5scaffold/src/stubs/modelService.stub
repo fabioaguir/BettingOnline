@@ -62,7 +62,7 @@ class $CLASS$Service
      * @param int $id
      * @return mixed
      */
-    public function update(array $data, int $id) : Aluno
+    public function update(array $data, int $id) : $CLASS$
     {
         #Atualizando no banco de dados
         $$MODELOBJ$ = $this->repository->update($data, $id);

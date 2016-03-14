@@ -4,6 +4,7 @@ namespace $NAMESPACE$Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use $NAMESPACE$Validators\$CLASS$Validator;
 use $NAMESPACE$Repositories\$CLASS$Repository;
 use $NAMESPACE$Entities\$CLASS$;
 
@@ -21,6 +22,17 @@ class $CLASS$RepositoryEloquent extends BaseRepository implements $CLASS$Reposit
     public function model()
     {
         return $CLASS$::class;
+    }
+
+    /**
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
+    public function validator()
+    {
+
+         return $CLASS$Validator::class;
     }
 
 
