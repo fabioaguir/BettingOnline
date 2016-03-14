@@ -1,17 +1,19 @@
 <?php
 
-namespace $NAMESPACE$Entities;
+namespace Seracademico\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class $CLASS$ extends Model implements Transformable
+class Empresa extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = '$TABLE$';
+    protected $table    = 'empresas';
 
-    protected $fillable = $FILLABLE$;
+    protected $fillable = [ 
+		'nome',
+	];
 
 }

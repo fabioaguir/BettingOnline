@@ -1,21 +1,21 @@
 <?php
 
-namespace $NAMESPACE$Services;
+namespace Seracademico\Services;
 
-use $NAMESPACE$Repositories\$CLASS$Repository;
-use $NAMESPACE$Entities;
+use Seracademico\Repositories\EmpresaRepository;
+use Seracademico\Entities;
 
-class $CLASS$Service
+class EmpresaService
 {
     /**
-     * @var $CLASS$Repository
+     * @var EmpresaRepository
      */
     private $repository;
 
     /**
-     * @param $CLASS$Repository $repository
+     * @param EmpresaRepository $repository
      */
-    public function __construct($CLASS$Repository $repository)
+    public function __construct(EmpresaRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -25,36 +25,36 @@ class $CLASS$Service
      * @return mixed
      * @throws \Exception
      */
-    public function find($id)
+    public function find($id) : Empresa
     {
         #Recuperando o registro no banco de dados
-        $$MODELOBJ$ = $this->repository->find($id);
+        $empresas = $this->repository->find($id);
 
         #Verificando se o registro foi encontrado
-        if(!$$MODELOBJ$) {
+        if(!$empresas) {
             throw new \Exception('Empresa não encontrada!');
         }
 
         #retorno
-        return $$MODELOBJ$;
+        return $empresas;
     }
 
     /**
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Aluno
+    public function store(array $data) : Empresa
     {
         #Salvando o registro pincipal
-        $$MODELOBJ$ =  $this->repository->create($data);
+        $empresas =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$$MODELOBJ$) {
+        if(!$empresas) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $$MODELOBJ$;
+        return $empresas;
     }
 
     /**
@@ -62,19 +62,19 @@ class $CLASS$Service
      * @param int $id
      * @return mixed
      */
-    public function update(array $data, int $id) : Aluno
+    public function update(array $data, int $id) : Empresa
     {
         #Atualizando no banco de dados
-        $$MODELOBJ$ = $this->repository->update($data, $id);
+        $empresas = $this->repository->update($data, $id);
 
 
         #Verificando se foi atualizado no banco de dados
-        if(!$$MODELOBJ$) {
+        if(!$empresas) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $$MODELOBJ$;
+        return $empresas;
     }
 
     /**
@@ -89,7 +89,7 @@ class $CLASS$Service
         #Criando e executando as consultas
         foreach ($models as $model) {
             #qualificando o namespace
-            $nameModel = "$NAMESPACE$\Entities\\$model";
+            $nameModel = "Seracademico\\Entities\\$model";
 
             #Recuperando o registro e armazenando no array
             $result[strtolower($model)] = $nameModel::lists('nome', 'id');

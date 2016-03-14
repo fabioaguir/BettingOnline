@@ -1,16 +1,18 @@
 <?php
 
-namespace $NAMESPACE$Validators;
+namespace Seracademico\Validators;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-class $CLASS$Validator extends LaravelValidator
+class EmpresaValidator extends LaravelValidator
 {
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            $VALIDATORS$
+            
+			'nome' =>  '' ,
+
         ],
         ValidatorInterface::RULE_UPDATE => [],
    ];

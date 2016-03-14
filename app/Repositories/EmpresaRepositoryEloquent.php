@@ -4,14 +4,14 @@ namespace Seracademico\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\InstituicaoRepository;
-use Seracademico\Entities\Instituicao;
+use Seracademico\Repositories\EmpresaRepository;
+use Seracademico\Entities\Empresa;
 
 /**
- * Class InstituicaoRepositoryEloquent
+ * Class EmpresaRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class InstituicaoRepositoryEloquent extends BaseRepository implements InstituicaoRepository
+class EmpresaRepositoryEloquent extends BaseRepository implements EmpresaRepository
 {
     /**
      * Specify Model class name
@@ -20,10 +20,10 @@ class InstituicaoRepositoryEloquent extends BaseRepository implements Instituica
      */
     public function model()
     {
-        return Instituicao::class;
+        return Empresa::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
