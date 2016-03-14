@@ -4,15 +4,14 @@ namespace Seracademico\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\TurnoRepository;
-use Seracademico\Entities\Turno;
-use Seracademico\Validators\TurnoValidator;
+use Seracademico\Repositories\PermissionRepository;
+use Seracademico\Entities\Permission;
 
 /**
- * Class TurnoRepositoryEloquent
+ * Class PermissionRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class TurnoRepositoryEloquent extends BaseRepository implements TurnoRepository
+class PermissionRepositoryEloquent extends BaseRepository implements PermissionRepository
 {
     /**
      * Specify Model class name
@@ -21,20 +20,10 @@ class TurnoRepositoryEloquent extends BaseRepository implements TurnoRepository
      */
     public function model()
     {
-        return Turno::class;
+        return Permission::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return TurnoValidator::class;
-    }
-
+    
 
     /**
      * Boot up the repository, pushing criteria
