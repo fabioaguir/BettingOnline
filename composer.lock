@@ -1982,7 +1982,7 @@
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
@@ -2038,7 +2038,7 @@
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
@@ -2428,16 +2428,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v6.7.3",
+            "version": "v6.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "da17c40fbbf69490dd7ed6b5d70c0612565eba5f"
+                "reference": "3a135f111c85e1c0fb7166307d11fbdbbd343476"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/da17c40fbbf69490dd7ed6b5d70c0612565eba5f",
-                "reference": "da17c40fbbf69490dd7ed6b5d70c0612565eba5f",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/3a135f111c85e1c0fb7166307d11fbdbbd343476",
+                "reference": "3a135f111c85e1c0fb7166307d11fbdbbd343476",
                 "shasum": ""
             },
             "require": {
@@ -2481,7 +2481,7 @@
                 "laravel4",
                 "laravel5"
             ],
-            "time": "2016-03-02 15:14:56"
+            "time": "2016-03-11 13:14:00"
         }
     ],
     "packages-dev": [
