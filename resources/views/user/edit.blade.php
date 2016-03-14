@@ -88,8 +88,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    {!! Form::label('ativo', 'Ativo') !!}
-                                    {!! Form::checkbox('user[isActive]', 1, array('class' => 'form-control')) !!}
+                                    {!! Form::hidden('active', 0) !!}
+                                    {!! Form::label('active', 'Ativo') !!}
+                                    {!! Form::checkbox('active', 1, null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>

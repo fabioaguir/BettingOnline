@@ -126,7 +126,7 @@ class UserService
         } else {
             $data['password'] = \bcrypt($data['password']);
         }
-
+        
         #Salvando o registro pincipal
         $user =  $this->repository->update($data, $id);
 
