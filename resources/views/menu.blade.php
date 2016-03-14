@@ -79,7 +79,7 @@
                                 <li><a href="profile.html">Perfil</a></li>
                                 <li><a href="contacts.html">Notificações</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="{{ url('auth/logout') }}">Logout</a></li>
                             </ul>
                         </div>
                     </li>

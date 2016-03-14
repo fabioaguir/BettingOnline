@@ -24,6 +24,22 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
+     * @var string
+     *
+     * Atributo que armazena o caminho de redirecionamento
+     * quando o usuário tiver sucesso ao se autenticar
+     */
+    protected $redirectPath = '/seracademico/index';
+
+    /**
+     * @var string
+     *
+     * Atributo que armazena o caminho de redirecionamento
+     * quando o usuário "deslogar"
+     */
+    protected $redirectAfterLogout = '/auth/login';
+
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
