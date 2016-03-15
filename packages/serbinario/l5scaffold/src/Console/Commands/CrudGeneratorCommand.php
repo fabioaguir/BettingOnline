@@ -73,20 +73,22 @@ class CrudGeneratorCommand extends Command
         foreach ($tables as $t) {
             if ($this->confirm("Voce gostaria de criar o CRUD  $t ? [y|N]")) {
 
-                $this->info("Criando Model: $modelname");
-                $this->call('make:modelSer', ['model-name' => $modelname]);
+                $ClassName = $this->ask('Qual nome do Model?');
 
-                $this->info("Criando Validator: $modelname");
-                $this->call('make:validatorSer', ['model-name' => $modelname]);
+                $this->info("Criando Model: $ClassName");
+                $this->call('make:modelSer', ['model-name' => $ClassName]);
 
-                $this->info("Criando Repository: $modelname");
-                $this->call('make:repositorySer', ['model-name' => $modelname]);
+                $this->info("Criando Validator: $ClassName");
+                $this->call('make:validatorSer', ['model-name' => $ClassName]);
 
-                $this->info("Criando Service: $modelname");
-                $this->call('make:serviceSer', ['model-name' => $modelname]);
+                $this->info("Criando Repository: $ClassName");
+                $this->call('make:repositorySer', ['model-name' => $ClassName]);
 
-                $this->info("Criando Contoller: $modelname");
-                $this->call('make:controllerSer', ['model-name' => $modelname]);
+                $this->info("Criando Service: $ClassName");
+                $this->call('make:serviceSer', ['model-name' => $ClassName]);
+
+                $this->info("Criando Contoller: $ClassName");
+                $this->call('make:controllerSer', ['model-name' => $ClassName]);
 
             }
         }
