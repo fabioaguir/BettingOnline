@@ -5,63 +5,62 @@ namespace Seracademico\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\EmpresaService;
-use Seracademico\Validators\EmpresaValidator;
+use Seracademico\Http\Controllers\Controller;
+use Seracademico\Services\SalaService;
+use Seracademico\Validators\SalaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 
-class EmpresaController extends Controller
+class SalaController extends Controller
 {
     /**
-     * @var EmpresaService
+     * @var SalaService
      */
     private $service;
 
     /**
-     * @var EmpresaValidator
+     * @var SalaValidator
      */
     private $validator;
 
     /**
      * @var array
      */
-    private $loadFields = [
-        'Estado'
-    ];
+    private $loadFields = [];
 
     /**
-     * @param EmpresaService $service
-     * @param EmpresaValidator $validator
+     * @param SalaService $service
+     * @param SalaValidator $validator
      */
-    public function __construct(EmpresaService $service, EmpresaValidator $validator)
+    public function __construct(SalaService $service, SalaValidator $validator)
     {
         $this->service   = $service;
         $this->validator = $validator;
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Seracademico\Services\Exception
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function checkRoute()
+    public function index()
     {
-        try {
-            #Retornando uma empresa se existir e false se não existir
-            $result = $this->service->isExists();
-
-            #Verificando o se existe empresa
-            if ($result) {
-                #Se for encontrado uma empresa redirecionará para a edição
-                return redirect()->route('seracademico.empresa.edit', ['id' => $result->id]);
-            }
-
-            #Se nnão foi encontrado uma empresa redirecionará para o cadastro
-            return redirect()->route('seracademico.empresa.create');
-        } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
-        }
+        return view('sala.index');
     }
+
+    /**
+     * @return mixed
+     */
+    public function grid()
+    {
+        #Criando a consulta
+        $salas = \DB::table('fac_salas')->select(['id', 'nome', 'bloco', 'andar', 'numero', 'capacidade']);
+
+        #Editando a grid
+        return Datatables::of($salas)->addColumn('action', function ($sala) {
+            return '<a href="edit/'.$sala->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+        })->make(true);
+    }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -69,10 +68,10 @@ class EmpresaController extends Controller
     public function create()
     {
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        //$loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('empresa.create', compact('loadFields'));
+        return view('sala.create');
     }
 
     /**
@@ -92,7 +91,7 @@ class EmpresaController extends Controller
             $result = $this->service->store($data);
 
             #Retorno para a view
-            return redirect()->route('seracademico.empresa.edit', ['id' => $result->id])->with("message", "Cadastro realizado com sucesso!");
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
@@ -107,14 +106,14 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         try {
-            #Recuperando a empresa
-            $empresa    = $this->service->find($id);
+            #Recuperando a sala
+            $sala = $this->service->find($id);
 
             #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
+            //$loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('empresa.edit', compact('empresa', 'loadFields'));
+            return view('sala.edit', compact('sala'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -145,5 +144,4 @@ class EmpresaController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
-
 }

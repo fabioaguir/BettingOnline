@@ -46,8 +46,10 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Cadastros</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                       <li><a href="{{ route('seracademico.user.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('seracademico.user.index') }}">Usuários</a></li>
                         <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
+                        <li><a href="{{ route('seracademico.sala.index') }}">Salas</a></li>
+                        <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}">Tipos de Avaliações</a></li>
                     </ul>
                 </li>
                 <li>

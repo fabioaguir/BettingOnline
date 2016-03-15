@@ -128,5 +128,15 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\PermissionRepository::class,
             \Seracademico\Repositories\PermissionRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\SalaRepository::class,
+            \Seracademico\Repositories\SalaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\TipoAvaliacaoRepository::class,
+            \Seracademico\Repositories\TipoAvaliacaoRepositoryEloquent::class
+        );
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-
-
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::group(['prefix' => 'auth'], function () {
@@ -34,6 +32,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'EmpresaController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'EmpresaController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'EmpresaController@update']);
+        });
+
+        Route::group(['prefix' => 'sala', 'as' => 'sala.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'SalaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'SalaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'SalaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'SalaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'SalaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'SalaController@update']);
+        });
+
+        Route::group(['prefix' => 'tipoAvaliacao', 'as' => 'tipoAvaliacao.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TipoAvaliacaoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'TipoAvaliacaoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TipoAvaliacaoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TipoAvaliacaoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoAvaliacaoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoAvaliacaoController@update']);
         });
 
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
