@@ -96,7 +96,7 @@
 
 <!-- Mainly scripts -->
 <script src="{{ asset('/js/jquery-2.1.1.js')}}"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript" ></script>
+<script src="{{ asset('/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
@@ -106,9 +106,9 @@
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
 
 <!-- Custom and plugin javascript -->

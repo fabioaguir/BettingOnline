@@ -26,6 +26,11 @@ class UserService
     private $permissionRepository;
 
     /**
+     * @var string
+     */
+    private $destinationPath = "images/";
+
+    /**
      * @param UserRepository $repository
      * @param RoleRepository $roleRepository
      * @param PermissionRepository $permissionRepository
@@ -67,6 +72,21 @@ class UserService
     {
         #tratando a senha
         $data['password'] = \bcrypt($data['password']);
+
+        #tratando a imagem
+        if(isset($data['img'])) {
+            $file     = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $data['path_image'] = $fileName;
+
+            #destruindo o img do array
+            unset($data['img']);
+        }
 
         #Salvando o registro pincipal
         $user =  $this->repository->create($data);
@@ -126,9 +146,31 @@ class UserService
         } else {
             $data['password'] = \bcrypt($data['password']);
         }
-        
+
         #Salvando o registro pincipal
         $user =  $this->repository->update($data, $id);
+
+        #tratando a imagem
+        if(isset($data['img'])) {
+            $file     = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #removendo a imagem antiga
+            if($user->path_image != null) {
+                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $user->path_image);
+            }
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $user->path_image = $fileName;
+            $user->save();
+
+            #destruindo o img do array
+            unset($data['img']);
+        }
+
 
         #Verificando se foi criado no banco de dados
         if(!$user) {
