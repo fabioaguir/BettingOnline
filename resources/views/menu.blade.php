@@ -47,6 +47,7 @@
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                        <li><a href="{{ route('seracademico.user.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
                     </ul>
                 </li>
             </ul>
@@ -76,7 +77,7 @@
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                {{-- <li><a href="profile.html">Perfil</a></li>
                                 <li><a href="contacts.html">Notificações</a></li>--}}
-                                <li class="divider"></li>
+                                {{--<li class="divider"></li>--}}
                                 <li><a href="{{ url('auth/logout') }}">Sair</a></li>
                             </ul>
                         </div>
