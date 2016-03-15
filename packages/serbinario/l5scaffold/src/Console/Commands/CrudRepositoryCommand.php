@@ -18,7 +18,7 @@ class CrudRepositoryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:repositorySer {model-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
+    protected $signature = 'make:repositorySer {table-name} {--force} {--singular} {--model-name=} {--master-layout=} {--custom-controller=}';
 
     /**
      * The console command description.
@@ -56,10 +56,12 @@ class CrudRepositoryCommand extends Command
     {
         //Retorna namespace
         //dd(app()->getNamespace());
-        $modelname = strtolower($this->argument('model-name'));
+        $tableName = strtolower($this->argument('table-name'));
+
+        $modelName = $this->option('model-name');
 
         //Passo cada tabela e retorno todos os campos
-        $this->tableDescribes = $table = DB::select('DESCRIBE ' . $modelname);
+        //$this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
 
         //Comcateno em tableField todos os campos da tabela
         /*$this->tableFields .= PHP_EOL;
@@ -80,7 +82,7 @@ class CrudRepositoryCommand extends Command
         Generic::setFilePath($this->getStub());
 
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
-        Generic::setReplacements(['CLASS' => Generic::ucWords($modelname)]);
+        Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Repository");
 
@@ -90,7 +92,7 @@ class CrudRepositoryCommand extends Command
         Generic::setFilePath($this->getStubRep());
 
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
-        Generic::setReplacements(['CLASS' => Generic::ucWords($modelname)]);
+        Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "RepositoryEloquent");
 

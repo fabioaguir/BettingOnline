@@ -17,7 +17,7 @@ class CrudGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:crudSer {model-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
+    protected $signature = 'make:crudSer {table-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
 
     /**
      * The console command description.
@@ -46,15 +46,17 @@ class CrudGeneratorCommand extends Command
     {
         //Retorna namespace
         //dd(app()->getNamespace());
-        $modelname = strtolower($this->argument('model-name'));
-        $prefix = \Config::get('database.connections.mysql.prefix');
-        $custom_table_name = $this->option('table-name');
-        $custom_controller = $this->option('custom-controller');
-        $singular = $this->option('singular');
+        $tablename = strtolower($this->argument('table-name'));
+
+
+        //$prefix = \Config::get('database.connections.mysql.prefix');
+        //$custom_table_name = $this->option('table-name');
+        //$custom_controller = $this->option('custom-controller');
+        //$singular = $this->option('singular');
 
         $tocreate = [];
 
-        if($modelname == 'all') {
+        if($tablename == 'all') {
             $pretables = json_decode(json_encode(DB::select("show tables")), true);
             $tables = [];
             foreach($pretables as $p) {
@@ -66,29 +68,29 @@ class CrudGeneratorCommand extends Command
 
         }else{
             $tables = [
-                'modelname' => $modelname
+                'modelname' => $tablename
             ];
         }
 
         foreach ($tables as $t) {
             if ($this->confirm("Voce gostaria de criar o CRUD  $t ? [y|N]")) {
 
-                $ClassName = $this->ask('Qual nome do Model?');
+                $modelName = $this->ask('Qual nome do Model?');
 
-                $this->info("Criando Model: $ClassName");
-                $this->call('make:modelSer', ['model-name' => $ClassName]);
+                $this->info("Criando Model: $modelName");
+                $this->call('make:modelSer', ['table-name' => $tablename, '--model-name' => $modelName]);
 
-                $this->info("Criando Validator: $ClassName");
-                $this->call('make:validatorSer', ['model-name' => $ClassName]);
+                $this->info("Criando Validator: $modelName");
+                $this->call('make:validatorSer', ['table-name' => $tablename, '--model-name' => $modelName]);
 
-                $this->info("Criando Repository: $ClassName");
-                $this->call('make:repositorySer', ['model-name' => $ClassName]);
+                $this->info("Criando Repository: $modelName");
+                $this->call('make:repositorySer', ['table-name' => $tablename, '--model-name' => $modelName]);
 
-                $this->info("Criando Service: $ClassName");
-                $this->call('make:serviceSer', ['model-name' => $ClassName]);
+                $this->info("Criando Service: $modelName");
+                $this->call('make:serviceSer', ['table-name' => $tablename, '--model-name' => $modelName]);
 
-                $this->info("Criando Contoller: $ClassName");
-                $this->call('make:controllerSer', ['model-name' => $ClassName]);
+                $this->info("Criando Contoller: $modelName");
+                $this->call('make:controllerSer', ['table-name' => $tablename, '--model-name' => $modelName]);
 
             }
         }

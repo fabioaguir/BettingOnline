@@ -18,7 +18,7 @@ class CrudModelCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:modelSer {model-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
+    protected $signature = 'make:modelSer {table-name} {--force} {--singular} {--model-name=} {--master-layout=} {--custom-controller=}';
 
     /**
      * The console command description.
@@ -56,13 +56,14 @@ class CrudModelCommand extends Command
     {
         //Retorna namespace
         //dd(app()->getNamespace());
-        $modelname = strtolower($this->argument('model-name'));
+        $tableName = strtolower($this->argument('table-name'));
+
+        $modelName = $this->option('model-name');
 
         //Passo cada tabela e retorno todos os campos
-        $this->tableDescribes = $table = DB::select('DESCRIBE ' . $modelname);
+        $this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
 
-        //Seto o caminho e o nome do arquivo modelo
-        Generic::setFilePath($this->getStub());
+
 
         //Comcateno em tableField todos os campos da tabela
         $this->tableFields .= "[ " .PHP_EOL;
@@ -76,13 +77,18 @@ class CrudModelCommand extends Command
 
         $this->tableFields .= "\t]";
 
+        //dd($this->tableFields);
+
+        //Seto o caminho e o nome do arquivo modelo
+        Generic::setFilePath($this->getStub());
 
 
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
-        Generic::setReplacements(['TABLE' => $modelname]);
-        Generic::setReplacements(['CLASS' => Generic::ucWords($modelname)]);
+        Generic::setReplacements(['TABLE' => $tableName]);
+        Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
         Generic::setReplacements(['FILLABLE' => $this->tableFields]);
         //Generic::setReplacements(['METODO' => $this->compileRelations]);
+
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathModels);
 
@@ -94,7 +100,7 @@ class CrudModelCommand extends Command
 
     protected function getStub()
     {
-        return __DIR__ . '/../../stubs/model.stub';
+        return __DIR__.'/../../stubs/model.stub';
     }
 
 

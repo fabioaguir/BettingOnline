@@ -18,7 +18,7 @@ class CrudControllerCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:controllerSer {model-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
+    protected $signature = 'make:controllerSer {table-name} {--force} {--singular} {--model-name=} {--master-layout=} {--custom-controller=}';
 
     /**
      * The console command description.
@@ -54,18 +54,20 @@ class CrudControllerCommand extends Command
     {
         //Retorna namespace
         //dd(app()->getNamespace());
-        $modelname = strtolower($this->argument('model-name'));
+        $tableName = strtolower($this->argument('table-name'));
+
+        $modelName = $this->option('model-name');
 
         //Passo cada tabela e retorno todos os campos
-        $this->tableDescribes = $table = DB::select('DESCRIBE ' . $modelname);
+        //$this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
 
 
 
         //Seto o caminho e o nome do arquivo modelo
         Generic::setFilePath($this->getStub());
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
-        Generic::setReplacements(['CLASS' => Generic::ucWords($modelname)]);
-        Generic::setReplacements(['MODELOBJ' => $modelname]);
+        Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
+        Generic::setReplacements(['MODELOBJ' => $modelName]);
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Controller");
 

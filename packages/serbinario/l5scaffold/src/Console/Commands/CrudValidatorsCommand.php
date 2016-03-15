@@ -18,7 +18,7 @@ class CrudValidatorsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:validatorSer {model-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
+    protected $signature = 'make:validatorSer {table-name} {--force} {--singular} {--model-name=} {--master-layout=} {--custom-controller=}';
 
     /**
      * The console command description.
@@ -55,11 +55,12 @@ class CrudValidatorsCommand extends Command
     public function handle()
     {
         //Retorna namespace
-        //dd(app()->getNamespace());
-        $modelname = strtolower($this->argument('model-name'));
+        $tableName = strtolower($this->argument('table-name'));
+
+        $modelName = $this->option('model-name');
 
         //Passo cada tabela e retorno todos os campos
-        $this->tableDescribes = $table = DB::select('DESCRIBE ' . $modelname);
+        $this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
 
         //Seto o caminho e o nome do arquivo modelo
         Generic::setFilePath($this->getStub());
@@ -79,8 +80,8 @@ class CrudValidatorsCommand extends Command
 
 
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
-        Generic::setReplacements(['TABLE' => $modelname]);
-        Generic::setReplacements(['CLASS' => Generic::ucWords($modelname)]);
+        Generic::setReplacements(['TABLE' => $tableName]);
+        Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
         Generic::setReplacements(['VALIDATORS' => $this->tableFields]);
         //Generic::setReplacements(['METODO' => $this->compileRelations]);
 
