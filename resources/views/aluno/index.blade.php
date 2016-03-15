@@ -30,7 +30,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>CPF</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 17%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
