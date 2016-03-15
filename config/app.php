@@ -245,8 +245,6 @@ return [
         //https://github.com/mcamara/laravel-localization
         'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
 
-
-
     ],
 
 ];

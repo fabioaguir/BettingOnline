@@ -47,6 +47,14 @@
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                        <li><a href="{{ route('seracademico.user.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Parâmetros do sistema</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.empresa.check') }}">Empresa</a></li>
                     </ul>
                 </li>
             </ul>
@@ -72,12 +80,12 @@
                     <li>
                         <div class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                             <span class="text-muted text-xs block">Usuário<b class="caret"></b></span></a>
+                             <span class="text-muted text-xs block">{{ Auth::user()->name }}<b class="caret"></b></span></a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Perfil</a></li>
-                                <li><a href="contacts.html">Notificações</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{{ url('auth/logout') }}">Logout</a></li>
+                               {{-- <li><a href="profile.html">Perfil</a></li>
+                                <li><a href="contacts.html">Notificações</a></li>--}}
+                                {{--<li class="divider"></li>--}}
+                                <li><a href="{{ url('auth/logout') }}">Sair</a></li>
                             </ul>
                         </div>
                     </li>

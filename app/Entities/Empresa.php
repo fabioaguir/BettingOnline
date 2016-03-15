@@ -14,6 +14,15 @@ class Empresa extends Model implements Transformable
 
     protected $fillable = [ 
 		'nome',
+        'cnpj',
+        'inscricao_municipal',
+        'inscricao_estadual',
+        'endereco_id'
 	];
+
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class);
+    }
 
 }
