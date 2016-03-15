@@ -28,6 +28,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'AlunoController@contrato']);
         });
 
+        Route::group(['prefix' => 'empresa', 'as' => 'empresa.'], function () {
+            Route::get('check', ['as' => 'check', 'uses' => 'EmpresaController@checkRoute']);
+            Route::get('create', ['as' => 'create', 'uses' => 'EmpresaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'EmpresaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'EmpresaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'EmpresaController@update']);
+        });
+
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);

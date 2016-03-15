@@ -50,6 +50,13 @@
                         <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Parâmetros do sistema</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.empresa.check') }}">Empresa</a></li>
+                    </ul>
+                </li>
             </ul>
 
         </div>
