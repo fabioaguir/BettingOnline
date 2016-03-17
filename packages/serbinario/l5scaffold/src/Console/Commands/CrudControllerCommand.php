@@ -8,6 +8,8 @@ use DB;
 use Artisan;
 use Serbinario\L5scaffold\CrudGeneratorService;
 use Serbinario\L5scaffold\Generic;
+use Serbinario\L5scaffold\Inflector;
+
 
 
 class CrudControllerCommand extends Command
@@ -64,6 +66,7 @@ class CrudControllerCommand extends Command
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
         Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
         Generic::setReplacements(['MODELOBJ' => strtolower($modelName)]);
+        Generic::setReplacements(['MODELVIEW' => lcfirst(Inflector::singularize($modelName))]);
         Generic::setReplacements(['TABLE' => $tableName]);
 
         //Grava o arquivo

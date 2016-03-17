@@ -10,7 +10,6 @@ use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\$CLASS$Validator;
-use Seracademico\Validators\$CLASS$Validator;
 
 class $CLASS$Controller extends Controller
 {
@@ -44,7 +43,7 @@ class $CLASS$Controller extends Controller
      */
     public function index()
     {
-        return view('');
+        return view('$MODELVIEW$.index');
     }
 
     /**
@@ -70,7 +69,7 @@ class $CLASS$Controller extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('', compact('loadFields'));
+        return view('$MODELVIEW$.create', compact('loadFields'));
     }
 
     /**
@@ -115,7 +114,7 @@ class $CLASS$Controller extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('', compact('model', 'loadFields'));
+            return view('$MODELVIEW$.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
