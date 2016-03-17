@@ -13,7 +13,8 @@
         "laravelcollective/html": "5.1.*",
         "bican/roles": "2.1.*",
         "mcamara/laravel-localization": "1.0.*",
-        "barryvdh/laravel-snappy": "0.2.x"
+        "barryvdh/laravel-snappy": "0.2.x",
+        "doctrine/dbal": "~2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

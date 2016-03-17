@@ -50,6 +50,11 @@
                         <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
                         <li><a href="{{ route('seracademico.sala.index') }}">Salas</a></li>
                         <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}">Tipos de Avaliações</a></li>
+                        <li><a href="{{ route('seracademico.tipoDisciplina.index') }}">Tipos de Disciplinas</a></li>
+                        <li><a href="{{ route('seracademico.tipoCurso.index') }}">Tipos de Cursos</a></li>
+                        <li><a href="{{ route('seracademico.sede.index') }}">Sedes</a></li>
+                        <li><a href="{{ route('seracademico.departamento.index') }}">Departamentos</a></li>
+                        <li><a href="{{ route('seracademico.disciplina.index') }}">Disciplinas</a></li>
                     </ul>
                 </li>
                 <li>

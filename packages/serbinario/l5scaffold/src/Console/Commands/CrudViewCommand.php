@@ -108,7 +108,7 @@ class CrudViewCommand extends Command
         $this->formFieldsHtml .=  "\t" . "</div>\n";
         $this->formFieldsHtml .= "" . "</div>";
 
-        Generic::setNameClasseSingular($this->getPathTemplate() . "templateForm" . $modelName . ".blade");
+        Generic::setNameClasseSingular($this->getPathTemplate() . "tamplateForm" . $modelName . ".blade");
         Generic::write($this->formFieldsHtml, '');
         dd($this->formFieldsHtml);
 
