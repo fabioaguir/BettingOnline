@@ -166,5 +166,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\DisciplinaRepository::class,
 			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\CursoRepository::class,
+			\Seracademico\Repositories\CursoRepositoryEloquent::class
+		);
+
 	}
 }
