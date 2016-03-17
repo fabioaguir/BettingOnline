@@ -55,6 +55,7 @@
                         <li><a href="{{ route('seracademico.sede.index') }}">Sedes</a></li>
                         <li><a href="{{ route('seracademico.departamento.index') }}">Departamentos</a></li>
                         <li><a href="{{ route('seracademico.disciplina.index') }}">Disciplinas</a></li>
+                        <li><a href="{{ route('seracademico.curso.index') }}">Cursos</a></li>
                     </ul>
                 </li>
                 <li>
