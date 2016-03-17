@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use $NAMESPACE$Http\Requests;
 use $NAMESPACE$Services\$CLASS$Service;
 use Yajra\Datatables\Datatables;
+use Prettus\Validator\Exceptions\ValidatorException;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 class $CLASS$Controller extends Controller
 {
@@ -42,11 +44,11 @@ class $CLASS$Controller extends Controller
     public function grid()
     {
         #Criando a consulta
-        $empresas = \DB::table('empresas')->select(['id', 'nome']);
+        $rows = \DB::table('$TABLE$')->select(['id', 'nome']);
 
         #Editando a grid
-        return Datatables::of($empresas)->addColumn('action', function ($empresa) {
-            return '<a href="edit/'.$empresa->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
         })->make(true);
     }
 

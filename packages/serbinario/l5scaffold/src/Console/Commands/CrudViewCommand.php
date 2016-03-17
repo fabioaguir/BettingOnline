@@ -20,7 +20,7 @@ class CrudViewCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:viewSer {model-name} {--force} {--singular} {--table-name=} {--master-layout=} {--custom-controller=}';
+    protected $signature = 'make:viewSer {table-name} {--force} {--singular} {--model-name=} {--master-layout=} {--custom-controller=}';
 
     /**
      * The console command description.
@@ -43,6 +43,8 @@ class CrudViewCommand extends Command
      * @var string
      */
     protected $formHeadingHtml = '';
+
+    protected $formBodyHtml = '';
 
     private $buildImput;
 
@@ -98,13 +100,15 @@ class CrudViewCommand extends Command
     public function handle()
     {
 
-        $modelname = strtolower($this->argument('model-name'));
+        $tableName = strtolower($this->argument('table-name'));
+
+        $modelName = $this->option('model-name');
 
 
         $schema = \DB::getDoctrineSchemaManager();
 
         //Retorna todas as tabelas
-        $tables = $schema->listTableColumns($modelname);
+        $tables = $schema->listTableColumns($tableName);
 
         //Varre a procura de cada fields
         foreach ($tables as $column) {
@@ -114,10 +118,16 @@ class CrudViewCommand extends Command
                 . $column->getName()
                 . " do tipo "
                 . $column->getType()->getName()
-                . " Escolha um tipo", ['text', 'password', 'select', 'radio', 'date', 'checkbox'], false);
+                . " Escolha um tipo", ['text', 'password', 'select', 'radio', 'date', 'checkbox', 'Não Gerar'], false);
 
             $this->formFieldsHtml .= $this->createField($typeName, $column);
+
         }
+
+        Generic::setNameClasseSingular("teste.blade");
+        Generic::write($this->formFieldsHtml, '');
+        dd($this->formFieldsHtml);
+
 
     }
 
@@ -143,6 +153,8 @@ class CrudViewCommand extends Command
             case 'checkbox':
                 return $this->createChecboxField($column);
                 break;
+            case 'Não Gerar':
+                break;
             default: // text
                 return $this->createFormField($column);
         }
@@ -150,40 +162,49 @@ class CrudViewCommand extends Command
 
     private function createTextField($column)
     {
+        $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
         $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
         $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', null, array('class' => 'form-control')) !!}";
-        $this->wrapField($this->buildImput, '');
+        return $this->wrapField($this->buildImput, '');
 
     }
 
     private function createPasswordField($column)
     {
+        $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
         $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', null, array('class' => 'form-control')) !!}";
-        $this->wrapField($this->buildImput, '');
+        $this->buildImput .= "\t\t\t\t" . "{!! Form::password('" .$column->getName() . "', array('class' => 'form-control')) !!}";
+        return $this->wrapField($this->buildImput, '');
 
     }
-
-
-
 
     private function createSelectField($column)
     {
+        $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
         $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
         $this->buildImput .= "\t\t\t\t" . "{!! Form::select('" .$column->getName() . "', array(), array('class' => 'form-control')) !!}";
-        $this->wrapField($this->buildImput, '');
+        return  $this->wrapField($this->buildImput, '');
 
     }
 
+    private function createEmailField($column)
+    {
+    }
     private function createRadioField($column)
     {
     }
 
     private function createDateField($column)
     {
+        $this->buildImput = "";
+        $this->buildImput .= PHP_EOL;
+        $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
+        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', null, array('class' => 'form-control datepicker')) !!}";
+
+        return  $this->wrapField($this->buildImput, '');
     }
 
     private function createCheckboxField($column)
@@ -201,16 +222,19 @@ class CrudViewCommand extends Command
     protected function wrapField($column, $field)
     {
         $buildImput = "
-        <div class=\"col-md-4\">
-            <div class=\"form-group\">
-                $column
-            </div>
-        </div>";
+            <div class=\"col-md-4\">
+                <div class=\"form-group\">
+                    $column
+                </div>
+            </div>";
+        //dd($buildImput);
+        return $buildImput;
+
 
         //Seto o caminho e o nome do arquivo modelo
-        Generic::setNameClasseSingular("teste.blade");
-        Generic::write($buildImput, '');
-        dd($buildImput);
+        //Generic::setNameClasseSingular("teste.blade");
+        //Generic::write($buildImput, '');
+        //dd($buildImput);
 
     }
 

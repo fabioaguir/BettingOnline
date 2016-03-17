@@ -70,22 +70,12 @@ class Generic
         return self::$replacementr = array();
     }
 
-
-    public function getFillable()
+    public static function setNameClasseSingular($nameClasseSingular)
     {
-        /*if (!$this->fillable) {
-            return '[]';
-        }
-
-        $results = '['.PHP_EOL;
-
-        foreach ($this->getSchemaParser()->toArray() as $column => $value) {
-            $results .= "\t\t'{$column}',".PHP_EOL;
-        }
-
-        return $results."\t".']';*/
+        self::$nameClasseSingular = $nameClasseSingular;
     }
 
+    //Retira do andreline
     public static function ucWords($nameClass)
     {
         //Se o da tabela veio com um anderline
@@ -96,7 +86,7 @@ class Generic
             {
                 self::$nameClasseSingular .= ucfirst(Inflector::singularize($nc));
             }
-            //dd($this->nameClasseSingular);
+
         }else{
             self::$nameClasseSingular = ucfirst(Inflector::singularize($nameClass));
         }
@@ -104,6 +94,7 @@ class Generic
         return self::$nameClasseSingular;
     }
 
+    //Create file
     public static function write($compileModel, $phathModels, $concatClassName = null)
     {
         $schema = $compileModel;
@@ -113,6 +104,15 @@ class Generic
         self::$nameClasseSingular = "";
         //dd($path);
         self::saveTo($path, $schema);
+    }
+
+    public static function appendToEndOfFile($path, $text, $remove_last_chars = 0, $dont_add_if_exist = false) {
+        $content = file_get_contents($path);
+        //dd(strlen($content));
+        if(!str_contains($content, $text) || !$dont_add_if_exist) {
+            $newcontent = substr($content, 0, strlen($content)-$remove_last_chars).$text;
+            file_put_contents($path, $newcontent);
+        }
     }
 
 }

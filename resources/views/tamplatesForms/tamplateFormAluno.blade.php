@@ -73,6 +73,7 @@
                 </span>
                 <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6"
                    data-dismiss="fileinput">Remover</a>
+                   data-dismiss="fileinput">Remover</a>
             </div>
         </div>
     </div>
@@ -190,7 +191,6 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('data_expedicao', 'Data expedição') !!}
-
                                                 {!! Form::text('data_expedicao', null , array('class' => 'form-control datepicker')) !!}
                                             </div>
                                         </div>

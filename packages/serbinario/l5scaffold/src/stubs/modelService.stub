@@ -3,7 +3,7 @@
 namespace $NAMESPACE$Services;
 
 use $NAMESPACE$Repositories\$CLASS$Repository;
-use $NAMESPACE$Entities;
+use $NAMESPACE$Entities\$CLASS$;
 
 class $CLASS$Service
 {
@@ -43,7 +43,7 @@ class $CLASS$Service
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Aluno
+    public function store(array $data) : $CLASS$
     {
         #Salvando o registro pincipal
         $$MODELOBJ$ =  $this->repository->create($data);

@@ -8,6 +8,7 @@ use DB;
 use Artisan;
 use Serbinario\L5scaffold\CrudGeneratorService;
 use Serbinario\L5scaffold\Generic;
+use Serbinario\L5scaffold\Inflector;
 
 
 class CrudRepositoryCommand extends Command
@@ -35,6 +36,7 @@ class CrudRepositoryCommand extends Command
 
     //Vai ignorar esse campos da tabela
     private $ignore = array('id','created_at','updated_at');
+    private $buildRepository;
 
     /**
      * Create a new command instance.
@@ -54,29 +56,13 @@ class CrudRepositoryCommand extends Command
      */
     public function handle()
     {
+
         //Retorna namespace
         //dd(app()->getNamespace());
         $tableName = strtolower($this->argument('table-name'));
 
         $modelName = $this->option('model-name');
 
-        //Passo cada tabela e retorno todos os campos
-        //$this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
-
-        //Comcateno em tableField todos os campos da tabela
-        /*$this->tableFields .= PHP_EOL;
-        foreach ($this->tableDescribes as $values) {
-
-            if (!in_array($values->Field, $this->ignore)) {
-
-                $this->tableFields .= "\t\t\t'" . $values->Field . "'" . " => " . " '' " . "," . "\n";
-            }
-        }*/
-
-        //$this->tableFields .= "\t]";
-
-
-        //Gerar o arquivo ModelRepository
 
         //Seto o caminho e o nome do arquivo modelo
         Generic::setFilePath($this->getStub());
@@ -86,8 +72,6 @@ class CrudRepositoryCommand extends Command
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Repository");
 
-        //Gerar o arquivo ModelRepositoryEloquent
-
         //Seto o caminho e o nome do arquivo modeloRepositoryEloquent
         Generic::setFilePath($this->getStubRep());
 
@@ -96,8 +80,8 @@ class CrudRepositoryCommand extends Command
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "RepositoryEloquent");
 
-
-
+        //Adiciona ao arquivo SeracademicoRepositoryProvider.php os repositories
+        $this->SetRepository($modelName);
 
     }
 
@@ -106,9 +90,28 @@ class CrudRepositoryCommand extends Command
         return __DIR__ . '/../../stubs/modelRepository.stub';
     }
 
+    /*
+     * Retorna o arquivo de modelo
+     */
     protected function getStubRep()
     {
         return __DIR__ . '/../../stubs/modelRepositoryEloquent.stub';
+    }
+
+
+
+    /**
+     *Adicona Providres ao arquivo SeracademicoRepositoryProvider.php
+     */
+    protected function SetRepository($modelName){
+        $this->buildRepository .= PHP_EOL;
+        $this->buildRepository .= "\t\t\$this->app->bind(\n";
+        $this->buildRepository .= "\t\t\t\\Seracademico\\Repositories\\" . Inflector::singularize($modelName)  . "Repository::class,\n";
+        $this->buildRepository .= "\t\t\t\\Seracademico\\Repositories\\" . Inflector::singularize($modelName) . "RepositoryEloquent::class\n";
+        $this->buildRepository .= "\t\t);\n";
+        $this->buildRepository .= "\t}\n";
+        $this->buildRepository .= "}";
+        Generic::appendToEndOfFile(base_path(). "/app/Providers/SeracademicoRepositoryProvider.php", $this->buildRepository, 6, true);
     }
 
 

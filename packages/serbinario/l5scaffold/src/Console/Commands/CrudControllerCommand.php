@@ -67,7 +67,8 @@ class CrudControllerCommand extends Command
         Generic::setFilePath($this->getStub());
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
         Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
-        Generic::setReplacements(['MODELOBJ' => $modelName]);
+        Generic::setReplacements(['MODELOBJ' => strtolower($modelName)]);
+        Generic::setReplacements(['TABLE' => $tableName]);
 
         Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Controller");
 

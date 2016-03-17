@@ -10,6 +10,8 @@ $(document).ready(function(){
     $('.cep').mask('00000-000');
     //money
      $('.money').mask('000.000.000,00', {reverse: true});
+    //CNPJ
+    $('.cnpj').mask('00.000.000.0000-00');
 
     //##### Submeter formulário
     $('#formAluno').submit(function() {

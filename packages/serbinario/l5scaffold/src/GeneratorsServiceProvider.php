@@ -29,7 +29,8 @@ class GeneratorsServiceProvider extends ServiceProvider
            'Serbinario\L5scaffold\Console\Commands\CrudValidatorsCommand',
            'Serbinario\L5scaffold\Console\Commands\CrudRepositoryCommand',
            'Serbinario\L5scaffold\Console\Commands\CrudServiceCommand',
-           'Serbinario\L5scaffold\Console\Commands\CrudControllerCommand'
+           'Serbinario\L5scaffold\Console\Commands\CrudControllerCommand',
+           'Serbinario\L5scaffold\Console\Commands\CrudViewCommand'
 
        ]);
 
