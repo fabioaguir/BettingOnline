@@ -73,11 +73,17 @@ class CrudViewCommand extends Command
      */
     public function handle()
     {
+
         //Nome da tablela
         $tableName = strtolower($this->argument('table-name'));
 
         //Nome do Model
         $modelName = $this->option('model-name');
+
+        $this->formFieldsHtml .=  "<div class=\"row\">\n";
+        $this->formFieldsHtml .=  "\t" . "<div class=\"col-md-10\">\n";
+        $this->formFieldsHtml .= "\t\t" . "<div class=\"row\">\n";
+
 
 
         $schema = \DB::getDoctrineSchemaManager();
@@ -98,7 +104,11 @@ class CrudViewCommand extends Command
 
         }
 
-        Generic::setNameClasseSingular("teste.blade");
+        $this->formFieldsHtml .= "\n\t\t" . "</div>\n";
+        $this->formFieldsHtml .=  "\t" . "</div>\n";
+        $this->formFieldsHtml .= "" . "</div>";
+
+        Generic::setNameClasseSingular($this->getPathTemplate() . "templateForm" . $modelName . ".blade");
         Generic::write($this->formFieldsHtml, '');
         dd($this->formFieldsHtml);
 
@@ -139,7 +149,7 @@ class CrudViewCommand extends Command
         $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
         $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', null, array('class' => 'form-control')) !!}";
+        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', Session::getOldInput('" .$column->getName() . "')  , array('class' => 'form-control')) !!}";
         return $this->wrapField($this->buildImput, '');
 
     }
@@ -176,7 +186,7 @@ class CrudViewCommand extends Command
         $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
         $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', null, array('class' => 'form-control datepicker')) !!}";
+        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', Session::getOldInput('" .$column->getName() . "'), array('class' => 'form-control datepicker')) !!}";
 
         return  $this->wrapField($this->buildImput, '');
     }
@@ -188,10 +198,6 @@ class CrudViewCommand extends Command
     public function createFormField($column){
 
     }
-
-
-
-
 
     protected function wrapField($column, $field)
     {
@@ -205,10 +211,27 @@ class CrudViewCommand extends Command
 
     }
 
-    protected function getStub()
+    protected function getStubEdit()
     {
-        return __DIR__ . '/../../stubs/modelValidator.stub';
+        return __DIR__ . '/../../stubs/edit.blade.stub';
     }
+
+    protected function getStubCreate()
+    {
+        return __DIR__ . '/../../stubs/create.blade.stub';
+    }
+
+    protected function getStubIndex()
+    {
+        return __DIR__ . '/../../stubs/index.blade.stub';
+    }
+
+    protected function getPathTemplate()
+    {
+        return '/resources/views/tamplatesForms/';
+    }
+
+
 
 
 }

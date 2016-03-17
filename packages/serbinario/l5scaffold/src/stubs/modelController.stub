@@ -9,6 +9,8 @@ use $NAMESPACE$Services\$CLASS$Service;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use Seracademico\Validators\$CLASS$Validator;
+use Seracademico\Validators\$CLASS$Validator;
 
 class $CLASS$Controller extends Controller
 {

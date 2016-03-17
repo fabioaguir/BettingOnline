@@ -92,6 +92,9 @@ class CrudGeneratorCommand extends Command
                 $this->info("Criando Contoller: $modelName");
                 $this->call('make:controllerSer', ['table-name' => $tablename, '--model-name' => $modelName]);
 
+                $this->info("Criando View: $modelName");
+                $this->call('make:viewSer', ['table-name' => $tablename, '--model-name' => $modelName]);
+
             }
         }
 

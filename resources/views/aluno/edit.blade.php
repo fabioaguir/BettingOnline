@@ -47,7 +47,9 @@
             {!! Form::close() !!}
         </div>
     </div>
-<?php //echo $cliente['enderecosEnderecos']['bairrosBairros']['cidadesCidades']['estadosEstados']['id']; ?>
+<?php
+@endsection
+//echo $cliente['enderecosEnderecos']['bairrosBairros']['cidadesCidades']['estadosEstados']['id']; ?>
     @section('javascript')
         <script src="{{ asset('/js/validacoes/validation_form_aluno.js')}}"></script>
 
