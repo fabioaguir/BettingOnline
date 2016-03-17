@@ -138,5 +138,33 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\TipoAvaliacaoRepository::class,
             \Seracademico\Repositories\TipoAvaliacaoRepositoryEloquent::class
         );
-    }
+  
+		$this->app->bind(
+			\Seracademico\Repositories\TipoDisciplinaRepository::class,
+			\Seracademico\Repositories\TipoDisciplinaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\TipoCursoRepository::class,
+			\Seracademico\Repositories\TipoCursoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\SedeRepository::class,
+			\Seracademico\Repositories\SedeRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Seracademico\Repositories\DepartamentoRepository::class,
+			\Seracademico\Repositories\DepartamentoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\DisciplinaRepository::class,
+			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Seracademico\Repositories\DisciplinaRepository::class,
+			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
+		);
+	}
 }

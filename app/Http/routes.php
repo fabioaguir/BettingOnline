@@ -52,6 +52,51 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoAvaliacaoController@update']);
         });
 
+        Route::group(['prefix' => 'tipoDisciplina', 'as' => 'tipoDisciplina.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TipoDisciplinaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'TipoDisciplinaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TipoDisciplinaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TipoDisciplinaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoDisciplinaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoDisciplinaController@update']);
+        });
+
+        Route::group(['prefix' => 'tipoCurso', 'as' => 'tipoCurso.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TipoCursoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'TipoCursoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TipoCursoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TipoCursoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoCursoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoCursoController@update']);
+        });
+
+        Route::group(['prefix' => 'sede', 'as' => 'sede.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'SedeController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'SedeController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'SedeController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'SedeController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'SedeController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'SedeController@update']);
+        });
+
+        Route::group(['prefix' => 'departamento', 'as' => 'departamento.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'DepartamentoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'DepartamentoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'DepartamentoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'DepartamentoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'DepartamentoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'DepartamentoController@update']);
+        });
+
+        Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'DisciplinaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'DisciplinaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'DisciplinaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'DisciplinaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'DisciplinaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'DisciplinaController@update']);
+        });
+
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
