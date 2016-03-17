@@ -33,6 +33,7 @@ class CrudViewCommand extends Command
 
     private $tableFields;
 
+    //Path onde será gerado o arquivo
     private $phathviews = "resources/views";
 
     //Vai ignorar esse campos da tabela
@@ -54,33 +55,6 @@ class CrudViewCommand extends Command
      */
     protected $formFieldsHtml = '';
 
-    protected $typeLookup = [
-        'string' => 'text',
-        'char' => 'text',
-        'varchar' => 'text',
-        'text' => 'textarea',
-        'mediumtext' => 'textarea',
-        'longtext' => 'textarea',
-        'json' => 'textarea',
-        'jsonb' => 'textarea',
-        'binary' => 'textarea',
-        'password' => 'password',
-        'email' => 'email',
-        'number' => 'number',
-        'integer' => 'number',
-        'bigint' => 'number',
-        'mediumint' => 'number',
-        'tinyint' => 'number',
-        'smallint' => 'number',
-        'decimal' => 'number',
-        'double' => 'number',
-        'float' => 'number',
-        'date' => 'date',
-        'datetime' => 'datetime-local',
-        'time' => 'time',
-        'boolean' => 'radio',
-    ];
-
     /**
      * Create a new command instance.
      *
@@ -99,9 +73,10 @@ class CrudViewCommand extends Command
      */
     public function handle()
     {
-
+        //Nome da tablela
         $tableName = strtolower($this->argument('table-name'));
 
+        //Nome do Model
         $modelName = $this->option('model-name');
 
 
@@ -114,10 +89,9 @@ class CrudViewCommand extends Command
         foreach ($tables as $column) {
             echo ' - ' . $column->getName() . " - " . $column->getType()->getName() . "\n";
 
+            //Pergunta qual tipo de campo
             $typeName = $this->choice('Foi encontrado o capo '
-                . $column->getName()
-                . " do tipo "
-                . $column->getType()->getName()
+                . $column->getName(). " do tipo " . $column->getType()->getName()
                 . " Escolha um tipo", ['text', 'password', 'select', 'radio', 'date', 'checkbox', 'Não Gerar'], false);
 
             $this->formFieldsHtml .= $this->createField($typeName, $column);
@@ -227,14 +201,7 @@ class CrudViewCommand extends Command
                     $column
                 </div>
             </div>";
-        //dd($buildImput);
         return $buildImput;
-
-
-        //Seto o caminho e o nome do arquivo modelo
-        //Generic::setNameClasseSingular("teste.blade");
-        //Generic::write($buildImput, '');
-        //dd($buildImput);
 
     }
 

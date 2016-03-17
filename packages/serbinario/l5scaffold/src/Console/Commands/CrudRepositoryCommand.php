@@ -32,10 +32,11 @@ class CrudRepositoryCommand extends Command
 
     private $tableFields;
 
-    private $phathValidators = "app/Repositories";
+    private $pathValidators = "app/Repositories";
 
     //Vai ignorar esse campos da tabela
     private $ignore = array('id','created_at','updated_at');
+
     private $buildRepository;
 
     /**
@@ -47,7 +48,6 @@ class CrudRepositoryCommand extends Command
     {
         parent::__construct();
     }
-
 
     /**
      * Execute the console command.
@@ -70,7 +70,7 @@ class CrudRepositoryCommand extends Command
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
         Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
 
-        Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Repository");
+        Generic::write(Generic::getContents(Generic::getReplacements()), $this->pathValidators, "Repository");
 
         //Seto o caminho e o nome do arquivo modeloRepositoryEloquent
         Generic::setFilePath($this->getStubRep());
@@ -78,13 +78,16 @@ class CrudRepositoryCommand extends Command
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
         Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
 
-        Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "RepositoryEloquent");
+        Generic::write(Generic::getContents(Generic::getReplacements()), $this->pathValidators, "RepositoryEloquent");
 
         //Adiciona ao arquivo SeracademicoRepositoryProvider.php os repositories
         $this->SetRepository($modelName);
 
     }
 
+    /*
+     * Retorna o  arquivo de modelo
+     */
     protected function getStub()
     {
         return __DIR__ . '/../../stubs/modelRepository.stub';
@@ -97,8 +100,6 @@ class CrudRepositoryCommand extends Command
     {
         return __DIR__ . '/../../stubs/modelRepositoryEloquent.stub';
     }
-
-
 
     /**
      *Adicona Providres ao arquivo SeracademicoRepositoryProvider.php

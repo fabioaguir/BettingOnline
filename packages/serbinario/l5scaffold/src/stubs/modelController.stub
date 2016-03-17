@@ -13,21 +13,28 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 class $CLASS$Controller extends Controller
 {
     /**
-     * @var $CLASS$Service
-     */
+    * @var $CLASS$Service
+    */
     private $service;
 
     /**
-     * @var array
-     */
+    * @var $CLASS$Validator
+    */
+    private $validator;
+
+    /**
+    * @var array
+    */
     private $loadFields = [];
 
     /**
-     * @param $CLASS$Service $service
-     */
-    public function __construct($CLASS$Service $service)
+    * @param $CLASS$Service $service
+    * @param $CLASS$Validator $validator
+    */
+    public function __construct($CLASS$Service $service, $CLASS$Validator $validator)
     {
-        $this->service    = $service;
+        $this->service   =  $service;
+        $this->validator =  $validator;
     }
 
     /**
@@ -75,15 +82,15 @@ class $CLASS$Controller extends Controller
             $data = $request->all();
 
             #Validando a requisição
-           // $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        //} catch (ValidatorException $e) {
-          //  return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -97,7 +104,7 @@ class $CLASS$Controller extends Controller
     {
         try {
             #Recuperando a empresa
-            $empresa = $this->service->find($id);
+            $model = $this->service->find($id);
 
             #Tratando as datas
            // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
@@ -106,7 +113,7 @@ class $CLASS$Controller extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('', compact('empresa', 'loadFields'));
+            return view('', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -131,8 +138,8 @@ class $CLASS$Controller extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
-       // } catch (ValidatorException $e) {
-       //     return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

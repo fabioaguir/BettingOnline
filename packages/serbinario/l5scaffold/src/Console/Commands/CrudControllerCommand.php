@@ -31,7 +31,8 @@ class CrudControllerCommand extends Command
 
     private $tableFields;
 
-    private $phathValidators = "app/Http/Controllers";
+    //Path onde será gerado o arquivo
+    private $pathController = "app/Http/Controllers";
 
 
     /**
@@ -52,16 +53,11 @@ class CrudControllerCommand extends Command
      */
     public function handle()
     {
-        //Retorna namespace
-        //dd(app()->getNamespace());
+        //Nome da tabela
         $tableName = strtolower($this->argument('table-name'));
 
+        //Nome do Model
         $modelName = $this->option('model-name');
-
-        //Passo cada tabela e retorno todos os campos
-        //$this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
-
-
 
         //Seto o caminho e o nome do arquivo modelo
         Generic::setFilePath($this->getStub());
@@ -70,7 +66,8 @@ class CrudControllerCommand extends Command
         Generic::setReplacements(['MODELOBJ' => strtolower($modelName)]);
         Generic::setReplacements(['TABLE' => $tableName]);
 
-        Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Controller");
+        //Grava o arquivo
+        Generic::write(Generic::getContents(Generic::getReplacements()), $this->pathController, "Controller");
 
 
     }

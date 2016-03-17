@@ -31,6 +31,7 @@ class CrudValidatorsCommand extends Command
 
     private $tableFields;
 
+    //Path onde será gerado o arquivo
     private $phathValidators = "app/Validators";
 
     //Vai ignorar esse campos da tabela
@@ -62,9 +63,6 @@ class CrudValidatorsCommand extends Command
         //Passo cada tabela e retorno todos os campos
         $this->tableDescribes = $table = DB::select('DESCRIBE ' . $tableName);
 
-        //Seto o caminho e o nome do arquivo modelo
-        Generic::setFilePath($this->getStub());
-
         //Comcateno em tableField todos os campos da tabela
         $this->tableFields .= PHP_EOL;
         foreach ($this->tableDescribes as $values) {
@@ -75,10 +73,8 @@ class CrudValidatorsCommand extends Command
             }
         }
 
-        //$this->tableFields .= "\t]";
-
-
-
+        //Seto o caminho e o nome do arquivo modelo
+        Generic::setFilePath($this->getStub());
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
         Generic::setReplacements(['TABLE' => $tableName]);
         Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
@@ -89,7 +85,9 @@ class CrudValidatorsCommand extends Command
 
 
     }
-
+    /*
+    * Retorna o arquivo de modelo
+    */
     protected function getStub()
     {
         return __DIR__ . '/../../stubs/modelValidator.stub';

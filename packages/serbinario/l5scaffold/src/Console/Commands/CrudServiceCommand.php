@@ -31,7 +31,8 @@ class CrudServiceCommand extends Command
 
     private $tableFields;
 
-    private $phathValidators = "app/Services";
+    //Path onde será gerado o arquivo
+    private $pathService = "app/Services";
 
 
     /**
@@ -67,13 +68,15 @@ class CrudServiceCommand extends Command
         Generic::setFilePath($this->getStub());
         Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
         Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
-        Generic::setReplacements(['MODELOBJ' => $modelName]);
+        Generic::setReplacements(['MODELOBJ' => lcfirst($modelName)]);
 
-        Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Service");
+        Generic::write(Generic::getContents(Generic::getReplacements()), $this->pathService, "Service");
 
 
     }
-
+    /*
+    * Retorna o arquivo de modelo
+    */
     protected function getStub()
     {
         return __DIR__ . '/../../stubs/modelService.stub';
