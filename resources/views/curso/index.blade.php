@@ -2,30 +2,22 @@
 
 @section('content')
     <div class="ibox float-e-margins">
+
         <div class="ibox-title">
-            <h5>Lista de cursos</h5>
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">Config option 1</a>
-                    </li>
-                    <li><a href="#">Config option 2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
+            <div class="col-md-10">
+                <h4>
+                    <i class="fa fa-users"></i>
+                    Listar Cursos
+                </h4>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ route('seracademico.curso.create')}}" class="btn-sm btn-primary">Novo Curso</a>
             </div>
         </div>
+
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('seracademico.curso.create')}}" class="btn btn-primary btn-pressure btn-sm btn-sensitive">Novo Curso</a><br /><br />
                     <div class="table-responsive no-padding">
                         <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>

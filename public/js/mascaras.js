@@ -13,6 +13,9 @@ $(document).ready(function(){
     //CNPJ
     $('.cnpj').mask('00.000.000.0000-00');
 
+    //Telefone
+    $('.phone').mask('(00)00000.000');
+
     //##### Submeter formulário
     $('#formAluno').submit(function() {
         $('.cpf').unmask();

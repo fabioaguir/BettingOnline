@@ -1,18 +1,19 @@
 <div class="row">
     <div class="col-md-12">
-
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-2">
-            <div class="form-group">
-                {!! Form::label('nome', 'Nome ') !!}
+        <div class="row">
+            <div class="form-group col-md-4">
+                {!! Form::label('nome', 'Nome: ') !!}
                 {!! Form::text('nome', null, array('class' => 'form-control')) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('sede_id', 'Sede ') !!}
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                {!! Form::label('sede_id', 'Sede: ') !!}
                 {!! Form::select('sede_id', $loadFields['sede'], null,  array('class' => 'form-control')) !!}
             </div>
         </div>
+
         {!! Form::submit('Salvar', array('class' => 'btn btn-primary')) !!}
     </div>
 </div>
