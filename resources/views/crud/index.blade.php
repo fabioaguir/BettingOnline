@@ -11,7 +11,7 @@
                 </h4>
             </div>
             <div class="col-md-2">
-                <a href="{{ route('seracademico.aluno.create')}}" class="btn-sm btn-primary">Novo Aluno</a>
+                <a href="{{ route('crud')}}" class="btn-sm btn-primary">Novo Aluno</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -43,7 +43,7 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#aluno-grid').DataTable({
+        var table = $('#crud-grid').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{!! route('seracademico.aluno.grid') !!}",
@@ -55,7 +55,7 @@
         });
 
         /*//Seleciona uma linha
-        $('#aluno-grid tbody').on( 'click', 'tr', function () {
+        $('#crud-grid tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
             }
@@ -66,7 +66,7 @@
         } );
 
         //Retonra o id do registro
-        $('#aluno-grid tbody').on( 'click', 'tr', function () {
+        $('#crud-grid tbody').on( 'click', 'tr', function () {
 
             var rows = table.row( this ).data()
 

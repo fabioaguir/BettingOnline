@@ -7,20 +7,11 @@
         <div class="ibox-title">
             <h4>
                 <i class="fa fa-user"></i>
-                Cadastrar Aluno
+                Editar Aluno
             </h4>
         </div>
-
-        <ul class="language_bar_chooser">
-            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                <li>
-                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
-                        {{{ $properties['native'] }}}
-                    </a>
-                </li>
-            @endforeach
-        </ul>
         <div class="ibox-content">
+
 
             @if(Session::has('message'))
                 <div class="alert alert-success">
@@ -29,22 +20,39 @@
                 </div>
             @endif
 
-            @if(Session::has('errors'))
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    @foreach($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
-                </div>
+            @if (isset($return) && $return !=  null)
+                @if($return['success'] == false && isset($return[0]['fields']) &&  $return[0]['fields'] != null)
+                    <div class="alert alert-warning">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach ($return[0]['fields'] as $nome => $erro)
+                            {{ $erro }}<br>
+                        @endforeach
+                    </div>
+                @elseif($return['success'] == false)
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ $return['message'] }}<br>
+                    </div>
+                @elseif($return['success'] == true)
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ $return['message'] }}<br>
+                    </div>
+                @endif
             @endif
 
-            {!! Form::open(['route'=>'seracademico.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($aluno, ['route'=> ['crud', $aluno->id], 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormAluno')
+                {{--<a href="{{ route('seracademico.report.contratoAluno', ['id' => $crud->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}
             {!! Form::close() !!}
         </div>
     </div>
-
+<?php
+@endsection
+//echo $cliente['enderecosEnderecos']['bairrosBairros']['cidadesCidades']['estadosEstados']['id']; ?>
     @section('javascript')
+        <script src="{{ asset('/js/validacoes/validation_form_aluno.js')}}"></script>
+
         <script type="text/javascript">
             //Carregando as cidades
             $(document).on('change', "#estado", function () {
@@ -139,8 +147,6 @@
                             'search':     params.term, // search term
                             'tableName':  'fac_instituicoes',
                             'fieldName':  'nome',
-                            'fieldWhere':  'nivel',
-                            'valueWhere':  '3',
                             'page':       params.page
                         };
                     },

@@ -66,8 +66,8 @@ switch ($semana) {
 <table style="border: none;" id="topo" class="topo"  width="100%">
     <tr style="border: none">
         <td style="border: none; font-size: medium"><center>
-                {{--@if(isset($aluno['img']))
-                    <img src="{{asset('/uploads/fotos/'.$aluno['img'])}}" alt="Foto"  height="100" width="150">
+                {{--@if(isset($crud['img']))
+                    <img src="{{asset('/uploads/fotos/'.$crud['img'])}}" alt="Foto"  height="100" width="150">
                 @endif--}}
             </center></td>
         <td style="border: none; font-size: medium">

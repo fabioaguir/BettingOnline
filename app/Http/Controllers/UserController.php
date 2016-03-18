@@ -104,7 +104,7 @@ class UserController extends Controller
     public function edit($id)
     {
         try {
-            #Recuperando o aluno
+            #Recuperando o crud
             $user = $this->service->find($id);
 
             #Carregando os dados para o cadastro
