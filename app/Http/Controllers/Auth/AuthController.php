@@ -1,10 +1,10 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Auth;
+namespace Softage\Http\Controllers\Auth;
 
-use Seracademico\User;
+use Softage\Entities\User;
 use Validator;
-use Seracademico\Http\Controllers\Controller;
+use Softage\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -29,7 +29,7 @@ class AuthController extends Controller
      * Atributo que armazena o caminho de redirecionamento
      * quando o usuário tiver sucesso ao se autenticar
      */
-    protected $redirectPath = '/seracademico/index';
+    protected $redirectPath = '/softage/index';
 
     /**
      * @var string

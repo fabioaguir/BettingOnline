@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Softage\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\UserRepository;
-use Seracademico\Entities\User;
-use Seracademico\Validators\UserValidator;
+use Softage\Repositories\UserRepository;
+use Softage\Entities\User;
+use Softage\Validators\UserValidator;
 
 class UserRepositoryEloquent  extends BaseRepository implements UserRepository
 {

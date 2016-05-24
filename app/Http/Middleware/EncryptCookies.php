@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Http\Middleware;
+namespace Softage\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

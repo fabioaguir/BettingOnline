@@ -8,7 +8,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('logout', 'Auth\AuthController@getLogout');
     });
 
-    Route::group(['prefix' => 'serbinario', 'middleware' => 'auth', 'as' => 'serbinario.'], function () {
+    Route::group(['prefix' => 'softage', 'middleware' => 'auth', 'as' => 'softage.'], function () {
 //    Route::get('login'  , ['as' => 'login', 'uses' => 'SecurityController@login']);
 //    Route::get('logout'  , ['as' => 'logout', 'uses' => 'SecurityController@logout']);
 //    Route::post('check'  , ['as' => 'check', 'uses' => 'SecurityController@check']);

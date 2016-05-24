@@ -149,13 +149,13 @@ return [
         /*
          * Application Service Providers...
          */
-        Seracademico\Providers\AppServiceProvider::class,
-        Seracademico\Providers\AuthServiceProvider::class,
-        Seracademico\Providers\EventServiceProvider::class,
-        Seracademico\Providers\RouteServiceProvider::class,
+        Softage\Providers\AppServiceProvider::class,
+        Softage\Providers\AuthServiceProvider::class,
+        Softage\Providers\EventServiceProvider::class,
+        Softage\Providers\RouteServiceProvider::class,
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        \Seracademico\Providers\SeracademicoRepositoryProvider::class,
+        \Softage\Providers\SeracademicoRepositoryProvider::class,
 
         /*
         * Laravel Framework Service Providers...

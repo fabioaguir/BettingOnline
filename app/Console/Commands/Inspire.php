@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Console\Commands;
+namespace Softage\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

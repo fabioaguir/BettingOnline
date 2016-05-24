@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Http\Middleware;
+namespace Softage\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Providers;
+namespace Softage\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,18 +25,18 @@ class SeracademicoRepositoryProvider extends ServiceProvider
     {
 
         $this->app->bind(
-            \Seracademico\Repositories\UserRepository::class,
-            \Seracademico\Repositories\UserRepositoryEloquent::class
+            \Softage\Repositories\UserRepository::class,
+            \Softage\Repositories\UserRepositoryEloquent::class
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\RoleRepository::class,
-            \Seracademico\Repositories\RoleRepositoryEloquent::class
+            \Softage\Repositories\RoleRepository::class,
+            \Softage\Repositories\RoleRepositoryEloquent::class
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\PermissionRepository::class,
-            \Seracademico\Repositories\PermissionRepositoryEloquent::class
+            \Softage\Repositories\PermissionRepository::class,
+            \Softage\Repositories\PermissionRepositoryEloquent::class
         );
 
 	}

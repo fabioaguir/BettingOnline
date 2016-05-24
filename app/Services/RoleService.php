@@ -1,10 +1,10 @@
 <?php
 
-namespace Seracademico\Services;
+namespace Softage\Services;
 
-use Seracademico\Repositories\PermissionRepository;
-use Seracademico\Repositories\RoleRepository;
-use Seracademico\Entities\Role;
+use Softage\Repositories\PermissionRepository;
+use Softage\Repositories\RoleRepository;
+use Softage\Entities\Role;
 
 class RoleService
 {
@@ -139,7 +139,7 @@ class RoleService
         #Criando e executando as consultas
         foreach ($models as $model) {
             #qualificando o namespace
-            $nameModel = "Seracademico\\Entities\\$model";
+            $nameModel = "Softage\\Entities\\$model";
 
             #Recuperando o registro e armazenando no array
             $result[strtolower($model)] = $nameModel::lists('name', 'id');

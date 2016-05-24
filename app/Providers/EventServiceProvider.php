@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Providers;
+namespace Softage\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Seracademico\Events\SomeEvent' => [
-            'Seracademico\Listeners\EventListener',
+        'Softage\Events\SomeEvent' => [
+            'Softage\Listeners\EventListener',
         ],
     ];
 

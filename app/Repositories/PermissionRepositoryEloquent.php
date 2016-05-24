@@ -1,11 +1,11 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Softage\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\PermissionRepository;
-use Seracademico\Entities\Permission;
+use Softage\Repositories\PermissionRepository;
+use Softage\Entities\Permission;
 
 /**
  * Class PermissionRepositoryEloquent

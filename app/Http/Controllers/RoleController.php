@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Seracademico\Http\Requests;
-use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\RoleService;
+use Softage\Http\Requests;
+use Softage\Http\Controllers\Controller;
+use Softage\Services\RoleService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
 

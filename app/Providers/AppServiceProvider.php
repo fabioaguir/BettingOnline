@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Providers;
+namespace Softage\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

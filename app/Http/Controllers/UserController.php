@@ -1,13 +1,14 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Softage\Http\Controllers;
 
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Http\Request;
 
-use Seracademico\Http\Requests;
-use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\UserService;
-use Seracademico\Validators\UserValidator;
+use Softage\Http\Requests;
+use Softage\Http\Controllers\Controller;
+use Softage\Services\UserService;
+use Softage\Validators\UserValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
@@ -90,7 +91,7 @@ class UserController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        } catch (ValidatorException $e) {print_r($e->getMessage()); exit;
+        } catch (ValidationException $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());

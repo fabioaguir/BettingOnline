@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Softage\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\RoleRepository;
-use Seracademico\Entities\Role;
-use Seracademico\Validators\RoleValidator;;
+use Softage\Repositories\RoleRepository;
+use Softage\Entities\Role;
+use Softage\Validators\RoleValidator;;
 
 /**
  * Class RoleRepositoryEloquent

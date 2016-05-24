@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Seracademico\Entities\User::class,
+    'model' => Softage\Entities\User::class,
 
     /*
     |--------------------------------------------------------------------------

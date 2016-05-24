@@ -1,7 +1,8 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Softage\Entities;
 
+use Bican\Roles\Models\Role;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Events;
+namespace Softage\Events;
 
 abstract class Event
 {

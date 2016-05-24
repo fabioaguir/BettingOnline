@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Providers;
+namespace Softage\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Seracademico\Model' => 'Seracademico\Policies\ModelPolicy',
+        'Softage\Model' => 'Softage\Policies\ModelPolicy',
     ];
 
     /**
