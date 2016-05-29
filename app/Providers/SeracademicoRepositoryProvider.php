@@ -38,6 +38,9 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Softage\Repositories\PermissionRepository::class,
             \Softage\Repositories\PermissionRepositoryEloquent::class
         );
-
+		$this->app->bind(
+			\Softage\Repositories\GuestRepository::class,
+			\Softage\Repositories\GuestRepositoryEloquent::class
+		);
 	}
 }

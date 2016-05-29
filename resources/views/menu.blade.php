@@ -33,12 +33,16 @@
         <link type="text/css" href="{{ asset('/assets/plugins/iCheck/skins/minimal/blue.css')}}" rel="stylesheet">
         <!-- iCheck -->
 
+        <!-- datatables -->
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
         <!--[if lt IE 10]>
         <script type="text/javascript" src="{{ asset('/assets/js/media.match.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/js/respond.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/js/placeholder.min.js')}}"></script>
         <![endif]-->
-        <!-- The following CSS are included as plugins and can be removed if unused-->
+
     @show
 
 </head>
@@ -241,10 +245,10 @@
                                 {{--<li><a href="angular/app/"><i class="ti ti-shield"></i><span>AngularJS</span></a></li>--}}
                                 <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                     <ul class="acc-menu">
-                                        <li><a href="layout-grids.html">Grid Scaffolding</a></li>
-                                        <li><a href="layout-static-leftbar.html">Static Sidebar</a></li>
-                                        <li><a href="layout-sidebar-scroll.html">Scroll Sidebar</a></li>
-                                        <li><a href="layout-boxed.html">Boxed</a></li>
+                                        <li><a href="{{ route('softage.guest.index')}} ">Hospede</a></li>
+                                        <li><a href="">Static Sidebar</a></li>
+                                        <li><a href="">Scroll Sidebar</a></li>
+                                        <li><a href="">Boxed</a></li>
                                     </ul>
                                 </li>
 
@@ -347,6 +351,10 @@
     <script type="text/javascript" src="{{ asset('/assets/js/application.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/assets/demo/demo.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/assets/demo/demo-switcher.js')}}"></script>
+
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 @show
 
 

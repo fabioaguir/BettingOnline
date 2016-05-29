@@ -16,14 +16,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 //    Route::get('update2'  , ['as' => 'update2', 'middleware'=>'security:ROLE_ADMIN', 'uses' => 'DefaultController@update2']);
 
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
+        
 
-        Route::group(['prefix' => 'crud', 'as' => 'crud.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'DefaultController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'AlunoController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'AlunoController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'AlunoController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
+        Route::group(['prefix' => 'guest', 'as' => 'guest.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'GuestController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'GuestController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'GuestController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'GuestController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'GuestController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'GuestController@update']);
         });
 
 

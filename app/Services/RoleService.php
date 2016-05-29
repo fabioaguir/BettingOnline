@@ -10,6 +10,7 @@ class RoleService
 {
     /**
      * @var RoleRepository
+     *
      */
     private $repository;
 
