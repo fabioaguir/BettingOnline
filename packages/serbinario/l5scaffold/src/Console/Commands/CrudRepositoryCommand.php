@@ -107,8 +107,8 @@ class CrudRepositoryCommand extends Command
     protected function SetRepository($modelName){
         $this->buildRepository .= PHP_EOL;
         $this->buildRepository .= "\t\t\$this->app->bind(\n";
-        $this->buildRepository .= "\t\t\t\\Seracademico\\Repositories\\" . Inflector::singularize($modelName)  . "Repository::class,\n";
-        $this->buildRepository .= "\t\t\t\\Seracademico\\Repositories\\" . Inflector::singularize($modelName) . "RepositoryEloquent::class\n";
+        $this->buildRepository .= "\t\t\t\\Softage\\Repositories\\" . Inflector::singularize($modelName)  . "Repository::class,\n";
+        $this->buildRepository .= "\t\t\t\\Softage\\Repositories\\" . Inflector::singularize($modelName) . "RepositoryEloquent::class\n";
         $this->buildRepository .= "\t\t);\n";
         $this->buildRepository .= "\t}\n";
         $this->buildRepository .= "}";
