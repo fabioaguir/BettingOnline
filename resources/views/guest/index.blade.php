@@ -27,7 +27,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive no-padding">
-                            <table id="aluno-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                            <table id="gues-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -57,13 +57,13 @@
     @parent
     <script type="text/javascript">
 
-        var table = $('#crud-grid').DataTable({
+        var table = $('#gues-grid').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{!! route('softage.guest.grid') !!}",
             columns: [
-                {data: 'nome', name: 'nome'},
-                {data: 'cpf', name: 'cpf'},
+                {data: 'gue_name', name: 'gue_name'},
+                {data: 'gue_cpf', name: 'gue_cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

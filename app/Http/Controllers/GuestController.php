@@ -52,7 +52,7 @@ class GuestController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('guest')->select(['id', 'nome']);
+        $rows = \DB::table('guest')->select(['gue_id as id', 'gue_name', 'gue_cpf']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
