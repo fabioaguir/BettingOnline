@@ -109,7 +109,7 @@
 
 <div class="extrabar-underlay"></div>
 
-<header id="topnav" class="navbar navbar-bluegray navbar-fixed-top">
+<header id="topnav" class="navbar navbar-blue navbar-fixed-top">
 
     {{-- logo-area --}}
     <div class="logo-area">
@@ -198,8 +198,8 @@
             <a href="#" class="dropdown-toggle" data-toggle='dropdown'><span class="icon-bg"><i class="ti ti-user"></i></span></i>
             </a>
             <ul class="dropdown-menu userinfo arrow">
-                <li><a href="#/"><i class="ti ti-user"></i><span>Profile</span><span
-                                class="badge badge-info pull-right">73%</span></a></li>
+                <li><a href="#/"><i class="ti ti-user"></i><span>Profile</span>{{--<span
+                                class="badge badge-info pull-right">73%</span>--}}</a></li>
                 <li><a href="#/"><i class="ti ti-settings"></i><span>Settings</span></a></li>
                 <li><a href="#/"><i class="ti ti-help-alt"></i><span>Help</span></a></li>
                 <li class="divider"></li>
@@ -232,12 +232,14 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- menu lateral --}}
                     <div class="widget stay-on-collapse" id="widget-sidebar">
                         <nav class="widget-body">
                             <ul class="acc-menu">
-                                <li class="nav-separator"><span>Explore</span></li>
-                                <li><a href="angular/app/"><i class="ti ti-shield"></i><span>AngularJS</span></a></li>
-                                <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Layout</span></a>
+                                <li class="nav-separator"><span>Menu</span></li>
+                                {{--<li><a href="angular/app/"><i class="ti ti-shield"></i><span>AngularJS</span></a></li>--}}
+                                <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                     <ul class="acc-menu">
                                         <li><a href="layout-grids.html">Grid Scaffolding</a></li>
                                         <li><a href="layout-static-leftbar.html">Static Sidebar</a></li>
@@ -246,12 +248,14 @@
                                     </ul>
                                 </li>
 
-                                <li class="nav-separator"><span>Extras</span></li>
+                                {{-- menu extras --}}
+
+                                {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span
                                                 class="badge badge-danger">3</span></a></li>
                                 <li><a href="extras-calendar.html"><i
                                                 class="ti ti-calendar	"></i><span>Calendar</span>
-                                        <span class="badge badge-orange">1</span></a></li>
+                                        <span class="badge badge-orange">1</span></a></li>--}}
                             </ul>
                         </nav>
                     </div>
