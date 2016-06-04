@@ -246,7 +246,7 @@
                                 <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                     <ul class="acc-menu">
                                         <li><a href="{{ route('softage.guest.index')}} ">Hospede</a></li>
-                                        <li><a href="">Static Sidebar</a></li>
+                                        <li><a href="{{ route('softage.local.index')}} ">Locais</a></li>
                                         <li><a href="">Scroll Sidebar</a></li>
                                         <li><a href="">Boxed</a></li>
                                     </ul>
