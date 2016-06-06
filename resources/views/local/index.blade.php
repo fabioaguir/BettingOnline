@@ -31,11 +31,13 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Ação</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Ação</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -56,12 +58,24 @@
         var table = $('#gues-grid').DataTable({
             processing: true,
             serverSide: true,
+            language: {
+                "lengthMenu": "_MENU_"
+            },
             ajax: "{!! route('softage.local.grid') !!}",
             columns: [
-                {data: 'local_name', name: 'local_name'},
+                {data: 'loc_name', name: 'loc_name'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+        $('.dataTables_filter input').attr('placeholder','Pesquisar...');
+
+        //DOM Manipulation to move datatable elements integrate to panel
+        $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
+        $('.panel-ctrls').append("<i class='separator'></i>");
+        $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
+
+        $('.panel-footer').append($(".dataTable+.row"));
+        $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
 
         /*//Seleciona uma linha
          $('#crud-grid tbody').on( 'click', 'tr', function () {

@@ -12,8 +12,8 @@
     <meta name="author" content="KaijuThemes">
 
     @section('css')
-        <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600'
-              rel='stylesheet'>
+       {{-- <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600'
+              rel='stylesheet'>--}}
 
         <link type="text/css" href="{{ asset('/assets/fonts/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
         <!-- Font Awesome -->
@@ -251,6 +251,7 @@
                                 <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                     <ul class="acc-menu">
                                         <li><a href="{{ route('softage.guest.index')}} ">Hospede</a></li>
+                                        <li><a href="{{ route('softage.local.index')}} ">Local</a></li>
                                     </ul>
                                 </li>
 
