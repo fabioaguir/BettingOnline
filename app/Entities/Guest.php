@@ -2,6 +2,7 @@
 
 namespace Softage\Entities;
 
+use Faker\Provider\sr_Latn_RS\Address;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -13,7 +14,7 @@ class Guest extends Model implements Transformable
     protected $table    = 'guest';
 
     protected $fillable = [ 
-		'gue_id',
+		'id',
 		'gue_name',
 		'gue_cpf',
 		'gue_rg',
@@ -25,5 +26,15 @@ class Guest extends Model implements Transformable
 		'gue_adr_id',
 		'gue_visible',
 	];
+
+	public function address()
+	{
+		return $this->belongsTo(Addres::class, 'gue_adr_id');
+	}
+
+	public function gender()
+	{
+		return $this->belongsTo(Gender::class, 'gue_gen_id');
+	}
 
 }

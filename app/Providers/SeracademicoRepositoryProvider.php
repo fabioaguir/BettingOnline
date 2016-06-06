@@ -42,5 +42,18 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Softage\Repositories\GuestRepository::class,
 			\Softage\Repositories\GuestRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Softage\Repositories\GenderRepository::class,
+			\Softage\Repositories\GenderRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Softage\Repositories\AddresRepository::class,
+			\Softage\Repositories\AddresRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Softage\Repositories\StateRepository::class,
+			\Softage\Repositories\StateRepositoryEloquent::class
+		);
 	}
 }
