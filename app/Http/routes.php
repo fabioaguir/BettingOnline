@@ -27,7 +27,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'GuestController@update']);
         });
 
-
+        Route::group(['prefix' => 'local', 'as' => 'local.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'LocalController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'LocalController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'LocalController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'LocalController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'LocalController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'LocalController@update']);
+        });
+        
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
