@@ -26,7 +26,9 @@ class LocalController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        ''
+    ];
 
     /**
     * @param LocalService $service
@@ -52,7 +54,7 @@ class LocalController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('local')->select(['id', 'nome']);
+        $rows = \DB::table('local')->select(['loc_id as id', 'loc_name as local_name']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {

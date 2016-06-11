@@ -51,9 +51,9 @@
                     </div>
                     <div class="panel-body">
 
-                        {!! Form::model($model, ['route'=> ['softage.guest.store', $model->id], 'id' => 'formGuest', 'enctype' => 'multipart/form-data']) !!}
-                        @include('tamplatesForms.tamplateFormGuest')
-                        {{--<a href="{{ route('seracademico.report.contratoAluno', ['id' => $crud->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}
+                        {!! Form::model($model, ['route'=> ['softage.local.edit', $model->id], 'id' => 'formLocal', 'enctype' => 'multipart/form-data']) !!}
+                        @include('tamplatesForms.tamplateFormLocal')
+                        {{--<a href="{{ route('softage.local.edit', ['id' => $crud->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}
                         {!! Form::close() !!}
 
                     </div>

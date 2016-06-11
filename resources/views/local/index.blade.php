@@ -27,15 +27,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive no-padding">
-                            <table id="gues-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                            <table id="local-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
+                                    <th style="width: 17%;">Action</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -53,7 +55,7 @@
     @parent
     <script type="text/javascript">
 
-        var table = $('#gues-grid').DataTable({
+        var table = $('#local-grid').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{!! route('softage.local.grid') !!}",
