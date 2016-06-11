@@ -35,6 +35,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
+			\Softage\Repositories\CompanyRepository::class,
+			\Softage\Repositories\CompanyRepositoryEloquent::class
+		);
+        
+        $this->app->bind(
             \Softage\Repositories\PermissionRepository::class,
             \Softage\Repositories\PermissionRepositoryEloquent::class
         );
@@ -42,5 +47,5 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Softage\Repositories\GuestRepository::class,
 			\Softage\Repositories\GuestRepositoryEloquent::class
 		);
-	}
-}
+		
+    }
