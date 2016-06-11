@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Outline Admin Theme</title>
+    <title>HÓSPEDE+ | @yield('title')</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="description" content="Outline Admin Theme">
-    <meta name="author" content="KaijuThemes">
 
     @section('css')
        {{-- <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600'
@@ -130,7 +129,7 @@
 			</a>
 		</span>
 
-        <a class="navbar-brand" href="index.html">Outline</a>
+        <a class="navbar-brand" href="index.html">HÓSPEDE+</a>
 
         <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
             <div class="input-icon">
@@ -248,21 +247,27 @@
                             <ul class="acc-menu">
                                 <li class="nav-separator"><span>Menu</span></li>
                                 {{--<li><a href="angular/app/"><i class="ti ti-shield"></i><span>AngularJS</span></a></li>--}}
-                                <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
+                                <li>
+                                    <a href="javascript:;"><i class="ti ti-layout"></i><span>Hóspede</span></a>
                                     <ul class="acc-menu">
-                                        <li><a href="{{ route('softage.guest.index')}} ">Hospede</a></li>
+                                        <li><a href="{{ route('softage.guest.index')}} ">Cadastrar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
+                                    <ul class="acc-menu">
                                         <li><a href="{{ route('softage.local.index')}} ">Local</a></li>
                                     </ul>
                                 </li>
 
                                 {{-- menu extras --}}
-
                                 {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span
                                                 class="badge badge-danger">3</span></a></li>
                                 <li><a href="extras-calendar.html"><i
                                                 class="ti ti-calendar	"></i><span>Calendar</span>
-                                        <span class="badge badge-orange">1</span></a></li>--}}
+                                        <span class="badge badge-orange">1</span></a></li>
+                                --}}
                             </ul>
                         </nav>
                     </div>
