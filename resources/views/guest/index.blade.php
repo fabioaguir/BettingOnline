@@ -11,7 +11,7 @@
 @endsection
 
 @section('page-heading')
-    <h1>Hospede</h1>
+    <h1>Hóspede</h1>
 @endsection
 
 @section('container')
@@ -26,8 +26,8 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Lista de hospedes</h2><br />
-                        <a href="{{ route('softage.guest.create')}}" class="btn btn-primary">Novo Hospede</a>
+                        <h2>Lista de hóspedes</h2><br />
+                        <a href="{{ route('softage.guest.create')}}" class="btn btn-primary">Novo Hóspede</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
