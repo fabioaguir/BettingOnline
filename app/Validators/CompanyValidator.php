@@ -11,8 +11,8 @@ class CompanyValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'com_id' =>  '' ,
-			'com_name' =>  '' ,
+			'id' =>  '' ,
+			'name' =>  '' ,
 			'com_email' =>  '' ,
 			'com_site' =>  '' ,
 			'com_phone' =>  '' ,

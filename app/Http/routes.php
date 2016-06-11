@@ -36,6 +36,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'LocalController@update']);
         });
         
+        Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CompanyController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'CompanyController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CompanyController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CompanyController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CompanyController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CompanyController@update']);
+        });
+        
+        
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
@@ -43,15 +53,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'UserController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UserController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'UserController@update']);
-        });
-
-        Route::group(['prefix' => 'guest', 'as' => 'Company.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'CompanyController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'CompanyController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'CompanyController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'CompanyController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CompanyController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CompanyController@update']);
         });
         
         Route::group(['prefix' => 'role', 'as' => 'role.'], function () {

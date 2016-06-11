@@ -3,9 +3,11 @@
 namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Softage\Services\CompanyService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use Softage\Validators\CompanyValidator;
 
 class CompanyController extends Controller
 {
@@ -28,7 +30,7 @@ class CompanyController extends Controller
     * @param CompanyModelService $service
     * @param CompanyModelValidator $validator
     */
-    public function __construct(CompanyModelService $service, CompanyModelValidator $validator)
+    public function __construct(CompanyService $service, CompanyValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -39,7 +41,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('companyModel.index');
+        return view('company.index');
     }
 
     /**
@@ -48,7 +50,7 @@ class CompanyController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('company')->select(['id', 'nome']);
+        $rows = \DB::table('company')->select(['id', 'name','com_email', 'com_site', 'com_phone', 'com_phone2']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -65,7 +67,7 @@ class CompanyController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('companyModel.create', compact('loadFields'));
+        return view('company.create', compact('loadFields'));
     }
 
     /**
@@ -110,7 +112,7 @@ class CompanyController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('companyModel.edit', compact('model', 'loadFields'));
+            return view('company.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

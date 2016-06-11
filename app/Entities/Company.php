@@ -13,8 +13,8 @@ class Company extends Model implements Transformable
     protected $table    = 'company';
 
     protected $fillable = [ 
-		'com_id',
-		'com_name',
+		'id',
+		'name',
 		'com_email',
 		'com_site',
 		'com_phone',

@@ -39,7 +39,7 @@
                     </div>
                     <div class="panel-body">
 
-                        {!! Form::open(['route'=>'softage.guest.store', 'method' => "POST", 'id' => 'formCompany', 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['route'=>'softage.company.store', 'method' => "POST", 'id' => 'formCompany', 'enctype' => 'multipart/form-data']) !!}
                         @include('tamplatesForms.tamplateformCompany')
                         {!! Form::close() !!}
 

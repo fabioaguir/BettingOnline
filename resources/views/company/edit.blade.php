@@ -68,6 +68,7 @@
 @section('js')
     @parent
     <script type="text/javascript">
-
+        var elem = document.querySelector('.js-switch-info');
+        var init = new Switchery(elem);
     </script>
 @endsection

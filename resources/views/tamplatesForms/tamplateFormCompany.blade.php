@@ -5,8 +5,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('com_name', 'Nome') !!}
-				{!! Form::text('com_name', Session::getOldInput('com_name')  , array('class' => 'form-control')) !!}
+				{!! Form::label('name', 'Nome') !!}
+				{!! Form::text('name', Session::getOldInput('com_name')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
