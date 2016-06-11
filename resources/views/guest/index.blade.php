@@ -2,11 +2,16 @@
 
 @section('css')
     @parent
-
+<style>
+    .table-responsive {
+        min-height: 0.01%;
+        overflow-x: initial;
+    }
+</style>
 @endsection
 
 @section('page-heading')
-    <h1>Responsive Tables</h1>
+    <h1>Hóspede</h1>
 @endsection
 
 @section('container')
@@ -21,7 +26,8 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                            <a href="{{ route('softage.guest.create')}}" class="btn btn-primary">Novo Hospede</a>
+                        <h2>Lista de hóspedes</h2><br />
+                        <a href="{{ route('softage.guest.create')}}" class="btn btn-primary">Novo Hóspede</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
@@ -39,7 +45,7 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>CPF</th>
-                                    <th style="width: 17%;">Acão</th>
+                                    <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -61,12 +67,25 @@
             processing: true,
             serverSide: true,
             ajax: "{!! route('softage.guest.grid') !!}",
+            language: {
+                "lengthMenu": "_MENU_"
+            },
             columns: [
                 {data: 'gue_name', name: 'gue_name'},
                 {data: 'gue_cpf', name: 'gue_cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+        $('.dataTables_filter input').attr('placeholder','Pesquisar...');
+
+        //DOM Manipulation to move datatable elements integrate to panel
+        $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
+        $('.panel-ctrls').append("<i class='separator'></i>");
+        $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
+
+        $('.panel-footer').append($(".dataTable+.row"));
+        $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
+
 
         /*//Seleciona uma linha
          $('#crud-grid tbody').on( 'click', 'tr', function () {

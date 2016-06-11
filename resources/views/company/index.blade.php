@@ -2,12 +2,7 @@
 
 @section('css')
 @parent
-<style>
-    .table-responsive {
-        min-height: 0.01%;
-        overflow-x: initial;
-    }
-</style>
+
 @endsection
 
 @section('page-heading')
@@ -26,29 +21,40 @@
 
             <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                 <div class="panel-heading">
-                    <a href="{{ route('softage.local.create')}}" class="btn btn-primary">Novo Local</a>
+                    <a href="{{ route('softage.company.create')}}" class="btn btn-primary">Cadastrar Empresa</a>
                     <div class="panel-ctrls" data-actions-container=""
                          data-action-collapse='{"target": ".panel-body"}'></div>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive no-padding">
-                        <table id="local-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="company-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Action</th>
+                                    <th>E-mail</th>
+                                    <th>Home Page</th>
+                                    <th>Telefone</th>
+                                    <th>Celular</th>
+                                    
+                                    <th>Acão</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Nome</th>
-                                    <th style="width: 17%;">Action</th>
+                                    <th>E-mail</th>
+                                    <th>Home Page</th>
+                                    <th>Telefone</th>
+                                    <th>Celular</th>
+                                    
+                                    <th style="width: 17%;">Acão</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -59,46 +65,38 @@
 @parent
 <script type="text/javascript">
 
-    var table = $('#local-grid').DataTable({
+    var table = $('#company-grid').DataTable({
         processing: true,
         serverSide: true,
-        language: {
-            "lengthMenu": "_MENU_"
-        },
-        ajax: "{!! route('softage.local.grid') !!}",
+        ajax: "{!! route('softage.company.grid') !!}",
         columns: [
             {data: 'name', name: 'name'},
+            {data: 'com_email', name: 'name'},
+            {data: 'com_site', name: 'name'},
+            {data: 'com_phone', name: 'name'},
+            {data: 'com_phone2', name: 'name'},
+            
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
-    $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
 
-    //DOM Manipulation to move datatable elements integrate to panel
-    $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
-    $('.panel-ctrls').append("<i class='separator'></i>");
-    $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
+    
+            $('#company-grid tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        } else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
 
-    $('.panel-footer').append($(".dataTable+.row"));
-    $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
+    //Retonra o id do registro
+    $('#company-grid tbody').on('click', 'tr', function () {
 
-    /*//Seleciona uma linha
-     $('#crud-grid tbody').on( 'click', 'tr', function () {
-     if ( $(this).hasClass('selected') ) {
-     $(this).removeClass('selected');
-     }
-     else {
-     table.$('tr.selected').removeClass('selected');
-     $(this).addClass('selected');
-     }
-     } );
-         
-     //Retonra o id do registro
-     $('#crud-grid tbody').on( 'click', 'tr', function () {
-         
-     var rows = table.row( this ).data()
-         
-     console.log( rows.id );
-     } );*/
+        var rows = table.row(this).data()
+
+        console.log(rows.id);
+    });
 
 </script>
 @endsection

@@ -26,7 +26,10 @@ class GuestController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'Gender',
+        'State'
+    ];
 
     /**
     * @param GuestService $service
@@ -52,11 +55,24 @@ class GuestController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('guest')->select(['gue_id as id', 'gue_name', 'gue_cpf']);
+        $rows = \DB::table('guest')->select(['id', 'gue_name', 'gue_cpf']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            $html = '<ul class="demo-btns">';
+
+            $html .= '<li>
+                          <a class="btn btn-success-alt" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-check"></i></a>
+                      </li>';
+
+            $html .= '<li>
+                        <a class="btn btn-danger-alt" style="margin-left: 2px;" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-close"></i></a>
+                      </li>';
+
+            $html .= '</ul>';
+
+            return $html;
+            //return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
         })->make(true);
     }
 
@@ -108,7 +124,7 @@ class GuestController extends Controller
             $model = $this->service->find($id);
 
             #Tratando as datas
-           // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
+            $model = $this->service->getWithDateFormatPtBr($model);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);

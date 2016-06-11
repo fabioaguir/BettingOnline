@@ -3,38 +3,34 @@
 namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Softage\Http\Requests;
-use Softage\Services\LocalService;
+use Softage\Services\CompanyService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Softage\Validators\LocalValidator;
+use Softage\Validators\CompanyValidator;
 
-class LocalController extends Controller
+class CompanyController extends Controller
 {
     /**
-    * @var LocalService
+    * @var CompanyModelService
     */
     private $service;
 
     /**
-    * @var LocalValidator
+    * @var CompanyModelValidator
     */
     private $validator;
 
     /**
     * @var array
     */
-    private $loadFields = [
-     
-    ];
+    private $loadFields = [];
 
     /**
-    * @param LocalService $service
-    * @param LocalValidator $validator
+    * @param CompanyModelService $service
+    * @param CompanyModelValidator $validator
     */
-    public function __construct(LocalService $service, LocalValidator $validator)
+    public function __construct(CompanyService $service, CompanyValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -45,7 +41,7 @@ class LocalController extends Controller
      */
     public function index()
     {
-        return view('local.index');
+        return view('company.index');
     }
 
     /**
@@ -54,7 +50,7 @@ class LocalController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('local')->select(['id', 'name']);
+        $rows = \DB::table('company')->select(['id', 'name','com_email', 'com_site', 'com_phone', 'com_phone2']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -71,7 +67,7 @@ class LocalController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('local.create', compact('loadFields'));
+        return view('company.create', compact('loadFields'));
     }
 
     /**
@@ -116,7 +112,7 @@ class LocalController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('local.edit', compact('model', 'loadFields'));
+            return view('company.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

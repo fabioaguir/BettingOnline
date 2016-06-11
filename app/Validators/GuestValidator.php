@@ -11,7 +11,7 @@ class GuestValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'gue_id' =>  '' ,
+			'id' =>  '' ,
 			'gue_name' =>  '' ,
 			'gue_cpf' =>  '' ,
 			'gue_rg' =>  '' ,

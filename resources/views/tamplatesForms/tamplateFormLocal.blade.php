@@ -1,59 +1,48 @@
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="row">
 
-            <div class="col-md-4">
-                <div class="form-group">
-
-                    {!! Form::label('loc_value', 'Valor') !!}
+            <div class="form-group">
+                {!! Form::label('loc_value', 'Valor', array('class' => 'col-sm-2 control-label')) !!}
+                <div class="col-sm-8">
                     {!! Form::text('loc_value', Session::getOldInput('loc_value')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
 
-                    {!! Form::label('loc_occupants', 'Ocupantes') !!}
+            <div class="form-group">
+                {!! Form::label('loc_occupants', 'Ocupantes', array('class' => 'col-sm-2 control-label')) !!}
+                <div class="col-sm-8">
                     {!! Form::text('loc_occupants', Session::getOldInput('loc_occupants')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
-            <div class="col-md-2">
-                <div class="checkbox checkbox-primary">
-                    {!! Form::hidden('loc_visible', 0) !!}
-                    {!! Form::checkbox('loc_visible', 1, null, array('class' => 'form-control')) !!}
-                    {!! Form::label('loc_visible', 'Visível', false) !!}
+            <div class="form-group">
+                <label class="col-sm-2 control-label label-input-xs">Ativar/Desativar</label>
+                <div class="col-sm-8">
+                    <ul class="demo-btns mb-n xs">
+                        <li>
+                            {!! Form::hidden('loc_visible', 0) !!}
+                            {!! Form::checkbox('loc_visible', 1, null, ['class' => 'js-switch-info switchery-xs']) !!}
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="form-group">
-
-                    {!! Form::label('loc_title', 'Título') !!}
+            <div class="form-group">
+                {!! Form::label('loc_title', 'Título', array('class' => 'col-sm-2 control-label')) !!}
+                <div class="col-sm-8">
                     {!! Form::text('loc_title', Session::getOldInput('loc_title')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="form-group">
 
-                    {!! Form::label('loc_name', 'Nome') !!}
-                    {!! Form::text('loc_name', Session::getOldInput('loc_name')  , array('class' => 'form-control')) !!}
+            <div class="form-group">
+                {!! Form::label('loc_name', 'Nome', array('class' => 'col-sm-2 control-label')) !!}
+                <div class="col-sm-8">
+                    {!! Form::text('name', Session::getOldInput('name')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
         </div>
-        
-        <div class="row">
 
-            <div class="col-md-3">
-                <div class="btn-group btn-group-justified">
-                    <div class="btn-group">
-                        <a href="{{ route('softage.local.index')}}" class="btn btn-primary btn-block"><i
-                                    class="fa fa-long-arrow-left"></i> Voltar</a></div>
-                    <div class="btn-group">
-                        {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

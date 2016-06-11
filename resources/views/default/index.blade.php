@@ -1,5 +1,10 @@
 @extends('menu')
 
+@section('title')
+    @parent
+    HOME
+@endsection
+
 @section('css')
     @parent
 

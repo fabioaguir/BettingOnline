@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Outline Admin Theme</title>
+    <title>HÓSPEDE+ | @yield('title')</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="description" content="Outline Admin Theme">
-    <meta name="author" content="KaijuThemes">
 
     @section('css')
-        <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600'
-              rel='stylesheet'>
+       {{-- <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600'
+              rel='stylesheet'>--}}
 
         <link type="text/css" href="{{ asset('/assets/fonts/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
         <!-- Font Awesome -->
@@ -31,11 +30,16 @@
         <link type="text/css" href="{{ asset('/assets/plugins/codeprettifier/prettify.css')}}" rel="stylesheet">
         <!-- Code Prettifier -->
         <link type="text/css" href="{{ asset('/assets/plugins/iCheck/skins/minimal/blue.css')}}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/plugins/switchery/switchery.css')}}" rel="stylesheet">
+
         <!-- iCheck -->
 
         <!-- datatables -->
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+        {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">--}}
+        <link type="text/css" href="{{ asset('/assets/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/plugins/datatables/dataTables.themify.css')}}" rel="stylesheet">
+
 
         <!--[if lt IE 10]>
         <script type="text/javascript" src="{{ asset('/assets/js/media.match.min.js')}}"></script>
@@ -125,7 +129,7 @@
 			</a>
 		</span>
 
-        <a class="navbar-brand" href="index.html">Outline</a>
+        <a class="navbar-brand" href="index.html">HÓSPEDE+</a>
 
         <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
             <div class="input-icon">
@@ -226,7 +230,7 @@
                         <div class="widget-body">
                             <div class="userinfo">
                                 <div class="avatar">
-                                    <img src="http://placehold.it/300&text=Placeholder"
+                                    <img src="{{asset('/img/profile_small.jpg')}}"
                                          class="img-responsive img-circle">
                                 </div>
                                 <div class="info">
@@ -243,23 +247,31 @@
                             <ul class="acc-menu">
                                 <li class="nav-separator"><span>Menu</span></li>
                                 {{--<li><a href="angular/app/"><i class="ti ti-shield"></i><span>AngularJS</span></a></li>--}}
-                                <li><a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
+                                <li>
+                                    <a href="javascript:;"><i class="ti ti-layout"></i><span>Hóspede</span></a>
                                     <ul class="acc-menu">
-                                        <li><a href="{{ route('softage.guest.index')}} ">Hospede</a></li>
-                                        <li><a href="{{ route('softage.local.index')}} ">Locais</a></li>
+                                        <li><a href="{{ route('softage.guest.index')}} ">Cadastrar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
+                                    <ul class="acc-menu">
+                                        <li><a href="{{ route('softage.local.index')}} ">Local</a></li>
+                                        <li><a href="{{ route('softage.company.index')}} ">Empresa</a></li>
+                                        <li><a href="">Static Sidebar</a></li>
                                         <li><a href="">Scroll Sidebar</a></li>
                                         <li><a href="">Boxed</a></li>
                                     </ul>
                                 </li>
 
                                 {{-- menu extras --}}
-
                                 {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span
                                                 class="badge badge-danger">3</span></a></li>
                                 <li><a href="extras-calendar.html"><i
                                                 class="ti ti-calendar	"></i><span>Calendar</span>
-                                        <span class="badge badge-orange">1</span></a></li>--}}
+                                        <span class="badge badge-orange">1</span></a></li>
+                                --}}
                             </ul>
                         </nav>
                     </div>
@@ -352,9 +364,16 @@
     <script type="text/javascript" src="{{ asset('/assets/demo/demo.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/assets/demo/demo-switcher.js')}}"></script>
 
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    {{--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>--}}
+    <script type="text/javascript" src="{{ asset('/assets/plugins/datatables/jquery.dataTables.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/plugins/datatables/dataTables.bootstrap.js')}}"></script>
 
-    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <!-- plugins adicionais -->
+    <script type="text/javascript" src="{{ asset('/assets/plugins/switchery/switchery.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/demo/demo-formcomponents.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/plugins/form-jasnyupload/fileinput.min.js')}}"></script>
+
 @show
 
 
