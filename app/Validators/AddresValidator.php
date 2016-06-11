@@ -5,23 +5,19 @@ namespace Softage\Validators;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-class GuestValidator extends LaravelValidator
+class AddresValidator extends LaravelValidator
 {
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
 			'id' =>  '' ,
-			'gue_name' =>  '' ,
-			'gue_cpf' =>  '' ,
-			'gue_rg' =>  '' ,
-			'gue_email' =>  '' ,
-			'gue_phone' =>  '' ,
-			'gue_phone2' =>  '' ,
-			'gue_dt_birth' =>  '' ,
-			'gue_gen_id' =>  '' ,
-			'gue_adr_id' =>  '' ,
-			'gue_visible' =>  '' ,
+			'adr_cep' =>  '' ,
+			'adr_country' =>  '' ,
+			'adr_city' =>  '' ,
+			'adr_district' =>  '' ,
+			'adr_address' =>  '' ,
+			'adr_sta_id' =>  '' ,
 
         ],
         ValidatorInterface::RULE_UPDATE => [],

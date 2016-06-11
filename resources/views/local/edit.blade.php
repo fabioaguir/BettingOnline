@@ -2,15 +2,11 @@
 
 @section('css')
     @parent
-    <style>
-        .form-group {
-            margin-top: -10px;;
-        }
-    </style>
+
 @endsection
 
 @section('page-heading')
-    <h1>Hospede</h1>
+    <h1>Responsive Tables</h1>
 @endsection
 
 @section('container')
@@ -49,25 +45,18 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Editar hospede</h2>
+                        <h2>Horizontal Tables</h2>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
-
-                    {!! Form::model($model, ['route'=> ['softage.guest.update', $model->id], 'id' => 'formGuest', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        @include('tamplatesForms.tamplateFormGuest')
-                    </div>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
-                                <a class="btn-default btn" href="{{ route('softage.guest.index')}}">Voltar</a>
-                            </div>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
 
+                        {!! Form::model($model, ['route'=> ['softage.guest.store', $model->id], 'id' => 'formGuest', 'enctype' => 'multipart/form-data']) !!}
+                        @include('tamplatesForms.tamplateFormGuest')
+                        {{--<a href="{{ route('seracademico.report.contratoAluno', ['id' => $crud->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}
+                        {!! Form::close() !!}
+
+                    </div>
                 </div>
 
             </div>
@@ -79,7 +68,6 @@
 @section('js')
     @parent
     <script type="text/javascript">
-        var elem = document.querySelector('.js-switch-info');
-        var init = new Switchery(elem);
+
     </script>
 @endsection

@@ -5,37 +5,34 @@ namespace Softage\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Softage\Http\Requests;
-use Softage\Services\GuestService;
+use Softage\Services\LocalService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Softage\Validators\GuestValidator;
+use Softage\Validators\LocalValidator;
 
-class GuestController extends Controller
+class LocalController extends Controller
 {
     /**
-    * @var GuestService
+    * @var LocalService
     */
     private $service;
 
     /**
-    * @var GuestValidator
+    * @var LocalValidator
     */
     private $validator;
 
     /**
     * @var array
     */
-    private $loadFields = [
-        'Gender',
-        'State'
-    ];
+    private $loadFields = [];
 
     /**
-    * @param GuestService $service
-    * @param GuestValidator $validator
+    * @param LocalService $service
+    * @param LocalValidator $validator
     */
-    public function __construct(GuestService $service, GuestValidator $validator)
+    public function __construct(LocalService $service, LocalValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -46,7 +43,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('guest.index');
+        return view('local.index');
     }
 
     /**
@@ -55,24 +52,11 @@ class GuestController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('guest')->select(['id', 'gue_name', 'gue_cpf']);
+        $rows = \DB::table('local')->select(['loc_id as id', 'loc_name']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html = '<ul class="demo-btns">';
-
-            $html .= '<li>
-                          <a class="btn btn-success-alt" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-check"></i></a>
-                      </li>';
-
-            $html .= '<li>
-                        <a class="btn btn-danger-alt" style="margin-left: 2px;" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-close"></i></a>
-                      </li>';
-
-            $html .= '</ul>';
-
-            return $html;
-            //return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
         })->make(true);
     }
 
@@ -85,7 +69,7 @@ class GuestController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('guest.create', compact('loadFields'));
+        return view('local.create', compact('loadFields'));
     }
 
     /**
@@ -124,13 +108,13 @@ class GuestController extends Controller
             $model = $this->service->find($id);
 
             #Tratando as datas
-            $model = $this->service->getWithDateFormatPtBr($model);
+           // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('guest.edit', compact('model', 'loadFields'));
+            return view('local.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
