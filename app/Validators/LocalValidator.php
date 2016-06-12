@@ -11,13 +11,13 @@ class LocalValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'loc_id' =>  '' ,
+			'id' =>  '' ,
 			'loc_value' =>  '' ,
 			'loc_occupants' =>  '' ,
 			'loc_visible' =>  '' ,
 			'loc_title' =>  '' ,
 			'loc_lot_id' =>  '' ,
-			'loc_name' =>  '' ,
+			'name' =>  '' ,
 
         ],
         ValidatorInterface::RULE_UPDATE => [],

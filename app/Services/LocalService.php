@@ -92,7 +92,7 @@ class LocalService
             $nameModel = "Softage\\Entities\\$model";
 
             #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            $result[strtolower($model)] = $nameModel::lists('name', 'id');
         }
 
         #retorno
