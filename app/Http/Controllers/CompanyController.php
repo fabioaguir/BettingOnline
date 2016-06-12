@@ -48,14 +48,29 @@ class CompanyController extends Controller
      * @return mixed
      */
     public function grid()
-    {
+    {        
         #Criando a consulta
         $rows = \DB::table('company')->select(['id', 'name','com_email', 'com_site', 'com_phone', 'com_phone2']);
-
+        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
-        })->make(true);
+            $html = '<ul class="demo-btns">';
+
+            $html .= '<li>
+                          <a class="btn btn-success-alt" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-check"></i></a>
+                      </li>';
+
+            $html .= '<li>
+                        <a class="btn btn-danger-alt" style="margin-left: 2px;" href="edit/'.$row->id.'" title="Excluir"><i class="ti ti-close"></i></a>
+                      </li>';
+
+            $html .= '</ul>';
+
+            return $html;
+            //return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+        })->make(true);    
+        
+        
     }
 
     /**

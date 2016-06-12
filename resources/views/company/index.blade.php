@@ -1,34 +1,40 @@
 @extends('menu')
 
 @section('css')
-@parent
-
+    @parent
+<style>
+    .table-responsive {
+        min-height: 0.01%;
+        overflow-x: initial;
+    }
+</style>
 @endsection
 
 @section('page-heading')
-<h1>Responsive Tables</h1>
+    <h1>Empresa</h1>
 @endsection
 
 @section('container')
 
-<div data-widget-group="group1">
-    <div class="row">
-        <div class="col-sm-12">
-            {{--<div class="alert alert-info alert-dismissable ">
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-sm-12">
+                {{--<div class="alert alert-info alert-dismissable ">
                     <i class="ti ti-info-alt"></i> Resize the browser window to see the responive tables in action!
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 </div>--}}
 
-            <div class="panel panel-default" data-widget='{"draggable": "false"}'>
-                <div class="panel-heading">
-                    <a href="{{ route('softage.company.create')}}" class="btn btn-primary">Cadastrar Empresa</a>
-                    <div class="panel-ctrls" data-actions-container=""
-                         data-action-collapse='{"target": ".panel-body"}'></div>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive no-padding">
-                        <table id="company-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
+                <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+                    <div class="panel-heading">
+                        <h2>Lista de Empresa</h2><br />
+                        <a href="{{ route('softage.company.create')}}" class="btn btn-primary">Nova Empresa</a>
+                        <div class="panel-ctrls" data-actions-container=""
+                             data-action-collapse='{"target": ".panel-body"}'></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive no-padding">
+                            <table id="company-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
                                 <tr>
                                     <th>Nome</th>
                                     <th>E-mail</th>
@@ -38,8 +44,8 @@
                                     
                                     <th>Acão</th>
                                 </tr>
-                            </thead>
-                            <tfoot>
+                                </thead>
+                                <tfoot>
                                 <tr>
                                     <th>Nome</th>
                                     <th>E-mail</th>
@@ -47,56 +53,70 @@
                                     <th>Telefone</th>
                                     <th>Celular</th>
                                     
-                                    <th style="width: 17%;">Acão</th>
+                                    <th style="width: 15%;">Acão</th>
                                 </tr>
-                            </tfoot>
-                        </table>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
 @endsection
 
 @section('js')
-@parent
-<script type="text/javascript">
+    @parent
+    <script type="text/javascript">
 
-    var table = $('#company-grid').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{!! route('softage.company.grid') !!}",
-        columns: [
-            {data: 'name', name: 'name'},
-            {data: 'com_email', name: 'name'},
-            {data: 'com_site', name: 'name'},
-            {data: 'com_phone', name: 'name'},
-            {data: 'com_phone2', name: 'name'},
-            
-            {data: 'action', name: 'action', orderable: false, searchable: false}
-        ]
-    });
+        var table = $('#company-grid').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{!! route('softage.company.grid') !!}",
+            language: {
+                "lengthMenu": "_MENU_"
+            },
+            columns: [
+                {data: 'name', name: 'name'},
+                {data: 'com_email', name: 'com_email'},
+                {data: 'com_site', name: 'com_site'},
+                {data: 'com_phone', name: 'com_phone'},
+                {data: 'com_phone2', name: 'com_phone2'},
+                
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+        $('.dataTables_filter input').attr('placeholder','Pesquisar...');
 
-    
-            $('#company-grid tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-        } else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-    });
+        //DOM Manipulation to move datatable elements integrate to panel
+        $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
+        $('.panel-ctrls').append("<i class='separator'></i>");
+        $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
 
-    //Retonra o id do registro
-    $('#company-grid tbody').on('click', 'tr', function () {
+        $('.panel-footer').append($(".dataTable+.row"));
+        $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
 
-        var rows = table.row(this).data()
 
-        console.log(rows.id);
-    });
+        /*//Seleciona uma linha
+         $('#crud-grid tbody').on( 'click', 'tr', function () {
+         if ( $(this).hasClass('selected') ) {
+         $(this).removeClass('selected');
+         }
+         else {
+         table.$('tr.selected').removeClass('selected');
+         $(this).addClass('selected');
+         }
+         } );
 
-</script>
+         //Retonra o id do registro
+         $('#crud-grid tbody').on( 'click', 'tr', function () {
+
+         var rows = table.row( this ).data()
+
+         console.log( rows.id );
+         } );*/
+
+    </script>
 @endsection
