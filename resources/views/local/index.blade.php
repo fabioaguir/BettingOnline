@@ -36,13 +36,17 @@
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Action</th>
+                                    <th>Valor</th>
+                                    <th>Tipo</th>
+                                    <th>Açao</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Nome</th>
-                                    <th style="width: 17%;">Action</th>
+                                    <th>Valor</th>
+                                    <th>Tipo</th>
+                                    <th style="width: 17%;">Açao</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -68,6 +72,8 @@
         ajax: "{!! route('softage.local.grid') !!}",
         columns: [
             {data: 'name', name: 'name'},
+            {data: 'value', name: 'loc_value'},
+            {data: 'title', name: 'loc_title'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

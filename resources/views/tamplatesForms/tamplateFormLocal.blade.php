@@ -42,6 +42,13 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                {!! Form::label('loc_lot_id', 'Tipo', array('class' => 'col-sm-2 control-label')) !!}
+                <div class="col-sm-2">
+                    {!! Form::select('loc_lot_id', $loadFields['localtype'], Session::getOldInput('loc_lot_id'), array('class' => 'form-control')) !!}
+                </div>
+            </div>
+
         </div>
 
     </div>
