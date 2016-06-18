@@ -5,19 +5,19 @@ namespace Softage\Validators;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-class LocalValidator extends LaravelValidator
+class CompanyValidator extends LaravelValidator
 {
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
 			'id' =>  '' ,
-			'loc_value' =>  '' ,
-			'loc_occupants' =>  '' ,
-			'loc_visible' =>  '' ,
-			'loc_title' =>  '' ,
-			'loc_lot_id' =>  '' ,
 			'name' =>  '' ,
+			'com_email' =>  '' ,
+			'com_site' =>  '' ,
+			'com_phone' =>  '' ,
+			'com_phone2' =>  '' ,
+			'com_adr_id' =>  '' ,
 
         ],
         ValidatorInterface::RULE_UPDATE => [],

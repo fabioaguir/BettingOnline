@@ -2,20 +2,20 @@
 
 namespace Softage\Services;
 
-use Softage\Repositories\LocalRepository;
-use Softage\Entities\Local;
+use Softage\Repositories\CompanyRepository;
+use Softage\Entities\Company;
 
-class LocalService
+class CompanyService
 {
     /**
-     * @var LocalRepository
+     * @var CompanyRepository
      */
     private $repository;
 
     /**
-     * @param LocalRepository $repository
+     * @param CompanyRepository $repository
      */
-    public function __construct(LocalRepository $repository)
+    public function __construct(CompanyRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -28,33 +28,33 @@ class LocalService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $local = $this->repository->find($id);
+        $company = $this->repository->find($id);
 
         #Verificando se o registro foi encontrado
-        if(!$local) {
+        if(!$company) {
             throw new \Exception('Empresa não encontrada!');
         }
 
         #retorno
-        return $local;
+        return $company;
     }
 
     /**
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Local
+    public function store(array $data) : Company
     {
         #Salvando o registro pincipal
-        $local =  $this->repository->create($data);
+        $company =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$local) {
+        if(!$company) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $local;
+        return $company;
     }
 
     /**
@@ -62,19 +62,19 @@ class LocalService
      * @param int $id
      * @return mixed
      */
-    public function update(array $data, int $id) : Local
+    public function update(array $data, int $id) : Company
     {
         #Atualizando no banco de dados
-        $local = $this->repository->update($data, $id);
+        $company = $this->repository->update($data, $id);
 
 
         #Verificando se foi atualizado no banco de dados
-        if(!$local) {
+        if(!$company) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $local;
+        return $company;
     }
 
     /**
@@ -92,7 +92,7 @@ class LocalService
             $nameModel = "Softage\\Entities\\$model";
 
             #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::lists('name', 'id');
+            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
         }
 
         #retorno

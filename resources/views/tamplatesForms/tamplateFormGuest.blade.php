@@ -1,6 +1,6 @@
 <div class="row">
-	<div class="col-md-12">
-		<div class="row">
+    <div class="col-md-12">
+        <div class="row">
             <div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#principal" data-toggle="tab">Dados pessoais</a></li>
@@ -18,7 +18,7 @@
                                     <div>
                                         <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
                                         <span class="btn btn-default btn-file"><span class="fileinput-new">Selecione uma imagem</span>
-                                        <span class="fileinput-exists">Selecionar</span>
+                                            <span class="fileinput-exists">Selecionar</span>
                                             <input type="file" name="...">
                                         </span>
                                     </div>
@@ -133,6 +133,6 @@
                     </div>
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
