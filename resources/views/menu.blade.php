@@ -31,6 +31,8 @@
         <!-- Code Prettifier -->
         <link type="text/css" href="{{ asset('/assets/plugins/iCheck/skins/minimal/blue.css')}}" rel="stylesheet">
         <link type="text/css" href="{{ asset('/assets/plugins/switchery/switchery.css')}}" rel="stylesheet">
+        <link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
+        <link type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.css')}}">
 
         <!-- iCheck -->
 
@@ -259,6 +261,13 @@
                                         <li><a href="{{ route('softage.local.index')}} ">Local</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="javascript:;"><i class="ti ti-layout"></i><span>Administrador</span></a>
+                                    <ul class="acc-menu">
+                                        <li><a href="{{ route('softage.user.index')}} ">Usuário</a></li>
+                                        <li><a href="{{ route('softage.role.index') }}">Perfis</a></li>
+                                    </ul>
+                                </li>
 
                                 {{-- menu extras --}}
                                 {{--<li class="nav-separator"><span>Extras</span></li>
@@ -369,6 +378,8 @@
     <script type="text/javascript" src="{{ asset('/assets/plugins/switchery/switchery.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/assets/demo/demo-formcomponents.js')}}"></script>
     <script type="text/javascript" src="{{ asset('/assets/plugins/form-jasnyupload/fileinput.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.js')}}"></script>
+
 
 @show
 

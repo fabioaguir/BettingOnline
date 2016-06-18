@@ -60,15 +60,12 @@ class GuestController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = '<ul class="demo-btns">';
-
             $html .= '<li>
                           <a class="btn btn-success-alt" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-check"></i></a>
                       </li>';
-
             $html .= '<li>
                         <a class="btn btn-danger-alt" style="margin-left: 2px;" href="edit/'.$row->id.'" title="Editar"><i class="ti ti-close"></i></a>
                       </li>';
-
             $html .= '</ul>';
 
             return $html;

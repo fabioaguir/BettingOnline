@@ -1,73 +1,96 @@
 @extends('menu')
 
-@section('content')
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>Lista Perfís</h5>
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">Config option 1</a>
-                    </li>
-                    <li><a href="#">Config option 2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>
-        </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('seracademico.role.create')}}" class="btn btn-primary btn-pressure btn-sm btn-sensitive">Novo Perfil</a><br /><br />
-                    <div class="table-responsive no-padding">
-                        <table id="role-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th >Acão</th>
-                            </tr>
-                            </thead>
+@section('title')
+    @parent
+    Perfil
+@endsection
 
-                            <tfoot>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th style="width: 10%;">Acão</th>
-                            </tr>
-                            </tfoot>
-                        </table>
+@section('css')
+    @parent
+    <style>
+        .table-responsive {
+            min-height: 0.01%;
+            overflow-x: initial;
+        }
+    </style>
+@endsection
+
+@section('page-heading')
+    <h1>Perfis</h1>
+@endsection
+
+@section('container')
+
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-sm-12">
+                {{--<div class="alert alert-info alert-dismissable ">
+                    <i class="ti ti-info-alt"></i> Resize the browser window to see the responive tables in action!
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                </div>--}}
+
+                <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+                    <div class="panel-heading">
+                        <h2>Lista de perfis</h2> <br />
+                        <a href="{{ route('softage.role.create')}}" class="btn btn-primary">Novo Perfil</a>
+                        <div class="panel-ctrls" data-actions-container=""
+                             data-action-collapse='{"target": ".panel-body"}'></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive no-padding">
+                            <table id="role-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th >Acão</th>
+                                </tr>
+                                </thead>
+
+                                <tfoot>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th style="width: 10%;">Acão</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                The righ side of the footer
-            </span>
-            This is simple footer example
-        </div>
     </div>
-@stop
 
-@section('javascript')
+@endsection
+
+@section('js')
+    @parent
     <script type="text/javascript">
         var table = $('#role-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('seracademico.role.grid') !!}",
+            language: {
+                "lengthMenu": "_MENU_"
+            },
+            ajax: "{!! route('softage.role.grid') !!}",
             columns: [
                 {data: 'name', name: 'name'},
                 {data: 'description', name: 'description'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
+        $('.dataTables_filter input').attr('placeholder','Pesquisar...');
+
+        //DOM Manipulation to move datatable elements integrate to panel
+        $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
+        $('.panel-ctrls').append("<i class='separator'></i>");
+        $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
+
+        $('.panel-footer').append($(".dataTable+.row"));
+        $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
+
     </script>
-@stop
+@endsection
