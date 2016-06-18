@@ -1,115 +1,132 @@
 @extends('menu')
 
-@section('content')
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>Novo Perfil</h5>
+@section('css')
+    @parent
+    <style>
+        .form-group {
+            margin-top: -10px;;
+        }
+    </style>
+@endsection
 
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">Config option 1</a>
-                    </li>
-                    <li><a href="#">Config option 2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>
-        </div>
-        <div class="ibox-content">
+@section('page-heading')
+    <h1>Perfil</h1>
+@endsection
 
-            @if(Session::has('message'))
-                <div class="alert alert-success">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <em> {!! session('message') !!}</em>
-                </div>
-            @endif
+@section('container')
 
-            {!! Form::model($role, ['route'=> ['seracademico.role.update', $role->id], 'method' => "POST", 'enctype' => 'multipart/form-data' ]) !!}
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs">
-                        <li role="presentation" class="active">
-                            <a href="#role" aria-controls="role" role="tab" data-toggle="tab">Dados Gerais</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#permission" aria-controls="permission" role="tab" data-toggle="tab">Permissões</a>
-                        </li>
-                    </ul>
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-sm-12">
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="role">
-                            <br/>
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <em> {!! session('message') !!}</em>
+                    </div>
+                @endif
 
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    {!! Form::label('name', 'Nome') !!}
-                                    {!! Form::text('name', null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('description', 'Descrição') !!}
-                                    {!! Form::text('description', null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="permission">
-                            <br/>
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
-                            <div id="tree-permission">
-                                <ul>
-                                    <li>
-                                        @if(count($role->permissions->lists('name')->all()) > 0)
-                                            <input type="checkbox" checked> Todos
-                                        @else
-                                            <input type="checkbox"> Todos
-                                        @endif
-                                        <ul>
-                                            @if(isset($loadFields['permission']))
-                                                @foreach($loadFields['permission'] as $id => $permission)
-                                                    @if(\in_array($permission, $role->permissions->lists('name')->all()))
-                                                        <li><input type="checkbox" name="permission[]" checked value="{{ $id  }}"> {{ $permission }} </li>
-                                                    @else
-                                                        <li><input type="checkbox" name="permission[]" value="{{ $id  }}"> {{ $permission }} </li>
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        </ul>
+                <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+                    <div class="panel-heading">
+                        <h2>Editar perfil</h2>
+                        <div class="panel-ctrls" data-actions-container=""
+                             data-action-collapse='{"target": ".panel-body"}'></div>
+                    </div>
+                    {!! Form::model($role, ['route'=> ['softage.role.update', $role->id], 'method' => "POST", 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data' ]) !!}
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li role="presentation" class="active">
+                                        <a href="#role" aria-controls="role" role="tab" data-toggle="tab">Dados Gerais</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#permission" aria-controls="permission" role="tab" data-toggle="tab">Permissões</a>
                                     </li>
                                 </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="role">
+                                        <br/><br/>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    {!! Form::label('name', 'Nome', array('class' => 'col-sm-2 control-label')) !!}
+                                                    <div class="col-sm-8">
+                                                        {!! Form::text('name', null  , array('class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    {!! Form::label('description', 'Descrição', array('class' => 'col-sm-2 control-label')) !!}
+                                                    <div class="col-sm-8">
+                                                        {!! Form::text('description', null  , array('class' => 'form-control')) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="permission">
+                                        <br/>
+
+                                        <div id="tree-permission">
+                                            <ul>
+                                                <li>
+                                                    @if(count($role->permissions->lists('name')->all()) > 0)
+                                                        <input type="checkbox" checked> Todos
+                                                    @else
+                                                        <input type="checkbox"> Todos
+                                                    @endif
+                                                    <ul>
+                                                        @if(isset($loadFields['permission']))
+                                                            @foreach($loadFields['permission'] as $id => $permission)
+                                                                @if(\in_array($permission, $role->permissions->lists('name')->all()))
+                                                                    <li><input type="checkbox" name="permission[]" checked value="{{ $id  }}"> {{ $permission }} </li>
+                                                                @else
+                                                                    <li><input type="checkbox" name="permission[]" value="{{ $id  }}"> {{ $permission }} </li>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-1">
+                                <button class="btn-primary btn" style="margin-left: 22px">Salvar</button>
+                                <a class="btn-default btn" href="{{ route('softage.role.index')}}">Voltar</a>
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
-                <di class="col-md-12">
-                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary')) !!}
-                </di>
             </div>
-            {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
         </div>
     </div>
-@stop
 
-@section('javascript')
-    <script type="text/javascript" class="init">
+@endsection
+
+@section('js')
+    @parent
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#tree-permission").tree();
         });
     </script>
-@stop
+@endsection

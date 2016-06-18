@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-1">
                                 <button class="btn-primary btn" style="margin-left: 22px">Salvar</button>
-                                <a class="btn-default btn" href="{{ route('softage.user.index')}}">Voltar</a>
+                                <a class="btn-default btn" href="{{ route('softage.role.index')}}">Voltar</a>
                             </div>
                         </div>
                     </div>
