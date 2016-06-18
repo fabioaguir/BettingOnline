@@ -260,9 +260,6 @@
                                     <ul class="acc-menu">
                                         <li><a href="{{ route('softage.local.index')}} ">Local</a></li>
                                         <li><a href="{{ route('softage.company.index')}} ">Empresa</a></li>
-                                        <li><a href="">Static Sidebar</a></li>
-                                        <li><a href="">Scroll Sidebar</a></li>
-                                        <li><a href="">Boxed</a></li>
                                     </ul>
                                 </li>
                                 <li>
