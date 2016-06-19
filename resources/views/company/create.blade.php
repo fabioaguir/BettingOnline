@@ -61,11 +61,50 @@
 
 @endsection
 
+
+
 @section('js')
     @parent
 
+    <script>
+	window.ParsleyConfig = {
+    	  successClass: 'has-success'
+		, errorClass: 'has-error'
+		, errorElem: '<span></span>'
+		, errorsWrapper: '<span class="help-block"></span>'
+		, errorTemplate: "<div></div>"
+		, classHandler: function(el) {
+    		return el.$element.closest(".formCompany");
+		}
+	};
+ 
+ 
+    
+
+</script>
+
+<script type="text/javascript" src="{{ asset('assets/plugins/form-parsley/parsley.js')}}"></script>
+
+<script>
+// See Docs
+$(document).ready(function () {
+    //    Normally no JS is required to initialize parsley, however
+    //    we will use it to do a faux-validation
+    //    Do see the docs for configuration options
+
+    $('#formCompany .btn').on('click', function () {
+        $('#formCompany').parsley().validate();
+      });
+    });
+</script>
+    
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');
         var init = new Switchery(elem);
     </script>
-@endsection
+
+ @endsection
+
+
+
+
