@@ -23307,7 +23307,7 @@ ul .panel .panel-heading h2 {
 .panel.panel-blue .panel-heading .panel-ctrls i.separator {
   background-color: rgba(33, 150, 243, 0.125);
 }
-.panel.panel-blue .panel-heading .nav-tabs li > a {
+.panel.panel-div .panel-heading .nav-tabs li > a {
   color: rgba(0, 0, 0, 0.5);
 }
 .panel.panel-blue .panel-heading .nav-tabs li:hover > a {

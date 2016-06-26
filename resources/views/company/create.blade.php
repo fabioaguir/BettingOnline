@@ -15,7 +15,7 @@
 
 @section('container')
 
-    <div data-widget-group="group1">
+    <div data-widget-group="group1" data-parsley-validate>
         <div class="row">
             <div class="col-sm-12">
 
@@ -41,7 +41,7 @@
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
-                    {!! Form::open(['route'=>'softage.company.store', 'method' => "POST",'id' => 'formCompany', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
+                    {!! Form::open(['route'=>'softage.company.store', 'method' => "POST",'id' => 'formCompany', 'class' => 'form-horizontal row-border', 'enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
                         @include('tamplatesForms.tamplateFormCompany')
                     </div>
@@ -96,7 +96,7 @@ $(document).ready(function () {
         $('#formCompany').parsley().validate();
       });
     });
-</script>
+</script>   
     
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');

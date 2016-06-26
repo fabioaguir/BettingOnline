@@ -34,7 +34,7 @@
         <div class="form-group">
             {!! Form::label('com_phone2', 'Celular', array('class' => 'col-sm-2 control-label')) !!}
             <div class="col-sm-2">
-                {!! Form::text('com_phone2', Session::getOldInput('com_phone2')  , array('class' => 'form-control')) !!}
+                {!! Form::text('com_phone2', Session::getOldInput('com_phone2')  , array('class' => 'form-control', 'required' => 'required')) !!}
             </div>
         </div>
     </div>
