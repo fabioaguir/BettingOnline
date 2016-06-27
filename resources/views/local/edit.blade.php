@@ -10,7 +10,7 @@
 @endsection
 
 @section('page-heading')
-    <h1>Hóspede</h1>
+    <h1>Local</h1>
 @endsection
 
 @section('container')

@@ -63,6 +63,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider {
         $this->app->bind(
                 \Softage\Repositories\LocalTypeRepository::class, \Softage\Repositories\LocalTypeRepositoryEloquent::class
         );
+
+        $this->app->bind(
+                \Softage\Repositories\ServiceRepository::class, \Softage\Repositories\ServiceRepositoryEloquent::class
+        );
     }
 
 }

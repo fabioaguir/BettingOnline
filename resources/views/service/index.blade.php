@@ -11,7 +11,7 @@
 @endsection
 
 @section('page-heading')
-<h1>Local</h1>
+<h1>Serviço</h1>
 @endsection
 
 @section('container')
@@ -26,18 +26,17 @@
 
             <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                 <div class="panel-heading">
-                    <a href="{{ route('softage.local.create')}}" class="btn btn-primary">Novo Local</a>
+                    <a href="{{ route('softage.service.create')}}" class="btn btn-primary">Novo Serviço</a>
                     <div class="panel-ctrls" data-actions-container=""
                          data-action-collapse='{"target": ".panel-body"}'></div>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive no-padding">
-                        <table id="local-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="service-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
                                     <th>Valor</th>
-                                    <th>Tipo</th>
                                     <th>Açao</th>
                                 </tr>
                             </thead>
@@ -45,7 +44,6 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Valor</th>
-                                    <th>Tipo</th>
                                     <th style="width: 17%;">Açao</th>
                                 </tr>
                             </tfoot>
@@ -63,17 +61,16 @@
 @parent
 <script type="text/javascript">
 
-    var table = $('#local-grid').DataTable({
+    var table = $('#service-grid').DataTable({
         processing: true,
         serverSide: true,
         language: {
             "lengthMenu": "_MENU_"
         },
-        ajax: "{!! route('softage.local.grid') !!}",
+        ajax: "{!! route('softage.service.grid') !!}",
         columns: [
-            {data: 'name', name: 'name'},
-            {data: 'value', name: 'loc_value'},
-            {data: 'title', name: 'loc_title'},
+            {data: 'name', name: 'sev_name'},
+            {data: 'value', name: 'sev_amount'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

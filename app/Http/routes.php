@@ -18,6 +18,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
         
 
+        Route::group(['prefix' => 'service', 'as' => 'service.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ServiceController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ServiceController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ServiceController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ServiceController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServiceController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServiceController@update']);
+        });
+        
         Route::group(['prefix' => 'guest', 'as' => 'guest.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'GuestController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'GuestController@grid']);
