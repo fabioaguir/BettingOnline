@@ -270,6 +270,12 @@
                                             </ul>
                                         </li>
                                         <li>
+                                            <a href="javascript:;"><i class="ti ti-layout"></i><span>Categoria Pagamento</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="{{ route('softage.categorypay.index')}} ">Categoria Pagamento</a></li>
+                                                </ul>
+                                        </li>
+                                        <li>
                                             <a href="javascript:;"><i class="ti ti-layout"></i><span>Administrador</span></a>
                                             <ul class="acc-menu">
                                                 <li><a href="{{ route('softage.user.index')}} ">Usuário</a></li>

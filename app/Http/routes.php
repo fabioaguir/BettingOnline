@@ -17,7 +17,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
         
-
+        
         Route::group(['prefix' => 'service', 'as' => 'service.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ServiceController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'ServiceController@grid']);
@@ -43,6 +43,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'LocalController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'LocalController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'LocalController@update']);
+        });
+       
+        Route::group(['prefix' => 'categorypay', 'as' => 'categorypay.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CategoryPayController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'CategoryPayController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CategoryPayController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CategoryPayController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CategoryPayController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CategoryPayController@update']);
         });
         
         Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
