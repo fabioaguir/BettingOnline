@@ -8,7 +8,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('logout', 'Auth\AuthController@getLogout');
     });
 
-    Route::group(['prefix' => 'softage', 'middleware' => 'auth', 'as' => 'softage.'], function () {
+    Route::group(['prefix' => 'apostas', 'middleware' => 'auth', 'as' => 'softage.'], function () {
 //    Route::get('login'  , ['as' => 'login', 'uses' => 'SecurityController@login']);
 //    Route::get('logout'  , ['as' => 'logout', 'uses' => 'SecurityController@logout']);
 //    Route::post('check'  , ['as' => 'check', 'uses' => 'SecurityController@check']);
@@ -16,17 +16,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 //    Route::get('update2'  , ['as' => 'update2', 'middleware'=>'security:ROLE_ADMIN', 'uses' => 'DefaultController@update2']);
 
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
-        
-        
-        Route::group(['prefix' => 'service', 'as' => 'service.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'ServiceController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'ServiceController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'ServiceController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'ServiceController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ServiceController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ServiceController@update']);
-        });
-        
+
         Route::group(['prefix' => 'guest', 'as' => 'guest.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'GuestController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'GuestController@grid']);
@@ -36,33 +26,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'GuestController@update']);
         });
 
-        Route::group(['prefix' => 'local', 'as' => 'local.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'LocalController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'LocalController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'LocalController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'LocalController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'LocalController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'LocalController@update']);
-        });
-       
-        Route::group(['prefix' => 'categorypay', 'as' => 'categorypay.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'CategoryPayController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'CategoryPayController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'CategoryPayController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'CategoryPayController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CategoryPayController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CategoryPayController@update']);
-        });
-        
-        Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'CompanyController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'CompanyController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'CompanyController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'CompanyController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CompanyController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CompanyController@update']);
-        });
-        
         
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);

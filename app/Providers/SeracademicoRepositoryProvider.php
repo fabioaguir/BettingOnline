@@ -29,48 +29,6 @@ class SeracademicoRepositoryProvider extends ServiceProvider {
         $this->app->bind(
                 \Softage\Repositories\RoleRepository::class, \Softage\Repositories\RoleRepositoryEloquent::class
         );
-
-        $this->app->bind(
-                \Softage\Repositories\CompanyRepository::class, \Softage\Repositories\CompanyRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\PermissionRepository::class, \Softage\Repositories\PermissionRepositoryEloquent::class
-        );
-        $this->app->bind(
-                \Softage\Repositories\GuestRepository::class, \Softage\Repositories\GuestRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\GenderRepository::class, \Softage\Repositories\GenderRepositoryEloquent::class
-        );
-        $this->app->bind(
-                \Softage\Repositories\AddresRepository::class, \Softage\Repositories\AddresRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\StateRepository::class, \Softage\Repositories\StateRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\LocalRepository::class, \Softage\Repositories\LocalRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\CompanyRepository::class, \Softage\Repositories\CompanyRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\LocalTypeRepository::class, \Softage\Repositories\LocalTypeRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\ServiceRepository::class, \Softage\Repositories\ServiceRepositoryEloquent::class
-        );
-    
-        $this->app->bind(
-                \Softage\Repositories\CategoryPayRepository::class, \Softage\Repositories\CategoryPayRepositoryEloquent::class
-        );
-    
+        
 	}
 }
