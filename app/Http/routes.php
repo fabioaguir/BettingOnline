@@ -8,7 +8,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('logout', 'Auth\AuthController@getLogout');
     });
 
-    Route::group(['prefix' => 'apostas', 'middleware' => 'auth', 'as' => 'softage.'], function () {
+    Route::group(['prefix' => 'betting', 'middleware' => 'auth', 'as' => 'betting.'], function () {
 //    Route::get('login'  , ['as' => 'login', 'uses' => 'SecurityController@login']);
 //    Route::get('logout'  , ['as' => 'logout', 'uses' => 'SecurityController@logout']);
 //    Route::post('check'  , ['as' => 'check', 'uses' => 'SecurityController@check']);
@@ -17,13 +17,69 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
 
-        Route::group(['prefix' => 'guest', 'as' => 'guest.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'GuestController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'GuestController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'GuestController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'GuestController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'GuestController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'GuestController@update']);
+        Route::get('form'  , ['as' => 'form', 'uses' => 'DefaultController@form']);
+
+        Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ParametroController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ParametroController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ParametroController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ParametroController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametroController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametroController@update']);
+        });
+
+        Route::group(['prefix' => 'area', 'as' => 'area.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'AreaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'AreaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'AreaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'AreaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AreaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'AreaController@update']);
+        });
+
+        Route::group(['prefix' => 'vendedor', 'as' => 'vendedor.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'VendedorController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'VendedorController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'VendedorController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'VendedorController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VendedorController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'VendedorController@update']);
+        });
+
+        Route::group(['prefix' => 'partida', 'as' => 'partida.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'PartidaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'PartidaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'PartidaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'PartidaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PartidaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'PartidaController@update']);
+        });
+
+        Route::group(['prefix' => 'cotacao', 'as' => 'cotacao.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CotacaoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'CotacaoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CotacaoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CotacaoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacaoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CotacaoController@update']);
+        });
+
+        Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ModalidadeController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ModalidadeController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ModalidadeController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ModalidadeController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadeController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadeController@update']);
+        });
+
+        Route::group(['prefix' => 'resultado', 'as' => 'resultado.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ResultadoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ResultadoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ResultadoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ResultadoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ResultadoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ResultadoController@update']);
         });
 
         

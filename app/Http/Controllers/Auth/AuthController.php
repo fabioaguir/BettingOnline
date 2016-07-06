@@ -29,7 +29,7 @@ class AuthController extends Controller
      * Atributo que armazena o caminho de redirecionamento
      * quando o usuário tiver sucesso ao se autenticar
      */
-    protected $redirectPath = '/softage/index';
+    protected $redirectPath = '/betting/index';
 
     /**
      * @var string

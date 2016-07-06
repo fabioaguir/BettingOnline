@@ -41,7 +41,7 @@
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
-                    {!! Form::model($user, ['route'=> ['softage.user.update', $user->id], 'method' => "POST", 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data' ]) !!}
+                    {!! Form::model($user, ['route'=> ['betting.user.update', $user->id], 'method' => "POST", 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data' ]) !!}
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -172,7 +172,7 @@
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-1">
                                 <button class="btn-primary btn" style="margin-left: 22px">Salvar</button>
-                                <a class="btn-default btn" href="{{ route('softage.user.index')}}">Voltar</a>
+                                <a class="btn-default btn" href="{{ route('betting.user.index')}}">Voltar</a>
                             </div>
                         </div>
                     </div>

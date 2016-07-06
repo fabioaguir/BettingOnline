@@ -13,4 +13,9 @@ class DefaultController extends Controller
     {
         return view('default.index');
     }
+
+    public function form()
+    {
+        return view('partida.create');
+    }
 }

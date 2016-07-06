@@ -248,41 +248,16 @@
                                 <nav class="widget-body">
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Menu</span></li>
-                                        {{--<li><a href="angular/app/"><i class="ti ti-shield"></i><span>AngularJS</span></a></li>--}}
-                                        <li>
-                                            <a href="javascript:;"><i class="ti ti-layout"></i><span>Hóspede</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="{{ route('softage.guest.index')}} ">Cadastrar</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
+                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Áreas</span></a></li>
+                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Vendedores</span></a></li>
+                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('softage.local.index')}} ">Local</a></li>
-                                                <li><a href="{{ route('softage.company.index')}} ">Empresa</a></li>
+                                                <li><a href="{{ route('betting.form') }} ">Cadastrar</a></li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a href="javascript:;"><i class="ti ti-layout"></i><span>Produtos/Serviços</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="{{ route('softage.local.index')}} ">Produtos</a></li>
-                                                <li><a href="{{ route('softage.service.index')}} ">Serviços</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;"><i class="ti ti-layout"></i><span>Categoria Pagamento</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="{{ route('softage.categorypay.index')}} ">Categoria Pagamento</a></li>
-                                                </ul>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;"><i class="ti ti-layout"></i><span>Administrador</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="{{ route('softage.user.index')}} ">Usuário</a></li>
-                                                <li><a href="{{ route('softage.role.index') }}">Perfis</a></li>
-                                            </ul>
-                                        </li>
-
                                         {{-- menu extras --}}
                                         {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span

@@ -2,16 +2,16 @@
 
 @section('css')
     @parent
-    <style>
-        .table-responsive {
-            min-height: 0.01%;
-            overflow-x: initial;
-        }
-    </style>
+<style>
+    .table-responsive {
+        min-height: 0.01%;
+        overflow-x: initial;
+    }
+</style>
 @endsection
 
 @section('page-heading')
-    <h1>Usuários</h1>
+    <h1>Área</h1>
 @endsection
 
 @section('container')
@@ -26,27 +26,26 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Lista de Usuários</h2><br />
-                        <a href="{{ route('betting.user.create')}}" class="btn btn-primary">Novo Usuário</a>
+                        <h2>Lista de áreas</h2><br />
+                        <a href="{{ route('betting.area.create')}}" class="btn btn-primary">Novo Área</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive no-padding">
-                            <table id="user-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                            <table id="area-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Email</th>
-                                    <th >Acão</th>
+                                    <th>CPF</th>
+                                    <th>Acão</th>
                                 </tr>
                                 </thead>
-
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Email</th>
-                                    <th style="width: 10%;">Acão</th>
+                                    <th>CPF</th>
+                                    <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -64,20 +63,19 @@
     @parent
     <script type="text/javascript">
 
-        var table = $('#user-grid').DataTable({
+        var table = $('#area-grid').DataTable({
             processing: true,
             serverSide: true,
+            ajax: "{!! route('betting.area.grid') !!}",
             language: {
                 "lengthMenu": "_MENU_"
             },
-            ajax: "{!! route('betting.user.grid') !!}",
             columns: [
-                {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
+                {data: 'gue_name', name: 'gue_name'},
+                {data: 'gue_cpf', name: 'gue_cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-
         $('.dataTables_filter input').attr('placeholder','Pesquisar...');
 
         //DOM Manipulation to move datatable elements integrate to panel
