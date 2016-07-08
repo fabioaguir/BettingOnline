@@ -5,7 +5,7 @@
                 <div class="form-group">
                     {!! Form::label('data', 'Data', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-2">
-                        {!! Form::text('data', Session::getOldInput('data')  , array('class' => 'form-control')) !!}
+                        {!! Form::text('data', Session::getOldInput('data')  , array('class' => 'form-control mask', 'data-inputmask' => "'alias': 'date'")) !!}
                     </div>
                 </div>
                 <div class="form-group">

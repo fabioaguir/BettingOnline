@@ -119,7 +119,7 @@
 
         <div class="extrabar-underlay"></div>
 
-        <header id="topnav" class="navbar navbar-blue navbar-fixed-top">
+        <header id="topnav" class="navbar navbar-teal navbar-fixed-top">
 
             {{-- logo-area --}}
             <div class="logo-area">
@@ -144,7 +144,7 @@
 
 
             {{-- Dropdowns do menu do topo --}}
-            <div class="yamm navbar-left navbar-collapse collapse in">
+            {{--<div class="yamm navbar-left navbar-collapse collapse in">
                 <ul class="nav navbar-nav">
                     <li class="dropdown" id="widget-classicmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
@@ -160,7 +160,7 @@
                     </li>
                     <li><a href="">Another Link</a></li>
                 </ul>
-            </div>
+            </div>--}}
 
 
             {{-- Opções direitas do menu do topo --}}
@@ -175,7 +175,7 @@
                 </li>
 
                 {{-- Notificações --}}
-                <li class="dropdown toolbar-icon-bg">
+                {{--<li class="dropdown toolbar-icon-bg">
                     <a href="#" class="hasnotifications dropdown-toggle" data-toggle='dropdown'><span class="icon-bg"><i
                                 class="ti ti-bell"></i></span><span class="badge badge-deeporange">2</span></a>
                     <div class="dropdown-menu notifications arrow">
@@ -201,7 +201,7 @@
                             <a href="#">See all notifications</a>
                         </div>
                     </div>
-                </li>
+                </li>--}}
 
                 {{-- Menu do usuário --}}
                 <li class="dropdown toolbar-icon-bg">
@@ -210,14 +210,14 @@
                     <ul class="dropdown-menu userinfo arrow">
                         <li><a href="#/"><i class="ti ti-user"></i><span>Profile</span>{{--<span
                                 class="badge badge-info pull-right">73%</span>--}}</a></li>
-                        <li><a href="#/"><i class="ti ti-settings"></i><span>Settings</span></a></li>
-                        <li><a href="#/"><i class="ti ti-help-alt"></i><span>Help</span></a></li>
-                        <li class="divider"></li>
-                        <li><a href="#/"><i class="ti ti-view-list-alt"></i><span>Statement</span></a></li>
+                        {{--<li><a href="#/"><i class="ti ti-settings"></i><span>Settings</span></a></li>
+                        <li><a href="#/"><i class="ti ti-help-alt"></i><span>Help</span></a></li>--}}
+                        {{--<li class="divider"></li>--}}
+                        {{--<li><a href="#/"><i class="ti ti-view-list-alt"></i><span>Statement</span></a></li>
                         <li><a href="#/"><i class="ti ti-stats-up"></i><span>Earnings</span></a></li>
-                        <li><a href="#/"><i class="ti ti-money"></i><span>Withdrawals</span></a></li>
+                        <li><a href="#/"><i class="ti ti-money"></i><span>Withdrawals</span></a></li>--}}
                         <li class="divider"></li>
-                        <li><a href="{{ url('auth/logout') }}"><i class="ti ti-shift-right"></i><span>Sign Out</span></a></li>
+                        <li><a href="{{ url('auth/logout') }}"><i class="ti ti-shift-right"></i><span>Sair</span></a></li>
                     </ul>
                 </li>
             </ul>
@@ -248,16 +248,17 @@
                                 <nav class="widget-body">
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Menu</span></li>
+                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Dashboard</span></a></li>
                                         <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
                                         <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Áreas</span></a></li>
                                         <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Vendedores</span></a></li>
                                         <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
-                                        <li>
+                                        {{--<li>
                                             <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                             <ul class="acc-menu">
                                                 <li><a href="{{ route('betting.form') }} ">Cadastrar</a></li>
                                             </ul>
-                                        </li>
+                                        </li>--}}
                                         {{-- menu extras --}}
                                         {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span
@@ -368,8 +369,14 @@
         <script type="text/javascript" src="{{ asset('/assets/demo/demo-formcomponents.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-jasnyupload/fileinput.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.js')}}"></script>
-
-
+        <script type="text/javascript" src="{{ asset('/assets/plugins/form-inputmask/jquery.inputmask.bundle.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/js/jquery.mask.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/js/mascaras.js')}}"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('.mask').inputmask();
+            });
+        </script>
         @show
 
 
