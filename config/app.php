@@ -177,7 +177,11 @@ return [
          */
         Serbinario\L5scaffold\GeneratorsServiceProvider::class,
 
-
+        /*
+         * Gerador de migrations
+         */
+        Way\Generators\GeneratorsServiceProvider::class,
+        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
     ],
 
     /*
