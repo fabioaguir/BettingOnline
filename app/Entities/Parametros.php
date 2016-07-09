@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class State extends Model implements Transformable
+class Parametros extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'state';
-
-    protected $fillable = [ 
-		'id',
-		'name',
-	];
+    protected $fillable = [
+        'nome_banca',
+        'status',
+        'mensagen_rodape',
+        'limite_premiacao'
+    ];
 
 }

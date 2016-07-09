@@ -54,13 +54,11 @@
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
 
-                    {!! Form::model($model, ['route'=> ['betting.vendedor.update', $model->id], 'id' => 'formVendedor', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        @include('tamplatesForms.tamplateFormVendedor')
+                        @include('tamplatesForms.tamplateFormVendedorEdit')
                     </div>
                     <div class="panel-footer">
                     </div>
-                    {!! Form::close() !!}
 
                 </div>
 

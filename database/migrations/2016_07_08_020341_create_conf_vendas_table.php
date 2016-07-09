@@ -21,7 +21,7 @@ class CreateConfVendasTable extends Migration {
 			$table->integer('tipo_cotacao_id')->nullable()->index('fk_conf_vendas_tipo_cotacao1_idx');
 			$table->integer('vendedor_id')->nullable()->index('fk_conf_vendas_vendedor1_idx');
 			$table->timestamps();
-			$table->integer('vendas_id')->index('fk_conf_vendas_vendas1_idx');
+			$table->integer('vendas_id')->nullable()->index('fk_conf_vendas_vendas1_idx');
 		});
 	}
 

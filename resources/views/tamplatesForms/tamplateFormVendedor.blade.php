@@ -18,9 +18,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {!! Form::label('area_id', 'Área', array('class' => 'col-sm-2 control-label')) !!}
+                                {!! Form::label('areas_id', 'Área', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-5">
-                                    {!! Form::select('area_id', array(), Session::getOldInput('area_id'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('areas_id', $loadFields['areas'], Session::getOldInput('areas_id'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -38,13 +38,13 @@
                             <div class="form-group">
                                 {!! Form::label('status_id', 'Ativo', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-2">
-                                    {!! Form::select('status_id', array(), Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('status_id', $loadFields['status'], Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('estorno_id', 'Estorno', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-2">
-                                    {!! Form::select('estorno_id', array(), Session::getOldInput('estorno_id'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('estorno_id', $loadFields['estornovendedor'], Session::getOldInput('estorno_id'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div><br />
@@ -82,7 +82,7 @@
                             <div class="form-group">
                                 {!! Form::label('tipo_cotacao_id', 'Tipo de cotação', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::select('address[tipo_cotacao_id]', array(), Session::getOldInput('address[tipo_cotacao_id]'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('config[tipo_cotacao_id]', $loadFields['tipocotacao'], Session::getOldInput('config[tipo_cotacao_id]'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div><br />

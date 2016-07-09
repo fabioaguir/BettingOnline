@@ -6,15 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class CategoryPay extends Model implements Transformable
+class TipoApostas extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'category_pay';
+    protected $fillable = [
+        'nome'
+    ];
 
-    protected $fillable = [ 
-		'catp_id',
-		'catp_name',
-	];
-
-} 
+}

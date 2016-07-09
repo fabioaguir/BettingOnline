@@ -54,7 +54,7 @@
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
 
-                    {!! Form::model("", ['route'=> ['betting.parametro.update', 2], 'id' => 'formParametro', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
+                    {!! Form::model($model, ['route'=> ['betting.parametro.update', $model->id], 'id' => 'formParametro', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
                         @include('tamplatesForms.tamplateFormParametro')
                     </div>

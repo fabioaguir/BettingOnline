@@ -27,7 +27,7 @@
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Lista de vendedores</h2><br />
-                        <a href="{{ route('betting.vendedor.create')}}" class="btn btn-primary">Novo Área</a>
+                        <a href="{{ route('betting.vendedor.create')}}" class="btn btn-primary">Novo Vendedor</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
@@ -37,14 +37,12 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>CPF</th>
                                     <th>Acão</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>CPF</th>
                                     <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
@@ -71,8 +69,7 @@
                 "lengthMenu": "_MENU_"
             },
             columns: [
-                {data: 'gue_name', name: 'gue_name'},
-                {data: 'gue_cpf', name: 'gue_cpf'},
+                {data: 'nome', name: 'nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

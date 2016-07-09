@@ -56,7 +56,7 @@
 
                     {!! Form::model($model, ['route'=> ['betting.area.update', $model->id], 'id' => 'formArea', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        @include('tamplatesForms.tamplateFormParametro')
+                        @include('tamplatesForms.tamplateFormArea')
                     </div>
                     <div class="panel-footer">
                         <div class="row">

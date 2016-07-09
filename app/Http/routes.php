@@ -20,21 +20,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('form'  , ['as' => 'form', 'uses' => 'DefaultController@form']);
 
         Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'ParametroController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'ParametroController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'ParametroController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'ParametroController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametroController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametroController@update']);
+            Route::get('index', ['as' => 'index', 'uses' => 'ParametrosController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ParametrosController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ParametrosController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ParametrosController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametrosController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametrosController@update']);
         });
 
         Route::group(['prefix' => 'area', 'as' => 'area.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'AreaController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'AreaController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'AreaController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'AreaController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AreaController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'AreaController@update']);
+            Route::get('index', ['as' => 'index', 'uses' => 'AreasController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'AreasController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'AreasController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'AreasController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AreasController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'AreasController@update']);
         });
 
         Route::group(['prefix' => 'vendedor', 'as' => 'vendedor.'], function () {

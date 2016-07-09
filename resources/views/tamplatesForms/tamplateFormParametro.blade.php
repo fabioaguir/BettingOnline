@@ -22,13 +22,13 @@
                 <div class="form-group">
                     {!! Form::label('mensagem_rodape', 'Mensagem Rodapé', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-5">
-                        {!! Form::textarea('mensagem_rodape', Session::getOldInput('mensagem_rodape')  ,['size' => '50x3'] , array('class' => 'form-control')) !!}
+                        {!! Form::textarea('mensagen_rodape', Session::getOldInput('mensagem_rodape')  ,['size' => '50x3'] , array('class' => 'form-control')) !!}
                     </div>
                 </div>
                 <div class="form-group">
-                    {!! Form::label('nome', 'Limite de Premiação Cliente', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('limite_premiacao', 'Limite de Premiação Cliente', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-2">
-                        {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                        {!! Form::text('limite_premiacao', Session::getOldInput('limite_premiacao')  , array('class' => 'form-control')) !!}
                     </div>
                 </div>
 
