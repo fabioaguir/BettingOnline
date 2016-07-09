@@ -72,6 +72,29 @@ class VendedorController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function gridConfig($id)
+    {
+        #Criando a consulta
+        $rows = \DB::table('conf_vendas')
+            ->leftJoin('tipo_cotacao', 'tipo_cotacao.id', '=', 'conf_vendas.tipo_cotacao_id')
+            ->where('vendedor_id', '=', $id)
+            ->select(['conf_vendas.id as id',
+                'conf_vendas.limite_vendas as vendas',
+                'conf_vendas.comissao as comissao',
+                'conf_vendas.cotacao as cotacao',
+                'tipo_cotacao.nome as tipo',
+                'tipo_cotacao.id as id_tipo',
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            return '<a href="" class="btn btn-xs btn-primary edit"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+        })->make(true);
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()

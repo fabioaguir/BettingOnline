@@ -59,12 +59,13 @@
                     </div>
                     <div class="tab-pane" id="config">
                         <br /><br />
-                        <form class="form-horizontal row-border">
                         <div class="row">
+                            <form class="form-horizontal row-border">
                             <div class="form-group">
                                 {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-4">
                                     {!! Form::text('config[limite_vendas]', Session::getOldInput('config[limite_vendas]')  , array('class' => 'form-control')) !!}
+                                    {!! Form::hidden('vendedor_id', $model->id , array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
@@ -88,15 +89,16 @@
                                     {!! Form::select('config[tipo_cotacao_id]', $loadFields['tipocotacao'], Session::getOldInput('config[tipo_cotacao_id]'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
+                        </form>
                         </div>
-                        </form><br />
+                        <br />
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
+                                <button class="btn-primary btn save" style="margin-left: -11px">Salvar</button>
+                                <button class="btn-success btn edit">Editar</button>
                                 <a class="btn-default btn" href="{{ route('betting.vendedor.index')}}">Voltar</a>
                             </div>
-                        </div><br /><br />
-
+                        </div><br />
                         <div class="row">
                             <div class="col-md-1">
                             </div>
@@ -124,7 +126,6 @@
                                     </table>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
