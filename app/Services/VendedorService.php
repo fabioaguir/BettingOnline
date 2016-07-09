@@ -53,10 +53,10 @@ class VendedorService
     public function store(array $data) : Vendedor
     {
         #Salvando o registro pincipal
-        //dd($data);
         $vendedor =  $this->repository->create($data);
         $data['config']['vendedor_id']= $vendedor->id;
-        //dd($data['config']['vendedor_id']);
+        $data['config']['status_id']= '1';
+
         $confVendas = $this->repoConfVendas->create($data['config']);
         
 

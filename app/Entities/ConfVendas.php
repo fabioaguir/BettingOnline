@@ -10,13 +10,16 @@ class ConfVendas extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'conf_vendas';
+    
     protected $fillable = [
         'limite_vendas',
         'comissao',
         'cotacao',
         'tipo_cotacao_id',
         'vendedor_id',
-        'vendas_id'
+        'vendas_id',
+        'status_id'
     ];
 
 }

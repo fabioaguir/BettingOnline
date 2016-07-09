@@ -10,6 +10,8 @@ class Times extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'times';
+    
     protected $fillable = [
         'nome',
         'status_id'

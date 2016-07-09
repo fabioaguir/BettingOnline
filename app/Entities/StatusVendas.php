@@ -10,6 +10,8 @@ class StatusVendas extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'status_vendas';
+    
     protected $fillable = [
         'nome'
     ];
