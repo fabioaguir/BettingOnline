@@ -33,25 +33,13 @@
                     </div>
                 @endif
 
-                @if (isset($return) && $return !=  null)
-                    @if($return['success'] == false && isset($return[0]['fields']) &&  $return[0]['fields'] != null)
-                        <div class="alert alert-warning">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            @foreach ($return[0]['fields'] as $nome => $erro)
-                                {{ $erro }}<br>
-                            @endforeach
-                        </div>
-                    @elseif($return['success'] == false)
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ $return['message'] }}<br>
-                        </div>
-                    @elseif($return['success'] == true)
-                        <div class="alert alert-success">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ $return['message'] }}<br>
-                        </div>
-                    @endif
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
                 @endif
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
@@ -89,6 +77,8 @@
                 {data: 'comissao', name: 'conf_vendas.comissao'},
                 {data: 'cotacao', name: 'conf_vendas.cotacao'},
                 {data: 'tipo', name: 'tipo_cotacao.nome'},
+                {data: 'status', name: 'status.nome'},
+                {data: 'data', name: 'conf_vendas.data'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -107,8 +97,31 @@
             }
             var data = table.rows('.selected').data()[0];
 
-            console.log( data );
+            $('#limite').val(data['vendas']);
+            $('#comissao').val(data['comissao']);
+            $('#cotacao').val(data['cotacao']);
+            $('#tipo_cotacao').val(data['id_tipo']);
+
+            console.log(data);
         } );
+
+        //salvar configurações do vendedor
+        $('#save').on('click', function(){
+
+            jQuery.ajax({
+                type: 'POST',
+                url: '',
+                headers: {
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                },
+                data: dados,
+                datatype: 'json'
+            }).done(function (json) {
+                var option = "";
+
+            });
+
+        });
 
     </script>
 @endsection

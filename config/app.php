@@ -155,7 +155,7 @@ return [
         Softage\Providers\RouteServiceProvider::class,
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        \Softage\Providers\SeracademicoRepositoryProvider::class,
+        \Softage\Providers\RepositoryServiceProvider::class,
 
         /*
         * Laravel Framework Service Providers...

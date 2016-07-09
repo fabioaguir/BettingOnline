@@ -19,7 +19,8 @@ class ConfVendas extends Model implements Transformable
         'tipo_cotacao_id',
         'vendedor_id',
         'vendas_id',
-        'status_id'
+        'status_id',
+        'data'
     ];
 
 }

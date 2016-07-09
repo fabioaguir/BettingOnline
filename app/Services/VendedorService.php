@@ -54,9 +54,13 @@ class VendedorService
     {
         #Salvando o registro pincipal
         $vendedor =  $this->repository->create($data);
+
+        $dateObj = new \DateTime('now');
+
         $data['config']['vendedor_id']= $vendedor->id;
         $data['config']['status_id']= '1';
-
+        $data['config']['data']= $dateObj->format('d-m-Y');
+        
         $confVendas = $this->repoConfVendas->create($data['config']);
         
 
@@ -67,6 +71,39 @@ class VendedorService
 
         #Retorno
         return $vendedor;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function storeConfig(array $data)
+    {
+        #Salvando o registro pincipal
+
+        $dateObj = new \DateTime('now');
+
+        $data['status_id']= '1';
+        $data['data']= $dateObj->format('d-m-Y');
+
+        //buscando registro com status igual a 1
+        $validacao = $this->repoConfVendas->findWhere(['status_id' => '1']);
+
+        //validando a consulta , caso seja verdadeiro o cadastro será interrompido
+        if(count($validacao) > 0) {
+            return false;
+        }
+
+        //salvando o registro no banco
+        $confVendas = $this->repoConfVendas->create($data);
+
+        #Verificando se foi criado no banco de dados
+        if(!$confVendas) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        #Retorno
+        return $confVendas;
     }
 
     /**
