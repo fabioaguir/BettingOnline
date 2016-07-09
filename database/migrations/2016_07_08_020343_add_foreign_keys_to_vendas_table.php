@@ -14,7 +14,7 @@ class AddForeignKeysToVendasTable extends Migration {
 	{
 		Schema::table('vendas', function(Blueprint $table)
 		{
-			$table->foreign('premiacoes_id', 'fk_vendas_premiacoes1')->references('id')->on('premiacoes')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('premiacao_id', 'fk_vendas_premiacoes1')->references('id')->on('premiacoes')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('status_v_id', 'fk_vendas_status_vendas1')->references('id')->on('status_vendas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('tipo_aposta_id', 'fk_vendas_tipo_apostas1')->references('id')->on('tipo_apostas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});

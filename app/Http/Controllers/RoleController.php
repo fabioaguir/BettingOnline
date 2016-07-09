@@ -81,7 +81,7 @@ class RoleController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -110,7 +110,7 @@ class RoleController extends Controller
 
             #retorno para view
             return view('role.edit', compact('role', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -127,7 +127,7 @@ class RoleController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
@@ -136,7 +136,7 @@ class RoleController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) { 
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

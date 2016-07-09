@@ -14,8 +14,8 @@ class AddForeignKeysToApostasTable extends Migration {
 	{
 		Schema::table('apostas', function(Blueprint $table)
 		{
-			$table->foreign('cotacoes_id', 'fk_apostas_cotacoes1')->references('id')->on('cotacoes')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('partidas_id', 'fk_apostas_partidas1')->references('id')->on('partidas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('cotacao_id', 'fk_apostas_cotacoes1')->references('id')->on('cotacoes')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('partida_id', 'fk_apostas_partidas1')->references('id')->on('partidas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('venda_id', 'fk_apostas_vendas1')->references('id')->on('vendas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}

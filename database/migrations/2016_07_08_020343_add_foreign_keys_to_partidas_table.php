@@ -14,10 +14,10 @@ class AddForeignKeysToPartidasTable extends Migration {
 	{
 		Schema::table('partidas', function(Blueprint $table)
 		{
-			$table->foreign('campeonatos_id', 'fk_partidas_campeonatos1')->references('id')->on('campeonatos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('campeonato_id', 'fk_partidas_campeonatos1')->references('id')->on('campeonatos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('status_id', 'fk_partidas_status1')->references('id')->on('status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('time_casa', 'fk_partidas_times1')->references('id')->on('times')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('time_fora', 'fk_partidas_times2')->references('id')->on('times')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('time_casa_id', 'fk_partidas_times1')->references('id')->on('times')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('time_fora_id', 'fk_partidas_times2')->references('id')->on('times')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
