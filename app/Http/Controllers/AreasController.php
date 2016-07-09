@@ -36,7 +36,7 @@ class AreasController extends Controller
     public function __construct(AreaService $service, AreasValidator $validator)
     {
         $this->service = $service;
-        $this->validator  = $validator;
+        $this->validator = $validator;
     }
 
 

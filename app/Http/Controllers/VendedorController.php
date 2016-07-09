@@ -37,6 +37,11 @@ class VendedorController extends Controller
         'EstornoVendedor'
     ];
 
+    /**
+     * VendedorController constructor.
+     * @param VendedorService $service
+     * @param VendedorValidator $validator
+     */
     public function __construct(VendedorService $service, VendedorValidator $validator)
     {
         $this->service = $service;
@@ -121,7 +126,7 @@ class VendedorController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -136,15 +141,12 @@ class VendedorController extends Controller
             #Recuperando a empresa
             $model = $this->service->find($id);
 
-            #Tratando as datas
-            // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
-
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
             return view('vendedor.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -170,7 +172,7 @@ class VendedorController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

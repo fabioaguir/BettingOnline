@@ -20,7 +20,7 @@ class CreateVendedorTable extends Migration {
 			$table->string('senha')->nullable();
 			$table->integer('status_id')->nullable()->index('fk_vendedor_status_vendedor_idx');
 			$table->integer('estorno_id')->nullable()->index('fk_vendedor_estorno_vendedor1_idx');
-			$table->integer('areas_id')->nullable()->index('fk_vendedor_areas1_idx');
+			$table->integer('area_id')->nullable()->index('fk_vendedor_areas1_idx');
 			$table->timestamps();
 		});
 	}

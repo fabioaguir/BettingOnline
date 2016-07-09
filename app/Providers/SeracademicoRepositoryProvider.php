@@ -20,16 +20,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
-
-        $this->app->bind(
-                \Softage\Repositories\UserRepository::class, \Softage\Repositories\UserRepositoryEloquent::class
-        );
-
-        $this->app->bind(
-                \Softage\Repositories\RoleRepository::class, \Softage\Repositories\RoleRepositoryEloquent::class
-        );
-
+    public function register()
+    {
+        $this->app->bind(\Softage\Repositories\UserRepository::class, \Softage\Repositories\UserRepositoryEloquent::class );
+        $this->app->bind(\Softage\Repositories\RoleRepository::class, \Softage\Repositories\RoleRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\AreasRepository::class, \Softage\Repositories\AreasRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\ParametrosRepository::class, \Softage\Repositories\ParametrosRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\CampeonatosRepository::class, \Softage\Repositories\CampeonatosRepositoryEloquent::class);
