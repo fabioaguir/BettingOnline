@@ -9,7 +9,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Areas extends Model implements Transformable
 {
     use TransformableTrait;
-
+    
     protected $fillable = [
         'nome',
         'status'
