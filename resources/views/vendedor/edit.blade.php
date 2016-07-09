@@ -6,6 +6,13 @@
         .form-group {
             margin-top: -10px;;
         }
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+        .table-responsive {
+            min-height: 0.01%;
+            overflow-x: initial;
+        }
     </style>
 @endsection
 
@@ -57,11 +64,7 @@
                     <div class="panel-body">
                         @include('tamplatesForms.tamplateFormVendedorEdit')
                     </div>
-                    <div class="panel-footer">
-                    </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -73,5 +76,39 @@
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');
         var init = new Switchery(elem);
+
+        var table = $('#confg-grid').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('betting.vendedor.gridConfig', ['id' => $model->id]) }}",
+            language: {
+                "lengthMenu": "_MENU_"
+            },
+            columns: [
+                {data: 'vendas', name: 'conf_vendas.limite_vendas'},
+                {data: 'comissao', name: 'conf_vendas.comissao'},
+                {data: 'cotacao', name: 'conf_vendas.cotacao'},
+                {data: 'tipo', name: 'tipo_cotacao.nome'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+        $('.dataTables_filter input').attr('placeholder','Pesquisar...');
+
+        //Retonra o id do registro
+        $('#confg-grid tbody').on( 'click', '.edit', function (event) {
+            event.preventDefault();
+
+            if ($(this).parent().parent().hasClass('selected')) {
+                $(this).parent().parent().removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).parent().parent().addClass('selected');
+            }
+            var data = table.rows('.selected').data()[0];
+
+            console.log( data );
+        } );
+
     </script>
 @endsection

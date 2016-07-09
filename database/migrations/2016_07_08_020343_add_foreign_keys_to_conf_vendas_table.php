@@ -20,7 +20,6 @@ class AddForeignKeysToConfVendasTable extends Migration {
 		});
 	}
 
-
 	/**
 	 * Reverse the migrations.
 	 *

@@ -40,6 +40,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::group(['prefix' => 'vendedor', 'as' => 'vendedor.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'VendedorController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'VendedorController@grid']);
+            Route::get('gridConfig/{id}', ['as' => 'gridConfig', 'uses' => 'VendedorController@gridConfig']);
             Route::get('create', ['as' => 'create', 'uses' => 'VendedorController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'VendedorController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VendedorController@edit']);

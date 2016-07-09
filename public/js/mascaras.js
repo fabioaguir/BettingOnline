@@ -36,13 +36,6 @@ $(document).ready(function(){
 
     $('.time').mask('00:00:00' , {reverse: true});
 
-    $('.datepicker').datetimepicker({
-        timepicker: false,
-        format: 'd/m/Y',
-        mask: false,
-        lang: 'pt-BR'
-    });
-
     //##### Submeter formulário
     $('#formAluno').submit(function() {
         $('.cpf').unmask();
