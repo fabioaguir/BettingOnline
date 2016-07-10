@@ -14,7 +14,11 @@
                         <ul class="demo-btns mb-n xs">
                             <li>
                                 {!! Form::hidden('status', 0) !!}
-                                {!! Form::checkbox('status', 1, null, ['class' => 'js-switch-info switchery-xs']) !!}
+                                @if(!isset($model->id))
+                                    {!! Form::checkbox('status', 1, null, ['class' => 'js-switch-info switchery-xs', 'checked' => 'checked']) !!}
+                                @else
+                                    {!! Form::checkbox('status', 1, null, ['class' => 'js-switch-info switchery-xs']) !!}
+                                @endif
                             </li>
                         </ul>
                     </div>

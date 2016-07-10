@@ -23,4 +23,34 @@ class ConfVendas extends Model implements Transformable
         'data'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Vendedor
+     */
+    public function vendedor()
+    {
+        return $this->belongsTo(Vendedor::class, 'vendedor_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Status
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Tipo de cotação
+     */
+    public function tipoCotacao()
+    {
+        return $this->belongsTo(TipoCotacao::class, 'tipo_cotacao_id');
+    }
+
 }

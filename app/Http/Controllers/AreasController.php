@@ -58,7 +58,14 @@ class AreasController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            $html = "";
+            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            # Verificando se existe vinculo com o currículo
+            $area = $this->service->find($row->id);
+            if(count($area->vendedores) == 0) {
+                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-success delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
+            }
+            return $html;
         })->make(true);
     }
 
@@ -143,6 +150,23 @@ class AreasController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

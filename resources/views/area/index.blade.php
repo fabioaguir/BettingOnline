@@ -19,10 +19,21 @@
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-sm-12">
-                {{--<div class="alert alert-info alert-dismissable ">
-                    <i class="ti ti-info-alt"></i> Resize the browser window to see the responive tables in action!
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                </div>--}}
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <em> {!! session('message') !!}</em>
+                    </div>
+                @endif
+
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
@@ -66,13 +77,25 @@
             serverSide: true,
             ajax: "{!! route('betting.area.grid') !!}",
             language: {
-                "lengthMenu": "_MENU_"
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "Não foram encontrados resultados",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
+                "sProcessing":   "Processando...",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
             },
             columns: [
                 {data: 'nome', name: 'nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
         $('.dataTables_filter input').attr('placeholder','Pesquisar...');
 
         //DOM Manipulation to move datatable elements integrate to panel
@@ -83,25 +106,17 @@
         $('.panel-footer').append($(".dataTable+.row"));
         $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
 
-
-        /*//Seleciona uma linha
-         $('#crud-grid tbody').on( 'click', 'tr', function () {
-         if ( $(this).hasClass('selected') ) {
-         $(this).removeClass('selected');
-         }
-         else {
-         table.$('tr.selected').removeClass('selected');
-         $(this).addClass('selected');
-         }
-         } );
-
-         //Retonra o id do registro
-         $('#crud-grid tbody').on( 'click', 'tr', function () {
-
-         var rows = table.row( this ).data()
-
-         console.log( rows.id );
-         } );*/
+        $(document).on('click', 'a.delete', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
+        });
 
     </script>
 @endsection

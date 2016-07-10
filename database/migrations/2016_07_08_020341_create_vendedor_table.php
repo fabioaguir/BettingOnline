@@ -18,6 +18,7 @@ class CreateVendedorTable extends Migration {
 			$table->string('nome')->nullable();
 			$table->string('usuario')->nullable();
 			$table->string('senha')->nullable();
+			$table->integer('codigo');
 			$table->integer('status_id')->nullable()->index('fk_vendedor_status_vendedor_idx');
 			$table->integer('estorno_id')->nullable()->index('fk_vendedor_estorno_vendedor1_idx');
 			$table->integer('area_id')->nullable()->index('fk_vendedor_areas1_idx');

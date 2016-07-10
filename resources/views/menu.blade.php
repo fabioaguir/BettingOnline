@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>HÓSPEDE+ | @yield('title')</title>
+        <title>Apostas Online | @yield('title')</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport"
               content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -252,7 +252,7 @@
                                         <li><a href="{{ route('betting.parametro.edit', ['id' => '1']) }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Áreas</span></a></li>
                                         <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-shield"></i><span>Vendedores</span></a></li>
-                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
+                                        <li><a href=" "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
                                         {{--<li>
                                             <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                             <ul class="acc-menu">
@@ -370,6 +370,7 @@
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-jasnyupload/fileinput.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-inputmask/jquery.inputmask.bundle.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/assets/plugins/bootbox/bootbox.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/jquery.mask.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/mascaras.js')}}"></script>
         <script type="text/javascript">

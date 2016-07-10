@@ -17,4 +17,10 @@ class Areas extends Model implements Transformable
         'status'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vendedores(){
+        return $this->hasMany(Vendedor::class, 'area_id', 'id');
+    }
 }

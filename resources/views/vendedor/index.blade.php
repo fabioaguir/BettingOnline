@@ -19,10 +19,21 @@
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-sm-12">
-                {{--<div class="alert alert-info alert-dismissable ">
-                    <i class="ti ti-info-alt"></i> Resize the browser window to see the responive tables in action!
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                </div>--}}
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <em> {!! session('message') !!}</em>
+                    </div>
+                @endif
+
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
@@ -36,13 +47,29 @@
                             <table id="area-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
+                                    <th>Código</th>
+                                    <th>Área</th>
                                     <th>Nome</th>
+                                    <th>Usuário</th>
+                                    <th>Estorno</th>
+                                    <th>Ativo</th>
+                                    <th>Limite de vendas</th>
+                                    <th>Comissão</th>
+                                    <th>Cotação</th>
                                     <th>Acão</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
+                                    <th>Código</th>
+                                    <th>Área</th>
                                     <th>Nome</th>
+                                    <th>Usuário</th>
+                                    <th>Estorno</th>
+                                    <th>Ativo</th>
+                                    <th>Limite de vendas</th>
+                                    <th>Comissão</th>
+                                    <th>Cotação</th>
                                     <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
@@ -66,10 +93,29 @@
             serverSide: true,
             ajax: "{!! route('betting.vendedor.grid') !!}",
             language: {
-                "lengthMenu": "_MENU_"
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "Não foram encontrados resultados",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
+                "sProcessing":   "Processando...",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
             },
             columns: [
-                {data: 'nome', name: 'nome'},
+                {data: 'codigo', name: 'vendedor.codigo'},
+                {data: 'nome_area', name: 'areas.nome'},
+                {data: 'nome', name: 'vendedor.nome'},
+                {data: 'usuario', name: 'vendedor.usuario'},
+                {data: 'estorno', name: 'estorno_vendedor.nome'},
+                {data: 'status', name: 'status.nome'},
+                {data: 'limite', name: 'conf_vendas.limite_vendas'},
+                {data: 'comissao', name: 'conf_vendas.comissao'},
+                {data: 'cotacao', name: 'conf_vendas.cotacao'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -83,25 +129,17 @@
         $('.panel-footer').append($(".dataTable+.row"));
         $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
 
-
-        /*//Seleciona uma linha
-         $('#crud-grid tbody').on( 'click', 'tr', function () {
-         if ( $(this).hasClass('selected') ) {
-         $(this).removeClass('selected');
-         }
-         else {
-         table.$('tr.selected').removeClass('selected');
-         $(this).addClass('selected');
-         }
-         } );
-
-         //Retonra o id do registro
-         $('#crud-grid tbody').on( 'click', 'tr', function () {
-
-         var rows = table.row( this ).data()
-
-         console.log( rows.id );
-         } );*/
+        $(document).on('click', 'a.zerar', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza que deseja zerar o limite?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
+        });
 
     </script>
 @endsection
