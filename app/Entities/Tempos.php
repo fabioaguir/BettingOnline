@@ -10,6 +10,8 @@ class Tempos extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'tempos';
+    
     protected $fillable = [
         'nome'
     ];

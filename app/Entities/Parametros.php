@@ -10,6 +10,8 @@ class Parametros extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'parametros';
+    
     protected $fillable = [
         'nome_banca',
         'status',

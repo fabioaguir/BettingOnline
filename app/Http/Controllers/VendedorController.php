@@ -9,6 +9,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Softage\Http\Requests\AreasCreateRequest;
 use Softage\Http\Requests\AreasUpdateRequest;
+use Softage\Repositories\ConfVendasRepository;
 use Softage\Services\VendedorService;
 use Softage\Validators\VendedorValidator;
 use Yajra\Datatables\Datatables;
@@ -79,13 +80,17 @@ class VendedorController extends Controller
         #Criando a consulta
         $rows = \DB::table('conf_vendas')
             ->leftJoin('tipo_cotacao', 'tipo_cotacao.id', '=', 'conf_vendas.tipo_cotacao_id')
+            ->leftJoin('status', 'status.id', '=', 'conf_vendas.status_id')
             ->where('vendedor_id', '=', $id)
+            ->orderBy('status.nome', 'desc')
             ->select(['conf_vendas.id as id',
                 'conf_vendas.limite_vendas as vendas',
                 'conf_vendas.comissao as comissao',
                 'conf_vendas.cotacao as cotacao',
                 'tipo_cotacao.nome as tipo',
                 'tipo_cotacao.id as id_tipo',
+                'status.nome as status',
+                \DB::raw("to_char(conf_vendas.data, 'DD/MM/YYYY') as data"),
             ]);
 
         #Editando a grid
@@ -132,6 +137,32 @@ class VendedorController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function storeConfig(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $resultado = $this->service->storeConfig($data);
+
+            if($resultado == false) {
+                return redirect()->back()->withErrors("Você não pode cadastrar uma configuração de vendas, com uma ainda não zerada")->withInput();
+            }
+            
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
@@ -162,8 +193,8 @@ class VendedorController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Executando a ação
             $this->service->update($data, $id);

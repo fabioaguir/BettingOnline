@@ -43,6 +43,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('gridConfig/{id}', ['as' => 'gridConfig', 'uses' => 'VendedorController@gridConfig']);
             Route::get('create', ['as' => 'create', 'uses' => 'VendedorController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'VendedorController@store']);
+            Route::post('storeConfig', ['as' => 'storeConfig', 'uses' => 'VendedorController@storeConfig']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VendedorController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'VendedorController@update']);
         });
