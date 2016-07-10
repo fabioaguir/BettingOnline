@@ -9,27 +9,27 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    {!! Form::label('campeonatos_id', 'Tabelas', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('campeonato_id', 'Tabelas', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('campeonatos_id', array(), Session::getOldInput('campeonatos_id'), array('class' => 'form-control')) !!}
+                        {!! Form::select('campeonato_id', (['' => 'Selecione um campeonato'] + $loadFields['campeonatos']->toArray()), Session::getOldInput('campeonato_id'), array('class' => 'form-control')) !!}
                     </div>
                 </div>
                 <div class="form-group">
-                    {!! Form::label('time_casa', 'Time - Casa', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('time_casa_id', 'Time - Casa', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('time_casa', array(), Session::getOldInput('time_casa'), array('class' => 'form-control')) !!}
+                        {!! Form::select('time_casa_id', (['' => 'Selecione um time'] + $loadFields['times']->toArray()), Session::getOldInput('campeonato_id'), array('class' => 'form-control')) !!}
                     </div>
                 </div>
                 <div class="form-group">
-                    {!! Form::label('time_fora', 'Time - Fora', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('time_fora_id', 'Time - Fora', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('time_fora', array(), Session::getOldInput('time_fora'), array('class' => 'form-control')) !!}
+                        {!! Form::select('time_fora_id',  (['' => 'Selecione um time'] + $loadFields['times']->toArray()), Session::getOldInput('time_fora_id'), array('class' => 'form-control')) !!}
                     </div>
                 </div>
                 <div class="form-group">
                     {!! Form::label('status_id', 'Ativo', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('status_id', array(), Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
+                        {!! Form::select('status_id',  (['' => 'Selecione uma situação'] + $loadFields['status']->toArray()), Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
                     </div>
                 </div>
             </div>

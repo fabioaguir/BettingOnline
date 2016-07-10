@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Validators;
+namespace Softage\Validators;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-class PartidaValidator extends LaravelValidator
+class PartidasValidator extends LaravelValidator
 {
 
     protected $rules = [

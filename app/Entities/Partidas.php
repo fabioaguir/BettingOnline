@@ -41,6 +41,22 @@ class Partidas extends Model implements Transformable
     ];
 
     /**
+     * @param $value
+     */
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data']);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * Relacionamento com Times (da casa)

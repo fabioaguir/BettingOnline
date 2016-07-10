@@ -47,13 +47,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'VendedorController@update']);
         });
 
-        Route::group(['prefix' => 'partida', 'as' => 'partida.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'PartidaController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'PartidaController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'PartidaController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'PartidaController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PartidaController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'PartidaController@update']);
+        # Rota para as partidas
+        Route::group(['prefix' => 'partidas', 'as' => 'partidas.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'PartidasController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'PartidasController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'PartidasController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'PartidasController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PartidasController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'PartidasController@update']);
         });
 
         Route::group(['prefix' => 'cotacao', 'as' => 'cotacao.'], function () {

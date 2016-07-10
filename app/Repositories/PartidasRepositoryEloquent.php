@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Repositories;
+namespace Softage\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\PartidaRepository;
-use App\Entities\Partida;
-use App\Validators\PartidaValidator;
+use Softage\Repositories\PartidasRepository;
+use Softage\Entities\Partidas;
+use Softage\Validators\PartidasValidator;
 
 /**
  * Class PartidaRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class PartidaRepositoryEloquent extends BaseRepository implements PartidaRepository
+class PartidasRepositoryEloquent extends BaseRepository implements PartidasRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class PartidaRepositoryEloquent extends BaseRepository implements PartidaReposit
      */
     public function model()
     {
-        return Partida::class;
+        return Partidas::class;
     }
 
     /**
@@ -32,7 +32,7 @@ class PartidaRepositoryEloquent extends BaseRepository implements PartidaReposit
     public function validator()
     {
 
-        return PartidaValidator::class;
+        return PartidasValidator::class;
     }
 
 

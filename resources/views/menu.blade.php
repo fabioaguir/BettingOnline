@@ -252,7 +252,7 @@
                                         <li><a href="{{ route('betting.parametro.edit', ['id' => '1']) }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Áreas</span></a></li>
                                         <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-shield"></i><span>Vendedores</span></a></li>
-                                        <li><a href="{{ route('betting.form') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
+                                        <li><a href="{{ route('betting.partidas.index') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
                                         {{--<li>
                                             <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
                                             <ul class="acc-menu">

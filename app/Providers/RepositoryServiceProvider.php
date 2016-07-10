@@ -38,7 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\Softage\Repositories\PremiacoesRepository::class, \Softage\Repositories\PremiacoesRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\VendedorRepository::class, \Softage\Repositories\VendedorRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\ConfVendasRepository::class, \Softage\Repositories\ConfVendasRepositoryEloquent::class);
-        $this->app->bind(\Softage\Repositories\PartidaRepository::class, \App\Repositories\PartidaRepositoryEloquent::class);
+        $this->app->bind(\Softage\Repositories\PartidasRepository::class, \Softage\Repositories\PartidasRepositoryEloquent::class);
         //:end-bindings:
     }
 }
