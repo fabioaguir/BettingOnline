@@ -56,6 +56,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'PartidasController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PartidasController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'PartidasController@update']);
+            Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'PartidasController@destroy']);
         });
 
         Route::group(['prefix' => 'cotacao', 'as' => 'cotacao.'], function () {

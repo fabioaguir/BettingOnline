@@ -9,6 +9,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    {!! Form::label('hora', 'Hora', array('class' => 'col-sm-2 control-label')) !!}
+                    <div class="col-sm-2">
+                        {!! Form::text('hora', Session::getOldInput('hora')  , array('class' => 'form-control mask', 'data-inputmask' => "'alias': 'time'")) !!}
+                    </div>
+                </div>
+                <div class="form-group">
                     {!! Form::label('campeonato_id', 'Tabelas', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
                         {!! Form::select('campeonato_id', (['' => 'Selecione um campeonato'] + $loadFields['campeonatos']->toArray()), Session::getOldInput('campeonato_id'), array('class' => 'form-control')) !!}

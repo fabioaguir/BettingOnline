@@ -37,6 +37,7 @@
                                 <thead>
                                 <tr>
                                     <th>Data</th>
+                                    <th>Hora</th>
                                     <th>Tima Casa</th>
                                     <th>Tima Fora</th>
                                     <th>Campeonato</th>
@@ -47,6 +48,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>Data</th>
+                                    <th>Hora</th>
                                     <th>Tima Casa</th>
                                     <th>Tima Fora</th>
                                     <th>Campeonato</th>
@@ -78,6 +80,7 @@
             },
             columns: [
                 {data: 'data', name: 'partidas.data'},
+                {data: 'hora', name: 'partidas.hora'},
                 {data: 'timeCasa', name: 'time_casa.nome'},
                 {data: 'timeFora', name: 'time_fora.nome'},
                 {data: 'campeonato', name: 'campeonatos.nome'},

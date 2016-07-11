@@ -34,6 +34,9 @@ $(document).ready(function(){
     //Data
     $('.date').mask('00/00/0000');
 
+    // Data e Hora
+    $('.datetime').mask('00/00/0000 00:00:00');
+
     $('.time').mask('00:00:00' , {reverse: true});
 
     //##### Submeter formulário

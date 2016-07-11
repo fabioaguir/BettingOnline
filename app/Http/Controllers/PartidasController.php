@@ -76,7 +76,9 @@ class PartidasController extends Controller
             ->join('campeonatos', 'campeonatos.id', '=', 'partidas.campeonato_id')
             ->join('status', 'status.id', '=', 'partidas.status_id')
             ->select([
-                \DB::raw("TO_CHAR(data, 'DD/MM/YYYY') as data"),
+                'partidas.id',
+                \DB::raw("TO_CHAR(partidas.data, 'DD/MM/YYYY') as data"),
+                'partidas.hora',
                 'time_casa.nome as timeCasa',
                 'time_fora.nome as timeFora',
                 'campeonatos.nome as campeonato',
@@ -135,7 +137,7 @@ class PartidasController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->service->find($id);
+            $model = $this->repository->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
