@@ -6,9 +6,6 @@
         .form-group {
             margin-top: -10px;;
         }
-        table.dataTable tbody th, table.dataTable tbody td {
-            padding: 2px 10px;
-        }
         .table-responsive {
             min-height: 0.01%;
             overflow-x: initial;
@@ -64,13 +61,25 @@
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');
         var init = new Switchery(elem);
+        var idConfigVendas = 0;
 
         var table = $('#confg-grid').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('betting.vendedor.gridConfig', ['id' => $model->id]) }}",
             language: {
-                "lengthMenu": "_MENU_"
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "Não foram encontrados resultados",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
+                "sProcessing":   "Processando...",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
             },
             columns: [
                 {data: 'vendas', name: 'conf_vendas.limite_vendas'},
@@ -100,28 +109,69 @@
             $('#limite').val(data['vendas']);
             $('#comissao').val(data['comissao']);
             $('#cotacao').val(data['cotacao']);
-            $('#tipo_cotacao').val(data['id_tipo']);
+            tipoCotacao(data['id_tipo']);
+            idConfigVendas = data['id']
 
-            console.log(data);
+            $('.save').prop('disabled', true);
+            $('.edit').prop('disabled', false);
+
         } );
 
         //salvar configurações do vendedor
-        $('#save').on('click', function(){
+        $('.edit').on('click', function(){
+
+            var limite = $('#limite').val();
+            var comissao = $('#comissao').val();
+            var cotacao = $('#cotacao').val();
+            var tipoCotacao = $('#tipo_cotacao').val();
+
+            var dados = {
+                'limite_vendas': limite,
+                'comissao': comissao,
+                'cotacao': cotacao,
+                'tipo_cotacao_id': tipoCotacao,
+                'idConfig' : idConfigVendas
+            }
 
             jQuery.ajax({
                 type: 'POST',
-                url: '',
-                headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                },
+                url: '{{route('betting.vendedor.updateConfig')}}',
                 data: dados,
                 datatype: 'json'
             }).done(function (json) {
-                var option = "";
+                $('.save').prop('disabled', false);
+                $('.edit').prop('disabled', true);
+                bootbox.alert(json['msg'])
+                table.ajax.reload()
+                var limite = $('#limite').val("");
+                var comissao = $('#comissao').val("");
+                var cotacao = $('#cotacao').val("");
+                tipoCotacao();
 
             });
 
         });
+
+
+        //Função para listar as localidades
+        function tipoCotacao(id) {
+            jQuery.ajax({
+                type: 'POST',
+                url: '{{ route('betting.allTipoCotacao')  }}',
+                datatype: 'json',
+            }).done(function (json) {
+                var option = '';
+                for (var i = 0; i < json['tipoCotacaoes'].length; i++) {
+                    if (json['tipoCotacaoes'][i]['id'] == id) {
+                        option += '<option selected value="' + json['tipoCotacaoes'][i]['id'] + '">' + json['tipoCotacaoes'][i]['nome'] + '</option>';
+                    } else {
+                        option += '<option value="' + json['tipoCotacaoes'][i]['id'] + '">' + json['tipoCotacaoes'][i]['nome'] + '</option>';
+                    }
+                }
+                $('#tipo_cotacao option').remove();
+                $('#tipo_cotacao').append(option);
+            });
+        }
 
     </script>
 @endsection

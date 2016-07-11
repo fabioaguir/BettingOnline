@@ -18,7 +18,37 @@ class Vendedor extends Model implements Transformable
         'senha',
         'status_id',
         'estorno_id',
-        'areas_id'
+        'area_id',
+        'codigo'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Status
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Estorno
+     */
+    public function estorno()
+    {
+        return $this->belongsTo(EstornoVendedor::class, 'estorno_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Area
+     */
+    public function area()
+    {
+        return $this->belongsTo(Areas::class, 'area_id');
+    }
 }

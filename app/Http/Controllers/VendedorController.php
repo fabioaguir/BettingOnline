@@ -64,11 +64,35 @@ class VendedorController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('vendedor')->select(['id', 'nome']);
-
+        $rows = \DB::table('vendedor')
+            ->join('areas', 'areas.id', '=', 'vendedor.area_id')
+            ->join('estorno_vendedor', 'estorno_vendedor.id', '=', 'vendedor.estorno_id')
+            ->join('status', 'status.id', '=', 'vendedor.status_id')
+            ->leftJoin(\DB::raw('(SELECT * FROM conf_vendas where conf_vendas.status_id = 1 ) conf_vendas'), function ($join) {
+                $join->on('conf_vendas.vendedor_id', '=', 'vendedor.id');
+            })
+            ->select([
+                'vendedor.id as id',
+                'vendedor.usuario as usuario',
+                'vendedor.nome as nome',
+                'vendedor.codigo as codigo',
+                'areas.nome as nome_area',
+                'estorno_vendedor.nome as estorno',
+                'status.nome as status',
+                'conf_vendas.limite_vendas as limite',
+                'conf_vendas.comissao as comissao',
+                'conf_vendas.cotacao as cotacao',
+                'conf_vendas.id as conf_id',
+            ]);
+        
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            $html = "";
+            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            if(isset($row->conf_id)){
+                $html .= '<a href="zerar/'.$row->conf_id.'" class="btn btn-xs btn-warning zerar"><i class="glyphicon glyphicon-edit"></i> Zerar</a>';
+            }
+            return $html;
         })->make(true);
     }
 
@@ -90,12 +114,16 @@ class VendedorController extends Controller
                 'tipo_cotacao.nome as tipo',
                 'tipo_cotacao.id as id_tipo',
                 'status.nome as status',
+                'status.id as status_id',
                 \DB::raw("to_char(conf_vendas.data, 'DD/MM/YYYY') as data"),
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="" class="btn btn-xs btn-primary edit"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            if($row->status_id == '1') {
+                return '<a href="" class="btn btn-xs btn-primary edit"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            }
+            return "";
         })->make(true);
     }
 
@@ -201,6 +229,49 @@ class VendedorController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function updateConfig(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->updateConfig($data);
+
+            #Retorno para a view
+            return array('msg' => 'Configuração de vendas alterada com sucesso!');
+        } catch (ValidatorException $e) {
+            return $this->validator->errors();
+        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function zerar($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->zerar($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Limite de vendas zerado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
         } catch (\Throwable $e) {

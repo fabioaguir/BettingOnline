@@ -27,8 +27,12 @@ class AreaService
      */
     public function find($id)
     {
+        $relacionamentos = [
+            'vendedores'
+        ];
+        
         #Recuperando o registro no banco de dados
-        $endereco = $this->repository->find($id);
+        $endereco = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$endereco) {
@@ -75,6 +79,25 @@ class AreaService
 
         #Retorno
         return $endereco;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #deletando o curso
+        $result = $this->repository->delete($id);
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
+        }
+
+        #retorno
+        return true;
     }
 
     /**

@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 {!! Form::label('areas_id', 'Área', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-5">
-                                    {!! Form::select('areas_id', $loadFields['areas'], Session::getOldInput('areas_id'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('area_id', $loadFields['areas'], Session::getOldInput('area_id'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,7 +94,7 @@
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
                                 <button type="submit" class="btn-primary btn save" style="margin-left: -11px">Salvar</button>
-                                <button class="btn-success btn edit">Editar</button>
+                                <button disabled type="button" class="btn-success btn edit">Editar</button>
                                 <a class="btn-default btn" href="{{ route('betting.vendedor.index')}}">Voltar</a>
                             </div>
                         </div>

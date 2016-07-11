@@ -17,7 +17,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
 
-        Route::get('form'  , ['as' => 'form', 'uses' => 'DefaultController@form']);
+        //Rotas para selectes via ajax
+        Route::post('allTipoCotacao'  , ['as' => 'allTipoCotacao', 'uses' => 'DefaultController@allTipoCotacao']);
 
         Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ParametrosController@index']);
@@ -35,6 +36,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'AreasController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AreasController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'AreasController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'AreasController@delete']);
         });
 
         Route::group(['prefix' => 'vendedor', 'as' => 'vendedor.'], function () {
@@ -46,6 +48,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeConfig', ['as' => 'storeConfig', 'uses' => 'VendedorController@storeConfig']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VendedorController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'VendedorController@update']);
+            Route::post('updateConfig', ['as' => 'updateConfig', 'uses' => 'VendedorController@updateConfig']);
+            Route::get('zerar/{id}', ['as' => 'zerar', 'uses' => 'VendedorController@zerar']);
         });
 
         # Rota para as partidas
