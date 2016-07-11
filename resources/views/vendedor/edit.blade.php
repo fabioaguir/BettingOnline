@@ -88,6 +88,7 @@
                 {data: 'tipo', name: 'tipo_cotacao.nome'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'data', name: 'conf_vendas.data'},
+                {data: 'total', name: 'vendas.valor_total'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -123,13 +124,13 @@
             var limite = $('#limite').val();
             var comissao = $('#comissao').val();
             var cotacao = $('#cotacao').val();
-            var tipoCotacao = $('#tipo_cotacao').val();
+            var tipoCota = $('#tipo_cotacao').val();
 
             var dados = {
                 'limite_vendas': limite,
                 'comissao': comissao,
                 'cotacao': cotacao,
-                'tipo_cotacao_id': tipoCotacao,
+                'tipo_cotacao_id': tipoCota,
                 'idConfig' : idConfigVendas
             }
 

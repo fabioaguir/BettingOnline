@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 {!! Form::label('areas_id', 'Área', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-5">
-                                    {!! Form::select('area_id', $loadFields['areas'], Session::getOldInput('area_id'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('area_id', $areas, Session::getOldInput('area_id'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -63,23 +63,23 @@
                         <div class="row">
                             <div class="form-group">
                                 {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label')) !!}
-                                <div class="col-sm-4">
-                                    {!! Form::text('limite_vendas', null  , array('class' => 'form-control', 'id' => 'limite')) !!}
+                                <div class="col-sm-3">
+                                    {!! Form::text('limite_vendas', null  , array('class' => 'form-control touchspin2', 'id' => 'limite')) !!}
                                     {!! Form::hidden('vendedor_id', $model->id , array('class' => 'form-control', 'id' => 'vendedor_id')) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('comissao', 'Comissão', array('class' => 'col-sm-2 control-label')) !!}
-                                <div class="col-sm-4">
-                                    {!! Form::text('comissao', null  , array('class' => 'form-control', 'id' => 'comissao')) !!}
+                                <div class="col-sm-3">
+                                    {!! Form::text('comissao', null  , array('class' => 'form-control touchspin2', 'id' => 'comissao')) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('cotacao', 'Cotação', array('class' => 'col-sm-2 control-label')) !!}
-                                <div class="col-sm-4">
-                                    {!! Form::text('cotacao', null  , array('class' => 'form-control', 'id' => 'cotacao')) !!}
+                                <div class="col-sm-3">
+                                    {!! Form::text('cotacao', null  , array('class' => 'form-control touchspin1', 'id' => 'cotacao')) !!}
                                 </div>
                             </div>
 
@@ -114,6 +114,7 @@
                                             <th>Tipo de cotação</th>
                                             <th>Status</th>
                                             <th>Data</th>
+                                            <th>Total Vendido</th>
                                             <th>Acão</th>
                                         </tr>
                                         </thead>
@@ -125,6 +126,7 @@
                                             <th>Tipo de cotação</th>
                                             <th>Status</th>
                                             <th>Data</th>
+                                            <th>Total Vendido</th>
                                             <th style="width: 15%;">Acão</th>
                                         </tr>
                                         </tfoot>

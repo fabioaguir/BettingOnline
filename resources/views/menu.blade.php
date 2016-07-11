@@ -371,11 +371,14 @@
         <script type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-inputmask/jquery.inputmask.bundle.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootbox/bootbox.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/jquery.mask.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/mascaras.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/js/scripts_api.js')}}"></script>
         <script type="text/javascript">
             $(function() {
                 $('.mask').inputmask();
+
             });
         </script>
         @show

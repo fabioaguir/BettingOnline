@@ -68,9 +68,12 @@ class VendedorController extends Controller
             ->join('areas', 'areas.id', '=', 'vendedor.area_id')
             ->join('estorno_vendedor', 'estorno_vendedor.id', '=', 'vendedor.estorno_id')
             ->join('status', 'status.id', '=', 'vendedor.status_id')
-            ->leftJoin(\DB::raw('(SELECT * FROM conf_vendas where conf_vendas.status_id = 1 ) conf_vendas'), function ($join) {
-                $join->on('conf_vendas.vendedor_id', '=', 'vendedor.id');
+            ->leftJoin('conf_vendas', function ($join) {
+                $join->on('conf_vendas.vendedor_id', '=', 'vendedor.id')
+                ->where('conf_vendas.status_id', '=', '1');
             })
+            ->leftJoin('vendas', 'conf_vendas.venda_id', '=', 'vendas.id')
+            ->groupBy('conf_vendas.venda_id', 'conf_vendas.id', 'areas.id', 'vendedor.id', 'estorno_vendedor.id', 'status.id')
             ->select([
                 'vendedor.id as id',
                 'vendedor.usuario as usuario',
@@ -83,6 +86,7 @@ class VendedorController extends Controller
                 'conf_vendas.comissao as comissao',
                 'conf_vendas.cotacao as cotacao',
                 'conf_vendas.id as conf_id',
+                \DB::raw("sum(vendas.valor_total) as total")
             ]);
         
         #Editando a grid
@@ -103,8 +107,10 @@ class VendedorController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('conf_vendas')
-            ->leftJoin('tipo_cotacao', 'tipo_cotacao.id', '=', 'conf_vendas.tipo_cotacao_id')
-            ->leftJoin('status', 'status.id', '=', 'conf_vendas.status_id')
+            ->join('tipo_cotacao', 'tipo_cotacao.id', '=', 'conf_vendas.tipo_cotacao_id')
+            ->join('status', 'status.id', '=', 'conf_vendas.status_id')
+            ->leftJoin('vendas', 'conf_vendas.venda_id', '=', 'vendas.id')
+            ->groupBy('conf_vendas.venda_id', 'conf_vendas.id', 'tipo_cotacao.id', 'status.id')
             ->where('vendedor_id', '=', $id)
             ->orderBy('status.nome', 'desc')
             ->select(['conf_vendas.id as id',
@@ -116,6 +122,7 @@ class VendedorController extends Controller
                 'status.nome as status',
                 'status.id as status_id',
                 \DB::raw("to_char(conf_vendas.data, 'DD/MM/YYYY') as data"),
+                \DB::raw("SUM(vendas.valor_total) as total"),
             ]);
 
         #Editando a grid
@@ -134,9 +141,10 @@ class VendedorController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+        $areas = \DB::table('areas')->where('status', '=', '1')->lists('nome', 'id');
 
         #Retorno para view
-        return view('vendedor.create', compact('loadFields'));
+        return view('vendedor.create', compact('loadFields', 'areas'));
     }
 
     /**
@@ -199,12 +207,13 @@ class VendedorController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
+            $areas = \DB::table('areas')->where('status', '=', '1')->lists('nome', 'id');
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('vendedor.edit', compact('model', 'loadFields'));
+            return view('vendedor.edit', compact('model', 'loadFields', 'areas'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }

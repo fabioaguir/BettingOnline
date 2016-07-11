@@ -54,6 +54,7 @@
                                     <th>Estorno</th>
                                     <th>Ativo</th>
                                     <th>Limite de vendas</th>
+                                    <th>Total de vendas</th>
                                     <th>Comissão</th>
                                     <th>Cotação</th>
                                     <th>Acão</th>
@@ -68,6 +69,7 @@
                                     <th>Estorno</th>
                                     <th>Ativo</th>
                                     <th>Limite de vendas</th>
+                                    <th>Total de vendas</th>
                                     <th>Comissão</th>
                                     <th>Cotação</th>
                                     <th style="width: 15%;">Acão</th>
@@ -114,6 +116,7 @@
                 {data: 'estorno', name: 'estorno_vendedor.nome'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'limite', name: 'conf_vendas.limite_vendas'},
+                {data: 'total', name: 'vendas.valor_total'},
                 {data: 'comissao', name: 'conf_vendas.comissao'},
                 {data: 'cotacao', name: 'conf_vendas.cotacao'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

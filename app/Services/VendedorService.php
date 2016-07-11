@@ -173,18 +173,49 @@ class VendedorService
      * @param array $models
      * @return array
      */
-    public function load(array $models) : array
+    public function load(array $models, $ajax = false) : array
     {
         #Declarando variáveis de uso
-        $result = [];
+        $result    = [];
+        $expressao = [];
 
         #Criando e executando as consultas
         foreach ($models as $model) {
-            #qualificando o namespace
-            $nameModel = "Softage\\Entities\\$model";
+            # separando as strings
+            $explode   = explode("|", $model);
 
-            #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            # verificando a condição
+            if(count($explode) > 1) {
+                $model     = $explode[0];
+                $expressao = explode(",", $explode[1]);
+            }
+
+            #qualificando o namespace
+            $nameModel = "\\Softage\\Entities\\$model";
+
+            #Verificando se existe sobrescrita do nome do model
+            $model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id']);
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+                }
+            } else {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                }
+            }
+
+            # Limpando a expressão
+            $expressao = [];
         }
 
         #retorno

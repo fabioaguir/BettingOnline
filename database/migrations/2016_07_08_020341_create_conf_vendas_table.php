@@ -17,7 +17,7 @@ class CreateConfVendasTable extends Migration {
 			$table->integer('id', true);
 			$table->decimal('limite_vendas', 10)->nullable();
 			$table->decimal('comissao', 10)->nullable();
-			$table->integer('cotacao')->nullable();
+			$table->decimal('cotacao', 10)->nullable();
 			$table->integer('tipo_cotacao_id')->nullable()->index('fk_conf_vendas_tipo_cotacao1_idx');
 			$table->integer('vendedor_id')->nullable()->index('fk_conf_vendas_vendedor1_idx');
 			$table->integer('status_id')->nullable()->index('fk_conf_vendas_status1_idx');
