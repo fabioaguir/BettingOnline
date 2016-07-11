@@ -63,7 +63,7 @@ class AreasController extends Controller
             # Verificando se existe vinculo com o currículo
             $area = $this->service->find($row->id);
             if(count($area->vendedores) == 0) {
-                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-success delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
+                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
             }
             return $html;
         })->make(true);

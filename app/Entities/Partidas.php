@@ -5,6 +5,7 @@ namespace Softage\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Softage\Uteis\SerbinarioDateFormat;
 
 class Partidas extends Model implements Transformable
 {
@@ -34,11 +35,37 @@ class Partidas extends Model implements Transformable
      */
     protected $fillable = [
         'data',
+        'hora',
         'time_casa_id',
-        'tima_fora_id',
+        'time_fora_id',
         'status_id',
         'campeonato_id'
     ];
+
+    /**
+     * @param $value
+     */
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = SerbinarioDateFormat::toUsa($value, 'date');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data'], 'date');
+    }
+
+  
+    /**
+     * @return mixed
+     */
+    public function getHoraAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['hora'], 'time');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

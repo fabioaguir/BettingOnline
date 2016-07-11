@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace Softage\Repositories;
 
 use Prettus\Repository\Contracts\RepositoryInterface;
 
@@ -8,7 +8,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * Interface PartidaRepository
  * @package namespace App\Repositories;
  */
-interface PartidaRepository extends RepositoryInterface
+interface PartidasRepository extends RepositoryInterface
 {
     //
 }
