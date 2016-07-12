@@ -1,7 +1,20 @@
 <div class="row">
     <div class="col-md-12">
+
         <div class="row">
             <div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="searchDate">Data</label>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <input class="form-control mask" data-inputmask="'alias': 'date'" type="text" id="searchDate">
+                            <div class="input-group-btn">
+                                <button class="btn btn-info" type="button">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     {!! Form::label('partida_id', 'Partida', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
