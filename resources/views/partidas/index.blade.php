@@ -76,7 +76,18 @@
             serverSide: true,
             ajax: "{!! route('betting.partidas.grid') !!}",
             language: {
-                "lengthMenu": "_MENU_"
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "Não foram encontrados resultados",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
+                "sProcessing":   "Processando...",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
             },
             columns: [
                 {data: 'data', name: 'partidas.data'},
@@ -101,24 +112,17 @@
         $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
 
 
-        /*//Seleciona uma linha
-         $('#crud-grid tbody').on( 'click', 'tr', function () {
-         if ( $(this).hasClass('selected') ) {
-         $(this).removeClass('selected');
-         }
-         else {
-         table.$('tr.selected').removeClass('selected');
-         $(this).addClass('selected');
-         }
-         } );
-
-         //Retonra o id do registro
-         $('#crud-grid tbody').on( 'click', 'tr', function () {
-
-         var rows = table.row( this ).data()
-
-         console.log( rows.id );
-         } );*/
+        $(document).on('click', 'a.delete', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
+        });
 
     </script>
 @endsection
