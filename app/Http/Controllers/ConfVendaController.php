@@ -10,7 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Softage\Http\Requests\AreasCreateRequest;
 use Softage\Http\Requests\AreasUpdateRequest;
 use Softage\Services\ConfVendaService;
-use Softage\Validators\VendedorValidator;
+use Softage\Validators\ConfgVendasValidator;
 use Yajra\Datatables\Datatables;
 
 
@@ -23,7 +23,7 @@ class ConfVendaController extends Controller
     private $service;
 
     /**
-     * @var VendedorValidator
+     * @var ConfgVendasValidator
      */
     private $validator;
 
@@ -33,7 +33,7 @@ class ConfVendaController extends Controller
     private $loadFields = [
     ];
 
-    public function __construct(ConfVendaService $service, VendedorValidator $validator)
+    public function __construct(ConfVendaService $service, ConfgVendasValidator $validator)
     {
         $this->service = $service;
         $this->validator  = $validator;

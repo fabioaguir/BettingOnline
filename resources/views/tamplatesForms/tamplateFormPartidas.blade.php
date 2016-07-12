@@ -11,7 +11,7 @@
                 <div class="form-group">
                     {!! Form::label('hora', 'Hora', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-2">
-                        {!! Form::text('hora', Session::getOldInput('hora')  , array('class' => 'form-control mask', 'data-inputmask' => "'alias': 'time'")) !!}
+                        {!! Form::text('hora', Session::getOldInput('hora')  , array('class' => 'form-control time')) !!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     {!! Form::label('status_id', 'Ativo', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('status_id',  (['' => 'Selecione uma situação'] + $loadFields['status']->toArray()), Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
+                        {!! Form::select('status_id',  $loadFields['status'], Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
                     </div>
                 </div>
             </div>

@@ -23,8 +23,6 @@ class ConfVendasRepositoryEloquent extends BaseRepository implements ConfVendasR
         return ConfVendas::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */

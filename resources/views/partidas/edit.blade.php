@@ -76,6 +76,7 @@
 
 @section('js')
     @parent
+    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_partida.js')}}"></script>
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');
         var init = new Switchery(elem);
