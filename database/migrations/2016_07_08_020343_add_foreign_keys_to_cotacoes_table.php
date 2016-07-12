@@ -14,7 +14,7 @@ class AddForeignKeysToCotacoesTable extends Migration {
 	{
 		Schema::table('cotacoes', function(Blueprint $table)
 		{
-			$table->foreign('modalidade_id', 'fk_cotacoes_modalidade1')->references('id')->on('modalidade')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('modalidade_id', 'fk_cotacoes_modalidade1')->references('id')->on('modalidades')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('partida_id', 'fk_cotacoes_partidas1')->references('id')->on('partidas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('status_id', 'fk_cotacoes_status1')->references('id')->on('status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});

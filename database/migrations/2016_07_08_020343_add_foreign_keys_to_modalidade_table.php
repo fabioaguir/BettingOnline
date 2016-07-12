@@ -12,7 +12,7 @@ class AddForeignKeysToModalidadeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('modalidade', function(Blueprint $table)
+		Schema::table('modalidades', function(Blueprint $table)
 		{
 			$table->foreign('status_id', 'fk_modalidade_status1')->references('id')->on('status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});

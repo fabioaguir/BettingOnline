@@ -12,11 +12,12 @@ class CreateModalidadeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('modalidade', function(Blueprint $table)
+		Schema::create('modalidades', function(Blueprint $table)
 		{
 			$table->integer('id', true);
 			$table->string('nome', 155)->nullable();
 			$table->integer('status_id')->nullable()->index('fk_modalidade_status1_idx');
+			$table->timestamps();
 		});
 	}
 
