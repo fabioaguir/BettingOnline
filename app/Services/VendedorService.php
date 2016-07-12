@@ -48,7 +48,8 @@ class VendedorService
 
     /**
      * @param array $data
-     * @return array
+     * @return Vendedor
+     * @throws \Exception
      */
     public function store(array $data) : Vendedor
     {
@@ -79,7 +80,8 @@ class VendedorService
 
     /**
      * @param array $data
-     * @return array
+     * @return bool|mixed
+     * @throws \Exception
      */
     public function storeConfig(array $data)
     {
@@ -113,7 +115,8 @@ class VendedorService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Vendedor
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Vendedor
     {
@@ -131,8 +134,8 @@ class VendedorService
 
     /**
      * @param array $data
-     * @param int $id
      * @return mixed
+     * @throws \Exception
      */
     public function updateConfig(array $data)
     {
