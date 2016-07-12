@@ -74,6 +74,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'ModalidadesController@destroy']);
         });
 
+        # Rota para as cotações
+        Route::group(['prefix' => 'cotacoes', 'as' => 'cotacoes.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CotacoesController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'CotacoesController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CotacoesController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CotacoesController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CotacoesController@update']);
+            Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@destroy']);
+        });
+
         Route::group(['prefix' => 'cotacao', 'as' => 'cotacao.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'CotacaoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'CotacaoController@grid']);

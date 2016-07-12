@@ -4,30 +4,30 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Softage\Repositories\ModalidadesRepository;
-use Softage\Services\ModalidadesService;
+use Softage\Repositories\CotacoesRepository;
+use Softage\Services\CotacoesService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Softage\Http\Requests\ModalidadesCreateRequest;
-use Softage\Http\Requests\ModalidadesUpdateRequest;
-use Softage\Validators\ModalidadesValidator;
+use Softage\Http\Requests\CotacoesCreateRequest;
+use Softage\Http\Requests\CotacoesUpdateRequest;
+use Softage\Validators\CotacoesValidator;
 use Yajra\Datatables\Datatables;
 
 
-class ModalidadesController extends Controller
+class CotacoesController extends Controller
 {
     /**
-     * @var ModalidadesRepository
+     * @var CotacoesRepository
      */
     private $repository;
 
     /**
-     * @var ModalidadesService
+     * @var CotacoesService
      */
     private $service;
     /**
-     * @var ModalidadesValidator
+     * @var CotacoesValidator
      */
     private $validator;
 
@@ -37,16 +37,17 @@ class ModalidadesController extends Controller
      * Arrays de models para carregamento
      */
     private $loadFields = [
-        'Status'
+        'Status',
+        'Modalidades'
     ];
 
     /**
-     * ModalidadesController constructor.
-     * @param ModalidadesRepository $repository
-     * @param ModalidadesService $service
-     * @param ModalidadesValidator $validator
+     * CotacoesController constructor.
+     * @param CotacoesRepository $repository
+     * @param CotacoesService $service
+     * @param CotacoesValidator $validator
      */
-    public function __construct(ModalidadesRepository $repository, ModalidadesService $service, ModalidadesValidator $validator)
+    public function __construct(CotacoesRepository $repository, CotacoesService $service, CotacoesValidator $validator)
     {
         $this->repository = $repository;
         $this->service    = $service;
@@ -59,7 +60,7 @@ class ModalidadesController extends Controller
      */
     public function index()
     {
-        return view('modalidades.index');
+        return view('cotacoes.index');
     }
 
     /**
@@ -67,12 +68,15 @@ class ModalidadesController extends Controller
      */
     public function grid()
     {
-        #Criando a consulta de Modalidades
-        $rows = \DB::table('modalidades')
-            ->join('status', 'status.id', '=', 'modalidades.status_id')
+        #Criando a consulta de Cotacoes
+        $rows = \DB::table('cotacoes')
+            ->join('cotacaos', 'cotacaos.id', '=', 'cotacoes.cotacao_id')
+            ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+            ->join('status', 'status.id', '=', 'cotacoes.status_id')
             ->select([
-                'modalidades.id',
+                'cotacoes.id',
                 'modalidades.nome',
+                'cotacoes.valor',
                 'status.nome as status'
             ]);
 
@@ -92,7 +96,7 @@ class ModalidadesController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('modalidades.create', compact('loadFields'));
+        return view('cotacoes.create', compact('loadFields'));
     }
 
     /**
@@ -134,7 +138,7 @@ class ModalidadesController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('modalidades.edit', compact('model', 'loadFields'));
+            return view('cotacoes.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
@@ -174,15 +178,15 @@ class ModalidadesController extends Controller
     {
         try {
             # Recuperando o registro do banco de dados
-            $partida = $this->repository->find($id);
+            $cotacao = $this->repository->find($id);
 
             # verificando se o registro foi recuperado
-            if(!$partida) {
-                throw new \Exception('Modalidade não encontrado!');
+            if(!$cotacao) {
+                throw new \Exception('Cotação não encontrado!');
             }
 
             # Removendo o registro do banco de dados
-            $this->repository->delete($partida->id);
+            $this->repository->delete($cotacao->id);
 
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
