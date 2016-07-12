@@ -53,7 +53,7 @@
                                     <th>Tima Fora</th>
                                     <th>Campeonato</th>
                                     <th>Situação</th>
-                                    <th>Acão</th>
+                                    <th style="width: 13%;">Acão</th>
                                 </tr>
                                 </tfoot>
                             </table>

@@ -41,9 +41,10 @@
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
-                    {!! Form::open(['route'=>'betting.area.store', 'method' => "POST", 'id' => 'formArea', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        @include('tamplatesForms.tamplateFormArea')
+                        {!! Form::open(['route'=>'betting.area.store', 'method' => "POST", 'id' => 'formArea', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
+                        @include('tamplatesForms.tamplateFormRepostVandas')
+                        {!! Form::close() !!}
                     </div>
                     <div class="panel-footer">
                         <div class="row">
@@ -53,7 +54,6 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

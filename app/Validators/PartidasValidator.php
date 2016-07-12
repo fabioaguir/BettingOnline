@@ -15,7 +15,19 @@ class PartidasValidator extends LaravelValidator
      * Array que armazenará a validação
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'data' => 'required',
+            'hora' => 'required',
+            'campeonato_id' => 'required',
+            'time_casa_id' => 'required',
+            'time_fora_id' => 'required',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'data' => 'required',
+            'hora' => 'required',
+            'campeonato_id' => 'required',
+            'time_casa_id' => 'required',
+            'time_fora_id' => 'required',
+        ],
    ];
 }

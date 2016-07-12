@@ -52,11 +52,11 @@ class ParametrosController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit()
     {
         try {
             #Recuperando a empresa
-            $model = $this->service->find($id);
+            $model = $this->service->find('1');
 
             #Tratando as datas
             // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);

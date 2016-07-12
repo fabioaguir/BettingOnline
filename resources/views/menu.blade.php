@@ -33,6 +33,7 @@
         <link type="text/css" href="{{ asset('/assets/plugins/switchery/switchery.css')}}" rel="stylesheet">
         <link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
         <link type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.css')}}">
+        <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
 
         <!-- iCheck -->
 
@@ -249,7 +250,7 @@
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Menu</span></li>
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Dashboard</span></a></li>
-                                        <li><a href="{{ route('betting.parametro.edit', ['id' => '1']) }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
+                                        <li><a href="{{ route('betting.parametro.save') }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Áreas</span></a></li>
                                         <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-shield"></i><span>Vendedores</span></a></li>
                                         <li><a href="{{ route('betting.partidas.index') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
@@ -375,6 +376,7 @@
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootbox/bootbox.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/jquery.mask.js')}}"></script>
+        <script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
         <script type="text/javascript" src="{{ asset('/js/mascaras.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/scripts_api.js')}}"></script>
         <script type="text/javascript">

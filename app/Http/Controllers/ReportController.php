@@ -14,7 +14,7 @@ use Softage\Validators\AreasValidator;
 use Yajra\Datatables\Datatables;
 
 
-class AreasController extends Controller
+class ReportController extends Controller
 {
     
     /**

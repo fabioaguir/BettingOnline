@@ -25,7 +25,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('grid', ['as' => 'grid', 'uses' => 'ParametrosController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'ParametrosController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'ParametrosController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametrosController@edit']);
+            Route::get('save', ['as' => 'save', 'uses' => 'ParametrosController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametrosController@update']);
         });
 

@@ -12,6 +12,7 @@ use Softage\Http\Requests\AreasUpdateRequest;
 use Softage\Repositories\ConfVendasRepository;
 use Softage\Services\VendedorService;
 use Softage\Validators\VendedorValidator;
+use Softage\Validators\ConfgVendasValidator;
 use Yajra\Datatables\Datatables;
 
 
@@ -29,6 +30,11 @@ class VendedorController extends Controller
     private $validator;
 
     /**
+     * @var ConfgVendasValidator
+     */
+    private $configValidator;
+
+    /**
      * @var array
      */
     private $loadFields = [
@@ -42,11 +48,13 @@ class VendedorController extends Controller
      * VendedorController constructor.
      * @param VendedorService $service
      * @param VendedorValidator $validator
+     * @param ConfgVendasValidator $configValidator
      */
-    public function __construct(VendedorService $service, VendedorValidator $validator)
+    public function __construct(VendedorService $service, VendedorValidator $validator, ConfgVendasValidator $configValidator)
     {
         $this->service = $service;
         $this->validator  = $validator;
+        $this->configValidator = $configValidator;
     }
 
 

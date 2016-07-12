@@ -59,10 +59,7 @@
 @section('js')
     @parent
     <script type="text/javascript">
-        var elem = document.querySelector('.js-switch-info');
-        var init = new Switchery(elem);
         var idConfigVendas = 0;
-
         var table = $('#confg-grid').DataTable({
             processing: true,
             serverSide: true,
@@ -94,7 +91,7 @@
         });
         $('.dataTables_filter input').attr('placeholder','Pesquisar...');
 
-        //Retonra o id do registro
+        //Retonra da tabela os registro pertencentes a linha selecionada
         $('#confg-grid tbody').on( 'click', '.edit', function (event) {
             event.preventDefault();
 
@@ -134,25 +131,44 @@
                 'idConfig' : idConfigVendas
             }
 
-            jQuery.ajax({
-                type: 'POST',
-                url: '{{route('betting.vendedor.updateConfig')}}',
-                data: dados,
-                datatype: 'json'
-            }).done(function (json) {
-                $('.save').prop('disabled', false);
-                $('.edit').prop('disabled', true);
-                bootbox.alert(json['msg'])
-                table.ajax.reload()
-                var limite = $('#limite').val("");
-                var comissao = $('#comissao').val("");
-                var cotacao = $('#cotacao').val("");
-                tipoCotacao();
+            //Validando formulário configuração de vendas edit
+            if(limite == "" || comissao == "" || cotacao == "" || tipoCota == "") {
+                bootbox.alert('Todos os campos são de preenchimento obrigatório');
+            } else {
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{route('betting.vendedor.updateConfig')}}',
+                    data: dados,
+                    datatype: 'json'
+                }).done(function (json) {
+                    $('.save').prop('disabled', false);
+                    $('.edit').prop('disabled', true);
+                    bootbox.alert(json['msg']);
+                    table.ajax.reload()
+                    var limite = $('#limite').val("");
+                    var comissao = $('#comissao').val("");
+                    var cotacao = $('#cotacao').val("");
+                    tipoCotacao();
 
-            });
+                });
+            }
 
         });
 
+        //Validando formulário configuração de vendas save
+        $('#formConfig').submit(function(event){
+            var limite = $('#limite').val();
+            var comissao = $('#comissao').val();
+            var cotacao = $('#cotacao').val();
+            var tipoCota = $('#tipo_cotacao').val();
+
+            if(limite == "" || comissao == "" || cotacao == "" || tipoCota == "") {
+                bootbox.alert('Todos os campos são de preenchimento obrigatório');
+                return false;
+            } else {
+                return true;
+            }
+        });
 
         //Função para listar as localidades
         function tipoCotacao(id) {

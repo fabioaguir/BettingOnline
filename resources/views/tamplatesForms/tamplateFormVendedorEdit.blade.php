@@ -51,7 +51,7 @@
                         </div><br />
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
+                                <button type="submit" class="btn-primary btn" style="margin-left: -11px">Salvar</button>
                                 <a class="btn-default btn" href="{{ route('betting.vendedor.index')}}">Voltar</a>
                             </div>
                         </div>{{----}}
@@ -59,7 +59,7 @@
                     </div>
                     <div class="tab-pane" id="config">
                         <br /><br />
-                        {!! Form::open(['route'=>'betting.vendedor.storeConfig', 'method' => "POST", 'id' => 'formVendedor', 'class' => 'form-horizontal row-border']) !!}
+                        {!! Form::open(['route'=>'betting.vendedor.storeConfig', 'method' => "POST", 'id' => 'formConfig', 'class' => 'form-horizontal row-border']) !!}
                         <div class="row">
                             <div class="form-group">
                                 {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label')) !!}
