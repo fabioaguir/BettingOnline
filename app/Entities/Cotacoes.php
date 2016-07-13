@@ -24,7 +24,7 @@ class Cotacoes extends Model implements Transformable
      */
     public function modalidade()
     {
-        return $this->belongsTo(Modalidades::class, 'status_id');
+        return $this->belongsTo(Modalidades::class, 'modalidade_id');
     }
 
     /**
@@ -32,7 +32,7 @@ class Cotacoes extends Model implements Transformable
      */
     public function partida()
     {
-        return $this->belongsTo(Partidas::class, 'status_id');
+        return $this->belongsTo(Partidas::class, 'partida_id');
     }
 
     /**

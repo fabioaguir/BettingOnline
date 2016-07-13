@@ -7,9 +7,13 @@
                     <label class="col-sm-2 control-label" for="searchDate">Data</label>
                     <div class="col-sm-3">
                         <div class="input-group">
-                            <input class="form-control mask" data-inputmask="'alias': 'date'" type="text" id="searchDate">
+                            @if(isset($model->id))
+                                <input class="form-control mask" value="{{$model->partida->data}}" data-inputmask="'alias': 'date'" type="text" id="searchDate">
+                            @else
+                                <input class="form-control mask" data-inputmask="'alias': 'date'" type="text" id="searchDate">
+                            @endif
                             <div class="input-group-btn">
-                                <button class="btn btn-info" type="button">Buscar</button>
+                                <button class="btn btn-info" id="btnSearch" type="button">Buscar</button>
                             </div>
                         </div>
                     </div>
@@ -18,7 +22,12 @@
                 <div class="form-group">
                     {!! Form::label('partida_id', 'Partida', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('partida_id', array(), Session::getOldInput('partida_id'), array('class' => 'form-control')) !!}
+                        @if(isset($model->id))
+                            {!! Form::select('partida_id', [$model->partida->id => $model->partida->casa->nome . " x " . $model->partida->fora->nome],
+                             Session::getOldInput('partida_id'), array('class' => 'form-control')) !!}
+                        @else
+                            {!! Form::select('partida_id', array(), Session::getOldInput('partida_id'), array('class' => 'form-control')) !!}
+                        @endif
                     </div>
                 </div>
 
@@ -46,3 +55,8 @@
         </div>
     </div>
 </div>
+
+@section('js')
+    @parent
+    <script type="text/javascript" src="{{ asset('js/cotacoes/cotacoes.js')  }}"></script>
+@endsection

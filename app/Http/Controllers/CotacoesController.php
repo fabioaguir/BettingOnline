@@ -2,6 +2,7 @@
 
 namespace Softage\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Softage\Repositories\CotacoesRepository;
@@ -70,7 +71,6 @@ class CotacoesController extends Controller
     {
         #Criando a consulta de Cotacoes
         $rows = \DB::table('cotacoes')
-            ->join('cotacaos', 'cotacaos.id', '=', 'cotacoes.cotacao_id')
             ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
             ->join('status', 'status.id', '=', 'cotacoes.status_id')
             ->select([
@@ -132,8 +132,8 @@ class CotacoesController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->repository->with('status')->find($id);
-
+            $model = $this->repository->with('status', 'partida')->find($id);
+            
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
@@ -192,6 +192,34 @@ class CotacoesController extends Controller
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
             return redirect()->back()->withErros($e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function getPartidas(Request $request)
+    {
+        try {
+            # Recuperando a data da requisição
+            $data  = Carbon::createFromFormat('d/m/Y', $request->get('data'));
+
+            # Fazendo a consulta
+            $query = \DB::table('partidas')
+                ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
+                ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
+                ->select([
+                    'partidas.id',
+                    'time_casa.nome as timeCasa',
+                    'time_fora.nome as timeFora'
+                ])->get();
+
+            # retorno
+            return response()->json(['success' => true, 'data' => $query]);
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['success' => false, 'msg' => 'Data inválida!']);
+        } catch (\Throwable $e) {
+            return response()->json(['success' => false, 'msg' => 'Ocorreu um erro, tente novamente.']);
         }
     }
 }

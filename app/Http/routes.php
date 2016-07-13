@@ -83,16 +83,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'CotacoesController@update']);
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@destroy']);
+            Route::get('getPartidas', ['as' => 'getPartidas', 'uses' => 'CotacoesController@getPartidas']);
         });
 
-        Route::group(['prefix' => 'cotacao', 'as' => 'cotacao.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'CotacaoController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'CotacaoController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'CotacaoController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'CotacaoController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacaoController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CotacaoController@update']);
-        });
 
         Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ModalidadeController@index']);

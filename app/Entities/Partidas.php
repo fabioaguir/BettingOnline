@@ -72,19 +72,19 @@ class Partidas extends Model implements Transformable
      *
      * Relacionamento com Times (da casa)
      */
-    public function timeCasa()
+    public function casa()
     {
-        return $this->belongsTo(Times::class, 'tima_casa_id');
+        return $this->belongsTo(Times::class, 'time_casa_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
-     *  Relacionamento com Times (de fora)
+     * Relacionamento com Times (de fora)
      */
-    public function timeFora()
+    public function fora()
     {
-        return $this->belongsTo(Times::class, 'tima_fora_id');
+        return $this->belongsTo(Times::class, 'time_fora_id');
     }
 
     /**

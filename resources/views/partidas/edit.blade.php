@@ -61,8 +61,8 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
-                                <a class="btn-default btn" href="{{ route('betting.partidas.index')}}">Voltar</a>
+                                <button class="btn-primary btn" type="submit" style="margin-left: -11px">Salvar</button>
+                                <a class="btn-default btn"  href="{{ route('betting.partidas.index')}}">Voltar</a>
                             </div>
                         </div>
                     </div>

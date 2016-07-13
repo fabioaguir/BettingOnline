@@ -33,7 +33,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive no-padding">
-                            <table id="partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                            <table id="cotacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Modalidade</th>
@@ -65,10 +65,10 @@
     @parent
     <script type="text/javascript">
         // Criando a grid DataTables
-        var table = $('#partidas-grid').DataTable({
+        var table = $('#cotacoes-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('betting.partidas.grid') !!}",
+            ajax: "{!! route('betting.cotacoes.grid') !!}",
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",
@@ -84,7 +84,7 @@
                 }
             },
             columns: [
-                {data: 'nome', name: 'modalidade.nome'},
+                {data: 'nome', name: 'modalidades.nome'},
                 {data: 'valor', name: 'cotacoes.valor'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
