@@ -81,7 +81,7 @@ class VendedorController extends Controller
                 ->where('conf_vendas.status_id', '=', '1');
             })
             ->leftJoin('vendas', 'conf_vendas.venda_id', '=', 'vendas.id')
-            ->groupBy('conf_vendas.venda_id', 'conf_vendas.id', 'areas.id', 'vendedor.id', 'estorno_vendedor.id', 'status.id')
+            ->groupBy('vendedor.id', 'vendas.valor_total')
             ->select([
                 'vendedor.id as id',
                 'vendedor.usuario as usuario',
@@ -96,7 +96,7 @@ class VendedorController extends Controller
                 'conf_vendas.id as conf_id',
                 \DB::raw("sum(vendas.valor_total) as total")
             ]);
-        
+
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";

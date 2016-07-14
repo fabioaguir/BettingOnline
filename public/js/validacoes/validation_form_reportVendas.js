@@ -1,13 +1,23 @@
 $(document).ready(function () {
-    $('#formPartida').bootstrapValidator({
-        excluded: [':disabled'],
+    $('#formReportVendas').bootstrapValidator({
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            'data': {
+            'data_inicio': {
+                validators: {
+                    notEmpty: {
+                        message: "Este campo é obrigatório",
+                    },
+                    date: {
+                        format: 'DD/MM/YYYY',
+                        message: "O formato da data está inválido",
+                    },
+                },
+            },
+            'data_fim': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
@@ -16,35 +26,35 @@ $(document).ready(function () {
                         format: 'DD/MM/YYYY',
                         message: "O formato da data está inválido",
                     }
-                },
+                }
             },
-            'hora': {
+            'vendedor': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
                     },
                 },
             },
-            'campeonato_id': {
+            'premiacao': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
-                    },
-                },
+                    }
+                }
             },
-            'time_fora_id': {
+            'status': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
-                    },
-                },
+                    }
+                }
             },
-            'time_casa_id': {
+            'area': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
-                    },
-                },
+                    }
+                }
             }
         }
     });

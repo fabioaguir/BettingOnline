@@ -249,18 +249,18 @@
                                 <nav class="widget-body">
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Menu</span></li>
-                                        <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Dashboard</span></a></li>
-                                        <li><a href="{{ route('betting.parametro.save') }} "><i class="ti ti-shield"></i><span>Parâmetros</span></a></li>
-                                        <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Áreas</span></a></li>
-                                        <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-shield"></i><span>Vendedores</span></a></li>
-                                        <li><a href="{{ route('betting.partidas.index') }} "><i class="ti ti-shield"></i><span>Partidas</span></a></li>
-                                        <li><a href="{{ route('betting.modalidades.index') }} "><i class="ti ti-shield"></i><span>Modalidades</span></a></li>
-                                        {{--<li>
-                                            <a href="javascript:;"><i class="ti ti-layout"></i><span>Cadastros</span></a>
+                                        {{--<li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Dashboard</span></a></li>--}}
+                                        <li><a href="{{ route('betting.parametro.save') }} "><i class="ti ti-settings"></i><span>Parâmetros</span></a></li>
+                                        <li><a href="{{ route('betting.area.index') }} "><i class="ti ti-location-pin"></i><span>Áreas</span></a></li>
+                                        <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-user"></i><span>Vendedores</span></a></li>
+                                        <li><a href="{{ route('betting.partidas.index') }} "><i class="ti ti-clipboard"></i><span>Partidas</span></a></li>
+                                        <li><a href="{{ route('betting.modalidades.index') }} "><i class="ti  ti-control-play"></i><span>Modalidades</span></a></li>
+                                        <li>
+                                            <a href="javascript:;"><i class="ti ti-files"></i><span>Consultas/Relatórios</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('betting.form') }} ">Cadastrar</a></li>
+                                                <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                                             </ul>
-                                        </li>--}}
+                                        </li>
                                         {{-- menu extras --}}
                                         {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span

@@ -11,7 +11,7 @@
                 <div class="form-group">
                     {!! Form::label('hora', 'Hora', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-2">
-                        {!! Form::text('hora', Session::getOldInput('hora')  , array('class' => 'form-control time')) !!}
+                        {!! Form::text('hora', Session::getOldInput('hora')  , array('class' => 'form-control', 'id' => 'hora')) !!}
                     </div>
                 </div>
                 <div class="form-group">

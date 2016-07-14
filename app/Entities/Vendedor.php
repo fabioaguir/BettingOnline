@@ -51,4 +51,5 @@ class Vendedor extends Model implements Transformable
     {
         return $this->belongsTo(Areas::class, 'area_id');
     }
+    
 }
