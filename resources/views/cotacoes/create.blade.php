@@ -10,7 +10,7 @@
 @endsection
 
 @section('page-heading')
-    <h1>Partidas</h1>
+    <h1>Cotacoes</h1>
 @endsection
 
 @section('container')
@@ -37,19 +37,19 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Cadastrar partida</h2>
+                        <h2>Cadastrar Cotação</h2>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
-                    {!! Form::open(['route'=>'betting.partidas.store', 'method' => "POST", 'id' => 'formPartida', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
+                    {!! Form::open(['route'=>'betting.cotacoes.store', 'method' => "POST", 'id' => 'formCotacao', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        @include('tamplatesForms.tamplateFormPartidas')
+                        @include('tamplatesForms.tamplateFormCotacoes')
                     </div>
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" type="submit" style="margin-left: -11px">Salvar</button>
-                                <a class="btn-default btn" href="{{ route('betting.partidas.index')}}">Voltar</a>
+                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
+                                <a class="btn-default btn" href="{{ route('betting.cotacoes.index')}}">Voltar</a>
                             </div>
                         </div>
                     </div>
@@ -59,18 +59,4 @@
         </div>
     </div>
 
-@endsection
-
-@section('js')
-    @parent
-    <script type="text/javascript" src="{{asset('/js/jquery.validate.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validationForm_turma.js')}}"></script>
-    <script type="text/javascript" src="{{asset('/js/jquery.inputmask.bundle.min.js')}}"></script>
-    <script type="text/javascript">
-        var elem = document.querySelector('.js-switch-info');
-        var init = new Switchery(elem);
-        $(document).ready(function(){
-            $("#hora").inputmask("hh:mm:ss", {"clearIncomplete": true});
-        });
-    </script>
 @endsection

@@ -38,8 +38,8 @@ class PartidasController extends Controller
      */
     private $loadFields = [
         'Times',
-        'Status',
-        'Campeonatos'
+        'Campeonatos',
+        'Status'
     ];
 
     /**
@@ -137,7 +137,7 @@ class PartidasController extends Controller
     {
         try {
             #Recuperando a empresa
-            $model = $this->repository->find($id);
+            $model = $this->repository->with('status')->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
