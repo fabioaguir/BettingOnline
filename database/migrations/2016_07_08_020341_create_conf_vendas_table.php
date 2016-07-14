@@ -22,7 +22,6 @@ class CreateConfVendasTable extends Migration {
 			$table->integer('vendedor_id')->nullable()->index('fk_conf_vendas_vendedor1_idx');
 			$table->integer('status_id')->nullable()->index('fk_conf_vendas_status1_idx');
 			$table->timestamps();
-			$table->integer('venda_id')->nullable()->index('fk_conf_vendas_vendas1_idx');
 			$table->date('data')->nullable();
 		});
 	}
