@@ -116,12 +116,13 @@
                 {data: 'estorno', name: 'estorno_vendedor.nome'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'limite', name: 'conf_vendas.limite_vendas'},
-                {data: 'total', name: 'vendas.valor_total'},
+                {data: 'valor_total', name: 'vendas.valor_total'},
                 {data: 'comissao', name: 'conf_vendas.comissao'},
                 {data: 'cotacao', name: 'conf_vendas.cotacao'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
         $('.dataTables_filter input').attr('placeholder','Pesquisar...');
 
         //DOM Manipulation to move datatable elements integrate to panel

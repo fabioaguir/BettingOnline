@@ -23,6 +23,7 @@ class CreateVendasTable extends Migration {
 			$table->integer('status_v_id')->index('fk_vendas_status_vendas1_idx');
 			$table->integer('premiacao_id')->index('fk_vendas_premiacoes1_idx');
 			$table->integer('tipo_aposta_id')->index('fk_vendas_tipo_apostas1_idx');
+			$table->integer('conf_venda_id')->index('fk_vendas_conf_vendas1_dx');
 		});
 	}
 

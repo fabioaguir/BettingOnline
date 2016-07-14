@@ -15,7 +15,6 @@ class AddForeignKeysToConfVendasTable extends Migration {
 		Schema::table('conf_vendas', function(Blueprint $table)
 		{
 			$table->foreign('tipo_cotacao_id', 'fk_conf_vendas_tipo_cotacao1')->references('id')->on('tipo_cotacao')->onUpdate('NO ACTION')->onDelete('NO ACTION');
-			$table->foreign('venda_id', 'fk_conf_vendas_vendas1')->references('id')->on('vendas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('vendedor_id', 'fk_conf_vendas_vendedor1')->references('id')->on('vendedor')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('status_id', 'fk_conf_vendas_status1')->references('id')->on('status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
@@ -31,9 +30,8 @@ class AddForeignKeysToConfVendasTable extends Migration {
 		Schema::table('conf_vendas', function(Blueprint $table)
 		{
 			$table->dropForeign('fk_conf_vendas_tipo_cotacao1');
-			$table->dropForeign('fk_conf_vendas_vendas1');
 			$table->dropForeign('fk_conf_vendas_vendedor1');
-			$table->dropForeign('fk_conf_vendas_status1');
+			$table->dropForeign('fk_conf_vendas_status1');			
 		});
 	}
 
