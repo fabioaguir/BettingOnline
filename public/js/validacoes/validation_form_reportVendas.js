@@ -1,60 +1,47 @@
+
 $(document).ready(function () {
-    $('#formReportVendas').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
+    $('#formReportVendas').validate({
+        rules: {
             'data_inicio': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    },
-                    date: {
-                        format: 'DD/MM/YYYY',
-                        message: "O formato da data está inválido",
-                    },
-                },
+                required: true
             },
             'data_fim': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    },
-                    date: {
-                        format: 'DD/MM/YYYY',
-                        message: "O formato da data está inválido",
-                    }
-                }
-            },
-            'vendedor': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    },
-                },
-            },
-            'premiacao': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    }
-                }
-            },
-            'status': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    }
-                }
+                required: true
             },
             'area': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    }
-                }
+                required: true
+            },
+            'vendedor': {
+                required: true
+            },
+            'premiacao': {
+                required: true
+            },
+            'status': {
+                required: true
+            },
+        },
+        messages: {
+            'data_inicio': "Este campo é obrigatório",
+            'data_fim': "Este campo é obrigatório",
+            'area': "Este campo é obrigatório",
+            'vendedor': "Este campo é obrigatório",
+            'premiacao': "Este campo é obrigatório",
+            'status': "Este campo é obrigatório",
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
             }
         }
     });

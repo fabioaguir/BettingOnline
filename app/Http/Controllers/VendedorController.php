@@ -241,6 +241,9 @@ class VendedorController extends Controller
             #tratando as rules
             $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
             #Executando a ação
             $this->service->update($data, $id);
 

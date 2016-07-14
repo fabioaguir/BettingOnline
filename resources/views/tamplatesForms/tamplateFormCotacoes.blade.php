@@ -58,5 +58,6 @@
 
 @section('js')
     @parent
+    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_cotacao.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/cotacoes/cotacoes.js')  }}"></script>
 @endsection

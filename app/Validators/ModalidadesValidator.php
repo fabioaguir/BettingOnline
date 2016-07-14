@@ -10,7 +10,13 @@ class ModalidadesValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
     
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'nome' => 'required',
+            'status_id' => 'required'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'nome' => 'required',
+            'status_id' => 'required'
+        ],
    ];
 }

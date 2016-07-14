@@ -3,7 +3,7 @@
         <div class="row">
             <div>
                 <div class="form-group">
-                    {!! Form::label('nome', 'Data', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('nome', 'Nome', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-2">
                         {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                     </div>

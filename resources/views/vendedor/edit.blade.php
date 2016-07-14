@@ -58,6 +58,7 @@
 
 @section('js')
     @parent
+    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_vendedorEdit.js')}}"></script>
     <script type="text/javascript">
         var idConfigVendas = 0;
         var table = $('#confg-grid').DataTable({

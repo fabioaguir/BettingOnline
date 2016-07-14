@@ -26,25 +26,13 @@
                     </div>
                 @endif
 
-                @if (isset($return) && $return !=  null)
-                    @if($return['success'] == false && isset($return[0]['fields']) &&  $return[0]['fields'] != null)
-                        <div class="alert alert-warning">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            @foreach ($return[0]['fields'] as $nome => $erro)
-                                {{ $erro }}<br>
-                            @endforeach
-                        </div>
-                    @elseif($return['success'] == false)
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ $return['message'] }}<br>
-                        </div>
-                    @elseif($return['success'] == true)
-                        <div class="alert alert-success">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ $return['message'] }}<br>
-                        </div>
-                    @endif
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
                 @endif
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
@@ -72,13 +60,4 @@
         </div>
     </div>
 
-@endsection
-
-@section('js')
-    @parent
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_area.js')}}"></script>
-    <script type="text/javascript">
-        var elem = document.querySelector('.js-switch-info');
-        var init = new Switchery(elem);
-    </script>
 @endsection

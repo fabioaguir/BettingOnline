@@ -1,20 +1,8 @@
 
 $(document).ready(function () {
-    $('#formPartida').validate({
+    $('#formModalidade').validate({
         rules: {
-            'data': {
-                required: true
-            },
-            'hora': {
-                required: true
-            },
-            'campeonato_id': {
-                required: true
-            },
-            'time_casa_id': {
-                required: true
-            },
-            'time_fora_id': {
+            'nome': {
                 required: true
             },
             'status_id': {
@@ -22,11 +10,7 @@ $(document).ready(function () {
             },
         },
         messages: {
-            'data': "Este campo é obrigatório",
-            'hora': "Este campo é obrigatório",
-            'campeonato_id': "Este campo é obrigatório",
-            'time_casa_id': "Este campo é obrigatório",
-            'time_fora_id': "Este campo é obrigatório",
+            'nome': "Este campo é obrigatório",
             'status_id': "Este campo é obrigatório",
         },
         highlight: function (element) {

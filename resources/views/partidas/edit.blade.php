@@ -79,5 +79,8 @@
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');
         var init = new Switchery(elem);
+        $(document).ready(function(){
+            $("#hora").inputmask("hh:mm:ss", {"clearIncomplete": true});
+        });
     </script>
 @endsection

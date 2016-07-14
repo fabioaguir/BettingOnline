@@ -50,7 +50,6 @@ class ModalidadesService
         #Atualizando no banco de dados
         $modalidade = $this->repository->update($data, $id);
 
-
         #Verificando se foi atualizado no banco de dados
         if(!$modalidade) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');

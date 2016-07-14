@@ -10,7 +10,17 @@ class CotacoesValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
     
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'valor' => 'required',
+            'partida_id' => 'required',
+            'modalidade_id' => 'required',
+            'status_id' => 'required'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'valor' => 'required',
+            'partida_id' => 'required',
+            'modalidade_id' => 'required',
+            'status_id' => 'required'
+        ],
    ];
 }

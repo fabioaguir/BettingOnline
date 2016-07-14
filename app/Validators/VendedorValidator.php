@@ -29,10 +29,6 @@ class VendedorValidator extends LaravelValidator
             'status_id' => 'required',
             'estorno_id' => 'required',
             'area_id' => 'required',
-            'config[limite_vendas]' => 'required',
-            'config[comissao]' => 'required',
-            'config[cotacao]' => 'required',
-            'config[tipo_cotacao_id]' => 'required',
         ],
    ];
 
