@@ -49,6 +49,22 @@
 </div>
 <br />
 <div class="row">
+    <div class="col-sm-4 col-md-offset-8">
+        <table class="table table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th style="background-color: grey; color: white">Total de vendas</th>
+                <th style="background-color: grey; color: white">Total de retorno</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="background-color: darkgrey; color: white"></b>@if(isset($sum[0]->total)) <b>{{$sum[0]->total}} </b> @endif</td>
+                <td style="background-color: darkgrey; color: white">@if(isset($sum[0]->total)) <b>{{$sum[0]->tot_retorno}} </b> @endif</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="col-sm-12">
         <div class="table-responsive no-padding">
             <table id="partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
@@ -65,17 +81,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td colspan="5"></td>
-                    <td style="background-color: grey; color: white">Total de vendas</td>
-                    <td style="background-color: grey; color: white">Total de retorno</td>
-                    <td></td>
-                </tr>
-                    <tr>
-                        <td colspan="5"></td>
-                        <td style="background-color: darkgrey; color: white"></b>@if(isset($sum[0]->total)) <b>{{$sum[0]->total}} </b> @endif</td>
-                        <td style="background-color: darkgrey; color: white">@if(isset($sum[0]->total)) <b>{{$sum[0]->tot_retorno}} </b> @endif</td>
-                    </tr>
                 @if(isset($consulta))
                     @foreach($consulta as $venda)
                         <tr>
