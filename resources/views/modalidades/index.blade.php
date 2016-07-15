@@ -19,10 +19,21 @@
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-sm-12">
-                {{--<div class="alert alert-info alert-dismissable ">
-                    <i class="ti ti-info-alt"></i> Resize the browser window to see the responive tables in action!
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                </div>--}}
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <em> {!! session('message') !!}</em>
+                    </div>
+                @endif
+
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
@@ -47,7 +58,7 @@
                                     <th>Código</th>
                                     <th>Nome</th>
                                     <th>Status</th>
-                                    <th>Acão</th>
+                                    <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
                             </table>
