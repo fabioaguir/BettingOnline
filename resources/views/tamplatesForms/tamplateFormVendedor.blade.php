@@ -61,21 +61,21 @@
                             <div class="form-group">
                                 {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::text('config[limite_vendas]', Session::getOldInput('config[limite_vendas]')  , array('class' => 'form-control touchspin2')) !!}
+                                    {!! Form::text('config[limite_vendas]', Session::getOldInput('config[limite_vendas]')  , array('class' => 'form-control touchspin2 money')) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('comissao', 'Comissão', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::text('config[comissao]', Session::getOldInput('config[comissao]')  , array('class' => 'form-control touchspin2')) !!}
+                                    {!! Form::text('config[comissao]', Session::getOldInput('config[comissao]')  , array('class' => 'form-control touchspin2 money')) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('cotacao', 'Cotação', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::text('config[cotacao]', Session::getOldInput('config[cotacao]')  , array('class' => 'form-control touchspin1')) !!}
+                                    {!! Form::text('config[cotacao]', Session::getOldInput('config[cotacao]')  , array('class' => 'form-control touchspin1 money')) !!}
                                 </div>
                             </div>
 

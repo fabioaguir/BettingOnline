@@ -10,7 +10,7 @@
                             @if(isset($model->id))
                                 <input class="form-control mask" value="{{$model->partida->data}}" data-inputmask="'alias': 'date'" type="text" id="searchDate">
                             @else
-                                <input class="form-control mask" data-inputmask="'alias': 'date'" type="text" id="searchDate">
+                                <input class="form-control mask datepicker" data-inputmask="'alias': 'date'" type="text" id="searchDate">
                             @endif
                             <div class="input-group-btn">
                                 <button class="btn btn-info" id="btnSearch" type="button">Buscar</button>
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     {!! Form::label('valor', 'Cotação', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control touchspin2')) !!}
+                        {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control touchspin2 money')) !!}
                     </div>
                 </div>
 

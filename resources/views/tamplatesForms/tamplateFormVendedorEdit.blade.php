@@ -62,9 +62,9 @@
                         {!! Form::open(['route'=>'betting.vendedor.storeConfig', 'method' => "POST", 'id' => 'formConfig', 'class' => 'form-horizontal row-border']) !!}
                         <div class="row">
                             <div class="form-group">
-                                {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label')) !!}
+                                {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label ')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::text('limite_vendas', null  , array('class' => 'form-control touchspin2', 'id' => 'limite')) !!}
+                                    {!! Form::text('limite_vendas', null  , array('class' => 'form-control touchspin2 money', 'id' => 'limite')) !!}
                                     {!! Form::hidden('vendedor_id', $model->id , array('class' => 'form-control', 'id' => 'vendedor_id')) !!}
                                 </div>
                             </div>
@@ -72,14 +72,14 @@
                             <div class="form-group">
                                 {!! Form::label('comissao', 'Comissão', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::text('comissao', null  , array('class' => 'form-control touchspin2', 'id' => 'comissao')) !!}
+                                    {!! Form::text('comissao', null  , array('class' => 'form-control touchspin2 money', 'id' => 'comissao')) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('cotacao', 'Cotação', array('class' => 'col-sm-2 control-label')) !!}
                                 <div class="col-sm-3">
-                                    {!! Form::text('cotacao', null  , array('class' => 'form-control touchspin1', 'id' => 'cotacao')) !!}
+                                    {!! Form::text('cotacao', null  , array('class' => 'form-control touchspin1 money', 'id' => 'cotacao')) !!}
                                 </div>
                             </div>
 
