@@ -78,8 +78,19 @@ class ModalidadesController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                    <a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+            # Html de retorno
+            $html = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+
+            # Recuperando a modalidade
+            $mdalidade = $this->repository->find($row->id);
+
+            # Validando a possibilidade de remoção
+            if(!count($mdalidade->cotacoes) > 0) {
+                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+            }
+
+            # retorno
+            return $html;
         })->make(true);
     }
 

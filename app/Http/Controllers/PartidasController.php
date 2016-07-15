@@ -94,7 +94,7 @@ class PartidasController extends Controller
             $partida = $this->repository->find($row->id);
 
             # Validando a possibilidade de remoção
-            if(!count($partida->gols) > 0 || !count($partida->cotacoes) > 0 || !count($partida->apostas) > 0) {
+            if(!count($partida->gols) > 0 && !count($partida->cotacoes) > 0 && !count($partida->apostas) > 0) {
                 $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
             }
 

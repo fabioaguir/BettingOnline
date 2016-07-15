@@ -21,7 +21,7 @@ class Apostas extends Model implements Transformable
     protected $fillable = [
         'venda_id',
         'partida_id',
-        'caotacao_id',
+        'cotacao_id',
         'valor'
     ];
 }
