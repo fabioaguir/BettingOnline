@@ -123,7 +123,7 @@
         // Apply the filter
         table.columns().eq(0).each(function (colIdx) {
 
-            $('input', table.column(colIdx).footer()).on('keyup change', function () {
+            $('input', table.column(colIdx).footer()).on('change', function () {
 
                 table
                         .column(colIdx)
