@@ -132,7 +132,7 @@
                     </a>
                 </span>
 
-                <a class="navbar-brand" href="index.html">HÓSPEDE+</a>
+                <a class="navbar-brand" href="index.html">Apostas Online+</a>
 
                 <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
                     <div class="input-icon">
@@ -145,23 +145,18 @@
 
 
             {{-- Dropdowns do menu do topo --}}
-            {{--<div class="yamm navbar-left navbar-collapse collapse in">
+            <div class="yamm navbar-left navbar-collapse collapse in">
                 <ul class="nav navbar-nav">
                     <li class="dropdown" id="widget-classicmenu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas/Relatórios<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
+                            {{--<li class="divider"></li>--}}
                         </ul>
                     </li>
-                    <li><a href="">Another Link</a></li>
+                    {{--<li><a href="">Another Link</a></li>--}}
                 </ul>
-            </div>--}}
+            </div>
 
 
             {{-- Opções direitas do menu do topo --}}
@@ -209,8 +204,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle='dropdown'><span class="icon-bg"><i class="ti ti-user"></i></span></i>
                     </a>
                     <ul class="dropdown-menu userinfo arrow">
-                        <li><a href="#/"><i class="ti ti-user"></i><span>Profile</span>{{--<span
-                                class="badge badge-info pull-right">73%</span>--}}</a></li>
+                        {{--<li><a href="#/"><i class="ti ti-user"></i><span>Profile</span><span
+                                class="badge badge-info pull-right">73%</span></a></li>--}}
                         {{--<li><a href="#/"><i class="ti ti-settings"></i><span>Settings</span></a></li>
                         <li><a href="#/"><i class="ti ti-help-alt"></i><span>Help</span></a></li>--}}
                         {{--<li class="divider"></li>--}}
