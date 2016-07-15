@@ -32,4 +32,11 @@ class Modalidades extends Model implements Transformable
         return $this->belongsTo(Status::class, 'status_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cotacoes()
+    {
+        return $this->hasMany(Cotacoes::class, 'modalidade_id');
+    }
 }

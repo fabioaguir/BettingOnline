@@ -106,4 +106,28 @@ class Partidas extends Model implements Transformable
     {
         return $this->belongsTo(Campeonatos::class, 'campeonato_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function apostas()
+    {
+        return $this->hasMany(Apostas::class, 'partida_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function gols()
+    {
+        return $this->hasMany(Gols::class, 'partida_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cotacoes()
+    {
+        return $this->hasMany(Cotacoes::class, 'partida_id');
+    }
 }

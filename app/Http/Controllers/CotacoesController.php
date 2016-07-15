@@ -72,18 +72,34 @@ class CotacoesController extends Controller
         #Criando a consulta de Cotacoes
         $rows = \DB::table('cotacoes')
             ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+            ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+            ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
+            ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
             ->join('status', 'status.id', '=', 'cotacoes.status_id')
             ->select([
                 'cotacoes.id',
                 'modalidades.nome',
+                \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
+                \DB::raw("to_char(partidas.data, 'DD/MM/YYYY') as data"),
                 'cotacoes.valor',
                 'status.nome as status'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                    <a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+            # Html de retorno
+            $html = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+
+            # Recuperando a cotação
+            $cotacao = $this->repository->find($row->id);
+            
+            # Validando a possibilidade de remoção
+            if(!count($cotacao->apostas) > 0) {
+                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+            }
+
+            # retorno
+            return $html;
         })->make(true);
     }
 
@@ -211,6 +227,7 @@ class CotacoesController extends Controller
             $query = \DB::table('partidas')
                 ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
                 ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
+                ->where('partidas.data', $data->format('Y-m-d'))
                 ->select([
                     'partidas.id',
                     'time_casa.nome as timeCasa',

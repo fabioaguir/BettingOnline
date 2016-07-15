@@ -42,4 +42,12 @@ class Cotacoes extends Model implements Transformable
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function apostas()
+    {
+        return $this->hasMany(Apostas::class, 'cotacao_id');
+    }
 }
