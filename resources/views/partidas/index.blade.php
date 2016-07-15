@@ -74,7 +74,10 @@
         var table = $('#partidas-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('betting.partidas.grid') !!}",
+            ajax: {
+                url: "{!! route('betting.partidas.grid') !!}",
+                method: 'POST'
+            },
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",

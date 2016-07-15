@@ -93,7 +93,10 @@
         var table = $('#area-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('betting.vendedor.grid') !!}",
+            ajax: {
+                url: "{!! route('betting.vendedor.grid') !!}",
+                method: 'POST'
+            },
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",
@@ -116,7 +119,7 @@
                 {data: 'estorno', name: 'estorno_vendedor.nome'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'limite', name: 'conf_vendas.limite_vendas'},
-                {data: 'valor_total', name: 'vendas.valor_total'},
+                {data: 'valor_total', name: 'vendas.valor_total', orderable: false, searchable: false},
                 {data: 'comissao', name: 'conf_vendas.comissao'},
                 {data: 'cotacao', name: 'conf_vendas.cotacao'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

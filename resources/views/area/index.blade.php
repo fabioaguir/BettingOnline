@@ -75,7 +75,10 @@
         var table = $('#area-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('betting.area.grid') !!}",
+            ajax: {
+                url: "{!! route('betting.area.grid') !!}",
+                method: 'POST'
+            },
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",

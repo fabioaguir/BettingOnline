@@ -64,7 +64,10 @@
         var table = $('#confg-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('betting.vendedor.gridConfig', ['id' => $model->id]) }}",
+            ajax: {
+                url: "{{ route('betting.vendedor.gridConfig', ['id' => $model->id]) }}",
+                method: 'POST'
+            },
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",
@@ -86,7 +89,7 @@
                 {data: 'tipo', name: 'tipo_cotacao.nome'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'data', name: 'conf_vendas.data'},
-                {data: 'total', name: 'vendas.valor_total'},
+                {data: 'total', name: 'vendas.valor_total', orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

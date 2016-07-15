@@ -83,7 +83,10 @@
         var table = $('#cotacoes-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('betting.cotacoes.grid') !!}",
+            ajax: {
+                url: "{!! route('betting.cotacoes.grid') !!}",
+                method: 'POST'
+            },
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",

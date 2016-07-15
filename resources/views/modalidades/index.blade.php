@@ -79,7 +79,10 @@
         var table = $('#modalidades-grid').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('betting.modalidades.grid') !!}",
+            ajax: {
+                url: "{!! route('betting.modalidades.grid') !!}",
+                method: 'POST'
+            },
             language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "Não foram encontrados resultados",

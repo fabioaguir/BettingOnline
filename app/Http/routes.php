@@ -31,7 +31,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::group(['prefix' => 'area', 'as' => 'area.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'AreasController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'AreasController@grid']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'AreasController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'AreasController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'AreasController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AreasController@edit']);
@@ -41,8 +41,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::group(['prefix' => 'vendedor', 'as' => 'vendedor.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'VendedorController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'VendedorController@grid']);
-            Route::get('gridConfig/{id}', ['as' => 'gridConfig', 'uses' => 'VendedorController@gridConfig']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'VendedorController@grid']);
+            Route::post('gridConfig/{id}', ['as' => 'gridConfig', 'uses' => 'VendedorController@gridConfig']);
             Route::get('create', ['as' => 'create', 'uses' => 'VendedorController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'VendedorController@store']);
             Route::post('storeConfig', ['as' => 'storeConfig', 'uses' => 'VendedorController@storeConfig']);
@@ -55,7 +55,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         # Rota para as partidas
         Route::group(['prefix' => 'partidas', 'as' => 'partidas.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'PartidasController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'PartidasController@grid']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'PartidasController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'PartidasController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'PartidasController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PartidasController@edit']);
@@ -66,7 +66,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         # Rota para as modalidades
         Route::group(['prefix' => 'modalidades', 'as' => 'modalidades.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ModalidadesController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'ModalidadesController@grid']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'ModalidadesController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'ModalidadesController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'ModalidadesController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadesController@edit']);
@@ -77,7 +77,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         # Rota para as cotações
         Route::group(['prefix' => 'cotacoes', 'as' => 'cotacoes.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'CotacoesController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'CotacoesController@grid']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'CotacoesController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'CotacoesController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'CotacoesController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@edit']);
