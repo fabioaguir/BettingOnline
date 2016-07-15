@@ -209,7 +209,7 @@ class ReportVendasController extends Controller
 
         #Criando a consulta
         $venda = \DB::table('vendas')
-            ->join('conf_vendas', 'conf_vendas.venda_id', '=', 'vendas.id')
+            ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
             ->join('vendedor', 'vendedor.id', '=', 'conf_vendas.vendedor_id')
             ->join('status_vendas', 'vendas.status_v_id', '=', 'status_vendas.id')
             ->join('areas', 'vendedor.area_id', '=', 'areas.id')
