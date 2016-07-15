@@ -101,8 +101,8 @@ class ReportVendasController extends Controller
      * @param $dados
      * @return mixed
      */
-    public function queryVendas($dados){
-
+    public function queryVendas($dados)
+    {
         $this->data = $dados;
 
         $query = $this->struturaQuery($this->data);
@@ -146,8 +146,8 @@ class ReportVendasController extends Controller
     /**
      * @param $dados
      */
-    public function struturaQuery($dados){
-
+    public function struturaQuery($dados)
+    {
         $this->data = $dados;
 
         //Tratando as datas
@@ -158,19 +158,23 @@ class ReportVendasController extends Controller
         $query = \DB::table('vendas')
             ->join('premiacoes', 'premiacoes.id', '=', 'vendas.premiacao_id')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
-            ->join('conf_vendas', 'conf_vendas.venda_id', '=', 'vendas.id')
+            ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
             ->join('vendedor', 'conf_vendas.vendedor_id', '=', 'vendedor.id')
             ->join('areas', 'areas.id', '=', 'vendedor.area_id')
             ->whereBetween('vendas.data', array($dataIni, $dataFim));
+
         if($this->data['area'] != 0) {
             $query->where('areas.id', $this->data['area']);
         }
+
         if($this->data['vendedor'] != 0) {
             $query->where('vendedor.id', $this->data['vendedor']);
         }
+
         if($this->data['premiacao'] != 0) {
             $query->where('premiacoes.id', $this->data['premiacao']);
         }
+
         if($this->data['status'] != 0) {
             $query->where('status_vendas.id', $this->data['status']);
         }
