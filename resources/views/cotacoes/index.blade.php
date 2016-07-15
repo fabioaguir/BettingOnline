@@ -36,6 +36,8 @@
                             <table id="cotacoes-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
+                                    <th>Data</th>
+                                    <th>Partida</th>
                                     <th>Modalidade</th>
                                     <th>Cotação</th>
                                     <th>Situação</th>
@@ -44,6 +46,8 @@
                                 </thead>
                                 <tfoot>
                                 <tr>
+                                    <th>Data</th>
+                                    <th>Partida</th>
                                     <th>Modalidade</th>
                                     <th>Cotação</th>
                                     <th>Situação</th>
@@ -84,6 +88,8 @@
                 }
             },
             columns: [
+                {data: 'data', name: "to_char(partidas.data, 'DD/MM/YYYY')", orderable: false},
+                {data: 'partida', name: "concat(time_casa.nome,' x ',time_fora.nome)", orderable: false},
                 {data: 'nome', name: 'modalidades.nome'},
                 {data: 'valor', name: 'cotacoes.valor'},
                 {data: 'status', name: 'status.nome'},

@@ -72,10 +72,15 @@ class CotacoesController extends Controller
         #Criando a consulta de Cotacoes
         $rows = \DB::table('cotacoes')
             ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+            ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+            ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
+            ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
             ->join('status', 'status.id', '=', 'cotacoes.status_id')
             ->select([
                 'cotacoes.id',
                 'modalidades.nome',
+                \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
+                \DB::raw("to_char(partidas.data, 'DD/MM/YYYY') as data"),
                 'cotacoes.valor',
                 'status.nome as status'
             ]);
@@ -222,6 +227,7 @@ class CotacoesController extends Controller
             $query = \DB::table('partidas')
                 ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
                 ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
+                ->where('partidas.data', $data->format('Y-m-d'))
                 ->select([
                     'partidas.id',
                     'time_casa.nome as timeCasa',
