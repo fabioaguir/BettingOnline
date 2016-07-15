@@ -79,6 +79,15 @@
 @section('js')
     @parent
     <script type="text/javascript">
+        // Setup - add a text input to each footer cell
+        $('#cotacoes-grid tfoot th').each( function () {
+            var title = $(this).text();
+
+            if(title != 'Acão') {
+                $(this).html( '<input type="text" class="form-control" placeholder="Pesquisar..." />' );
+            }
+        } );
+
         // Criando a grid DataTables
         var table = $('#cotacoes-grid').DataTable({
             processing: true,
@@ -111,6 +120,17 @@
             ]
         });
 
+        // Apply the filter
+        table.columns().eq(0).each(function (colIdx) {
+
+            $('input', table.column(colIdx).footer()).on('keyup change', function () {
+
+                table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+            });
+        });
 
         $('.dataTables_filter input').attr('placeholder','Pesquisar...');
 
