@@ -49,7 +49,7 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
+                                <button type="submit" class="btn-primary btn" style="margin-left: -11px">Salvar</button>
                                 <a class="btn-default btn" href="{{ route('betting.area.index')}}">Voltar</a>
                             </div>
                         </div>

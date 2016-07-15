@@ -88,7 +88,7 @@
                         </div><br />
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button class="btn-primary btn" style="margin-left: -11px">Salvar</button>
+                                <button type="submit" class="btn-primary btn" style="margin-left: -11px">Salvar</button>
                                 <a class="btn-default btn" href="{{ route('betting.vendedor.index')}}">Voltar</a>
                             </div>
                         </div>
