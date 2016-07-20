@@ -112,10 +112,10 @@
                 }
             },
             columns: [
-                {data: 'codigo', name: 'vendedor.codigo'},
+                {data: 'codigo', name: 'pessoas.codigo'},
                 {data: 'nome_area', name: 'areas.nome'},
-                {data: 'nome', name: 'vendedor.nome'},
-                {data: 'usuario', name: 'vendedor.usuario'},
+                {data: 'nome', name: 'pessoas.nome'},
+                {data: 'usuario', name: 'pessoas.usuario'},
                 {data: 'estorno', name: 'estorno_vendedor.nome'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'limite', name: 'conf_vendas.limite_vendas'},

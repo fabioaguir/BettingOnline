@@ -54,7 +54,7 @@ class VendedorService
     public function store(array $data) : Vendedor
     {
 
-        $codigo = \DB::table('vendedor')->max('codigo');
+        $codigo = \DB::table('pessoas')->max('codigo');
         $codigoMax = $codigo != null ? $codigoMax = $codigo + 1 : $codigoMax = "1";
         
         #Salvando o registro pincipal

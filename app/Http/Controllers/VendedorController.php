@@ -72,22 +72,22 @@ class VendedorController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('vendedor')
-            ->join('areas', 'areas.id', '=', 'vendedor.area_id')
-            ->join('estorno_vendedor', 'estorno_vendedor.id', '=', 'vendedor.estorno_id')
-            ->join('status', 'status.id', '=', 'vendedor.status_id')
+        $rows = \DB::table('pessoas')
+            ->join('areas', 'areas.id', '=', 'pessoas.area_id')
+            ->join('estorno_vendedor', 'estorno_vendedor.id', '=', 'pessoas.estorno_id')
+            ->join('status', 'status.id', '=', 'pessoas.status_id')
             ->leftJoin(\DB::raw('conf_vendas'), function ($join) {
                 $join->on(
                     'conf_vendas.id', '=',
                     \DB::raw("(SELECT conf_atual.id FROM conf_vendas as conf_atual 
-                    where conf_atual.vendedor_id = vendedor.id AND conf_atual.status_id = 1  ORDER BY conf_vendas.id DESC LIMIT 1)")
+                    where conf_atual.vendedor_id = pessoas.id AND conf_atual.status_id = 1  ORDER BY conf_vendas.id DESC LIMIT 1)")
                 );
             })
             ->select([
-                'vendedor.id as id',
-                'vendedor.usuario as usuario',
-                'vendedor.nome as nome',
-                'vendedor.codigo as codigo',
+                'pessoas.id as id',
+                'pessoas.usuario as usuario',
+                'pessoas.nome as nome',
+                'pessoas.codigo as codigo',
                 'areas.nome as nome_area',
                 'estorno_vendedor.nome as estorno',
                 'status.nome as status',

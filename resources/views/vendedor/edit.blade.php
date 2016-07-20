@@ -99,6 +99,7 @@
         $('#confg-grid tbody').on( 'click', '.edit', function (event) {
             event.preventDefault();
 
+            //validando se uma linha da tabela foi selecioando ou não
             if ($(this).parent().parent().hasClass('selected')) {
                 $(this).parent().parent().removeClass('selected');
             }
@@ -106,8 +107,11 @@
                 table.$('tr.selected').removeClass('selected');
                 $(this).parent().parent().addClass('selected');
             }
+
+            //se a linha foi selecionada, recuperace os dados da mesma
             var data = table.rows('.selected').data()[0];
 
+            //Preenchendo os campos dos formulário para edição
             $('#limite').val(data['vendas']);
             $('#comissao').val(data['comissao']);
             $('#cotacao').val(data['cotacao']);
@@ -122,11 +126,13 @@
         //salvar configurações do vendedor
         $('.edit').on('click', function(){
 
+            //pegando os campos do formulário
             var limite = $('#limite').val();
             var comissao = $('#comissao').val();
             var cotacao = $('#cotacao').val();
             var tipoCota = $('#tipo_cotacao').val();
 
+            //estrututando os dados do formulário em array para envio ajax
             var dados = {
                 'limite_vendas': limite,
                 'comissao': comissao,
@@ -145,13 +151,23 @@
                     data: dados,
                     datatype: 'json'
                 }).done(function (json) {
+
+                    //desabilitando botão salvar e habilitando o botão editar
                     $('.save').prop('disabled', false);
                     $('.edit').prop('disabled', true);
+
+                    //exibindo mensagem retornada pela requisição
                     bootbox.alert(json['msg']);
-                    table.ajax.reload()
+
+                    //recarregando a tabela de dados de configuração de vendas
+                    table.ajax.reload();
+
+                    //Limpando os campos do formulário após a edição
                     var limite = $('#limite').val("");
                     var comissao = $('#comissao').val("");
                     var cotacao = $('#cotacao').val("");
+
+                    //Recarregando os campo de tipo de cotação
                     tipoCotacao();
 
                 });
@@ -161,11 +177,14 @@
 
         //Validando formulário configuração de vendas save
         $('#formConfig').submit(function(event){
+
+            //pegando os campos do formulário
             var limite = $('#limite').val();
             var comissao = $('#comissao').val();
             var cotacao = $('#cotacao').val();
             var tipoCota = $('#tipo_cotacao').val();
 
+            //Validando formulário configuração de vendas salvar
             if(limite == "" || comissao == "" || cotacao == "" || tipoCota == "") {
                 bootbox.alert('Todos os campos são de preenchimento obrigatório');
                 return false;

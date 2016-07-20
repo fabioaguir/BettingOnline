@@ -22,7 +22,7 @@
                 {!! Form::select('area', (['0' => 'Todas'] + $loadFields['areas']->toArray()), $area,array('class' => 'form-control', 'id' => 'area')) !!}
             </div>
             <div class="form-group col-md-4">
-                <?php $vendedor =  isset($request['vendedor']) ? $request['vendedor'] : ""; ?>
+                <?php $vendedor =  isset($request['pessoas']) ? $request['pessoas'] : ""; ?>
                 {!! Form::label('vendedor', 'Vendedor ') !!}
                 {!! Form::select('vendedor', (['0' => 'Todos'] + $loadFields['vendedor']->toArray()), $vendedor, array('class' => 'form-control', 'id' => 'vendedor')) !!}
             </div>
@@ -84,7 +84,7 @@
                 @if(isset($consulta))
                     @foreach($consulta as $venda)
                         <tr>
-                            <td><a href="{{route('betting.report.cumpomVenda', ['d' => $venda->id])}}" target="__blank">{{$venda->seq}}</a></td>
+                            <td><a href="{{route('betting.report.cupomVendas', ['d' => $venda->id])}}" target="__blank">{{$venda->seq}}</a></td>
                             <td>{{$venda->area_nome}}</td>
                             <td>{{$venda->vendedor_nome}}</td>
                             <td>{{$venda->data}}</td>

@@ -111,7 +111,7 @@ class ReportVendasController extends Controller
             'vendas.id as id',
             \DB::raw("lpad(vendas.seq::text, 6, '0') as seq"),
             'areas.nome as area_nome',
-            'vendedor.nome as vendedor_nome',
+            'pessoas.nome as vendedor_nome',
             \DB::raw("to_char(vendas.data, 'DD/MM/YYYY') as data"),
             'vendas.obs as obs',
             'vendas.valor_total as valor_total',
@@ -159,8 +159,8 @@ class ReportVendasController extends Controller
             ->join('premiacoes', 'premiacoes.id', '=', 'vendas.premiacao_id')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
             ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
-            ->join('vendedor', 'conf_vendas.vendedor_id', '=', 'vendedor.id')
-            ->join('areas', 'areas.id', '=', 'vendedor.area_id')
+            ->join('pessoas', 'conf_vendas.vendedor_id', '=', 'pessoas.id')
+            ->join('areas', 'areas.id', '=', 'pessoas.area_id')
             ->whereBetween('vendas.data', array($dataIni, $dataFim));
 
         if($this->data['area'] != 0) {
@@ -168,7 +168,7 @@ class ReportVendasController extends Controller
         }
 
         if($this->data['vendedor'] != 0) {
-            $query->where('vendedor.id', $this->data['vendedor']);
+            $query->where('pessoas.id', $this->data['vendedor']);
         }
 
         if($this->data['premiacao'] != 0) {
@@ -185,7 +185,7 @@ class ReportVendasController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function cumpomVenda($id)
+    public function cupomVendas($id)
     {
         #Criando a consulta
         $apostas = \DB::table('apostas')
@@ -210,14 +210,14 @@ class ReportVendasController extends Controller
         #Criando a consulta
         $venda = \DB::table('vendas')
             ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
-            ->join('vendedor', 'vendedor.id', '=', 'conf_vendas.vendedor_id')
+            ->join('pessoas', 'pessoas.id', '=', 'conf_vendas.vendedor_id')
             ->join('status_vendas', 'vendas.status_v_id', '=', 'status_vendas.id')
-            ->join('areas', 'vendedor.area_id', '=', 'areas.id')
+            ->join('areas', 'pessoas.area_id', '=', 'areas.id')
             ->join('tipo_apostas', 'tipo_apostas.id', '=', 'vendas.tipo_aposta_id')
             ->where('vendas.id', '=', $id)
             ->select([
                 \DB::raw("to_char(vendas.data, 'DD/MM/YYYY HH:MI:SS') as data"),
-                'vendedor.nome as vendedor',
+                'pessoas.nome as vendedor',
                 'status_vendas.nome as status_nome',
                 'status_vendas.id as status_id',
                 'vendas.valor_total as total',
@@ -233,7 +233,7 @@ class ReportVendasController extends Controller
         $parametros = $this->parametros->all();
 
         #Retorno para view
-        return view('reports.cumpomVendas', compact('apostas', 'venda', 'parametros'));
+        return view('reports.cupomVendas', compact('apostas', 'venda', 'parametros'));
     }
     
 }
