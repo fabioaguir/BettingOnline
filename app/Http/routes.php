@@ -116,10 +116,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+            Route::get('getPartidasReport', ['as' => 'getPartidasReport', 'uses' => 'CotacoesController@getPartidas']);
             Route::get('reportVendasView', ['as' => 'reportVendasView', 'uses' => 'ReportVendasController@reportVendasView']);
             Route::post('reportVendasSearch', ['as' => 'reportVendasSearch', 'uses' => 'ReportVendasController@reportVendasSearch']);
             Route::get('reportVendasSearchPag', ['as' => 'reportVendasSearchPag', 'uses' => 'ReportVendasController@reportVendasSearchPag']);
-            Route::get('cumpomVenda/{d}', ['as' => 'cumpomVenda', 'uses' => 'ReportVendasController@cumpomVenda']);
+            Route::get('cupomVendas/{d}', ['as' => 'cupomVendas', 'uses' => 'ReportVendasController@cupomVendas']);
+            Route::get('reportApostasView', ['as' => 'reportApostasView', 'uses' => 'ReportApostasController@reportApostasView']);
+            Route::post('reportApostasSearch', ['as' => 'reportApostasSearch', 'uses' => 'ReportApostasController@reportApostasSearch']);
         });
         
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

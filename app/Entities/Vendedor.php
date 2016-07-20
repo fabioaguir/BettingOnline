@@ -10,7 +10,7 @@ class Vendedor extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'vendedor';
+    protected $table    = 'pessoas';
 
     protected $fillable = [
         'nome',

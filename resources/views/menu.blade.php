@@ -151,7 +151,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas/Relatórios<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
-                            {{--<li class="divider"></li>--}}
+                            <li class="divider"></li>
+                            <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                         </ul>
                     </li>
                     {{--<li><a href="">Another Link</a></li>--}}
@@ -256,6 +257,7 @@
                                             <a href="javascript:;"><i class="ti ti-files"></i><span>Consultas/Relatórios</span></a>
                                             <ul class="acc-menu">
                                                 <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
+                                                <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                                             </ul>
                                         </li>
                                         {{-- menu extras --}}

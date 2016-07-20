@@ -65,14 +65,14 @@
         //Carregando os bairros
         $(document).on('change', "#area", function () {
             //Removendo as Bairros
-            $('#vendedor option').remove();
+            $('#pessoas option').remove();
 
             //Recuperando a cidade
             var area = $(this).val();
 
             if (area !== "") {
                 var dados = {
-                    'table' : 'vendedor',
+                    'table' : 'pessoas',
                     'field_search' : 'area_id',
                     'value_search': area,
                 };
@@ -90,8 +90,8 @@
                         option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
                     }
 
-                    $('#vendedor option').remove();
-                    $('#vendedor').append(option);
+                    $('#pessoas option').remove();
+                    $('#pessoas').append(option);
                 });
             }
         });
