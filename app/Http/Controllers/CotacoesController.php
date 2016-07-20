@@ -213,33 +213,4 @@ class CotacoesController extends Controller
             return redirect()->back()->withErros($e->getMessage());
         }
     }
-
-    /**
-     * @param Request $request
-     */
-    public function getPartidas(Request $request)
-    {
-        try {
-            # Recuperando a data da requisição
-            $data  = Carbon::createFromFormat('d/m/Y', $request->get('data'));
-
-            # Fazendo a consulta
-            $query = \DB::table('partidas')
-                ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
-                ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
-                ->where('partidas.data', $data->format('Y-m-d'))
-                ->select([
-                    'partidas.id',
-                    'time_casa.nome as timeCasa',
-                    'time_fora.nome as timeFora'
-                ])->get();
-
-            # retorno
-            return response()->json(['success' => true, 'data' => $query]);
-        } catch (\InvalidArgumentException $e) {
-            return response()->json(['success' => false, 'msg' => 'Data inválida!']);
-        } catch (\Throwable $e) {
-            return response()->json(['success' => false, 'msg' => 'Ocorreu um erro, tente novamente.']);
-        }
-    }
 }
