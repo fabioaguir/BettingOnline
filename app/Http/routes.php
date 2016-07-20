@@ -52,6 +52,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('zerar/{id}', ['as' => 'zerar', 'uses' => 'VendedorController@zerar']);
         });
 
+        Route::group(['prefix' => 'arrecadador', 'as' => 'arrecadador.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ArrecadadorController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'ArrecadadorController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ArrecadadorController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ArrecadadorController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ArrecadadorController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ArrecadadorController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'ArrecadadorController@delete']);
+        });
+
         # Rota para as partidas
         Route::group(['prefix' => 'partidas', 'as' => 'partidas.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'PartidasController@index']);
