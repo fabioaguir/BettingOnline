@@ -167,7 +167,7 @@
                 </li>
 
                 <li class="toolbar-icon-bg hidden-xs" id="trigger-fullscreen">
-                    <a href="#" class="toggle-fullscreen"><span class="icon-bg"><i class="ti ti-fullscreen"></i></span></i></a>
+                    <a href="#" class="toggle-fullscreen"><span class="icon-bg"><i class="ti ti-fullscreen"></i></span></a>
                 </li>
 
                 {{-- Notificações --}}
@@ -249,6 +249,7 @@
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti  ti-location-pin"></i><span>Áreas</span></a></li>
                                         <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-user"></i><span>Vendedores</span></a></li>
                                         <li><a href="{{ route('betting.partidas.index') }} "><i class="ti  ti-clipboard"></i><span>Partidas</span></a></li>
+                                        <li><a href="{{ route('betting.gols.index') }} "><i class="ti  ti-clipboard"></i><span>Resultados</span></a></li>
                                         <li><a href="{{ route('betting.modalidades.index') }} "><i class="ti ti-control-play"></i><span>Modalidades</span></a></li>
                                         <li><a href="{{ route('betting.cotacoes.index') }} "><i class="ti ti-control-play"></i><span>Cotações</span></a></li>
                                         <li>
@@ -358,9 +359,12 @@
         <script type="text/javascript" src="{{ asset('/assets/demo/demo-switcher.js')}}"></script>
 
         {{--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>--}}
+         <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>--}}
         <script type="text/javascript" src="{{ asset('/assets/plugins/datatables/jquery.dataTables.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/datatables/dataTables.bootstrap.js')}}"></script>
+
+        <!-- Rotas para javascript -->
+        <script type="text/javascript" src="{{ asset('/js/laroute.js') }}"></script>
 
         <!-- plugins adicionais -->
         <script type="text/javascript" src="{{ asset('/assets/plugins/switchery/switchery.js')}}"></script>

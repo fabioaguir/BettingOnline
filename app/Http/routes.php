@@ -61,6 +61,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PartidasController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'PartidasController@update']);
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'PartidasController@destroy']);
+            Route::get('getPartidas', ['as' => 'getPartidas', 'uses' => 'PartidasController@getPartidas']);
         });
 
         # Rota para as modalidades
@@ -83,9 +84,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'CotacoesController@update']);
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@destroy']);
-            Route::get('getPartidas', ['as' => 'getPartidas', 'uses' => 'CotacoesController@getPartidas']);
         });
 
+        # Rota para gols
+        Route::group(['prefix' => 'gols', 'as' => 'gols.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'GolsController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'GolsController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'GolsController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'GolsController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'GolsController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'GolsController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'GolsController@delete']);
+        });
 
         Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ModalidadeController@index']);

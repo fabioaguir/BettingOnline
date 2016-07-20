@@ -182,6 +182,11 @@ return [
          */
         Way\Generators\GeneratorsServiceProvider::class,
         Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+
+        /*
+         * Gerador de rotas javascript
+         */
+        Lord\Laroute\LarouteServiceProvider::class,
     ],
 
     /*
