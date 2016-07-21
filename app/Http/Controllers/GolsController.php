@@ -36,8 +36,7 @@ class GolsController extends Controller
      * Arrays de models para carregamento
      */
     private $loadFields = [
-        'Status',
-        'Modalidades'
+        'Tempos'
     ];
 
     /**
@@ -59,13 +58,17 @@ class GolsController extends Controller
      */
     public function index()
     {
-        return view('gols.index');
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('gols.index', compact('loadFields'));
     }
 
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid($idPartida)
     {
         #Criando a consulta de Gols
         $rows = \DB::table('gols')
@@ -74,35 +77,25 @@ class GolsController extends Controller
             ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
             ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
             ->join('times', 'times.id', '=', 'gols.time_id')
+            ->where('partidas.id', $idPartida)
             ->select([
                 'gols.id',
                 \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
                 \DB::raw("to_char(partidas.data, 'DD/MM/YYYY') as data"),
                 'tempos.nome as nomeTempo',
-                'times.nome as time'
+                'times.nome as time',
+                'gols.minutos'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Html de retorno
-            $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
-            $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+           // $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            $html = '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
 
             # retorno
             return $html;
         })->make(true);
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
-
-        #Retorno para view
-        return view('gols.create', compact('loadFields'));
     }
 
     /**
@@ -119,63 +112,14 @@ class GolsController extends Controller
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
-            $this->service->store($data);
+            $gol = $this->service->store($data);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+            return response()->json(['success' => true, 'data' => $gol]);
         } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+            return response()->json(['success' => false, 'msg' => $this->validator->errors()]);
         } catch (\Throwable $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-        }
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        try {
-            #Recuperando a empresa
-            $model = $this->repository->with('status', 'partida')->find($id);
-            
-            #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
-
-            #retorno para view
-            return view('gols.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
-    {
-        try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            #Executando a ação
-            $this->service->update($data, $id);
-
-            #Retorno para a view
-            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
 
@@ -187,20 +131,55 @@ class GolsController extends Controller
     {
         try {
             # Recuperando o registro do banco de dados
-            $cotacao = $this->repository->find($id);
+            $gol = $this->repository->find($id);
 
             # verificando se o registro foi recuperado
-            if(!$cotacao) {
+            if(!$gol) {
                 throw new \Exception('Gol não encontrado!');
             }
 
+            # Recuperando o id da partida
+            $idPartida = $gol->partida->id;
+
             # Removendo o registro do banco de dados
-            $this->repository->delete($cotacao->id);
+            $this->repository->delete($gol->id);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+            return response()->json(['success' => true, 'data' => $idPartida]);
         } catch (\Throwable $e) {
-            return redirect()->back()->withErros($e->getMessage());
+            return  response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getTimes(Request $request)
+    {
+        try {
+            # Recuperando a requisição
+            $data = $request->get('data');
+
+            # Recuperando o registro do banco de dados
+            $times = \DB::table('times')
+                ->join('partidas', function ($join) {
+                    $join->on('partidas.time_casa_id', '=', 'times.id')
+                        ->orOn('partidas.time_fora_id', '=', 'times.id');
+                })
+                ->select('times.id', 'times.nome')
+                ->where('partidas.id', $data)
+                ->get();
+
+            # verificando se o registro foi recuperado
+            if(!$times) {
+                throw new \Exception('Times não encontrados!');
+            }
+
+            #Retorno para a view
+            return response()->json(['success' => true, 'data' => $times]);
+        } catch (\Throwable $e) {
+            return  response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
 }

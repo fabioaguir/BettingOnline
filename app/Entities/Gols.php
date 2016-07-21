@@ -25,4 +25,11 @@ class Gols extends Model implements Transformable
         'tempo_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partida()
+    {
+        return $this->belongsTo(Partidas::class, 'partida_id');
+    }
 }

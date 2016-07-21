@@ -19,22 +19,6 @@
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-md-12">
-                @if(Session::has('message'))
-                    <div class="alert alert-success">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <em> {!! session('message') !!}</em>
-                    </div>
-                @endif
-
-                @if(Session::has('errors'))
-                    <div class="alert alert-danger">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        @foreach($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
-
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Cadastrar Gol</h2>
@@ -105,66 +89,10 @@
 
 @section('js')
     @parent
+    <script type="text/javascript" src="{{ asset('js/gols/grid.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/gols/gols.js')  }}"></script>
-    <script type="text/javascript">
-        // Criando a grid DataTables
-        var table = $('#gols-grid').DataTable({
-            processing: true,
-            serverSide: true,
-            iDisplayLength: 20,
-            bLengthChange: false,
-            bFilter: false,
-            bPaginate: false,
-            ajax: {
-                url: "{!! route('betting.gols.grid') !!}",
-                method: 'POST'
-            },
-            language: {
-                "lengthMenu": "_MENU_",
-                "zeroRecords": "Não foram encontrados resultados",
-                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
-                "sProcessing":   "Processando...",
-                "oPaginate": {
-                    "sFirst":    "Primeiro",
-                    "sPrevious": "Anterior",
-                    "sNext":     "Seguinte",
-                    "sLast":     "Último"
-                }
-            },
-            columns: [
-                {data: 'nomeTempo', name: "tempos.nome", orderable: false},
-                {data: 'minutos', name: 'gols.minutos'},
-                {data: 'data', name: "to_char(partidas.data, 'DD/MM/YYYY')"},
-                {data: 'partida', name: "concat(time_casa.nome,' x ',time_fora.nome)", orderable: false},
-                {data: 'time', name: 'times.nome'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
-        });
-
-        $('.dataTables_filter input').attr('placeholder','Pesquisar...');
-
-        //DOM Manipulation to move datatable elements integrate to panel
-        $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
-        $('.panel-ctrls').append("<i class='separator'></i>");
-        $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
-
-        $('.panel-footer').append($(".dataTable+.row"));
-        $('.dataTables_paginate>ul.pagination').addClass("pull-right m-n");
-
-
-        $(document).on('click', 'a.delete', function (event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
-                if (result) {
-                    location.href = url
-                } else {
-                    false;
-                }
-            });
-        });
-
-    </script>
+    <script type="text/javascript" src="{{ asset('js/gols/store.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/gols/update.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/gols/destroy.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/gols/controller.js')  }}"></script>
 @endsection

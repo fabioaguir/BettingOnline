@@ -32,12 +32,14 @@ $(document).ready(function(){
     $('.codigo').mask('###');
 
     //Data
-    $('.date').mask('00/00/0000');
+    $('.date').mask('00/00/0000', {placeholder: '__/__/____'});
 
     // Data e Hora
     $('.datetime').mask('00/00/0000 00:00:00');
 
-    $('.time').mask('00:00:00' , {reverse: true});
+    $('.time').mask('00:00:00' , {placeholder: '00:00:00', reverse: true});
+    
+    $('.seconds').mask('00:00:00');
 
     $('.datepicker').datetimepicker({
         timepicker: false,
