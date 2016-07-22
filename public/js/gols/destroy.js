@@ -19,6 +19,9 @@ $(document).on('click', 'a.delete', function (event) {
                     // Html de retonro
                     var idPartida = jsonResponse.data;
 
+                    // Atualizando o resultado
+                    builderResultado(idPartida);
+
                     // Limpando os campos
                     clearFields();
 

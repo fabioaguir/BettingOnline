@@ -54,9 +54,15 @@ $(document).on('change', '#partida_id', function (event) {
         // Mensagem de alerta
         bootbox.alert("Partida inválida!");
 
+        // Removendo os times escolhidos
+        $('#time_id option').remove();
+
         // Cancelando a execução do evento
-        event.preventDefault();
+        return false;
     }
+
+    // Atualizando o resultado
+    builderResultado(idPartida);
 
     // Carregando a grid
     loadTable(idPartida).ajax.url(laroute.route('betting.gols.grid', {'idPartida' : idPartida})).load();

@@ -96,6 +96,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'GolsController@update']);
             Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'GolsController@destroy']);
             Route::get('getTimes', ['as' => 'getTimes', 'uses' => 'GolsController@getTimes']);
+            Route::get('getResultado/{idPartida}', ['as' => 'getResultado', 'uses' => 'GolsController@getResultado']);
+            Route::put('conclude/{idPartida}', ['as' => 'conclude', 'uses' => 'GolsController@conclude']);
         });
 
         Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {

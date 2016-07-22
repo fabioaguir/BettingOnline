@@ -43,7 +43,9 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td colspan="3" style="text-align: center; font-size: 16px; font-weight: bold; background-color: #DCDCDC">Sport 10 x 0 Santa Cruz</td>
+                                                <td colspan="3" style="text-align: center; font-size: 16px; font-weight: bold; background-color: #DCDCDC">
+                                                    <span id="time_casa"></span> <span id="gols_casa"></span> x <span id="gols_fora"></span> <span id="time_fora"></span>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -90,9 +92,11 @@
 @section('js')
     @parent
     <script type="text/javascript" src="{{ asset('js/gols/grid.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/gols/resultado.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/gols/gols.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/gols/store.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('js/gols/update.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/gols/destroy.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/gols/conclude.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/gols/controller.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/validacoes/validation_form_gols.js') }}"></script>
 @endsection

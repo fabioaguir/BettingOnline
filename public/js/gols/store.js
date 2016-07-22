@@ -12,6 +12,9 @@ function store(dados)
             // Html de retonro
             var gol = jsonResponse.data;
 
+            // Atualizando o resultado
+            builderResultado(gol.partida_id);
+
             // Limpando os campos
             clearFields();
 
@@ -21,6 +24,11 @@ function store(dados)
             } else {
                 loadTable(gol.partida_id).ajax.url(laroute.route('betting.gols.grid', {'idPartida' : gol.partida_id})).load();
             }
+
+            // Resetando a validação
+            $('#formGol').bootstrapValidator("resetForm",true);
+            $('#partida_id option').attr('selected', false);
+            $('#partida_id option[value=' + gol.partida_id + ']').prop('selected', true);
 
             // Mensagem
             bootbox.alert('Cadastro realizado com sucesso!');

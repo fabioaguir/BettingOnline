@@ -1,5 +1,5 @@
 // Evento para salvar o gol
-$('#formGol').submit(function (event) {
+$('#formGol').on('submit', function (event) {
     // Parando a propagação do evento
     event.preventDefault();
 
@@ -11,6 +11,12 @@ $('#formGol').submit(function (event) {
         'minutos' : $('#minutos').val(),
     };
 
+    // Validando o formulário
+    $('#formGol').bootstrapValidator(options);
+    var validate = $('#formGol').data('bootstrapValidator').validate().isValid();
+
      //Processando a requisição
-     store(dados);
+    if(validate) {
+        store(dados);
+    }
 });

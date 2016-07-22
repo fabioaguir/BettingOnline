@@ -4,6 +4,7 @@ namespace Softage\Services;
 
 use Softage\Entities\Gols;
 use Softage\Repositories\GolsRepository;
+use Softage\Repositories\PartidasRepository;
 
 class GolsService
 {
@@ -15,11 +16,17 @@ class GolsService
     private $repository;
 
     /**
+     * @var PartidasRepository
+     */
+    private $partidasRepository;
+
+    /**
      * @param GolsRepository $repository
      */
-    public function __construct(GolsRepository $repository)
+    public function __construct(GolsRepository $repository, PartidasRepository $partidasRepository)
     {
         $this->repository = $repository;
+        $this->partidasRepository = $partidasRepository;
     }
 
     /**
@@ -63,6 +70,29 @@ class GolsService
 
         #Retorno
         return $gol;
+    }
+
+    /**
+     * @param $idPartida
+     * @return bool
+     * @throws \Exception
+     */
+    public function conclude($idPartida)
+    {
+        # Recuperando a partida
+        $partida = $this->partidasRepository->find($idPartida);
+
+        # Verificando se a partida foi encontrada
+        if(!$partida) {
+            throw new \Exception("Partida não encontrada");
+        }
+
+        # Alterando o status da partida
+        $partida->status_id = 1;
+        $partida->save();
+
+        # Retorno
+        return true;
     }
 
     /**

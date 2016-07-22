@@ -152,6 +152,25 @@ class GolsController extends Controller
     }
 
     /**
+     * @param $idPartida
+     * @return mixed
+     */
+    public function conclude($idPartida)
+    {
+        try {
+            #Executando a ação
+            $this->service->conclude($idPartida);
+
+            #Retorno para a view
+            return response()->json(['success' => true]);
+        } catch (ValidatorException $e) {
+            return response()->json(['success' => false, 'msg' => $this->validator->errors()]);
+        } catch (\Throwable $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
      * @param Request $request
      * @return mixed
      */
@@ -178,6 +197,33 @@ class GolsController extends Controller
 
             #Retorno para a view
             return response()->json(['success' => true, 'data' => $times]);
+        } catch (\Throwable $e) {
+            return  response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idPartida
+     * @return mixed
+     */
+    public function getResultado($idPartida)
+    {
+        try {
+            # Recuperando o resultado da partida
+            $resultado = \DB::table('partidas')
+                ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
+                ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
+                ->where('partidas.id', $idPartida)
+                ->select([
+                    'time_casa.nome as time_casa',
+                    'time_fora.nome as time_fora',
+                    \DB::raw("(SELECT COUNT(gols.id) FROM gols WHERE gols.partida_id = partidas.id AND gols.time_id = time_casa.id) as gols_casa"),
+                    \DB::raw("(SELECT COUNT(gols.id) FROM gols WHERE gols.partida_id = partidas.id AND gols.time_id = time_fora.id) as gols_fora")
+                ])
+                ->get();
+
+            #Retorno para a view
+            return response()->json(['success' => true, 'data' => $resultado]);
         } catch (\Throwable $e) {
             return  response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }

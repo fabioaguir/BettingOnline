@@ -52,7 +52,8 @@
         <div class="row">
             <div class="col-sm-8 col-sm-offset-1">
                 <button class="btn-primary btn" id="btnStoreGol"  style="margin-left: -11px">Salvar</button>
-                <a class="btn-default btn" href="{{ route('betting.gols.index')}}">Voltar</a>
+                <a class="btn-success btn" id="btnConcludeGol">Finalizar</a>
+                <a class="btn-default btn" href="{{ route('betting.gols.index')}}">Cancelar</a>
             </div>
         </div>
     </div>

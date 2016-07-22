@@ -226,9 +226,11 @@ class PartidasController extends Controller
 
             # Fazendo a consulta
             $query = \DB::table('partidas')
+                ->join('status', 'status.id', '=', 'partidas.status_id')
                 ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
                 ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
                 ->where('partidas.data', $data->format('Y-m-d'))
+                ->where('status.id', 2)
                 ->select([
                     'partidas.id',
                     'time_casa.nome as timeCasa',
