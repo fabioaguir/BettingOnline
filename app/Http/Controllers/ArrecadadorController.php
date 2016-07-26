@@ -31,6 +31,7 @@ class ArrecadadorController extends Controller
      * @var array
      */
     private $loadFields = [
+        'Status'
     ];
 
     public function __construct(ArrecadadorService $service, ArrecadadorValidator $validator)
@@ -54,17 +55,20 @@ class ArrecadadorController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('pessoas')->select(['id', 'nome']);
+        $rows = \DB::table('pessoas')
+            ->join('status', 'status.id', '=', 'pessoas.status_id')
+            ->where('pessoas.tipo_pessoa_id', '=', '2')
+            ->select([
+                'pessoas.id as id', 
+                'pessoas.nome as nome', 
+                'pessoas.usuario as usuario',
+                'status.nome as status',
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
             $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
-            # Verificando se existe vinculo com o currículo
-            $area = $this->service->find($row->id);
-            if(count($area->vendedores) == 0) {
-                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
-            }
             return $html;
         })->make(true);
     }

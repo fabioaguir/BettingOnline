@@ -97,7 +97,7 @@ class ReportApostasController extends Controller
             'modalidades.nome as nome_modalidade',
             'apostas.valor as valor',
             'cotacoes.valor as cotacao',
-            \DB::raw("(CASE tipo_apostas.id WHEN 1 THEN to_char((apostas.valor * cotacoes.valor)::real, '99D99') WHEN 2 THEN to_char((vendas.retorno)::real, '99D99') END ) as retorno"),
+            \DB::raw("(CASE tipo_apostas.id WHEN 1 THEN to_char((apostas.valor * cotacoes.valor)::real, '9999999999D99') WHEN 2 THEN to_char((vendas.retorno)::real, '9999999999D99') END ) as retorno"),
         ]);
 
         return $consulta;

@@ -17,6 +17,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
 
+        //Rotas para Dashboard
+        Route::post('dashboard'  , ['as' => 'dashboard', 'uses' => 'DefaultController@dashboard']);
+        Route::post('resultVendas'  , ['as' => 'resultVendas', 'uses' => 'DefaultController@resultadosVendas']);
+
         //Rotas para selectes via ajax
         Route::post('allTipoCotacao'  , ['as' => 'allTipoCotacao', 'uses' => 'DefaultController@allTipoCotacao']);
 
@@ -125,19 +129,30 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'ResultadoController@update']);
         });
 
+        Route::group(['prefix' => 'timesAlta', 'as' => 'timesAlta.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TimesAltaController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'TimesAltaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TimesAltaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TimesAltaController@store']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'TimesAltaController@delete']);
+        });
+
         Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
             Route::get('getPartidasReport', ['as' => 'getPartidasReport', 'uses' => 'CotacoesController@getPartidas']);
             Route::get('reportVendasView', ['as' => 'reportVendasView', 'uses' => 'ReportVendasController@reportVendasView']);
             Route::post('reportVendasSearch', ['as' => 'reportVendasSearch', 'uses' => 'ReportVendasController@reportVendasSearch']);
-            Route::get('reportVendasSearchPag', ['as' => 'reportVendasSearchPag', 'uses' => 'ReportVendasController@reportVendasSearchPag']);
+            Route::post('reportVendasSum', ['as' => 'reportVendasSum', 'uses' => 'ReportVendasController@querySum']);
             Route::get('cupomVendas/{d}', ['as' => 'cupomVendas', 'uses' => 'ReportVendasController@cupomVendas']);
             Route::get('reportApostasView', ['as' => 'reportApostasView', 'uses' => 'ReportApostasController@reportApostasView']);
             Route::post('reportApostasSearch', ['as' => 'reportApostasSearch', 'uses' => 'ReportApostasController@reportApostasSearch']);
+            Route::get('reportArrecadacoesView', ['as' => 'reportArrecadacoesView', 'uses' => 'ReportArrecadacoesController@reportArrecadacoesView']);
+            Route::post('reportArrecadacoesSearch', ['as' => 'reportArrecadacoesSearch', 'uses' => 'ReportArrecadacoesController@reportArrecadacoesSearch']);
+            Route::post('reportArrecadacoesSum', ['as' => 'reportArrecadacoesSum', 'uses' => 'ReportArrecadacoesController@querySum']);
         });
         
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'UserController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'UserController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UserController@edit']);

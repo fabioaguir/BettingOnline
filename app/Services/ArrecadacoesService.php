@@ -2,20 +2,20 @@
 
 namespace Softage\Services;
 
-use Softage\Repositories\ArrecadadorRepository;
-use Softage\Entities\Arrecadador;
+use Softage\Repositories\ArrecadacoesRepository;
+use Softage\Entities\Arrecadacoes;
 
-class ArrecadadorService
+class ArrecadacoesService
 {
     /**
-     * @var ArrecadadorRepository
+     * @var ArrecadacoesRepository
      */
     private $repository;
 
     /**
-     * @param ArrecadadorRepository $repository
+     * @param ArrecadacoesRepository $repository
      */
-    public function __construct(ArrecadadorRepository $repository)
+    public function __construct(ArrecadacoesRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -28,11 +28,11 @@ class ArrecadadorService
     public function find($id)
     {
         $relacionamentos = [
-            'status'
+            'vendedores'
         ];
         
         #Recuperando o registro no banco de dados
-        $endereco = $this->repository->find($id);
+        $endereco = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$endereco) {
@@ -47,23 +47,18 @@ class ArrecadadorService
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Arrecadador
+    public function store(array $data) : Arrecadacoes
     {
-        $codigo = \DB::table('pessoas')->max('codigo');
-        $codigoMax = $codigo != null ? $codigoMax = $codigo + 1 : $codigoMax = "1";
-
         #Salvando o registro pincipal
-        $data['codigo'] = $codigoMax;
-        $data['tipo_pessoa_id'] = '2';
-        $vendedor =  $this->repository->create($data);
-        
+        $endereco =  $this->repository->create($data);
+
         #Verificando se foi criado no banco de dados
-        if(!$vendedor) {
+        if(!$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $vendedor;
+        return $endereco;
     }
 
     /**
@@ -71,7 +66,7 @@ class ArrecadadorService
      * @param int $id
      * @return mixed
      */
-    public function update(array $data, int $id) : Arrecadador
+    public function update(array $data, int $id) : Arrecadacoes
     {
         #Atualizando no banco de dados
         $endereco = $this->repository->update($data, $id);

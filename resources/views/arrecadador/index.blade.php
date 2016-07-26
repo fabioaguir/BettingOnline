@@ -11,7 +11,7 @@
 @endsection
 
 @section('page-heading')
-    <h1>Área</h1>
+    <h1>Arrecadador</h1>
 @endsection
 
 @section('container')
@@ -37,8 +37,8 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Lista de áreas</h2><br />
-                        <a href="{{ route('betting.area.create')}}" class="btn btn-primary">Novo Área</a>
+                        <h2>Lista de arrecadadores</h2><br />
+                        <a href="{{ route('betting.arrecadador.create')}}" class="btn btn-primary">Novo Arrecadador</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
@@ -48,12 +48,16 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Usuário</th>
+                                    <th>Status</th>
                                     <th>Acão</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Usuário</th>
+                                    <th>Status</th>
                                     <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
@@ -76,7 +80,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{!! route('betting.area.grid') !!}",
+                url: "{!! route('betting.arrecadador.grid') !!}",
                 method: 'POST'
             },
             language: {
@@ -94,7 +98,9 @@
                 }
             },
             columns: [
-                {data: 'nome', name: 'nome'},
+                {data: 'nome', name: 'pessoas.nome'},
+                {data: 'usuario', name: 'pessoas.usuario'},
+                {data: 'status', name: 'status.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

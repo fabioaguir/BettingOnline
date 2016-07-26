@@ -6,6 +6,10 @@
         .form-group {
             margin-top: -10px;;
         }
+        .table-responsive {
+            min-height: 0.01%;
+            overflow-x: initial;
+        }
     </style>
 @endsection
 
@@ -53,47 +57,4 @@
         </div>
     </div>
 
-@endsection
-
-@section('js')
-    @parent
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendas.js')}}"></script>
-    <script type="text/javascript">
-        var elem = document.querySelector('.js-switch-info');
-        var init = new Switchery(elem);
-
-        //Carregando os bairros
-        $(document).on('change', "#area", function () {
-            //Removendo as Bairros
-            $('#pessoas option').remove();
-
-            //Recuperando a cidade
-            var area = $(this).val();
-
-            if (area !== "") {
-                var dados = {
-                    'table' : 'pessoas',
-                    'field_search' : 'area_id',
-                    'value_search': area,
-                };
-
-                jQuery.ajax({
-                    type: 'POST',
-                    url: '{{ route('betting.util.search')  }}',
-                    data: dados,
-                    datatype: 'json'
-                }).done(function (json) {
-                    var option = "";
-
-                    option += '<option value="0">Todos</option>';
-                    for (var i = 0; i < json.length; i++) {
-                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
-                    }
-
-                    $('#pessoas option').remove();
-                    $('#pessoas').append(option);
-                });
-            }
-        });
-    </script>
 @endsection

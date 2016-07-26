@@ -2,6 +2,7 @@
 
 namespace Softage\Services;
 
+use Softage\Repositories\ArrecadacoesRepository;
 use Softage\Repositories\ConfVendasRepository;
 use Softage\Repositories\VendedorRepository;
 use Softage\Entities\Vendedor;
@@ -19,12 +20,24 @@ class VendedorService
     private $repoConfVendas;
 
     /**
-     * @param VendedorRepository $repository
+     * @var ArrecadacoesRepository
      */
-    public function __construct(VendedorRepository $repository, ConfVendasRepository $repoConfVendas)
+    private $repoArrecadacoes;
+
+    /**
+     * VendedorService constructor.
+     * @param VendedorRepository $repository
+     * @param ConfVendasRepository $repoConfVendas
+     * @param ArrecadacoesRepository $repoArrecadacoes
+     * 
+     */
+    public function __construct(VendedorRepository $repository, 
+                                ConfVendasRepository $repoConfVendas,
+                                ArrecadacoesRepository $repoArrecadacoes)
     {
         $this->repository = $repository;
         $this->repoConfVendas = $repoConfVendas;
+        $this->repoArrecadacoes = $repoArrecadacoes;
     }
 
     /**
@@ -59,6 +72,7 @@ class VendedorService
         
         #Salvando o registro pincipal
         $data['codigo'] = $codigoMax;
+        $data['tipo_pessoa_id'] = '1';
         $vendedor =  $this->repository->create($data);
 
         $dateObj = new \DateTime('now');
@@ -162,9 +176,34 @@ class VendedorService
         $result = $this->repoConfVendas->find($id);
         $result->status_id = '2';
         $result->save();
+
+        //Pegando o total das vendas
+        $totalVendido = \DB::table('vendas')
+        ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
+        ->where('conf_vendas.id', '=', $id)
+        ->groupBy('vendas.conf_venda_id')
+        ->select([
+            \DB::raw("SUM(vendas.valor_total) as total_vendido")
+        ])->get();
+
+        #pegando sessão de usuário
+        $user = \Auth::user();
+
+        //pegando data atual
+        $dateObj = new \DateTime('now');
+
+        //Criando array de dados para insert de arrecadações
+        $dadosArrecadacoes = array();
+        $dadosArrecadacoes['user_id'] = $user->id;
+        $dadosArrecadacoes['vendedor_id'] = $result->vendedor_id;
+        $dadosArrecadacoes['valor'] = $totalVendido[0]->total_vendido;
+        $dadosArrecadacoes['data'] = $dateObj->format('Y-m-d');
+
+        //Dando insert em arrecadações
+        $arrecadacoes = $this->repoArrecadacoes->create($dadosArrecadacoes);
         
         # Verificando se a execução foi bem sucessida
-        if(!$result) {
+        if(!$result || !$arrecadacoes) {
             throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
         }
 

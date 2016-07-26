@@ -26,7 +26,7 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Lista de Usuários</h2><br />
+                        <h2>Lista de usuários</h2><br />
                         <a href="{{ route('betting.user.create')}}" class="btn btn-primary">Novo Usuário</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
@@ -67,10 +67,24 @@
         var table = $('#user-grid').DataTable({
             processing: true,
             serverSide: true,
-            language: {
-                "lengthMenu": "_MENU_"
+            ajax: {
+                url: "{!! route('betting.user.grid') !!}",
+                method: 'POST'
             },
-            ajax: "{!! route('betting.user.grid') !!}",
+            language: {
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "Não foram encontrados resultados",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
+                "sProcessing":   "Processando...",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
+            },
             columns: [
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},

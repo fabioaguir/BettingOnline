@@ -20,7 +20,7 @@
                         {!! Form::select('partida', array(), null, array('class' => 'form-control')) !!}
                     </div>
                 </div>
-                <br/> <br/>
+                <br/>
             </div>
         </div>
     </div>
@@ -61,23 +61,18 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th>SEQ</th>
+                    <th style="width: 8%">SEQ</th>
                     <th>Data</th>
                     <th>Vendedor</th>
-                    <th>Tipo</th>
-                    <th>Modalidade</th>
-                    <th>Apostado</th>
-                    <th>Cotação</th>
-                    <th>Prêmio</th>
+                    <th style="width: 10%">Tipo</th>
+                    <th style="width: 15%">Modalidade</th>
+                    <th style="width: 10%">Apostado</th>
+                    <th style="width: 10%">Cotação</th>
+                    <th style="width: 10%">Prêmio</th>
                 </tr>
                 </tfoot>
             </table>
         </div>
-    </div>
-    <div class="col-md-offset-5">
-        @if(isset($consulta))
-            {!!  $consulta->render() !!}
-        @endif
     </div>
 </div>
 @section('js')
@@ -89,7 +84,8 @@
         var table = $('#apostas-grid').DataTable({
             processing: true,
             serverSide: true,
-            autoWidth: false,
+            iDisplayLength: 20,
+            bLengthChange: false,
             bFilter: false,
             ajax: {
                 url: "{!! route('betting.report.reportApostasSearch') !!}",

@@ -10,12 +10,15 @@ class Arrecadador extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table    = 'pessoas';
+
     protected $fillable = [
         'nome',
         'usuario',
         'senha',
         'status_id',
-        'codigo'
+        'codigo',
+        'tipo_pessoa_id'
     ];
 
     /**

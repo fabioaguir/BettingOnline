@@ -17,7 +17,9 @@ class CreateArrecadacoesTable extends Migration {
 			$table->integer('id', true);
 			$table->integer('user_id')->nullable()->index('fk_arrecadacoes_users1_idx');
 			$table->integer('arrecadador_id')->nullable()->index('fk_arrecadacoes_pessoas1_idx');
+			$table->integer('vendedor_id')->nullable()->index('fk_arrecadacoes_pessoas2_idx');
 			$table->decimal('valor', 10)->nullable();
+			$table->date('data')->nullable();
 			$table->timestamps();
 		});
 	}

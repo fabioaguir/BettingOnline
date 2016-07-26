@@ -19,7 +19,8 @@ class Vendedor extends Model implements Transformable
         'status_id',
         'estorno_id',
         'area_id',
-        'codigo'
+        'codigo',
+        'tipo_pessoa_id'
     ];
 
     /**
