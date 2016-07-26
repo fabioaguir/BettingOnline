@@ -230,7 +230,7 @@ class PartidasController extends Controller
                 ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
                 ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
                 ->where('partidas.data', $data->format('Y-m-d'))
-                ->where('status.id', 2)
+                ->where('status.id', 1)
                 ->select([
                     'partidas.id',
                     'time_casa.nome as timeCasa',

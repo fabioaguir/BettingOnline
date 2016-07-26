@@ -5,14 +5,14 @@
             <div class="form-group">
                 <?php $data = new \DateTime('now') ?>
                 <?php $dataInicio =  isset($request['data_inicio']) ? $request['data_inicio'] : ""; ?>
-				{!! Form::label('nome', 'Início') !!}
+				{!! Form::label('data_inicio', 'Início') !!}
 				{!! Form::text('data_inicio', $dataInicio , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <?php $dataFim =  isset($request['data_fim']) ? $request['data_fim'] : ""; ?>
-				{!! Form::label('cpnj', 'Fim') !!}
+				{!! Form::label('data_fim', 'Fim') !!}
 				{!! Form::text('data_fim', $data->format('d/m/Y') , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
