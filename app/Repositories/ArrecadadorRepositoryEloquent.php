@@ -4,14 +4,15 @@ namespace Softage\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\estorno_vendedorRepository;
-use Softage\Entities\EstornoVendedor;
+use Softage\Repositories\ArrecadadorRepository;
+use Softage\Entities\Arrecadador;
+use Softage\Validators\ArrecadadorValidator;
 
 /**
- * Class EstornoVendedorRepositoryEloquent
+ * Class PessoasRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class EstornoVendedorRepositoryEloquent extends BaseRepository implements EstornoVendedorRepository
+class ArrecadadorRepositoryEloquent extends BaseRepository implements ArrecadadorRepository
 {
     /**
      * Specify Model class name
@@ -20,10 +21,20 @@ class EstornoVendedorRepositoryEloquent extends BaseRepository implements Estorn
      */
     public function model()
     {
-        return EstornoVendedor::class;
+        return Arrecadador::class;
     }
 
-    
+    /**
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
+    public function validator()
+    {
+
+        return ArrecadadorValidator::class;
+    }
+
 
     /**
      * Boot up the repository, pushing criteria

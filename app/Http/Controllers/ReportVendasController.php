@@ -27,11 +27,6 @@ class ReportVendasController extends Controller
      * @var ParametrosRepository
      */
     private $parametros;
-
-    /**
-     * @var $data
-     */
-    private $data;
     
     /**
      * @var array
@@ -66,35 +61,20 @@ class ReportVendasController extends Controller
      */
     public function reportVendasSearch(Request $request)
     {
-        $dados = $request->request->all();
-
-        $request->session()->set('dados', $dados);
-
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
 
         $consulta = $this->queryVendas($request);
-        $sum       = $this->querySum($request);
 
-        #Retorno para view
-        return view('reports.reportVendas', compact('loadFields', 'consulta', 'sum', 'request'));
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function reportVendasSearchPag(Request $request)
-    {
-        $request = $request->session()->get('dados');
-
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
-
-        $consulta = $this->queryVendas($request);
-        $sum       = $this->querySum($request);
-
-        #Retorno para view
-        return view('reports.reportVendas', compact('loadFields', 'consulta', 'sum', 'request'));
+        #Editando a grid
+        return Datatables::of($consulta)->addColumn('seq', function ($row) {
+            $html = "";
+            $html .= '<a href="cupomVendas/'.$row->id.'" target="_blank">'.$row->seq.'</a> ';
+            return $html;
+        })
+        ->addColumn('action', function ($row) {
+            $html = "";
+            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary cancelar"><i class="glyphicon glyphicon-edit"></i> Cancelar</a> ';
+            return $html;
+        })->make(true);
     }
 
     /**
@@ -103,9 +83,8 @@ class ReportVendasController extends Controller
      */
     public function queryVendas($dados)
     {
-        $this->data = $dados;
 
-        $query = $this->struturaQuery($this->data);
+        $query = $this->struturaQuery($dados);
 
         $consulta = $query->select([
             'vendas.id as id',
@@ -117,27 +96,24 @@ class ReportVendasController extends Controller
             'vendas.valor_total as valor_total',
             'vendas.retorno as retorno',
             'premiacoes.nome as premiacao_nome',
-        ])->paginate(25);
-
-        $consulta->setPath(url('betting/report/reportVendasSearchPag'));
+        ]);
 
         return $consulta;
 
     }
 
     /**
-     * @param $dados
+     * @param Request $request
      * @return mixed
      */
-    public function querySum($dados){
+    public function querySum(Request $request)
+    {
 
-        $this->data = $dados;
-
-        $query = $this->struturaQuery($this->data);
+        $query = $this->struturaQuery($request);
 
         $sum = $query->select([
-            \DB::raw("SUM(vendas.valor_total) as total"),
-            \DB::raw("SUM(vendas.retorno) as tot_retorno")
+            \DB::raw("SUM(vendas.valor_total) as total_vendido"),
+            \DB::raw("SUM(vendas.retorno) as total_retorno")
         ])->get();
 
         return $sum;
@@ -148,11 +124,10 @@ class ReportVendasController extends Controller
      */
     public function struturaQuery($dados)
     {
-        $this->data = $dados;
 
         //Tratando as datas
-        $dataIni = SerbinarioDateFormat::toUsa($this->data['data_inicio'], 'date');
-        $dataFim = SerbinarioDateFormat::toUsa($this->data['data_fim'], 'date');
+        $dataIni = SerbinarioDateFormat::toUsa($dados['data_inicio'], 'date');
+        $dataFim = SerbinarioDateFormat::toUsa($dados['data_fim'], 'date');
 
         #Criando a consulta
         $query = \DB::table('vendas')
@@ -163,20 +138,20 @@ class ReportVendasController extends Controller
             ->join('areas', 'areas.id', '=', 'pessoas.area_id')
             ->whereBetween('vendas.data', array($dataIni, $dataFim));
 
-        if($this->data['area'] != 0) {
-            $query->where('areas.id', $this->data['area']);
+        if($dados['area'] != 0) {
+            $query->where('areas.id', $dados['area']);
         }
 
-        if($this->data['vendedor'] != 0) {
-            $query->where('pessoas.id', $this->data['vendedor']);
+        if($dados['vendedor'] != 0) {
+            $query->where('pessoas.id', $dados['vendedor']);
         }
 
-        if($this->data['premiacao'] != 0) {
-            $query->where('premiacoes.id', $this->data['premiacao']);
+        if($dados['premiacao'] != 0) {
+            $query->where('premiacoes.id', $dados['premiacao']);
         }
 
-        if($this->data['status'] != 0) {
-            $query->where('status_vendas.id', $this->data['status']);
+        if($dados['status'] != 0) {
+            $query->where('status_vendas.id', $dados['status']);
         }
 
         return $query;

@@ -1,41 +1,41 @@
-//Evento para quando clicar no botão de pesquisa
+// Evento para quando clicar no botão de pesquisa
 $(document).on('click', '#btnSearch', function (event) {
-    //Recuperando o valor da data
+    // Recuperando o valor da data
     var searchDate   = $('#searchDate').val();
     var dataValidate = searchDate.split('/');
 
-    //Validando o valor da data
+    // Validando o valor da data
     if(!(dataValidate.length == 3)) {
-        //Mensagem de alerta
+        // Mensagem de alerta
         bootbox.alert("Informe uma data válida!");
 
-        //Cancelando a execução do evento
+        // Cancelando a execução do evento
         event.preventDefault();
     }
 
-    //Requisição ajax
+    // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: 'getPartidasReport',
+        url: laroute.route('betting.partidas.getPartidas'),
         data: {'data' : searchDate},
         datatype: 'json'
     }).done(function (jsonResponse) {
         if (jsonResponse.success) {
-            //Html de retonro
+            // Html de retonro
             var html = '<option value="0">Selecione uma partida</option>';
 
-            //Recuperando as partidas
+            // Recuperando as partidas
             var partidas = jsonResponse.data;
 
-            //Percorrendo as partidas
+            // Percorrendo as partidas
             $.each(partidas, function(index, value) {
                 html += '<option value="' + value.id + '">' + value.timeCasa + ' x ' + value.timeFora + '</option>';
             });
 
-            //Carregando o html no selecect
+            // Carregando o html no selecect
             $('#partida').html(html);
         } else {
-            //Mensagem de retorno caso ocorra algum problema
+            // Mensagem de retorno caso ocorra algum problema
             bootbox.alert(jsonResponse.msg);
         }
     });

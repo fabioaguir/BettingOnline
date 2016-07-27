@@ -89,7 +89,7 @@ class PartidasController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Html de retorno
-            $html = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            $html = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
 
             # Recuperando a partida
             $partida = $this->repository->find($row->id);

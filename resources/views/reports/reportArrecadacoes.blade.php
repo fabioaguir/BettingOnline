@@ -18,6 +18,7 @@
 @endsection
 
 @section('container')
+
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-sm-12">
@@ -40,13 +41,13 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Apostas x Partidas</h2>
+                        <h2>Arrecadações</h2>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route'=>'betting.report.reportVendasSearch', 'method' => "POST", 'class' => 'form-horizontal row-border', 'id' => 'formReportVendas']) !!}
-                        @include('tamplatesForms.tamplateFormReportApostas')
+                        {!! Form::open(['route'=>'betting.report.reportVendasSearch', 'method' => "POST", 'id' => 'formReportVendas','enctype' => 'multipart/form-data']) !!}
+                        @include('tamplatesForms.tamplateFormReportArrecadacoes')
                         {!! Form::close() !!}
                     </div>
                     <div class="panel-footer">
@@ -55,4 +56,5 @@
             </div>
         </div>
     </div>
+
 @endsection

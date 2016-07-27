@@ -6,18 +6,15 @@
         .form-group {
             margin-top: -10px;;
         }
-        .table-responsive {
-            min-height: 0.01%;
-            overflow-x: initial;
-        }
     </style>
 @endsection
 
 @section('page-heading')
-    <h1>Relatórios</h1>
+    <h1>Arrecadador</h1>
 @endsection
 
 @section('container')
+
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-sm-12">
@@ -40,19 +37,27 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Apostas x Partidas</h2>
+                        <h2>Editar Aarrecadador</h2>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
+
+                    {!! Form::model($model, ['route'=> ['betting.arrecadador.update', $model->id], 'id' => 'formArrecadador', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        {!! Form::open(['route'=>'betting.report.reportVendasSearch', 'method' => "POST", 'class' => 'form-horizontal row-border', 'id' => 'formReportVendas']) !!}
-                        @include('tamplatesForms.tamplateFormReportApostas')
-                        {!! Form::close() !!}
+                        @include('tamplatesForms.tamplateFormArrecadador')
                     </div>
                     <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <button type="submit" class="btn-primary btn" style="margin-left: -11px">Salvar</button>
+                                <a class="btn-default btn" href="{{ route('betting.arrecadador.index')}}">Voltar</a>
+                            </div>
+                        </div>
                     </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
+
 @endsection

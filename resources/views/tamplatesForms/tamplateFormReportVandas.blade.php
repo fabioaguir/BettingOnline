@@ -38,16 +38,13 @@
                 {!! Form::label('status', 'Status ') !!}
                 {!! Form::select('status', (['0' => 'Ambos'] + $loadFields['statusvendas']->toArray()), $status,array('class' => 'form-control', 'id' => 'status')) !!}
             </div>
+            <div class="col-sm-2">
+                <button type="submit" style="margin-top: 18px" id="search" class="btn-primary btn">Consultar</button>
+            </div><br />
         </div>
 	</div>
     {{--Fim Buttons Submit e Voltar--}}
 </div>
-<div class="row">
-    <div class="col-sm-8">
-        <button type="submit" class="btn-primary btn">Consultar</button>
-    </div>
-</div>
-<br />
 <div class="row">
     <div class="col-sm-4 col-md-offset-8">
         <table class="table table-bordered" cellspacing="0" width="100%">
@@ -59,15 +56,15 @@
             </thead>
             <tbody>
             <tr>
-                <td style="background-color: darkgrey; color: white"></b>@if(isset($sum[0]->total)) <b>{{$sum[0]->total}} </b> @endif</td>
-                <td style="background-color: darkgrey; color: white">@if(isset($sum[0]->total)) <b>{{$sum[0]->tot_retorno}} </b> @endif</td>
+                <td class="total-vendido" style="background-color: darkgrey; color: white"></td>
+                <td class="total-retorno" style="background-color: darkgrey; color: white"></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="col-sm-12">
         <div class="table-responsive no-padding">
-            <table id="partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
+            <table id="vendas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>SEQ</th>
@@ -75,51 +72,159 @@
                     <th>Vendedor</th>
                     <th>Data</th>
                     <th>Informação</th>
-                    <th>Valor de vendas</th>
+                    <th>Venda</th>
                     <th>Retorno</th>
                     <th>Premiada</th>
+                    <th>Ação</th>
                 </tr>
                 </thead>
                 <tbody>
-                @if(isset($consulta))
-                    @foreach($consulta as $venda)
-                        <tr>
-                            <td><a href="{{route('betting.report.cupomVendas', ['d' => $venda->id])}}" target="__blank">{{$venda->seq}}</a></td>
-                            <td>{{$venda->area_nome}}</td>
-                            <td>{{$venda->vendedor_nome}}</td>
-                            <td>{{$venda->data}}</td>
-                            <td>{{$venda->obs}}</td>
-                            <td>{{$venda->valor_total}}</td>
-                            <td>{{$venda->retorno}}</td>
-                            <td>{{$venda->premiacao_nome}}</td>
-                        </tr>
-                    @endforeach
-                @endif
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th>SEQ</th>
+                    <th style="width: 6%">SEQ</th>
                     <th>Área</th>
                     <th>Vendedor</th>
                     <th>Data</th>
                     <th>Informação</th>
-                    <th>Valor de vendas</th>
-                    <th>Retorno</th>
-                    <th>Premiada</th>
+                    <th style="width: 8%">Venda</th>
+                    <th style="width: 9%">Retorno</th>
+                    <th style="width: 9%">Premiada</th>
+                    <th  style="width: 7%">Ação</th>
                 </tr>
                 </tfoot>
             </table>
         </div>
     </div>
-    <div class="col-md-offset-5">
-        @if(isset($consulta))
-            {!!  $consulta->render() !!}
-        @endif
-    </div>
 </div>
 @section('js')
     @parent
     <script type="text/javascript">
+        var table = $('#vendas-grid').DataTable({
+            processing: true,
+            serverSide: true,
+            iDisplayLength: 20,
+            bLengthChange: false,
+            bFilter: false,
+            ajax: {
+                url: "{!! route('betting.report.reportVendasSearch') !!}",
+                method: 'POST',
+                data: function (d) {
+                    d.data_inicio = $('input[name=data_inicio]').val();
+                    d.data_fim = $('input[name=data_fim]').val();
+                    d.area = $('select[name=area] option:selected').val();
+                    d.vendedor = $('select[name=vendedor] option:selected').val();
+                    d.premiacao = $('select[name=premiacao] option:selected').val();
+                    d.status = $('select[name=status] option:selected').val();
+                }
+            },
+            language: {
+                "lengthMenu": "_MENU_",
+                "zeroRecords": "Não foram encontrados resultados",
+                "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                "infoFiltered": "(Filtrado de _MAX_ total de registro)",
+                "sProcessing":   "Processando...",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                }
+            },
+            columns: [
+                {data: 'seq', name: 'seq', orderable: false, searchable: false},
+                {data: 'area_nome', name: 'areas.nome'},
+                {data: 'vendedor_nome', name: 'pessoas.nome'},
+                {data: 'data', name: 'vendas.data'},
+                {data: 'obs', name: 'vendas.obs'},
+                {data: 'valor_total', name: 'vendas.valor_total'},
+                {data: 'retorno', name: 'vendas.retorno'},
+                {data: 'premiacao_nome', name: 'premiacoes.nome'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
 
+        // Função do submit do search da grid principal
+        $('#search').click(function(e) {
+            table.draw();
+
+            var searchData = {
+                'data_inicio' : $('#data_inicio').val(),
+                'data_fim' : $('#data_fim').val(),
+                'area' : $('select[name=area] option:selected').val(),
+                'vendedor' : $('select[name=vendedor] option:selected').val(),
+                'premiacao' : $('select[name=premiacao] option:selected').val(),
+                'status' : $('select[name=status] option:selected').val()
+            };
+
+            // Requisição ajax
+            jQuery.ajax({
+                type: 'POST',
+                url: "{!! route('betting.report.reportVendasSum') !!}",
+                data: searchData,
+                datatype: 'json'
+            }).done(function (jsonResponse) {
+
+                if(!jsonResponse[0]['total_vendido'] && !jsonResponse[0]['total_retorno']) {
+                    $('td.total-vendido').html(" ");
+                    $('td.total-retorno').html(" ");
+                } else {
+                    $('td.total-vendido').html("<b>"+jsonResponse[0]['total_vendido']+"</b>");
+                    $('td.total-retorno').html("<b>"+jsonResponse[0]['total_retorno']+"</b>");
+                }
+
+            });
+
+            e.preventDefault();
+        });
+
+        $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
+
+        //Carregando os bairros
+        $(document).on('change', "#area", function () {
+            //Removendo as Bairros
+            $('#pessoas option').remove();
+
+            //Recuperando a cidade
+            var area = $(this).val();
+
+            if (area !== "") {
+                var dados = {
+                    'table' : 'pessoas',
+                    'field_search' : 'area_id',
+                    'value_search': area,
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('betting.util.search')  }}',
+                    data: dados,
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="0">Todos</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#vendedor option').remove();
+                    $('#vendedor').append(option);
+                });
+            }
+        });
+
+        $(document).on('click', 'a.cancelar', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza do cancelamento da venda?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
+        });
     </script>
 @endsection

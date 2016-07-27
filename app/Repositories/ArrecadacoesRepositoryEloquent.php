@@ -4,14 +4,14 @@ namespace Softage\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\estorno_vendedorRepository;
-use Softage\Entities\EstornoVendedor;
+use Softage\Repositories\arrecadacoesRepository;
+use Softage\Entities\Arrecadacoes;
 
 /**
- * Class EstornoVendedorRepositoryEloquent
+ * Class ArrecadacoesRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class EstornoVendedorRepositoryEloquent extends BaseRepository implements EstornoVendedorRepository
+class ArrecadacoesRepositoryEloquent extends BaseRepository implements ArrecadacoesRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +20,7 @@ class EstornoVendedorRepositoryEloquent extends BaseRepository implements Estorn
      */
     public function model()
     {
-        return EstornoVendedor::class;
+        return Arrecadacoes::class;
     }
 
     

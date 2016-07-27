@@ -33,7 +33,9 @@
         <link type="text/css" href="{{ asset('/assets/plugins/switchery/switchery.css')}}" rel="stylesheet">
         <link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
         <link type="text/css" src="{{ asset('/assets/plugins/zTree/jquery.tree.css')}}">
+            <link type="text/css" src="{{ asset('/assets/plugins/form-select2/select2.css')}}">
         <link type="text/css" href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
+        {{--<link type="text/css" href="{{ asset('/css/select2.min.css')}}" rel="stylesheet"/>--}}
         <link type="text/css" href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
 
         <!-- iCheck -->
@@ -153,6 +155,8 @@
                             <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
                         </ul>
                     </li>
                     {{--<li><a href="">Another Link</a></li>--}}
@@ -245,19 +249,34 @@
                                 <nav class="widget-body">
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Menu</span></li>
-                                        {{--<li><a href="{{ route('betting.area.index') }} "><i class="ti ti-shield"></i><span>Dashboard</span></a></li>--}}
+                                        <li><a href="{{ route('betting.index') }} "><i class="ti ti-home"></i><span>Dashboard</span></a></li>
                                         <li><a href="{{ route('betting.parametro.save') }} "><i class="ti ti-settings"></i><span>Parâmetros</span></a></li>
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti  ti-location-pin"></i><span>Áreas</span></a></li>
-                                        <li><a href="{{ route('betting.vendedor.index') }} "><i class="ti ti-user"></i><span>Vendedores</span></a></li>
+                                        <li>
+                                            <a href="javascript:;"><i class="ti ti-user"></i><span>Pessoas</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="{{ route('betting.vendedor.index') }} ">Vendedores</a></li>
+                                                <li><a href="{{ route('betting.arrecadador.index') }} ">Arrecadadores</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a href="{{ route('betting.partidas.index') }} "><i class="ti  ti-clipboard"></i><span>Partidas</span></a></li>
-                                        <li><a href="{{ route('betting.gols.index') }} "><i class="ti  ti-clipboard"></i><span>Resultados</span></a></li>
+                                        <li><a href="{{ route('betting.gols.index') }} "><i class="ti  ti-cup"></i><span>Resultados</span></a></li>
                                         <li><a href="{{ route('betting.modalidades.index') }} "><i class="ti ti-control-play"></i><span>Modalidades</span></a></li>
                                         <li><a href="{{ route('betting.cotacoes.index') }} "><i class="ti ti-control-play"></i><span>Cotações</span></a></li>
+                                        <li><a href="{{ route('betting.timesAlta.index') }} "><i class="ti ti-control-play"></i><span>Times em alta</span></a></li>
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-files"></i><span>Consultas/Relatórios</span></a>
                                             <ul class="acc-menu">
                                                 <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                                                 <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
+                                                <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;"><i class="ti ti-shield"></i><span>Administrador</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="{{ route('betting.user.index')}} ">Usuário</a></li>
+                                                <li><a href="{{ route('betting.role.index') }}">Perfis</a></li>
                                             </ul>
                                         </li>
                                         {{-- menu extras --}}
@@ -376,7 +395,9 @@
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-inputmask/jquery.inputmask.bundle.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootbox/bootbox.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/assets/plugins/form-select2/select2.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/jquery.datetimepicker.js')}}"></script>
+        {{--<script type="text/javascript" src="{{ asset('/js/select2.full.min.js')}}"></script>--}}
         <script type="text/javascript" src="{{ asset('/js/jquery.mask.js')}}"></script>
         <script type="text/javascript" src="{{asset('/js/jquery.validate.js')}}"></script>
         <script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>

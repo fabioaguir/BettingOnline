@@ -83,6 +83,7 @@ class VendedorController extends Controller
                     where conf_atual.vendedor_id = pessoas.id AND conf_atual.status_id = 1  ORDER BY conf_vendas.id DESC LIMIT 1)")
                 );
             })
+            ->where('pessoas.tipo_pessoa_id', '=', '1')
             ->select([
                 'pessoas.id as id',
                 'pessoas.usuario as usuario',

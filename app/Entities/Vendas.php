@@ -14,7 +14,7 @@ class Vendas extends Model implements Transformable
     
     protected $fillable = [
         'nome',
-        'status'
+        'status',
     ];
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Vendedor extends Model implements Transformable
+class Arrecadador extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -17,8 +17,6 @@ class Vendedor extends Model implements Transformable
         'usuario',
         'senha',
         'status_id',
-        'estorno_id',
-        'area_id',
         'codigo',
         'tipo_pessoa_id'
     ];
@@ -33,24 +31,4 @@ class Vendedor extends Model implements Transformable
         return $this->belongsTo(Status::class, 'status_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     *
-     * Relacionamento com Estorno
-     */
-    public function estorno()
-    {
-        return $this->belongsTo(EstornoVendedor::class, 'estorno_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     *
-     * Relacionamento com Area
-     */
-    public function area()
-    {
-        return $this->belongsTo(Areas::class, 'area_id');
-    }
-    
 }

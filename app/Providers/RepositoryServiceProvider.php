@@ -25,6 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(\Softage\Repositories\UserRepository::class, \Softage\Repositories\UserRepositoryEloquent::class );
         $this->app->bind(\Softage\Repositories\RoleRepository::class, \Softage\Repositories\RoleRepositoryEloquent::class);
+        $this->app->bind(\Softage\Repositories\PermissionRepository::class, \Softage\Repositories\PermissionRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\AreasRepository::class, \Softage\Repositories\AreasRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\ParametrosRepository::class, \Softage\Repositories\ParametrosRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\CampeonatosRepository::class, \Softage\Repositories\CampeonatosRepositoryEloquent::class);
@@ -43,6 +44,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\Softage\Repositories\CotacoesRepository::class, \Softage\Repositories\CotacoesRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\ApostasRepository::class, \Softage\Repositories\ApostasRepositoryEloquent::class);
         $this->app->bind(\Softage\Repositories\GolsRepository::class, \Softage\Repositories\GolsRepositoryEloquent::class);
+        $this->app->bind(\Softage\Repositories\ArrecadadorRepository::class, \Softage\Repositories\ArrecadadorRepositoryEloquent::class);
+        $this->app->bind(\Softage\Repositories\ArrecadacoesRepository::class, \Softage\Repositories\ArrecadacoesRepositoryEloquent::class);
+        $this->app->bind(\Softage\Repositories\TimesAltaRepository::class, \Softage\Repositories\TimesAltaRepositoryEloquent::class);
         //:end-bindings:
     }
 }
