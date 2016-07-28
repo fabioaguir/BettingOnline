@@ -71,7 +71,7 @@ class UserService
     public function store(array $data) : User
     {
         #tratando a senha
-        $data['password'] = \bcrypt($data['password']);
+        $data['password'] = bcrypt($data['password']);
 
         #tratando a imagem
         if(isset($data['img'])) {
@@ -89,7 +89,7 @@ class UserService
         }
 
         #Salvando o registro pincipal
-        $user =  $this->repository->create($data);
+        $user =  User::create($data);
 
         #Verificando se foi criado no banco de dados
         if(!$user) {

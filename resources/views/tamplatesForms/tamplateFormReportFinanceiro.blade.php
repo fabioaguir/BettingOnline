@@ -146,17 +146,16 @@
                 datatype: 'json'
             }).done(function (jsonResponse) {
 
-                if(!jsonResponse['premiacao'] && !jsonResponse['comissao'] &&
-                        !jsonResponse['valor_total'] && !jsonResponse['valor_final']) {
+                if(!jsonResponse.success) {
                     $('td.total-apurado').html(" ");
                     $('td.total-comissao').html(" ");
                     $('td.total-premio').html(" ");
                     $('td.total-final').html(" ");
                 } else {
-                    $('td.total-apurado').html("<b>"+jsonResponse['valor_total']+"</b>");
-                    $('td.total-comissao').html("<b>"+jsonResponse['comissao']+"</b>");
-                    $('td.total-premio').html("<b>"+jsonResponse['premiacao']+"</b>");
-                    $('td.total-final').html("<b>"+jsonResponse['valor_final']+"</b>");
+                    $('td.total-apurado').html("<b>"+ jsonResponse.data[0].valor_total+"</b>");
+                    $('td.total-comissao').html("<b>"+ jsonResponse.data[0].comissao +"</b>");
+                    $('td.total-premio').html("<b>"+ jsonResponse.data[0].premiacao +"</b>");
+                    $('td.total-final').html("<b>"+jsonResponse.data[0].valor_final +"</b>");
                 }
 
             });
