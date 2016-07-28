@@ -24,8 +24,8 @@
 
             <div class="col-md-3">
                 <div class="form-group">
-                    {!! Form::label('vendendor', 'Vendedor') !!}
-                    {!! Form::select('vendendor', (['Selecione um vendedor'] + $loadFields['vendedor']->toArray()), null, array('class' => 'form-control')) !!}
+                    {!! Form::label('vendedor', 'Vendedor') !!}
+                    {!! Form::select('vendedor', (['Selecione um vendedor'] + $loadFields['vendedor']->toArray()), null, array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-sm-2">
@@ -100,7 +100,7 @@
                 data: function (d) {
                     d.data_inicio = $('input[name=data_inicio]').val();
                     d.data_fim = $('input[name=data_fim]').val();
-                    d.vendendor = $('select[name=vendedor]').val();
+                    d.vendedor = $('select[name=vendedor]').val();
                     d.area = $('select[name=area]').val();
                 }
             },
@@ -120,7 +120,7 @@
             },
             columns: [
                 {data: 'nome_area', name: 'areas.nome'},
-                {data: 'nome', name: 'pessoa.nome'},
+                {data: 'nome', name: 'pessoas.nome'},
                 {data: 'valor_total', name: 'valor_total', orderable: false, searchable: false},
                 {data: 'comissao', name: 'comissao', orderable: false, searchable: false},
                 {data: 'premiacao', name: 'premiacao', orderable: false, searchable: false},
@@ -165,6 +165,40 @@
         });
 
         $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
+
+        //Carregando os vendedores
+        $(document).on('change', "#area", function () {
+            //Removendo as Bairros
+            $('#vendedor option').remove();
+
+            //Recuperando a cidade
+            var area = $(this).val();
+
+            if (area !== "") {
+                var dados = {
+                    'table' : 'pessoas',
+                    'field_search' : 'area_id',
+                    'value_search': area,
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('betting.util.search')  }}',
+                    data: dados,
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="0">Selecione um vendedor</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#vendedor option').remove();
+                    $('#vendedor').append(option);
+                });
+            }
+        });
 
     </script>
 @endsection

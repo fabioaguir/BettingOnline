@@ -16,11 +16,12 @@
             color: #696969;
             font-size: 20px;
             text-align: center;
-            background-color: #C0C0C0;
+            background-color: #91ba89;
+            border-color: #73a869;
         }
 
         .resultado {
-            background-color: #DCDCDC;
+            background-color: #d7e6d4;
             font-size: 16px;
             text-align: center;
         }
@@ -58,7 +59,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button class="btn-sm btn-primary" type="submit">Pesquisar</button>
+                                        <button type="submit"  id="search" class="btn-primary btn">Pesquisar</button>
                                     </div>
                                 </div>
                             </div>

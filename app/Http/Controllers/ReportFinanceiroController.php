@@ -58,9 +58,9 @@ class ReportFinanceiroController extends Controller
                 'pessoas.nome as nome',
                 'areas.nome as nome_area',
                 \DB::raw('SUM(vendas.retorno) as premiacao'),
-                \DB::raw('((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100) as comissao'),
+                \DB::raw('to_char(((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100)::real, \'9999999999D99\') as comissao'),
                 \DB::raw('SUM(vendas.valor_total) valor_total'),
-                \DB::raw('(SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100) - SUM(vendas.retorno)) as valor_final')
+                \DB::raw('to_char((SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * SUM(conf_vendas.comissao))/100) - SUM(vendas.retorno))::real, \'9999999999D99\') as valor_final')
             ]);
 
         #Editando a grid
@@ -97,9 +97,9 @@ class ReportFinanceiroController extends Controller
             $query = $this->getQuery()
                 ->select([
                     \DB::raw('SUM(vendas.retorno) as premiacao'),
-                    \DB::raw('((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100) as comissao'),
+                    \DB::raw('to_char(((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100)::real, \'9999999999D99\') as comissao'),
                     \DB::raw('SUM(vendas.valor_total) valor_total'),
-                    \DB::raw('(SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100) - SUM(vendas.retorno)) as valor_final')
+                    \DB::raw('to_char((SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100) - SUM(vendas.retorno))::real, \'9999999999D99\') as valor_final')
                 ]);
 
             # Verificando a se o período foi passado por parâmetro

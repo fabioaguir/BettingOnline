@@ -31,7 +31,22 @@ class PartidasService
     {
         # Aplicando regras de negócios
         $this->rnFieldsForeignKey($data);
-        
+
+        //Valida se o time casa está na lista de times em alta
+        $validarTimeAltaCasa = \DB::table('times')->join('times_alta', 'times_alta.time_id', '=', 'times.id')
+            ->where('times.id', '=', $data['time_casa_id'])->get();
+
+        //Valida se o time fora está na lista de times em alta
+        $validarTimeAltaFora = \DB::table('times')->join('times_alta', 'times_alta.time_id', '=', 'times.id')
+            ->where('times.id', '=', $data['time_fora_id'])->get();
+
+        //Caso o time casa ou fora esteja na lista de times em alta, a partida recebe status de partida multipla
+        if(count($validarTimeAltaCasa) >= 1 || count($validarTimeAltaFora) >= 1) {
+            $data['multipla'] = 1;
+        } else {
+            $data['multipla'] = 0;
+        }
+
         #Salvando o registro pincipal
         $partida =  $this->repository->create($data);
 
