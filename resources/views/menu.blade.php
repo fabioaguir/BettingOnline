@@ -152,6 +152,10 @@
                     <li class="dropdown" id="widget-classicmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas/Relatórios<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ route('betting.report.reportPartidasView') }} ">Resultados</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('betting.report.reportFinanceiroView') }} ">Financeiro</a></li>
+                            <li class="divider"></li>
                             <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
