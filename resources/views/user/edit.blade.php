@@ -101,7 +101,7 @@
                                                         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                                             @if ($user->path_image != null)
                                                                 <div id="midias">
-                                                                    <img id="logo" src="/seracademico-laravel/public/images/{{$user->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                                                                    <img id="logo" src="/public/images/{{$user->path_image}}"  alt="Foto" height="120" width="100"/><br/>
                                                                 </div>
                                                             @endif
                                                         </div>
