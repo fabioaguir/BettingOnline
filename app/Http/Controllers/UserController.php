@@ -93,7 +93,7 @@ class UserController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e->getMessage());
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

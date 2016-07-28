@@ -3,8 +3,9 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
+                    <?php $data = new \DateTime('now') ?>
                     {!! Form::label('data_inicio', 'Início') !!}
-                    {!! Form::text('data_inicio', null , array('class' => 'form-control date datepicker')) !!}
+                    {!! Form::text('data_inicio', $data->format('d/m/Y') , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
             <div class="col-md-2">
@@ -133,6 +134,17 @@
         $('.search').click(function(e) {
             table.draw();
 
+            // carregando os totais
+            loadTotais();
+
+            e.preventDefault();
+        });
+
+        /**
+         * Função para carregar os totais
+         */
+        function loadTotais()
+        {
             var searchData = {
                 'dataInicio' : $('#data_inicio').val(),
                 'dataFim' : $('#data_fim').val()
@@ -146,23 +158,20 @@
                 datatype: 'json'
             }).done(function (jsonResponse) {
 
-                if(!jsonResponse['premiacao'] && !jsonResponse['comissao'] &&
-                        !jsonResponse['valor_total'] && !jsonResponse['valor_final']) {
+                if(!jsonResponse.success) {
                     $('td.total-apurado').html(" ");
                     $('td.total-comissao').html(" ");
                     $('td.total-premio').html(" ");
                     $('td.total-final').html(" ");
                 } else {
-                    $('td.total-apurado').html("<b>"+jsonResponse['valor_total']+"</b>");
-                    $('td.total-comissao').html("<b>"+jsonResponse['comissao']+"</b>");
-                    $('td.total-premio').html("<b>"+jsonResponse['premiacao']+"</b>");
-                    $('td.total-final').html("<b>"+jsonResponse['valor_final']+"</b>");
+                    $('td.total-apurado').html("<b>"+ jsonResponse.data[0].valor_total+"</b>");
+                    $('td.total-comissao').html("<b>"+ jsonResponse.data[0].comissao +"</b>");
+                    $('td.total-premio').html("<b>"+ jsonResponse.data[0].premiacao +"</b>");
+                    $('td.total-final').html("<b>"+jsonResponse.data[0].valor_final +"</b>");
                 }
 
             });
-
-            e.preventDefault();
-        });
+        }
 
         $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
 

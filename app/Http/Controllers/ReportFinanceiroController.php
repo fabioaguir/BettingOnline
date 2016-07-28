@@ -62,13 +62,13 @@ class ReportFinanceiroController extends Controller
                 \DB::raw('SUM(vendas.valor_total) valor_total'),
                 \DB::raw('to_char((SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * SUM(conf_vendas.comissao))/100) - SUM(vendas.retorno))::real, \'9999999999D99\') as valor_final')
             ]);
-
+        
         #Editando a grid
         return Datatables::of($rows)
             ->filter(function ($query) use ($request) {
                 // Filtranto por vestibular
-                if ($request->has('dataInicio') && $request->has('dataFim')) {
-                    $query->whereBetween('conf_vendas.data', '=', array($request->get('dataInicio'), $request->get('dataFim')));
+                if ($request->has('data_inicio') && $request->has('data_fim')) {
+                    $query->whereBetween('conf_vendas.data', array($request->get('data_inicio'), $request->get('data_fim')));
                 }
             })
             ->make(true);
@@ -104,7 +104,7 @@ class ReportFinanceiroController extends Controller
 
             # Verificando a se o período foi passado por parâmetro
             if ($request->has('dataInicio') && $request->has('dataFim')) {
-                $query->whereBetween('conf_vendas.data', '=', array($request->get('dataInicio'), $request->get('dataFim')));
+                $query->whereBetween('conf_vendas.data',  array($request->get('dataInicio'), $request->get('dataFim')));
             }
 
             # Retorno
