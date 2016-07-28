@@ -14,7 +14,8 @@ class Arrecadacoes extends Model implements Transformable
         'user_id',
         'arrecadador_id',
         'vendedor_id',
-        'valor'
+        'valor',
+        'data'
     ];
 
     /**
