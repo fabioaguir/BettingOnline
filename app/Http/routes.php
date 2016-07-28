@@ -141,6 +141,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+            Route::post('reportFinanceiroSum', ['as' => 'reportFinanceiroSum', 'uses' => 'ReportFinanceiroController@reportFinanceiroSum']);
+            Route::get('reportFinanceiroView', ['as' => 'reportFinanceiroView', 'uses' => 'ReportFinanceiroController@reportFinanceiroView']);
+            Route::get('gridReportFinanceiro', ['as' => 'gridReportFinanceiro', 'uses' => 'ReportFinanceiroController@grid']);
             Route::get('reportPartidasView', ['as' => 'reportPartidasView', 'uses' => 'ReportPartidasController@reportPartidasView']);
             Route::get('getReportPartidas', ['as' => 'getReportPartidas', 'uses' => 'ReportPartidasController@getReportPartidas']);
             Route::get('getPartidasReport', ['as' => 'getPartidasReport', 'uses' => 'CotacoesController@getPartidas']);

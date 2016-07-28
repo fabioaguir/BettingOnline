@@ -52,9 +52,6 @@
                                             Gerais</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#permission" aria-controls="permission" role="tab" data-toggle="tab">Permissões</a>
-                                    </li>
-                                    <li role="presentation">
                                         <a href="#perfil" aria-controls="perfil" role="tab" data-toggle="tab">Perfís</a>
                                     </li>
                                 </ul>
@@ -119,32 +116,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="permission">
-                                        <br/>
-
-                                        <div id="tree-role">
-                                            <ul>
-                                                <li>
-                                                    @if(count($user->permissions->lists('name')->all()) > 0)
-                                                        <input type="checkbox" checked> Todos
-                                                    @else
-                                                        <input type="checkbox"> Todos
-                                                    @endif
-                                                    <ul>
-                                                        @if(isset($loadFields['permission']))
-                                                            @foreach($loadFields['permission'] as $id => $permission)
-                                                                @if(\in_array($permission, $user->permissions->lists('name')->all()))
-                                                                    <li><input type="checkbox" name="permission[]" checked value="{{ $id  }}"> {{ $permission }} </li>
-                                                                @else
-                                                                    <li><input type="checkbox" name="permission[]" value="{{ $id  }}"> {{ $permission }} </li>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </li>
-                                            </ul>
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="perfil">

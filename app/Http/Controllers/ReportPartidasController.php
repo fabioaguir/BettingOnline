@@ -10,34 +10,6 @@ use Yajra\Datatables\Datatables;
 class ReportPartidasController extends Controller
 {
     /**
-     * @var PartidasService
-     */
-    private $service;
-
-    /**
-     * @var Query
-     */
-    private $query;
-
-    /**
-     * @var array
-     */
-    private $loadFields = [
-        'Campeonatos'
-    ];
-
-    /**
-     * ReportPartidasController constructor.
-     * @param PartidasService $service
-     */
-    public function __construct(PartidasService $service)
-    {
-        $this->service = $service;
-    }
-
-
-
-    /**
      * @return mixed
      */
     public function getReportPartidas(Request $request)

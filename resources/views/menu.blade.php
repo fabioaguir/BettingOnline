@@ -267,6 +267,8 @@
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-files"></i><span>Consultas/Relatórios</span></a>
                                             <ul class="acc-menu">
+                                                <li><a href="{{ route('betting.report.reportPartidasView') }} ">Resultados</a></li>
+                                                <li><a href="{{ route('betting.report.reportFinanceiroView') }} ">Financeiro</a></li>
                                                 <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                                                 <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                                                 <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>

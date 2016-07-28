@@ -32,7 +32,7 @@
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Lista de perfis</h2> <br />
-                        <a href="{{ route('softage.role.create')}}" class="btn btn-primary">Novo Perfil</a>
+                        <a href="{{ route('betting.role.create')}}" class="btn btn-primary">Novo Perfil</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
@@ -74,7 +74,7 @@
             language: {
                 "lengthMenu": "_MENU_"
             },
-            ajax: "{!! route('softage.role.grid') !!}",
+            ajax: "{!! route('betting.role.grid') !!}",
             columns: [
                 {data: 'name', name: 'name'},
                 {data: 'description', name: 'description'},

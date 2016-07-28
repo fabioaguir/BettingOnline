@@ -52,9 +52,6 @@
                                             Gerais</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#permission" aria-controls="permission" role="tab" data-toggle="tab">Permissões</a>
-                                    </li>
-                                    <li role="presentation">
                                         <a href="#perfil" aria-controls="perfil" role="tab" data-toggle="tab">Perfís</a>
                                     </li>
                                 </ul>
@@ -115,25 +112,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="permission">
-                                        <br/>
-
-                                        <div id="tree-role">
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox"> Todos
-                                                    <ul>
-                                                        @if(isset($loadFields['permission']))
-                                                            @foreach($loadFields['permission'] as $id => $permission)
-                                                                <li><input type="checkbox" name="permission[]"
-                                                                           value="{{ $id  }}"> {{ $permission }} </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </li>
-                                            </ul>
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="perfil">

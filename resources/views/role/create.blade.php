@@ -41,7 +41,7 @@
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
-                    {!! Form::open(['route'=>'softage.role.store', 'method' => "POST", 'class' => 'form-horizontal row-border' ,'enctype' => 'multipart/form-data' ]) !!}
+                    {!! Form::open(['route'=>'betting.role.store', 'method' => "POST", 'class' => 'form-horizontal row-border' ,'enctype' => 'multipart/form-data' ]) !!}
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -49,9 +49,6 @@
                                 <ul class="nav nav-tabs">
                                     <li role="presentation" class="active">
                                         <a href="#role" aria-controls="role" role="tab" data-toggle="tab">Dados Gerais</a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#permission" aria-controls="permission" role="tab" data-toggle="tab">Permissões</a>
                                     </li>
                                 </ul>
 
@@ -76,24 +73,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane" id="permission">
-                                        <br/>
-
-                                        <div id="tree-permission">
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox"> Todos
-                                                    <ul>
-                                                        @if(isset($loadFields['permission']))
-                                                            @foreach($loadFields['permission'] as $id => $permission)
-                                                                <li><input type="checkbox" name="permission[]" value="{{ $id  }}"> {{ $permission }} </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +81,7 @@
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-1">
                                 <button class="btn-primary btn" style="margin-left: 22px">Salvar</button>
-                                <a class="btn-default btn" href="{{ route('softage.role.index')}}">Voltar</a>
+                                <a class="btn-default btn" href="{{ route('betting.role.index')}}">Voltar</a>
                             </div>
                         </div>
                     </div>

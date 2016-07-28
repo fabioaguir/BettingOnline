@@ -136,19 +136,30 @@ class UserService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return User
+     * @throws \Exception
      */
     public function update(array $data, int $id) : User
     {
+        # Variável que armazenará a nova senha
+        $newPassword = "";
+
         #tratando a senha
         if(empty($data['password'])) {
             unset($data['password']);
         } else {
-            $data['password'] = \bcrypt($data['password']);
+            $newPassword = \bcrypt($data['password']);
         }
 
         #Salvando o registro pincipal
         $user =  $this->repository->update($data, $id);
+
+        # Alterando a senha do usuário
+        if($newPassword) {
+            $user->fill([
+                'password' => $newPassword
+            ])->save();
+        }
 
         #tratando a imagem
         if(isset($data['img'])) {
