@@ -17,6 +17,7 @@ class CreatePartidasTable extends Migration {
 			$table->integer('id', true);
 			$table->date('data')->nullable();
 			$table->time('hora')->nullable();
+			$table->boolean('multipla')->nullable();
 			$table->integer('time_casa_id')->nullable()->index('fk_partidas_times1_idx');
 			$table->integer('time_fora_id')->nullable()->index('fk_partidas_times2_idx');
 			$table->integer('status_id')->nullable()->index('fk_partidas_status1_idx');

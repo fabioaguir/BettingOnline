@@ -21,7 +21,8 @@ class Modalidades extends Model implements Transformable
      */
     protected $fillable = [
         'nome',
-        'status_id'
+        'status_id',
+        'limite_cotacao'
     ];
 
     /**

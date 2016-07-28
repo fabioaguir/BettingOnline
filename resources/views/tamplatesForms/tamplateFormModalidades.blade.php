@@ -8,7 +8,12 @@
                         {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                     </div>
                 </div>
-
+                <div class="form-group">
+                    {!! Form::label('limite_cotacao', 'Limite para cotação', array('class' => 'col-sm-2 control-label')) !!}
+                    <div class="col-sm-2">
+                        {!! Form::text('limite_cotacao', Session::getOldInput('limite_cotacao')  , array('class' => 'form-control money')) !!}
+                    </div>
+                </div>
                 <div class="form-group">
                     {!! Form::label('status_id', 'Ativo', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">

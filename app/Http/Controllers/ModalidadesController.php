@@ -73,6 +73,7 @@ class ModalidadesController extends Controller
             ->select([
                 'modalidades.id',
                 'modalidades.nome',
+                'modalidades.limite_cotacao',
                 'status.nome as status'
             ]);
 

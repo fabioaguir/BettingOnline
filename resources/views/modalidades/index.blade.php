@@ -49,6 +49,7 @@
                                 <tr>
                                     <th>Código</th>
                                     <th>Nome</th>
+                                    <th>Limite para cotação</th>
                                     <th>Status</th>
                                     <th>Acão</th>
                                 </tr>
@@ -57,6 +58,7 @@
                                 <tr>
                                     <th>Código</th>
                                     <th>Nome</th>
+                                    <th>Limite para cotação</th>
                                     <th>Status</th>
                                     <th style="width: 15%;">Acão</th>
                                 </tr>
@@ -100,6 +102,7 @@
             columns: [
                 {data: 'id', name: 'modalidades.id'},
                 {data: 'nome', name: 'modalidades.nome'},
+                {data: 'limite_cotacao', name: 'modalidades.limite_cotacao'},
                 {data: 'status', name: 'status.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
