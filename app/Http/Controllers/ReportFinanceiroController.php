@@ -68,7 +68,7 @@ class ReportFinanceiroController extends Controller
             ->filter(function ($query) use ($request) {
                 // Filtranto por vestibular
                 if ($request->has('dataInicio') && $request->has('dataFim')) {
-                    $query->whereBetween('conf_vendas.data', '=', array($request->get('dataInicio'), $request->get('dataFim')));
+                    $query->whereBetween('conf_vendas.data', array($request->get('dataInicio'), $request->get('dataFim')));
                 }
             })
             ->make(true);
