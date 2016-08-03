@@ -60,4 +60,45 @@
     @parent
     <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_cotacao.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/cotacoes/cotacoes.js')  }}"></script>
+    <script type="text/javascript">
+        // Evento para bloquear a cotação se caso o valor passado
+        // for maior que o limite definido na modalidade
+        // Recuperando o id da modalidade
+        $('#formCotacao').submit(function (event) {
+            event.preventDefault();
+
+            // Recuperando o id da modalidade
+            var idModalidade = $('#modalidade_id').find('option:selected').val();
+
+            // Validando a modalidade
+            if(idModalidade) {
+                // Requisição ajax
+                jQuery.ajax({
+                    type: 'GET',
+                    url: laroute.route('betting.modalidades.getModalidade', {'id' : idModalidade}),
+                    datatype: 'json'
+                }).done(function (jsonResponse) {
+                    if (jsonResponse.success) {
+                        // Recuperando o valor da cotação
+                        var valorCotacao = $('#valor').val();
+
+                        // Regra de negócio
+                        if(valorCotacao > jsonResponse.data.limite_cotacao) {
+                            // Mensagem
+                            bootbox.alert('Valor informado tem que ser menor que o limite estabelecido, limite ' + jsonResponse.data.limite_cotacao);
+
+                            // Matando o processo
+                            event.preventDefault();
+                        } else {
+                            // Encaminhando a requisição
+                            $('#formCotacao').unbind('submit').submit()
+                        }
+                    } else {
+                        // Mensagem de retorno caso ocorra algum problema
+                        bootbox.alert(jsonResponse.msg);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

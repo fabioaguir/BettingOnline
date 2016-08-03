@@ -87,6 +87,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadesController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadesController@update']);
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'ModalidadesController@destroy']);
+            Route::get('getModalidade/{id}', ['as' => 'getModalidade', 'uses' => 'ModalidadesController@getModalidade']);
         });
 
         # Rota para as cotações

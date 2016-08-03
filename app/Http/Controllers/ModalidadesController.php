@@ -205,4 +205,21 @@ class ModalidadesController extends Controller
             return redirect()->back()->withErros($e->getMessage());
         }
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getModalidade($id)
+    {
+        try {
+            # Recuperando a modalidade
+            $modalidade = $this->repository->find($id);
+
+            #Retorno para a view
+            return response()->json(['success' => true, 'data' => $modalidade]);
+        } catch (\Throwable $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
 }
