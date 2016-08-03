@@ -20,6 +20,7 @@ class CreateArrecadacoesTable extends Migration {
 			$table->integer('vendedor_id')->nullable()->index('fk_arrecadacoes_pessoas2_idx');
 			$table->decimal('valor', 10)->nullable();
 			$table->date('data')->nullable();
+			$table->time('hora')->nullable();
 			$table->timestamps();
 		});
 	}

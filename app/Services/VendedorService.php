@@ -198,6 +198,7 @@ class VendedorService
         $dadosArrecadacoes['vendedor_id'] = $result->vendedor_id;
         $dadosArrecadacoes['valor'] = $totalVendido[0]->total_vendido;
         $dadosArrecadacoes['data'] = $dateObj->format('Y-m-d');
+        $dadosArrecadacoes['hora'] = date("H:i:s", mktime(gmdate("H")-3, gmdate("i"), gmdate("s")));
 
         //Dando insert em arrecadações
         $arrecadacoes = $this->repoArrecadacoes->create($dadosArrecadacoes);

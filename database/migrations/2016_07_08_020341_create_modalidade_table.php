@@ -17,6 +17,8 @@ class CreateModalidadeTable extends Migration {
 			$table->integer('id', true);
 			$table->string('nome', 155)->nullable();
 			$table->decimal('limite_cotacao', 10)->nullable();
+			$table->boolean('t_casa')->nullable();
+			$table->boolean('t_fora')->nullable();
 			$table->integer('status_id')->nullable()->index('fk_modalidade_status1_idx');
 			$table->timestamps();
 		});

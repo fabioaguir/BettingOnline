@@ -16,7 +16,8 @@ class Parametros extends Model implements Transformable
         'nome_banca',
         'status',
         'mensagen_rodape',
-        'limite_premiacao'
+        'limite_premiacao',
+        'limite_vendas'
     ];
 
 }

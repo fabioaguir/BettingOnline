@@ -5,6 +5,7 @@ namespace Softage\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Softage\Uteis\SerbinarioDateFormat;
 
 class Arrecadacoes extends Model implements Transformable
 {
@@ -15,8 +16,17 @@ class Arrecadacoes extends Model implements Transformable
         'arrecadador_id',
         'vendedor_id',
         'valor',
-        'data'
+        'data',
+        'hora'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function getHoraAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['hora'], 'time');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

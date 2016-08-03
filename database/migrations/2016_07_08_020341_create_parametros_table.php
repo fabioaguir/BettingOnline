@@ -19,6 +19,7 @@ class CreateParametrosTable extends Migration {
 			$table->boolean('status')->nullable();
 			$table->string('mensagen_rodape')->nullable();
 			$table->text('limite_premiacao', 16777215)->nullable();
+			$table->text('limite_vendas', 16777215)->nullable();
 			$table->timestamps();
 		});
 	}

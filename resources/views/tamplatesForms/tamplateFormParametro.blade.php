@@ -26,12 +26,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    {!! Form::label('limite_premiacao', 'Limite de Premiação Cliente', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('limite_premiacao', 'Limite de Premiação', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-2">
                         {!! Form::text('limite_premiacao', Session::getOldInput('limite_premiacao')  , array('class' => 'form-control')) !!}
                     </div>
                 </div>
-
+                <div class="form-group">
+                    {!! Form::label('limite_vendas', 'Limite de vendas', array('class' => 'col-sm-2 control-label')) !!}
+                    <div class="col-sm-2">
+                        {!! Form::text('limite_vendas', Session::getOldInput('limite_vendas')  , array('class' => 'form-control')) !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

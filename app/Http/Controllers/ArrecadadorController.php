@@ -65,6 +65,7 @@ class ArrecadadorController extends Controller
                 'status.nome as status',
             ]);
 
+        dd();
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
