@@ -43,6 +43,17 @@
                         {!! Form::select('status_id',  $loadFields['status'], Session::getOldInput('status_id'), array('class' => 'form-control')) !!}
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label label-input-xs">Partida múltipla?</label>
+                    <div class="col-sm-8">
+                        <ul class="demo-btns mb-n xs">
+                            <li>
+                                {!! Form::hidden('multipla', 0) !!}
+                                {!! Form::checkbox('multipla', 1, null, ['class' => 'js-switch-info switchery-xs']) !!}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
