@@ -279,6 +279,14 @@
                                             </ul>
                                         </li>
                                         <li>
+                                            <a href="javascript:;"><i class="ti ti-wallet"></i><span>Periféricos</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="{{ route('betting.chipe.index') }} ">Chipes</a></li>
+                                                <li><a href="{{ route('betting.impressora.index') }} ">Impressoras</a></li>
+                                                <li><a href="{{ route('betting.tablet.index') }} ">Tablets</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
                                             <a href="javascript:;"><i class="ti ti-shield"></i><span>Administrador</span></a>
                                             <ul class="acc-menu">
                                                 <li><a href="{{ route('betting.user.index')}} ">Usuário</a></li>

@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-3">
                                         <div class="input-group">
-                                            <input style="margin-left: 8px" class="form-control mask datepicker" data-inputmask="'alias': 'date'" type="text"
+                                            <input style="margin-left: 8px" placeholder="Data" class="form-control mask datepicker" data-inputmask="'alias': 'date'" type="text"
                                                    id="searchDate" name="searchDate">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-info" id="btnSearch" type="button">Buscar</button>

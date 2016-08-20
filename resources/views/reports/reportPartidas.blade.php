@@ -57,7 +57,13 @@
                                         {!! Form::label('data_fim', 'Fim') !!}
                                         {!! Form::text('data_fim', $datas['dataFim'] ?? "", array('class' => 'form-control date datepicker')) !!}
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="exportar">Exportar</label>
+                                        <select id="exportar" class="form-control" name="exportar">
+                                            <option value="0">Nenhum</option>
+                                            <option value="1">PDF</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <button type="submit"  id="search" class="btn-primary btn">Pesquisar</button>
                                     </div>
@@ -72,7 +78,7 @@
                                     <table id="report-partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                         @foreach($rows as $row)
                                             <tr>
-                                                <td class="campeonato" colspan="2">{{ $row['nome']  }}</td>
+                                                <td class="campeonato" colspan="2"><?php echo mb_strtoupper($row['nome'], 'UTF-8') ?></td>
                                             </tr>
                                             @foreach($row['partidas'] as $partida)
                                                 <tr>

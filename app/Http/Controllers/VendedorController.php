@@ -41,7 +41,10 @@ class VendedorController extends Controller
         'Status',
         'TipoCotacao',
         'Areas',
-        'EstornoVendedor'
+        'EstornoVendedor',
+        'Chipes',
+        'Impressoras',
+        'Tablets'
     ];
 
     /**

@@ -47,6 +47,24 @@
                                     {!! Form::select('estorno_id', $loadFields['estornovendedor'], Session::getOldInput('estorno_id'), array('class' => 'form-control')) !!}
                                 </div>
                             </div>
+                            <div class="form-group">
+                                {!! Form::label('chipe_id', 'Chipe', array('class' => 'col-sm-2 control-label')) !!}
+                                <div class="col-sm-3">
+                                    {!! Form::select('chipe_id', (['' => 'Selecione um chipe'] + $loadFields['chipes']->toArray()), Session::getOldInput('chipe_id'), array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('impressora_id', 'Impressora', array('class' => 'col-sm-2 control-label')) !!}
+                                <div class="col-sm-3">
+                                    {!! Form::select('impressora_id', (['' => 'Selecione uma impressora'] + $loadFields['impressoras']->toArray()), Session::getOldInput('impressora_id'), array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('tablet_id', 'Tablet', array('class' => 'col-sm-2 control-label')) !!}
+                                <div class="col-sm-3">
+                                    {!! Form::select('tablet_id', (['' => 'Selecione um tablet'] + $loadFields['tablets']->toArray()), Session::getOldInput('tablet_id'), array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
                         </div><br />
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">

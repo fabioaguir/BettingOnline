@@ -45,7 +45,7 @@
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route'=>'betting.report.reportVendasSearch', 'method' => "POST", 'class' => 'form-horizontal row-border', 'id' => 'formReportVendas']) !!}
+                        {!! Form::open(['route'=>'betting.report.pdfApostas', 'method' => "POST", 'target' => '_blanck','class' => 'form-horizontal row-border', 'id' => 'formReportApostas']) !!}
                         @include('tamplatesForms.tamplateFormReportApostas')
                         {!! Form::close() !!}
                     </div>

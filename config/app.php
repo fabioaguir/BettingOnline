@@ -142,6 +142,11 @@ return [
         */
         Barryvdh\Snappy\ServiceProvider::class,
 
+        /*
+        * Gerador de Excel
+        */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
         //Form
        //Illuminate\Html\HtmlServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -241,6 +246,11 @@ return [
          */
         'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'Image'     => Barryvdh\Snappy\Facades\SnappyImage::class,
+
+        /*
+         * Gerador de Excel
+         */
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
         //Form
         //'Html'      => Illuminate\Html\HtmlFacade::class,

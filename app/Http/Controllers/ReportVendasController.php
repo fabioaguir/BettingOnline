@@ -5,12 +5,14 @@ namespace Softage\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Softage\Repositories\ParametrosRepository;
+use Softage\Repositories\VendasRepository;
 use Softage\Services\ReportService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Softage\Http\Requests\AreasCreateRequest;
 use Softage\Http\Requests\AreasUpdateRequest;
+use Softage\Entities\Vendas;
 use Yajra\Datatables\Datatables;
 use Softage\Uteis\SerbinarioDateFormat;
 
@@ -24,9 +26,24 @@ class ReportVendasController extends Controller
     private $service;
 
     /**
+     * @var VendasRepository
+     */
+    private $vendasRepository;
+
+    /**
      * @var ParametrosRepository
      */
     private $parametros;
+
+    /**
+     * @var
+     */
+    private $queryVendas;
+
+    /**
+     * @var
+     */
+    private $querySum;
     
     /**
      * @var array
@@ -38,10 +55,17 @@ class ReportVendasController extends Controller
         'StatusVendas'
     ];
 
-    public function __construct(ReportService $service, ParametrosRepository $parametros)
+    /**
+     * ReportVendasController constructor.
+     * @param ReportService $service
+     * @param ParametrosRepository $parametros
+     * @param VendasRepository $vendasRepository
+     */
+    public function __construct(ReportService $service, ParametrosRepository $parametros, VendasRepository $vendasRepository)
     {
         $this->service    = $service;
         $this->parametros = $parametros;
+        $this->vendasRepository = $vendasRepository;
     }
 
     /**
@@ -72,7 +96,7 @@ class ReportVendasController extends Controller
         })
         ->addColumn('action', function ($row) {
             $html = "";
-            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary cancelar"><i class="glyphicon glyphicon-edit"></i> Cancelar</a> ';
+            $html .= '<a href="cancelarVenda/'.$row->id.'" class="btn btn-xs btn-primary cancelar"><i class="glyphicon glyphicon-edit"></i> Cancelar</a> ';
             return $html;
         })->make(true);
     }
@@ -132,11 +156,12 @@ class ReportVendasController extends Controller
         #Criando a consulta
         $query = \DB::table('vendas')
             ->join('premiacoes', 'premiacoes.id', '=', 'vendas.premiacao_id')
-            ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
             ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
             ->join('pessoas', 'conf_vendas.vendedor_id', '=', 'pessoas.id')
             ->join('areas', 'areas.id', '=', 'pessoas.area_id')
-            ->whereBetween('vendas.data', array($dataIni, $dataFim));
+            ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
+            ->whereBetween('vendas.data', array($dataIni, $dataFim))
+            ->where('status_vendas.id', '=', '1');
 
         if($dados['area'] != 0) {
             $query->where('areas.id', $dados['area']);
@@ -209,6 +234,68 @@ class ReportVendasController extends Controller
 
         #Retorno para view
         return view('reports.cupomVendas', compact('apostas', 'venda', 'parametros'));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function cancelarVenda($id)
+    {
+        try {
+
+            # Recuperando o registro do banco de dados
+            $vendas = $this->vendasRepository->find($id);
+
+            # verificando se o registro foi recuperado
+            if(!$vendas) {
+                throw new \Exception('Venda não encontrado!');
+            }
+
+            # Removendo o registro do banco de dados
+            $vendas->status_v_id = '2';
+            $vendas->save();
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cancelamento realizada com sucesso!");
+        } catch (\Throwable $e) {
+            dd('sdsd');
+            return redirect()->back()->withErros($e->getMessage());
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdfVendas(Request $request)
+    {
+        $dados = $request->request->all();
+        
+        $vendas = $this->queryVendas($request);
+        $sum    = $this->querySum($request);
+        
+        $this->queryVendas = $vendas->get();
+        $this->querySum = $sum;
+        
+        if($dados['exportar'] == '1') {
+            
+            return \PDF::loadView('reports.reportVendasPDF', ['vendas' => $vendas->get(), 'sum' => $sum])->stream();
+            
+        } else if ($dados['exportar'] == '2') {
+
+            \Excel::create('Relatório de vendas', function($excel) {
+
+                $excel->sheet('Excel', function($sheet) {
+
+                    $sheet->loadView('reports.reportVendasExcel', array('vendas' => $this->queryVendas, 'sum' => $this->querySum));
+
+                });
+
+            })->download('xls');
+        }
+        
     }
     
 }

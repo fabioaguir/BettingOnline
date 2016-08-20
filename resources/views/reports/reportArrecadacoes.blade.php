@@ -46,7 +46,7 @@
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route'=>'betting.report.reportVendasSearch', 'method' => "POST", 'id' => 'formReportVendas','enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['route'=>'betting.report.exporteArrecadacoes', 'method' => "POST", 'target' => '_blanck','id' => 'formReportArrecadacoes','enctype' => 'multipart/form-data']) !!}
                         @include('tamplatesForms.tamplateFormReportArrecadacoes')
                         {!! Form::close() !!}
                     </div>

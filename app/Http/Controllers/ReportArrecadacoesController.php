@@ -30,6 +30,16 @@ class ReportArrecadacoesController extends Controller
      * @var $data
      */
     private $data;
+
+    /**
+     * @var
+     */
+    private $queryArrecadacoes;
+
+    /**
+     * @var
+     */
+    private $querySum;
     
     /**
      * @var array
@@ -83,8 +93,8 @@ class ReportArrecadacoesController extends Controller
             'areas.nome as area_nome',
             'vendedor.nome as vendedor_nome',
             \DB::raw("concat(arrecadador.nome,' ',users.name) as usuario"),
-            'vendas.valor_total as valor_vendido',
-            \DB::raw("to_char((vendas.valor_total - ((conf_vendas.comissao * vendas.valor_total) / 100))::real, '9999999999D99') as valor_arrecadado"),
+            'arrecadacoes.valor as valor_vendido',
+            \DB::raw("to_char((arrecadacoes.valor - ((conf_vendas.comissao * arrecadacoes.valor) / 100))::real, '9999999999D99') as valor_arrecadado"),
         ]);
 
         return $consulta;
@@ -101,8 +111,8 @@ class ReportArrecadacoesController extends Controller
         $query = $this->struturaQuery($request);
 
         $sum = $query->select([
-            \DB::raw("SUM(vendas.valor_total) as total_vendido"),
-            \DB::raw("SUM(to_number(to_char((vendas.valor_total - ((conf_vendas.comissao * vendas.valor_total) / 100))::real, '9999999999D99'), '9999999999D99')) as total_arrecadado")
+            \DB::raw("SUM(arrecadacoes.valor) as total_vendido"),
+            \DB::raw("SUM(to_number(to_char((arrecadacoes.valor - ((conf_vendas.comissao * arrecadacoes.valor) / 100))::real, '9999999999D99'), '9999999999D99')) as total_arrecadado")
         ])->get();
         
         return $sum;
@@ -124,7 +134,6 @@ class ReportArrecadacoesController extends Controller
             ->join('pessoas as vendedor', 'vendedor.id', '=', 'arrecadacoes.vendedor_id')
             ->leftJoin('pessoas as arrecadador', 'arrecadador.id', '=', 'arrecadacoes.arrecadador_id')
             ->join('conf_vendas', 'conf_vendas.vendedor_id', '=', 'vendedor.id')
-            ->join('vendas', 'vendas.conf_venda_id', '=', 'conf_vendas.id')
             ->leftJoin('users', 'users.id', '=', 'arrecadacoes.user_id')
             ->join('areas', 'areas.id', '=', 'vendedor.area_id')
             ->whereBetween('arrecadacoes.data', array($dataIni, $dataFim))
@@ -134,6 +143,40 @@ class ReportArrecadacoesController extends Controller
             });
 
         return $query;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exporteArrecadacoes(Request $request)
+    {
+        $dados = $request->request->all();
+
+        $arrecadacoes = $this->queryArrecadacoes($request);
+        $sum    = $this->querySum($request);
+
+        $this->queryArrecadacoes = $arrecadacoes->get();
+        $this->querySum = $sum;
+
+        if($dados['exportar'] == '1') {
+
+            return \PDF::loadView('reports.reportArrecadacoesPDF', ['arrecadacoes' => $arrecadacoes->get(), 'sum' => $sum])->stream();
+
+        } else if ($dados['exportar'] == '2') {
+
+            \Excel::create('Relatório de vendas', function($excel) {
+
+                $excel->sheet('Excel', function($sheet) {
+
+                    $sheet->loadView('reports.reportArrecadacoesExcel', array('arrecadacoes' => $this->queryArrecadacoes, 'sum' => $this->querySum));
+
+                });
+
+            })->download('xls');
+        }
+
     }
     
 }

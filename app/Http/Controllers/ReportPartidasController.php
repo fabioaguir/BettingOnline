@@ -20,6 +20,7 @@ class ReportPartidasController extends Controller
         # Tratando os parametros
         $dataInicio = $request->get('data_inicio') ?? null;
         $dataFim    = $request->get('data_fim') ?? null;
+        $exportar   = $request->get('exportar') ?? null;
 
         # Array de datas
         $datas = [
@@ -61,8 +62,17 @@ class ReportPartidasController extends Controller
             $count++;
         }
 
-        #Retorno para view
-        return view('reports.reportPartidas', compact('rows', 'datas'));
+        if($exportar == '0') {
+
+            #Retorno para view
+            return view('reports.reportPartidas', compact('rows', 'datas'));
+            
+        } else if($exportar == '1') {
+
+            return \PDF::loadView('reports.reportPartidasPDF', compact('rows'))->download();
+
+        }
+        
     }
 
     /**

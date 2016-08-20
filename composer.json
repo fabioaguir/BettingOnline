@@ -16,7 +16,8 @@
         "barryvdh/laravel-snappy": "0.2.x",
         "doctrine/dbal": "~2.3",
         "nesbot/carbon": "~1.14",
-        "lord/laroute" : "^5.2"
+        "lord/laroute" : "^5.2",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

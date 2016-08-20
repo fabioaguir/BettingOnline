@@ -20,7 +20,10 @@ class Vendedor extends Model implements Transformable
         'estorno_id',
         'area_id',
         'codigo',
-        'tipo_pessoa_id'
+        'tipo_pessoa_id',
+        'chipe_id',
+        'impressora_id',
+        'tablet_id'
     ];
 
     /**
@@ -51,6 +54,36 @@ class Vendedor extends Model implements Transformable
     public function area()
     {
         return $this->belongsTo(Areas::class, 'area_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Area
+     */
+    public function chipe()
+    {
+        return $this->belongsTo(Chipes::class, 'chipe_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Area
+     */
+    public function impressora()
+    {
+        return $this->belongsTo(Impressoras::class, 'impressora_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * Relacionamento com Area
+     */
+    public function tablet()
+    {
+        return $this->belongsTo(Tablests::class, 'tablet_id');
     }
     
 }

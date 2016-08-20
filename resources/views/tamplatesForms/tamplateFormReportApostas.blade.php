@@ -20,6 +20,21 @@
                         {!! Form::select('partida', array(), null, array('class' => 'form-control')) !!}
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" for="exportar">Exportar</label>
+                    <div class="col-sm-2">
+                        <select id="exportar" class="form-control" name="exportar">
+                            <option value="">Nenhum</option>
+                            <option value="1">PDF</option>
+                            <option value="2">Excel</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2 col-sm-offset-1">
+                        <button type="submit" class="btn-danger btn">Exportar</button>
+                    </div>
+                </div>
                 <br/>
             </div>
         </div>
@@ -78,7 +93,7 @@
 @section('js')
     @parent
     <script type="text/javascript" src="{{ asset('js/reports/apostas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendas.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportApostas.js')}}"></script>
     <script type="text/javascript">
 
         var table = $('#apostas-grid').DataTable({

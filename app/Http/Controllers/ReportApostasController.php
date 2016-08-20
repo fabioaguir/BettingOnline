@@ -30,6 +30,11 @@ class ReportApostasController extends Controller
      * @var $data
      */
     private $data;
+
+    /**
+     * @var
+     */
+    private $queryApostas;
     
     /**
      * @var array
@@ -67,7 +72,7 @@ class ReportApostasController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         $consulta  = $this->queryApostas($request);
-        $sum       = $this->querySum($request);
+        //$sum       = $this->querySum($request);
 
         #Editando a grid
         return Datatables::of($consulta)->addColumn('action', function ($row) {
@@ -138,9 +143,42 @@ class ReportApostasController extends Controller
             ->join('partidas', 'partidas.id', '=', 'apostas.partida_id')
             ->join('tipo_apostas', 'tipo_apostas.id', '=', 'vendas.tipo_aposta_id')
             ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
-            ->where('partidas.id', '=', $dados['partida']);
+            ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
+            ->where('partidas.id', '=', $dados['partida'])
+            ->where('status_vendas.id', '=', '1');
 
         return $query;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdfApostas(Request $request)
+    {
+        $dados = $request->request->all();
+
+        $apostas = $this->queryApostas($request);
+        $this->queryApostas = $apostas->get();
+
+        if($dados['exportar'] == '1') {
+            
+            return \PDF::loadView('reports.reportApostasPDF', ['apostas' => $apostas->get()])->stream();
+            
+        } else if ($dados['exportar'] == '2') {
+
+            \Excel::create('Relatório de apostas x partidas', function($excel) {
+
+                $excel->sheet('Excel', function($sheet) {
+
+                    $sheet->loadView('reports.reportApostasExcel', array('apostas' => $this->queryApostas));
+
+                });
+
+            })->download('xls');
+        }
+
     }
     
 }

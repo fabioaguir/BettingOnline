@@ -20,10 +20,23 @@
                     {!! Form::text('arrecadador', null , array('class' => 'form-control')) !!}
                 </div>
             </div>
-            <div class="col-sm-2">
-                <button type="submit" style="margin-top: 18px" class="btn-primary btn search">Consultar</button>
+            <div class="form-group col-md-2">
+                <label for="exportar">Exportar </label>
+                <select id="exportar" class="form-control" name="exportar">
+                    <option value="">Nenhum</option>
+                    <option value="1">PDF</option>
+                    <option value="2">Excel</option>
+                </select>
             </div>
-            <br/> <br/>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button type="submit" style="margin-top: -5px;"  class="btn-primary btn search">Consultar</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" style="margin-top: -5px; margin-left: -70px"  class="btn-danger btn">Exportar</button>
+            </div>
+            <br/> <br/><br/>
         </div>
     </div>
 </div>
@@ -73,6 +86,7 @@
 </div>
 @section('js')
     @parent
+    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportArrecadacoes.js')}}"></script>
     <script type="text/javascript">
         var table = $('#arrecadacoes-grid').DataTable({
             processing: true,

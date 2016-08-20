@@ -38,8 +38,19 @@
                 {!! Form::label('status', 'Status ') !!}
                 {!! Form::select('status', (['0' => 'Ambos'] + $loadFields['statusvendas']->toArray()), $status,array('class' => 'form-control', 'id' => 'status')) !!}
             </div>
+            <div class="form-group col-md-2">
+                <label for="exportar">Exportar </label>
+                <select id="exportar" class="form-control" name="exportar">
+                    <option value="">Nenhum</option>
+                    <option value="1">PDF</option>
+                    <option value="2">Excel</option>
+                </select>
+            </div>
             <div class="col-sm-2">
                 <button type="submit" style="margin-top: 18px" id="search" class="btn-primary btn">Consultar</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" style="margin-top: 18px; margin-left: -64px" class="btn-danger btn">Exportar</button>
             </div><br />
         </div>
 	</div>
@@ -99,6 +110,7 @@
 </div>
 @section('js')
     @parent
+    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendas.js')}}"></script>
     <script type="text/javascript">
         var table = $('#vendas-grid').DataTable({
             processing: true,
@@ -145,7 +157,7 @@
             ]
         });
 
-        // Função do submit do search da grid principal
+        //Função do submit do search da grid principal
         $('#search').click(function(e) {
             table.draw();
 
@@ -157,6 +169,8 @@
                 'premiacao' : $('select[name=premiacao] option:selected').val(),
                 'status' : $('select[name=status] option:selected').val()
             };
+
+            var importe  =$('select[name=importar] option:selected').val()
 
             // Requisição ajax
             jQuery.ajax({
@@ -181,7 +195,7 @@
 
         $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
 
-        //Carregando os bairros
+        //Carregando os vendedores
         $(document).on('change', "#area", function () {
             //Removendo as Bairros
             $('#pessoas option').remove();

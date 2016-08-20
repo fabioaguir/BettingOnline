@@ -18,6 +18,9 @@ class AddForeignKeysToPessoasTable extends Migration {
 			$table->foreign('estorno_id', 'fk_pessoas_estorno_vendedor1')->references('id')->on('estorno_vendedor')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('status_id', 'fk_pessoas_status_vendedor')->references('id')->on('status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('tipo_pessoa_id', 'fk_pessoas_tipo_pessoa1')->references('id')->on('tipo_pessoas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('chipe_id', 'fk_chipes_pessoa1')->references('id')->on('chipes')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('impressora_id', 'fk_impressoras_pessoa1')->references('id')->on('impressoras')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('tablet_id', 'fk_tablets_pessoa1')->references('id')->on('tablets')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -35,6 +38,9 @@ class AddForeignKeysToPessoasTable extends Migration {
 			$table->dropForeign('fk_pessoas_estorno_vendedor1');
 			$table->dropForeign('fk_pessoas_status_vendedor');
 			$table->dropForeign('fk_pessoas_tipo_pessoa1');
+			$table->dropForeign('fk_chipes_pessoa1');
+			$table->dropForeign('fk_impressoras_pessoa1');
+			$table->dropForeign('fk_tablets_pessoa1');
 		});
 	}
 

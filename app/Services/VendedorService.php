@@ -67,6 +67,8 @@ class VendedorService
     public function store(array $data) : Vendedor
     {
 
+        $this->tratamentoCampos($data);
+
         $codigo = \DB::table('pessoas')->max('codigo');
         $codigoMax = $codigo != null ? $codigoMax = $codigo + 1 : $codigoMax = "1";
         
@@ -134,6 +136,8 @@ class VendedorService
      */
     public function update(array $data, int $id) : Vendedor
     {
+        $this->tratamentoCampos($data);
+
         #Atualizando no banco de dados
         $endereco = $this->repository->update($data, $id);
         
@@ -179,12 +183,14 @@ class VendedorService
 
         //Pegando o total das vendas
         $totalVendido = \DB::table('vendas')
-        ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
-        ->where('conf_vendas.id', '=', $id)
-        ->groupBy('vendas.conf_venda_id')
-        ->select([
-            \DB::raw("SUM(vendas.valor_total) as total_vendido")
-        ])->get();
+            ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')
+            ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
+            ->where('conf_vendas.id', '=', $id)
+            ->where('status_vendas.id', '=', '1')
+            ->groupBy('vendas.conf_venda_id')
+            ->select([
+                \DB::raw("SUM(vendas.valor_total) as total_vendido")
+            ])->get();
 
         #pegando sessão de usuário
         $user = \Auth::user();
@@ -196,7 +202,7 @@ class VendedorService
         $dadosArrecadacoes = array();
         $dadosArrecadacoes['user_id'] = $user->id;
         $dadosArrecadacoes['vendedor_id'] = $result->vendedor_id;
-        $dadosArrecadacoes['valor'] = $totalVendido[0]->total_vendido;
+        $dadosArrecadacoes['valor'] = count($totalVendido) > 0 ? $totalVendido[0]->total_vendido : "0.00";
         $dadosArrecadacoes['data'] = $dateObj->format('Y-m-d');
         $dadosArrecadacoes['hora'] = date("H:i:s", mktime(gmdate("H")-3, gmdate("i"), gmdate("s")));
 

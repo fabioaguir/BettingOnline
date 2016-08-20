@@ -10,11 +10,18 @@ class Vendas extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'areas';
+    protected $table    = 'vendas';
     
     protected $fillable = [
-        'nome',
-        'status',
+        'status_v_id',
+        'seq',
+        'data',
+        'obs',
+        'valor_total',
+        'retorno',
+        'premiacao_id',
+        'tipo_aposta_id',
+        'conf_venda_id'
     ];
 
     /**
