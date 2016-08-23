@@ -14,12 +14,13 @@ $(document).ready(function(){
         postfix: '%'
     });
     $("input.touchspin2").TouchSpin({
-        min: -1000000000,
-        max: 1000000000,
-        stepinterval: 50,
+        min: 0,
+        max: 100,
+        step: 0.1,
         decimals: 2,
-        maxboostedstep: 10000000,
-        prefix: '$'
+        boostat: 5,
+        maxboostedstep: 10,
+        postfix: '$'
     });
     $("input.touchspin3").TouchSpin({
         verticalbuttons: true

@@ -63,7 +63,7 @@ class UtilController extends Controller
             #preparando a consulta
             $qb = DB::table($tableName)->select('id', 'nome');
             $qb->skip($pageValue);
-            $qb->take(10);
+            $qb->take(30);
             $qb->orderBy('nome', 'asc');
             $qb->where($fieldName,'like', "%$searchValue%");
 

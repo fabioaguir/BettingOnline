@@ -48,7 +48,7 @@
                                             <div class="input-group">
                                                 {!! Form::select('time',(['' => 'Selecione um time'] + $loadFields['times']->toArray()), null, array('class' => 'form-control', 'id' => 'time')) !!}
                                                 <div class="input-group-btn">
-                                                    <button class="btn btn-info" id="inserir" type="button">Inserir na lista</button>
+                                                    <button class="btn btn-info" style="margin-top: -2px" id="inserir" type="button">Inserir na lista</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +165,7 @@
         });
 
         //consulta via select2 cgm
-        /*$("#time").select2({
+        $("#time").select2({
             placeholder: 'Selecione um time',
             minimumInputLength: 3,
             width: 200,
@@ -180,8 +180,6 @@
                         'search':     params.term, // search term
                         'tableName':  'times',
                         'fieldName':  'nome',
-                        /!*'fieldWhere':  'nivel',
-                         'valueWhere':  '3',*!/
                         'page':       params.page
                     };
                 },
@@ -201,36 +199,6 @@
                     };
                 }
             }
-        });*/
-
-
-        $("#time").select2({
-            placeholder: "Search for a movie",
-            minimumInputLength: 3,
-            width: '100%',
-            ajax: {
-                url: "{{ route('betting.util.select2')}}",
-                dataType: 'json',
-                quietMillis: 100,
-                data: function (term, page) { // page is the one-based page number tracked by Select2
-                    return {
-                        'search': term, //search term
-                        'tableName':  'times',
-                        'fieldName':  'nome',
-                        page_limit: 10, // page size
-                        'page': page, // page number
-                        apikey: "q7jnbsc56ysdyvvbeanghegk" // please do not use so this example keeps working
-                    };
-                },
-                results: function (data, page) {
-                    var more = (page * 10) < data.total; // whether or not there are more results available
-
-                    // notice we return the value of more so Select2 knows if more results can be loaded
-                    return {results: data.movies, more: more};
-                }
-            },
-            dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-            escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
         });
     </script>
 @endsection

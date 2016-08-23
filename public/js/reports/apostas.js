@@ -16,7 +16,7 @@ $(document).on('click', '#btnSearch', function (event) {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: laroute.route('betting.partidas.getPartidas'),
+        url: laroute.route('betting.partidas.getPartidasSemApostas'),
         data: {'data' : searchDate},
         datatype: 'json'
     }).done(function (jsonResponse) {
