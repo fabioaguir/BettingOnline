@@ -76,6 +76,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'PartidasController@update']);
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'PartidasController@destroy']);
             Route::get('getPartidas', ['as' => 'getPartidas', 'uses' => 'PartidasController@getPartidas']);
+            Route::get('getPartidasSemApostas', ['as' => 'getPartidasSemApostas', 'uses' => 'PartidasController@getPartidasSemApostas']);
         });
 
         # Rota para as modalidades

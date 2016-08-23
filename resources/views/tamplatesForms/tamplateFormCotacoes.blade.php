@@ -78,12 +78,13 @@
                     url: laroute.route('betting.modalidades.getModalidade', {'id' : idModalidade}),
                     datatype: 'json'
                 }).done(function (jsonResponse) {
+
                     if (jsonResponse.success) {
                         // Recuperando o valor da cotação
                         var valorCotacao = $('#valor').val();
-
                         // Regra de negócio
-                        if(valorCotacao > jsonResponse.data.limite_cotacao) {
+                        if(parseFloat(valorCotacao) > parseFloat(jsonResponse.data.limite_cotacao)) {
+
                             // Mensagem
                             bootbox.alert('Valor informado tem que ser menor que o limite estabelecido, limite ' + jsonResponse.data.limite_cotacao);
 

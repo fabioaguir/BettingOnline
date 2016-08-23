@@ -33,9 +33,8 @@
         <link type="text/css" href="{{ asset('/assets/plugins/switchery/switchery.css')}}" rel="stylesheet">
         <link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
         <link type="text/css" src="{{ asset('/assets/plugins/zTree/jquery.tree.css')}}">
-            <link type="text/css" src="{{ asset('/assets/plugins/form-select2/select2.css')}}">
         <link type="text/css" href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
-        {{--<link type="text/css" href="{{ asset('/css/select2.min.css')}}" rel="stylesheet"/>--}}
+        <link type="text/css" href="{{ asset('/css/select2.min.css')}}" rel="stylesheet"/>
         <link type="text/css" href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
 
         <!-- iCheck -->
@@ -409,9 +408,8 @@
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-inputmask/jquery.inputmask.bundle.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootbox/bootbox.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/plugins/form-select2/select2.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/jquery.datetimepicker.js')}}"></script>
-        {{--<script type="text/javascript" src="{{ asset('/js/select2.full.min.js')}}"></script>--}}
+        <script type="text/javascript" src="{{ asset('/js/select2.full.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/js/jquery.mask.js')}}"></script>
         <script type="text/javascript" src="{{asset('/js/jquery.validate.js')}}"></script>
         <script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>

@@ -16,11 +16,10 @@ class CreateTimesTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('nome')->nullable();
-			$table->integer('status_id')->index('fk_times_status1_idx');
+			$table->integer('status_id')->index('fk_times_status1_idx')->nullable();
 			$table->timestamps();
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.

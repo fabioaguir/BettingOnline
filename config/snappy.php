@@ -1,6 +1,6 @@
 <?php
 
-/*return array(
+return array(
 
 
     'pdf' => array(
@@ -17,9 +17,9 @@
     ),
 
 
-);*/
+);
 
-return array(
+/*return array(
 
     'pdf' => array(
         'enabled' => true,
@@ -35,4 +35,4 @@ return array(
         'options' => array(),
     ),
 
-);
+);*/
