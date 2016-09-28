@@ -162,7 +162,7 @@
                             <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
                         </ul>
                     </li>
-                    {{--<li><a href="">Another Link</a></li>--}}
+                    <li><a href="{{ route('betting.seteSorte') }}">Sete da sorte</a></li>
                 </ul>
             </div>
 
@@ -275,6 +275,7 @@
                                                 <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                                                 <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                                                 <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
+                                                <li><a target="_blank" href="{{ route('betting.report.reportModalidades') }} ">Modalidades</a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -368,11 +369,10 @@
 
         <script type="text/javascript" src="{{ asset('/assets/plugins/codeprettifier/prettify.js')}}"></script>
         <!-- Code Prettifier  -->
-        <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-switch/bootstrap-switch.js')}}"></script>
+       <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-switch/bootstrap-switch.js')}}"></script>
         <!-- Swith/Toggle Button -->
 
-        <script type="text/javascript"
-        src="{{ asset('/assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('/assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js')}}"></script>
         <!-- Bootstrap Tabdrop -->
 
         <script type="text/javascript" src="{{ asset('/assets/plugins/iCheck/icheck.min.js')}}"></script>
@@ -402,7 +402,6 @@
 
         <!-- plugins adicionais -->
         <script type="text/javascript" src="{{ asset('/assets/plugins/switchery/switchery.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('/assets/demo/demo-formcomponents.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-jasnyupload/fileinput.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/zTree/jquery.tree.js')}}"></script>
         <script type="text/javascript" src="{{ asset('/assets/plugins/form-inputmask/jquery.inputmask.bundle.min.js')}}"></script>
@@ -418,6 +417,7 @@
         <script type="text/javascript">
             $(function() {
                 $('.mask').inputmask();
+
             });
         </script>
         @show

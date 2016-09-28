@@ -54,6 +54,28 @@
                         </ul>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label label-input-xs">"Sete da sorte"?</label>
+                    <div class="col-sm-8">
+                        <ul class="demo-btns mb-n xs">
+                            <li>
+                                {!! Form::hidden('sete_da_sorte', 0) !!}
+                                {!! Form::checkbox('sete_da_sorte', 1, null, ['class' => 'js-switch-info switchery-sm']) !!}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label label-input-xs">Partida obrigatória "sete da sorte"?</label>
+                    <div class="col-sm-8">
+                        <ul class="demo-btns mb-n xs">
+                            <li>
+                                {!! Form::hidden('sete_sorte_obr', 0) !!}
+                                {!! Form::checkbox('sete_sorte_obr', 1, null, ['class' => 'js-switch-info switchery-xs']) !!}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

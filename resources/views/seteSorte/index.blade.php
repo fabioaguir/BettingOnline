@@ -19,7 +19,7 @@
 @endsection
 
 @section('page-heading')
-    <h1>Dashboard</h1>
+    <h1>SETE DA SORTE</h1>
 @endsection
 
 @section('container')
@@ -34,28 +34,16 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Dashboard</h2>
+                        <h2>Partidas do sete da sorte</h2>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
                     <div class="panel-body">
+                        {!! Form::open(['route'=>'betting.report.pdfVendas', 'method' => "POST",  'id' => 'formReportVendas']) !!}
+                         @include('tamplatesForms.tamplateFormReportSeteSorte')
+                        {!! Form::close() !!}
                         <div class="row">
-                            <form role="form" class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-sm-3">
-                                        <div class="input-group">
-                                            <input style="margin-left: 8px" placeholder="Data" class="form-control mask datepicker" data-inputmask="'alias': 'date'" type="text"
-                                                   id="searchDate" name="searchDate">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-info" id="btnSearch" type="button">Buscar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-7">
+                            <div class="col-sm-12">
                                 <div class="table-responsive no-padding">
                                     <table id="dashboard-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                         <thead>
@@ -87,7 +75,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-sm-5">
+                            {{--<div class="col-sm-5">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -106,7 +94,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -133,10 +121,11 @@
                 }
             },
             ajax: {
-                url: "{!! route('betting.dashboard') !!}",
+                url: "{!! route('betting.seteGrid') !!}",
                 method: 'POST',
                 data: function (d) {
-                    d.searchDate = $('input[name=searchDate]').val();
+                    d.dataInicio = $('input[name=data_inicio]').val();
+                    d.dataFim = $('input[name=data_fim]').val();
                 }
             },
             language: {
@@ -157,7 +146,7 @@
                 {data: 'campeonato', name: 'campeonatos.nome'},
                 {data: 'hora', name: 'partidas.hora'},
                 {data: 'partida', name: 'partida'},
-                {data: 'status', name: 'processadas.nome'},
+                {data: 'status', name: 'status.nome'},
                 {data: 'qtd_apostas', name: 'qtd_apostas'},
                 {data: 'casa', name: 'casa', orderable: false, searchable: false},
                 {data: 'fora', name: 'fora', orderable: false, searchable: false},
@@ -169,11 +158,11 @@
         resultadoVendas();
 
         // Função do submit do search da grid principal
-        $('#btnSearch').click(function(e) {
+        $('#search').click(function(e) {
             table.draw();
 
             //Pega o resultado das vendas
-            resultadoVendas();
+           // resultadoVendas();
 
             e.preventDefault();
         });

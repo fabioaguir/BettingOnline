@@ -40,7 +40,10 @@ class Partidas extends Model implements Transformable
         'time_fora_id',
         'status_id',
         'campeonato_id',
-        'multipla'
+        'multipla',
+        'sete_da_sorte',
+        'sete_sorte_obr',
+        'processada_id'
     ];
 
     /**

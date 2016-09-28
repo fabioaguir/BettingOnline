@@ -18,6 +18,7 @@ class AddForeignKeysToPartidasTable extends Migration {
 			$table->foreign('status_id', 'fk_partidas_status1')->references('id')->on('status')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('time_casa_id', 'fk_partidas_times1')->references('id')->on('times')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('time_fora_id', 'fk_partidas_times2')->references('id')->on('times')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('processada_id', 'fk_partidas_processada')->references('id')->on('processadas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -35,6 +36,7 @@ class AddForeignKeysToPartidasTable extends Migration {
 			$table->dropForeign('fk_partidas_status1');
 			$table->dropForeign('fk_partidas_times1');
 			$table->dropForeign('fk_partidas_times2');
+			$table->dropForeign('fk_partidas_processada');
 		});
 	}
 
