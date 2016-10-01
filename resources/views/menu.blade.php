@@ -157,6 +157,8 @@
                             <li class="divider"></li>
                             <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                             <li class="divider"></li>
+                            <li><a href="{{ route('betting.report.reportVendasPremiadasView') }} ">Vendas Premiadas</a></li>
+                            <li class="divider"></li>
                             <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
@@ -273,6 +275,7 @@
                                                 <li><a href="{{ route('betting.report.reportPartidasView') }} ">Resultados</a></li>
                                                 <li><a href="{{ route('betting.report.reportFinanceiroView') }} ">Financeiro</a></li>
                                                 <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
+                                                <li><a href="{{ route('betting.report.reportVendasPremiadasView') }} ">Vendas Premiadas</a></li>
                                                 <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                                                 <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
                                                 <li><a target="_blank" href="{{ route('betting.report.reportModalidades') }} ">Modalidades</a></li>

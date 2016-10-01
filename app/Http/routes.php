@@ -189,6 +189,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('reportArrecadacoesSum', ['as' => 'reportArrecadacoesSum', 'uses' => 'ReportArrecadacoesController@querySum']);
             Route::post('exporteArrecadacoes', ['as' => 'exporteArrecadacoes', 'uses' => 'ReportArrecadacoesController@exporteArrecadacoes']);
             Route::get('reportModalidades', ['as' => 'reportModalidades', 'uses' => 'ModalidadesController@report']);
+
+            //Report vedas premiadas
+            Route::get('reportVendasPremiadasView', ['as' => 'reportVendasPremiadasView', 'uses' => 'ReportVendasPremiadasController@view']);
+            Route::post('reportVendasPremiadasSearch', ['as' => 'reportVendasPremiadasSearch', 'uses' => 'ReportVendasPremiadasController@search']);
+            Route::post('reportVendasPremiadasSum', ['as' => 'reportVendasPremiadasSum', 'uses' => 'ReportVendasPremiadasController@querySum']);
+            Route::post('pdfVendasPremiadas', ['as' => 'pdfVendasPremiadas', 'uses' => 'ReportVendasPremiadasController@pdfVendas']);
         });
         
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
