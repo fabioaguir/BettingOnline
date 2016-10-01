@@ -37,6 +37,12 @@
                         {!! Form::text('limite_vendas', Session::getOldInput('limite_vendas')  , array('class' => 'form-control')) !!}
                     </div>
                 </div>
+                <div class="form-group">
+                    {!! Form::label('premio_sete_da_sorte', 'Premiação sete da sorte', array('class' => 'col-sm-2 control-label')) !!}
+                    <div class="col-sm-2">
+                        {!! Form::text('premio_sete_da_sorte', Session::getOldInput('premio_sete_da_sorte')  , array('class' => 'form-control')) !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -222,4 +222,17 @@ class ModalidadesController extends Controller
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function report()
+    {
+        $modalidades = $this->repository->all();
+        
+        return \PDF::loadView('reports.reportModalidades', ['modalidades' => $modalidades])->stream();
+        
+    }
 }

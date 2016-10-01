@@ -10,7 +10,7 @@ use Softage\Repositories\TipoCotacaoRepository;
 use Yajra\Datatables\Datatables;
 use Softage\Uteis\SerbinarioDateFormat;
 
-class DefaultController extends Controller
+class SeteSorteController extends Controller
 {
 
     /**
@@ -29,17 +29,9 @@ class DefaultController extends Controller
     
     public function index()
     {
-        return view('default.index');
+        return view('seteSorte.index');
     }
-
-    public function allTipoCotacao()
-    {
-        
-        $tipoCotacaoes = $this->TipoCotacaoRepository->all();
-        
-        return compact('tipoCotacaoes');
-    }
-
+    
     /**
      * @param Request $request
      * @return mixed
@@ -49,11 +41,13 @@ class DefaultController extends Controller
 
         $dados = $request->request->all();
         
-        if(isset($dados['searchDate'])) {
-            $data = SerbinarioDateFormat::toUsa($dados['searchDate'], 'date');
+        if(isset($dados['dataInicio']) && isset($dados['dataFim'])) {
+            $dataInicio = SerbinarioDateFormat::toUsa($dados['dataInicio'], 'date');
+            $dataFim    = SerbinarioDateFormat::toUsa($dados['dataFim'], 'date');
         } else {
             $dateObj = new \DateTime('now');
-            $data = $dateObj->format('Y-m-d');
+            $dataInicio = $dateObj->format('Y-m-d');
+            $dataFim = $dateObj->format('Y-m-d');
         }
 
         #Criando a consulta de Gols
@@ -61,18 +55,19 @@ class DefaultController extends Controller
             ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
             ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
             ->join('campeonatos', 'campeonatos.id', '=', 'partidas.campeonato_id')
-            ->join('processadas', 'processadas.id', '=', 'partidas.processada_id')
+            ->join('status', 'status.id', '=', 'partidas.status_id')
             ->leftJoin('apostas', 'apostas.partida_id', '=', 'partidas.id')
-            ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'processadas.id')
-            ->where('partidas.data', '=', $data)
+            ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'status.id')
+            ->whereBetween('partidas.data', array($dataInicio, $dataFim))
+            ->where('partidas.sete_da_sorte', '=', true)
             ->select([
                 'partidas.id as id',
                 \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
                 \DB::raw("count(apostas.id) as qtd_apostas"),
                 'campeonatos.nome as campeonato',
                 'partidas.hora as hora',
-                'processadas.nome as status',
-                'processadas.id as status_id',
+                'status.nome as status',
+                'status.id as status_id',
             ]);
 
         #Editando a grid

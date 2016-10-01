@@ -21,6 +21,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::post('dashboard'  , ['as' => 'dashboard', 'uses' => 'DefaultController@dashboard']);
         Route::post('resultVendas'  , ['as' => 'resultVendas', 'uses' => 'DefaultController@resultadosVendas']);
 
+        //Rotas para sete da sorte
+        Route::get('seteSorte'  , ['as' => 'seteSorte', 'uses' => 'SeteSorteController@index']);
+        Route::post('seteGrid'  , ['as' => 'seteGrid', 'uses' => 'SeteSorteController@dashboard']);
+
         //Rotas para selectes via ajax
         Route::post('allTipoCotacao'  , ['as' => 'allTipoCotacao', 'uses' => 'DefaultController@allTipoCotacao']);
 
@@ -116,15 +120,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::put('conclude/{idPartida}', ['as' => 'conclude', 'uses' => 'GolsController@conclude']);
         });
 
-        /*Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'ModalidadeController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'ModalidadeController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'ModalidadeController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'ModalidadeController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadeController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadeController@update']);
-        });*/
-
         Route::group(['prefix' => 'resultado', 'as' => 'resultado.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ResultadoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'ResultadoController@grid']);
@@ -193,6 +188,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('reportArrecadacoesSearch', ['as' => 'reportArrecadacoesSearch', 'uses' => 'ReportArrecadacoesController@reportArrecadacoesSearch']);
             Route::post('reportArrecadacoesSum', ['as' => 'reportArrecadacoesSum', 'uses' => 'ReportArrecadacoesController@querySum']);
             Route::post('exporteArrecadacoes', ['as' => 'exporteArrecadacoes', 'uses' => 'ReportArrecadacoesController@exporteArrecadacoes']);
+            Route::get('reportModalidades', ['as' => 'reportModalidades', 'uses' => 'ModalidadesController@report']);
+
+            //Report vedas premiadas
+            Route::get('reportVendasPremiadasView', ['as' => 'reportVendasPremiadasView', 'uses' => 'ReportVendasPremiadasController@view']);
+            Route::post('reportVendasPremiadasSearch', ['as' => 'reportVendasPremiadasSearch', 'uses' => 'ReportVendasPremiadasController@search']);
+            Route::post('reportVendasPremiadasSum', ['as' => 'reportVendasPremiadasSum', 'uses' => 'ReportVendasPremiadasController@querySum']);
+            Route::post('pdfVendasPremiadas', ['as' => 'pdfVendasPremiadas', 'uses' => 'ReportVendasPremiadasController@pdfVendas']);
         });
         
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
