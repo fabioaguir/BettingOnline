@@ -11,7 +11,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        \Softage\Entities\User::truncate();
+        //\Softage\Entities\User::truncate();
 
         \Softage\Entities\User::create([
             'name' => 'Andrey Fernandes',
