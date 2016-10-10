@@ -129,25 +129,33 @@ class SeteSorteController extends Controller
     {
         $dados = $request->request->all();
 
-        if(isset($dados['searchDate'])) {
-            $data = SerbinarioDateFormat::toUsa($dados['searchDate'], 'date');
+        if(isset($dados['dataInicio']) && isset($dados['dataFim'])) {
+            $dataInicio = SerbinarioDateFormat::toUsa($dados['dataInicio'], 'date');
+            $dataFim    = SerbinarioDateFormat::toUsa($dados['dataFim'], 'date');
         } else {
             $dateObj = new \DateTime('now');
-            $data = $dateObj->format('Y-m-d');
+            $dataInicio = $dateObj->format('Y-m-d');
+            $dataFim = $dateObj->format('Y-m-d');
         }
 
         $vendasRealizadas = \DB::table('vendas')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
+            ->join('apostas', 'apostas.venda_id', '=', 'vendas.id')
+            ->join('partidas', 'partidas.id', '=', 'apostas.partida_id')
             ->where('status_vendas.id', '=', '1')
-            ->where('vendas.data', '=', $data)
+            ->whereBetween('vendas.data', array($dataInicio, $dataFim))
+            ->where('partidas.sete_da_sorte', '=', true)
             ->select([
                 \DB::raw("count(vendas.id) as vendas_r"),
             ])->get();
 
         $vendasCanceladas = \DB::table('vendas')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
+            ->join('apostas', 'apostas.venda_id', '=', 'vendas.id')
+            ->join('partidas', 'partidas.id', '=', 'apostas.partida_id')
             ->where('status_vendas.id', '=', '2')
-            ->where('vendas.data', '=', $data)
+            ->whereBetween('vendas.data', array($dataInicio, $dataFim))
+            ->where('partidas.sete_da_sorte', '=', true)
             ->select([
                 \DB::raw("count(vendas.id) as vendas_c"),
             ])->get();
