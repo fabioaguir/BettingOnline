@@ -24,4 +24,28 @@ class Apostas extends Model implements Transformable
         'cotacao_id',
         'valor'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partida()
+    {
+        return $this->belongsTo(Partidas::class, 'partida_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cotacao()
+    {
+        return $this->belongsTo(Cotacoes::class, 'cotacao_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function venda()
+    {
+        return $this->belongsTo(Vendas::class, 'venda_id');
+    }
 }

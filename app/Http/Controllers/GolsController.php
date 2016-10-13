@@ -165,7 +165,7 @@ class GolsController extends Controller
             return response()->json(['success' => true]);
         } catch (ValidatorException $e) {
             return response()->json(['success' => false, 'msg' => $this->validator->errors()]);
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e);
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
