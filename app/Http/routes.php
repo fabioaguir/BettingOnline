@@ -21,6 +21,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::post('dashboard'  , ['as' => 'dashboard', 'uses' => 'DefaultController@dashboard']);
         Route::post('resultVendas'  , ['as' => 'resultVendas', 'uses' => 'DefaultController@resultadosVendas']);
 
+        //Rotas para sete da sorte
+        Route::get('seteSorte'  , ['as' => 'seteSorte', 'uses' => 'SeteSorteController@index']);
+        Route::post('seteGrid'  , ['as' => 'seteGrid', 'uses' => 'SeteSorteController@dashboard']);
+        Route::post('resultVendasST'  , ['as' => 'resultVendasST', 'uses' => 'SeteSorteController@resultadosVendas']);
+
         //Rotas para selectes via ajax
         Route::post('allTipoCotacao'  , ['as' => 'allTipoCotacao', 'uses' => 'DefaultController@allTipoCotacao']);
 
@@ -116,15 +121,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::put('conclude/{idPartida}', ['as' => 'conclude', 'uses' => 'GolsController@conclude']);
         });
 
-        /*Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'ModalidadeController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'ModalidadeController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'ModalidadeController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'ModalidadeController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ModalidadeController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ModalidadeController@update']);
-        });*/
-
         Route::group(['prefix' => 'resultado', 'as' => 'resultado.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'ResultadoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'ResultadoController@grid']);
@@ -172,6 +168,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'TabletsController@delete']);
         });
 
+        Route::group(['prefix' => 'time', 'as' => 'time.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TimesController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'TimesController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TimesController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TimesController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TimesController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TimesController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'TimesController@delete']);
+        });
+
+        Route::group(['prefix' => 'campeonato', 'as' => 'campeonato.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CampeonatosController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'CampeonatosController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CampeonatosController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CampeonatosController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CampeonatosController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CampeonatosController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'CampeonatosController@delete']);
+        });
+
         Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
             Route::post('reportFinanceiroSum', ['as' => 'reportFinanceiroSum', 'uses' => 'ReportFinanceiroController@reportFinanceiroSum']);
             Route::get('reportFinanceiroView', ['as' => 'reportFinanceiroView', 'uses' => 'ReportFinanceiroController@reportFinanceiroView']);
@@ -193,6 +209,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('reportArrecadacoesSearch', ['as' => 'reportArrecadacoesSearch', 'uses' => 'ReportArrecadacoesController@reportArrecadacoesSearch']);
             Route::post('reportArrecadacoesSum', ['as' => 'reportArrecadacoesSum', 'uses' => 'ReportArrecadacoesController@querySum']);
             Route::post('exporteArrecadacoes', ['as' => 'exporteArrecadacoes', 'uses' => 'ReportArrecadacoesController@exporteArrecadacoes']);
+            Route::get('reportModalidades', ['as' => 'reportModalidades', 'uses' => 'ModalidadesController@report']);
+
+            //Report vedas premiadas
+            Route::get('reportVendasPremiadasView', ['as' => 'reportVendasPremiadasView', 'uses' => 'ReportVendasPremiadasController@view']);
+            Route::post('reportVendasPremiadasSearch', ['as' => 'reportVendasPremiadasSearch', 'uses' => 'ReportVendasPremiadasController@search']);
+            Route::post('reportVendasPremiadasSum', ['as' => 'reportVendasPremiadasSum', 'uses' => 'ReportVendasPremiadasController@querySum']);
+            Route::post('pdfVendasPremiadas', ['as' => 'pdfVendasPremiadas', 'uses' => 'ReportVendasPremiadasController@pdfVendas']);
         });
         
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

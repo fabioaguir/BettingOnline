@@ -44,14 +44,30 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label label-input-xs">Partida múltipla?</label>
+                    <label for="checkbox" class="col-sm-2 control-label">Partida simples?</label>
                     <div class="col-sm-8">
-                        <ul class="demo-btns mb-n xs">
-                            <li>
-                                {!! Form::hidden('multipla', 0) !!}
-                                {!! Form::checkbox('multipla', 1, null, ['class' => 'js-switch-info switchery-xs']) !!}
-                            </li>
-                        </ul>
+                        {!! Form::hidden('simples', 0) !!}
+                        {!! Form::checkbox('simples', 1, null, array('class' => 'checkbox-inline', 'id' => 'simples')) !!}
+                    </div>
+                </div>
+                <div class="form-group" id="limite_aposta">
+                    {!! Form::label('limite_valor_aposta', 'Limite de aposta', array('class' => 'col-sm-2 control-label')) !!}
+                    <div class="col-sm-2">
+                        {!! Form::text('limite_valor_aposta', Session::getOldInput('limite_valor_aposta')  , array('class' => 'form-control money')) !!}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="checkbox" class="col-sm-2 control-label">"Sete da sorte"?</label>
+                    <div class="col-sm-8">
+                        {!! Form::hidden('sete_da_sorte', 0) !!}
+                        {!! Form::checkbox('sete_da_sorte', 1, null, array('class' => 'checkbox-inline')) !!}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="checkbox" class="col-sm-2 control-label">Partida obrigatória "sete da sorte"?</label>
+                    <div class="col-sm-8">
+                        {!! Form::hidden('sete_sorte_obr', 0) !!}
+                        {!! Form::checkbox('sete_sorte_obr', 1, null, array('class' => 'checkbox-inline')) !!}
                     </div>
                 </div>
             </div>
@@ -67,6 +83,22 @@
         var init = new Switchery(elem);
         $(document).ready(function(){
             $("#hora").inputmask("hh:mm:ss", {"clearIncomplete": true});
+
+            @if(isset($model->id) && $model->limite_valor_aposta)
+                $('#limite_aposta').show("slow");
+            @else
+                $('#limite_aposta').hide("slow");
+            @endif
+
+        });
+
+        $(document).on('click', '#simples', function(){
+            if($("#simples").is(":checked")) {
+                $('#limite_aposta').show("slow");
+            } else {
+                $('#limite_valor_aposta').val("");
+                $('#limite_aposta').hide("slow");
+            }
         });
 
     </script>

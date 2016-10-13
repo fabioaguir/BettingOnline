@@ -11,7 +11,7 @@
 @endsection
 
 @section('page-heading')
-    <h1>Chipes</h1>
+    <h1>Chips</h1>
 @endsection
 
 @section('container')
@@ -37,8 +37,8 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Lista de chipes</h2><br />
-                        <a href="{{ route('betting.chipe.create')}}" class="btn btn-primary">Novo chipe</a>
+                        <h2>Lista de chips</h2><br />
+                        <a href="{{ route('betting.chipe.create')}}" class="btn btn-primary">Novo chip</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>

@@ -65,6 +65,9 @@
                                             <th>Partida</th>
                                             <th>Processada</th>
                                             <th>Apostas</th>
+                                            <th>Casa</th>
+                                            <th>Fora</th>
+                                            <th>Empate</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -76,6 +79,9 @@
                                             <th>Partida</th>
                                             <th>Processada</th>
                                             <th>Apostas</th>
+                                            <th>Casa</th>
+                                            <th>Fora</th>
+                                            <th>Empate</th>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -120,6 +126,12 @@
             iDisplayLength: 20,
             bLengthChange: false,
             bFilter: false,
+            fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                if ( aData['status_id'] == "1" )
+                {
+                    $('td', nRow).css('background-color', 'Orange');
+                }
+            },
             ajax: {
                 url: "{!! route('betting.dashboard') !!}",
                 method: 'POST',
@@ -145,9 +157,11 @@
                 {data: 'campeonato', name: 'campeonatos.nome'},
                 {data: 'hora', name: 'partidas.hora'},
                 {data: 'partida', name: 'partida'},
-                {data: 'status', name: 'status.nome'},
-                {data: 'qtd_apostas', name: 'qtd_apostas'}
-                //{data: 'action', name: 'action', orderable: false, searchable: false}
+                {data: 'status', name: 'processadas.nome'},
+                {data: 'qtd_apostas', name: 'qtd_apostas'},
+                {data: 'casa', name: 'casa', orderable: false, searchable: false},
+                {data: 'fora', name: 'fora', orderable: false, searchable: false},
+                {data: 'empate', name: 'empate', orderable: false, searchable: false}
             ]
         });
 

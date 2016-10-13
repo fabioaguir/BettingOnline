@@ -16,4 +16,10 @@ class Campeonatos extends Model implements Transformable
         'nome'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function partidas(){
+        return $this->hasMany(Partidas::class, 'campeonato_id', 'id');
+    }
 }

@@ -61,9 +61,9 @@ class DefaultController extends Controller
             ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
             ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
             ->join('campeonatos', 'campeonatos.id', '=', 'partidas.campeonato_id')
-            ->join('status', 'status.id', '=', 'partidas.status_id')
+            ->join('processadas', 'processadas.id', '=', 'partidas.processada_id')
             ->leftJoin('apostas', 'apostas.partida_id', '=', 'partidas.id')
-            ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'status.id')
+            ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'processadas.id')
             ->where('partidas.data', '=', $data)
             ->select([
                 'partidas.id as id',
@@ -71,11 +71,59 @@ class DefaultController extends Controller
                 \DB::raw("count(apostas.id) as qtd_apostas"),
                 'campeonatos.nome as campeonato',
                 'partidas.hora as hora',
-                'status.nome as status'
+                'processadas.nome as status',
+                'processadas.id as status_id',
             ]);
 
         #Editando a grid
-        return Datatables::of($rows)->make(true);
+        return Datatables::of($rows)->addColumn('casa', function ($row) {
+
+            $q1 = \DB::table('cotacoes')
+                ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+                ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+                ->where('modalidades.t_casa', '=', 'true')
+                ->where('partidas.id', '=', $row->id)
+                ->select('cotacoes.valor')->first();
+
+            if (count($q1) > 0) {
+                return $q1->valor;
+            } else {
+                return "";
+            }
+
+        })
+            ->addColumn('fora', function ($row) {
+
+                $q1 = \DB::table('cotacoes')
+                    ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+                    ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+                    ->where('modalidades.t_fora', '=', 'true')
+                    ->where('partidas.id', '=', $row->id)
+                    ->select('cotacoes.valor')->first();
+
+                if (count($q1) > 0) {
+                    return $q1->valor;
+                } else {
+                    return "";
+                }
+
+            })
+            ->addColumn('empate', function ($row) {
+
+                $q1 = \DB::table('cotacoes')
+                    ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+                    ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+                    ->where('modalidades.t_empate', '=', 'true')
+                    ->where('partidas.id', '=', $row->id)
+                    ->select('cotacoes.valor')->first();
+
+                if (count($q1) > 0) {
+                    return $q1->valor;
+                } else {
+                    return "";
+                }
+
+            })->make(true);
     }
 
     /**

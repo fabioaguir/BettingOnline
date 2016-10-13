@@ -17,7 +17,8 @@ class Parametros extends Model implements Transformable
         'status',
         'mensagen_rodape',
         'limite_premiacao',
-        'limite_vendas'
+        'limite_vendas',
+        'premio_sete_da_sorte'
     ];
 
 }

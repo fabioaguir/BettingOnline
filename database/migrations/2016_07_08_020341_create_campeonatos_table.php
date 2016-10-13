@@ -16,6 +16,7 @@ class CreateCampeonatosTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('nome', 155)->nullable();
+			$table->timestamps();
 		});
 	}
 

@@ -20,6 +20,7 @@ class CreateParametrosTable extends Migration {
 			$table->string('mensagen_rodape')->nullable();
 			$table->text('limite_premiacao', 16777215)->nullable();
 			$table->text('limite_vendas', 16777215)->nullable();
+			$table->integer('premio_sete_da_sorte')->nullable();
 			$table->timestamps();
 		});
 	}
