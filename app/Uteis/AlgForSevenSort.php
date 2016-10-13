@@ -4,6 +4,7 @@ namespace Softage\Uteis;
 
 
 use Softage\Entities\Apostas;
+use Softage\Repositories\ParametrosRepository;
 
 class AlgForSevenSort extends AlgResponsibility
 {
@@ -11,6 +12,19 @@ class AlgForSevenSort extends AlgResponsibility
      * @var AlgResponsibility
      */
     private $sucessor;
+
+    /**
+     * @var ParametrosRepository
+     */
+    private $parametrosRepository;
+
+    /**
+     * AlgForSimple constructor.
+     */
+    public function __construct(ParametrosRepository $parametrosRepository)
+    {
+        $this->parametrosRepository = $parametrosRepository;
+    }
 
     /**
      * @param AlgResponsibility $sucessor
@@ -42,6 +56,11 @@ class AlgForSevenSort extends AlgResponsibility
         # Recuperando a venda
         $venda = $aposta->venda;
 
+        # Booleano e valor que determinará
+        # se o bonus será acrescentado
+        $isValorBonus = true;
+        $valorBonus   = 0;
+
         # Verificando se as apostas da venda foram todas acertadas
         $apostasPremiadasDaVenda = $venda->apostas->filter(function ($apostaDaVenda) use ($aposta) {
             # Verificando se a aposta foi premiada
@@ -52,6 +71,9 @@ class AlgForSevenSort extends AlgResponsibility
 
             # Verificando se a partida foi cancelada
             if(!$apostaDaVenda->partida->status_id == 2) {
+                # Não terá bonus acrescentado
+                $isValorBonus = false;
+
                 # Retorno
                 return false;
             }
@@ -75,9 +97,17 @@ class AlgForSevenSort extends AlgResponsibility
             $somaValoresCotacao += $aposta->cotacao->valor;
         }
 
+        # Recuperando o parametro
+        $parametros = $this->parametrosRepository->all();
+
+        # Tratando o valor do bonus
+        if(count($parametros) > 0 && $isValorBonus) {
+            $valorBonus = (double) $parametros->last()->premio_sete_da_sorte;
+        }
+
         # Atualizando os dados da venda
         $venda->premiacao_id = 1;
-        $venda->retorno = $venda->valor_total * $somaValoresCotacao; // somar com o valor do bonus por partida 7 da sorte
+        $venda->retorno = ($venda->valor_total * $somaValoresCotacao) + $valorBonus; // somar com o valor do bonus por partida 7 da sorte
         $venda->save();
 
         # Retorno

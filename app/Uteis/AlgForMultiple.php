@@ -11,13 +11,19 @@ class AlgForMultiple extends AlgResponsibility
      * @var AlgResponsibility
      */
     private $sucessor;
+    
+    /**
+     * @var ParametrosRepository
+     */
+    private $parametrosRepository;
 
     /**
      * AlgForMultiple constructor.
      */
-    public function __construct()
+    public function __construct(ParametrosRepository $parametrosRepository)
     {
-        $this->setSucessor(new AlgForSevenSort());
+        $this->setSucessor(new AlgForSevenSort($parametrosRepository));
+        $this->parametrosRepository = $parametrosRepository;
     }
 
     /**

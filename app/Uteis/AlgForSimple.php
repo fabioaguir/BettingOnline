@@ -4,6 +4,7 @@ namespace Softage\Uteis;
 
 
 use Softage\Entities\Apostas;
+use Softage\Repositories\ParametrosRepository;
 
 class AlgForSimple extends AlgResponsibility
 {
@@ -11,13 +12,19 @@ class AlgForSimple extends AlgResponsibility
      * @var AlgResponsibility
      */
     private $sucessor;
+    
+    /**
+     * @var ParametrosRepository
+     */
+    private $parametrosRepository;
 
     /**
      * AlgForSimple constructor.
      */
-    public function __construct()
+    public function __construct(ParametrosRepository $parametrosRepository)
     {
-        $this->setSucessor(new AlgForMultiple());
+        $this->setSucessor(new AlgForMultiple($parametrosRepository));
+        $this->parametrosRepository = $parametrosRepository;
     }
 
     /**
