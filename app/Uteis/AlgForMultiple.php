@@ -60,7 +60,7 @@ class AlgForMultiple extends AlgResponsibility
         # Verificando se as apostas da venda foram todas acertadas
         $apostasPremiadasDaVenda = $venda->apostas->filter(function ($apostaDaVenda) use ($aposta) {
             # Verificando se a aposta foi premiada
-            if(!$apostaDaVenda->premiada) {
+            if($apostaDaVenda->premiada !== 1) {
                 # Retorno
                 return false;
             }
