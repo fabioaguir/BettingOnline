@@ -44,7 +44,7 @@ class AlgForMultiple extends AlgResponsibility
         # verificando se o algoritimo é simples
         if($aposta->venda->tipo_aposta_id !== 2) {
             # Passando para o próxima na cadeia
-            $this->sucessor->executeResponsibility($aposta);
+            return $this->sucessor->executeResponsibility($aposta);
         }
 
         # Verificando se a partida foi cancelada

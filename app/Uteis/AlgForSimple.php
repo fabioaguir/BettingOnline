@@ -44,7 +44,7 @@ class AlgForSimple extends AlgResponsibility
         # verificando se o algoritimo é simples
         if($aposta->venda->tipo_aposta_id !== 1) {
             # Passando para o próxima na cadeia
-            $this->sucessor->executeResponsibility($aposta);
+            return $this->sucessor->executeResponsibility($aposta);
         }
         
         # Recuperando a venda
