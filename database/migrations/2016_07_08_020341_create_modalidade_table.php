@@ -27,7 +27,6 @@ class CreateModalidadeTable extends Migration {
 			$table->integer('gols_casa');
 			$table->integer('gols_fora');
 			$table->integer('tipo_inducao_id');
-			$table->foreign('tipo_inducao_id')->references('id')->on('tipos_inducoes');
 			$table->integer('gols_inducao');
 			$table->timestamps();
 		});
