@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTipoInducaoTable extends Migration {
+class CreateTiposInducoesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -28,7 +28,7 @@ class CreateTipoInducaoTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tipo_cotacao');
+		Schema::drop('tipos_inducoes');
 	}
 
 }
