@@ -140,22 +140,18 @@ class SeteSorteController extends Controller
 
         $vendasRealizadas = \DB::table('vendas')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
-            ->join('apostas', 'apostas.venda_id', '=', 'vendas.id')
-            ->join('partidas', 'partidas.id', '=', 'apostas.partida_id')
-            ->where('status_vendas.id', '=', '1')
+            ->where('vendas.status_v_id', '=', '1')
+            ->where('vendas.tipo_aposta_id', '=', '3')
             ->whereBetween('vendas.data', array($dataInicio, $dataFim))
-            ->where('partidas.sete_da_sorte', '=', true)
             ->select([
                 \DB::raw("count(vendas.id) as vendas_r"),
             ])->get();
 
         $vendasCanceladas = \DB::table('vendas')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
-            ->join('apostas', 'apostas.venda_id', '=', 'vendas.id')
-            ->join('partidas', 'partidas.id', '=', 'apostas.partida_id')
-            ->where('status_vendas.id', '=', '2')
+            ->where('vendas.status_v_id', '=', '2')
+            ->where('vendas.tipo_aposta_id', '=', '3')
             ->whereBetween('vendas.data', array($dataInicio, $dataFim))
-            ->where('partidas.sete_da_sorte', '=', true)
             ->select([
                 \DB::raw("count(vendas.id) as vendas_c"),
             ])->get();

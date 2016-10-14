@@ -33,6 +33,7 @@ class PartidasService
         $this->rnFieldsForeignKey($data);
 
         #Salvando o registro pincipal
+        $partida['processada_id'] = 2;
         $partida =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados

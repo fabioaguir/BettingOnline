@@ -15,6 +15,11 @@ trait TraitService
     public function rnFieldsForeignKey(array &$data)
     {
         # Tratamento de campos de chaves estrangeira
+
+        if(isset($data['limite_valor_aposta']) && $data['limite_valor_aposta'] == "") {
+            $data['limite_valor_aposta'] = null;
+        }
+
         foreach ($data as $key => $value) {
             if(is_array($value)) {
                 foreach ($value as $key2 => $value2) {

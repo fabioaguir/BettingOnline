@@ -49,7 +49,7 @@ class DefaultController extends Controller
 
         $dados = $request->request->all();
         
-        if(isset($dados['searchDate'])) {
+        if(isset($dados['searchDate']) && $dados['searchDate'] != "") {
             $data = SerbinarioDateFormat::toUsa($dados['searchDate'], 'date');
         } else {
             $dateObj = new \DateTime('now');
@@ -64,7 +64,7 @@ class DefaultController extends Controller
             ->join('processadas', 'processadas.id', '=', 'partidas.processada_id')
             ->leftJoin('apostas', 'apostas.partida_id', '=', 'partidas.id')
             ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'processadas.id')
-            ->where('partidas.data', '=', $data)
+            ->whereDate('partidas.data', '=', $data)
             ->select([
                 'partidas.id as id',
                 \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
@@ -134,7 +134,7 @@ class DefaultController extends Controller
     {
         $dados = $request->request->all();
 
-        if(isset($dados['searchDate'])) {
+        if(isset($dados['searchDate']) && $dados['searchDate'] != "") {
             $data = SerbinarioDateFormat::toUsa($dados['searchDate'], 'date');
         } else {
             $dateObj = new \DateTime('now');
@@ -143,16 +143,16 @@ class DefaultController extends Controller
 
         $vendasRealizadas = \DB::table('vendas')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
-            ->where('status_vendas.id', '=', '1')
-            ->where('vendas.data', '=', $data)
+            ->where('vendas.status_v_id', '=', '1')
+            ->whereDate('vendas.data', '=', $data)
             ->select([
                 \DB::raw("count(vendas.id) as vendas_r"),
             ])->get();
 
         $vendasCanceladas = \DB::table('vendas')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
-            ->where('status_vendas.id', '=', '2')
-            ->where('vendas.data', '=', $data)
+            ->where('vendas.status_v_id', '=', '2')
+            ->whereDate('vendas.data', '=', $data)
             ->select([
                 \DB::raw("count(vendas.id) as vendas_c"),
             ])->get();
