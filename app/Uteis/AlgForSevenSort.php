@@ -56,11 +56,6 @@ class AlgForSevenSort extends AlgResponsibility
         # Recuperando a venda
         $venda = $aposta->venda;
 
-        # Verificando se a venda já foi finalizada
-        if($venda->premiacao_id == 1) {
-            return true;
-        }
-
         # Booleano e valor que determinará
         # se o bonus será acrescentado
         $isValorBonus = true;
