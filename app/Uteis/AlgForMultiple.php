@@ -56,6 +56,11 @@ class AlgForMultiple extends AlgResponsibility
         # Recuperando a venda
         $venda = $aposta->venda;
 
+        # Verificando se a venda já foi finalizada
+        if($venda->premiacao_id == 1) {
+            return true;
+        }
+
         # Verificando se as apostas da venda foram todas acertadas
         $apostasPremiadasDaVenda = $venda->apostas->filter(function ($apostaDaVenda) use ($aposta) {
             # Verificando se a aposta foi premiada
