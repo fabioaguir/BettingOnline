@@ -21,6 +21,14 @@ class CreateModalidadeTable extends Migration {
 			$table->boolean('t_fora')->nullable();
 			$table->boolean('t_empate')->nullable();
 			$table->integer('status_id')->nullable()->index('fk_modalidade_status1_idx');
+			$table->boolean('vitoria_casa');
+			$table->boolean('vitoria_fora');
+			$table->boolean('empate');
+			$table->integer('gols_casa');
+			$table->integer('gols_fora');
+			$table->integer('tipo_inducao_id');
+			$table->foreign('tipo_inducao_id')->references('id')->on('tipos_inducoes');
+			$table->integer('gols_inducao');
 			$table->timestamps();
 		});
 	}
