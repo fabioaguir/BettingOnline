@@ -20,6 +20,7 @@ class CreateApostasTable extends Migration {
 			$table->integer('cotacao_id')->index('fk_apostas_cotacoes1_idx');
 			$table->integer('premiada');
 			$table->decimal('valor', 10)->nullable();
+			$table->timestamps();
 		});
 	}
 

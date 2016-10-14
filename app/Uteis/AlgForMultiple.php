@@ -4,6 +4,7 @@ namespace Softage\Uteis;
 
 
 use Softage\Entities\Apostas;
+use Softage\Repositories\ParametrosRepository;
 
 class AlgForMultiple extends AlgResponsibility
 {
