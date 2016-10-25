@@ -5,6 +5,7 @@ namespace Softage\Services;
 use Softage\Entities\Gols;
 use Softage\Repositories\GolsRepository;
 use Softage\Repositories\PartidasRepository;
+use Softage\Uteis\AlgForResult;
 
 class GolsService
 {
@@ -21,12 +22,21 @@ class GolsService
     private $partidasRepository;
 
     /**
-     * @param GolsRepository $repository
+     * @var AlgForResult
      */
-    public function __construct(GolsRepository $repository, PartidasRepository $partidasRepository)
+    private $algForResult;
+
+    /**
+     * GolsService constructor.
+     * @param GolsRepository $repository
+     * @param PartidasRepository $partidasRepository
+     * @param AlgForResult $algForResult
+     */
+    public function __construct(GolsRepository $repository, PartidasRepository $partidasRepository, AlgForResult $algForResult)
     {
         $this->repository = $repository;
         $this->partidasRepository = $partidasRepository;
+        $this->algForResult = $algForResult;
     }
 
     /**
@@ -90,6 +100,9 @@ class GolsService
         # Alterando o status da partida
         $partida->status_id = 1;
         $partida->save();
+
+        # Algoritmo para tratamento do resultado
+        $this->algForResult->execute($partida);
 
         # Retorno
         return true;

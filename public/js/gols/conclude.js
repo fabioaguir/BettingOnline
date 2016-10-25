@@ -21,6 +21,9 @@ $(document).on('click', '#btnConcludeGol', function () {
         if (jsonResponse.success) {
             // Mensagem
             bootbox.alert('Partida finalizada com sucesso!');
+
+            // recarregando a página
+            location.reload();
         } else {
             // Mensagem de retorno caso ocorra algum problema
             bootbox.alert(jsonResponse.msg);

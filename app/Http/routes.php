@@ -24,6 +24,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         //Rotas para sete da sorte
         Route::get('seteSorte'  , ['as' => 'seteSorte', 'uses' => 'SeteSorteController@index']);
         Route::post('seteGrid'  , ['as' => 'seteGrid', 'uses' => 'SeteSorteController@dashboard']);
+        Route::post('resultVendasST'  , ['as' => 'resultVendasST', 'uses' => 'SeteSorteController@resultadosVendas']);
 
         //Rotas para selectes via ajax
         Route::post('allTipoCotacao'  , ['as' => 'allTipoCotacao', 'uses' => 'DefaultController@allTipoCotacao']);
@@ -165,6 +166,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TabletsController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'TabletsController@update']);
             Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'TabletsController@delete']);
+        });
+
+        Route::group(['prefix' => 'time', 'as' => 'time.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TimesController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'TimesController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TimesController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TimesController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TimesController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TimesController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'TimesController@delete']);
+        });
+
+        Route::group(['prefix' => 'campeonato', 'as' => 'campeonato.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CampeonatosController@index']);
+            Route::post('grid', ['as' => 'grid', 'uses' => 'CampeonatosController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CampeonatosController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CampeonatosController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CampeonatosController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CampeonatosController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'CampeonatosController@delete']);
         });
 
         Route::group(['prefix' => 'report', 'as' => 'report.'], function () {

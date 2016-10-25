@@ -41,7 +41,7 @@
                 <div class="form-group">
                     {!! Form::label('valor', 'Cotação', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-3">
-                        {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control touchspin2 money')) !!}
+                        {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control money')) !!}
                     </div>
                 </div>
 

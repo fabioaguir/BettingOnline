@@ -217,6 +217,7 @@ class PartidasController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getPartidas(Request $request)
     {
@@ -252,6 +253,7 @@ class PartidasController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getPartidasSemApostas(Request $request)
     {

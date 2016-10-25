@@ -242,8 +242,8 @@
                                                  class="img-responsive img-circle">
                                         </div>
                                         <div class="info">
-                                            <span class="username">Glen Maxwell</span>
-                                            <span class="useremail">glen@outline.com</span>
+                                            <span class="username">{{ Auth::user()->name }}</span>
+                                            {{--<span class="useremail">{{ Auth::user()->email }}</span>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -279,6 +279,13 @@
                                                 <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                                                 <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
                                                 <li><a target="_blank" href="{{ route('betting.report.reportModalidades') }} ">Modalidades</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;"><i class="ti ti-flag-alt"></i><span>Times/Campeonatos</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="{{ route('betting.time.index') }} ">Times</a></li>
+                                                <li><a href="{{ route('betting.campeonato.index') }} ">Campeonatos</a></li>
                                             </ul>
                                         </li>
                                         <li>

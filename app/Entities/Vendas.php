@@ -30,4 +30,12 @@ class Vendas extends Model implements Transformable
     public function vendedores(){
         return $this->hasMany(Vendedor::class, 'area_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function apostas()
+    {
+        return $this->hasMany(Apostas::class, 'venda_id');
+    }
 }

@@ -22,7 +22,11 @@ class Modalidades extends Model implements Transformable
     protected $fillable = [
         'nome',
         'status_id',
-        'limite_cotacao'
+        'limite_cotacao',
+        'gols_casa',
+        'gols_fora',
+        'tipo_inducao_id',
+        'gols_inducao'
     ];
 
     /**

@@ -16,7 +16,7 @@ class CreateVendasTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('seq')->nullable();
-			$table->dateTime('data')->nullable();
+			$table->date('data')->nullable();
 			$table->text('obs', 65535)->nullable();
 			$table->decimal('valor_total', 10)->nullable();
 			$table->decimal('retorno', 10)->nullable();

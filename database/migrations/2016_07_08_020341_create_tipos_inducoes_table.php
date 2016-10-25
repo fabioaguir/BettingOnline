@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCampeonatosTable extends Migration {
+class CreateTiposInducoesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateCampeonatosTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('campeonatos', function(Blueprint $table)
+		Schema::create('tipos_inducoes', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('nome', 155)->nullable();
+			$table->string('nome', 45)->nullable();
 			$table->timestamps();
 		});
 	}
@@ -28,7 +28,7 @@ class CreateCampeonatosTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('campeonatos');
+		Schema::drop('tipos_inducoes');
 	}
 
 }

@@ -17,4 +17,11 @@ class Times extends Model implements Transformable
         'status_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function partidas(){
+        return $this->hasMany(Partidas::class, 'time_casa_id', 'id');
+    }
+
 }

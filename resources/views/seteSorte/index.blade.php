@@ -75,26 +75,28 @@
                                     </table>
                                 </div>
                             </div>
-                            {{--<div class="col-sm-5">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="info-tile info-tile-alt tile-success">
                                                 <div class="tile-icon"><i class="ti ti-check-box"></i></div>
                                                 <div class="tile-heading"><span>Vendas realizadas</span></div>
-                                                <div class="tile-body"><span id="vendas-r"></span></div>
+                                                <div class="tile-body"><span id="vendas-r">0</span></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="info-tile info-tile-alt tile-danger">
                                                 <div class="tile-icon"><i class="ti  ti-close"></i></div>
                                                 <div class="tile-heading"><span>Vendas canceladas</span></div>
-                                                <div class="tile-body"><span id="vendas-c"></span></div>
+                                                <div class="tile-body"><span id="vendas-c">0</span></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>--}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,14 +157,14 @@
         });
 
         //Pega o resultado das vendas
-        resultadoVendas();
+       // resultadoVendas();
 
         // Função do submit do search da grid principal
         $('#search').click(function(e) {
             table.draw();
 
             //Pega o resultado das vendas
-           // resultadoVendas();
+             resultadoVendas();
 
             e.preventDefault();
         });
@@ -171,16 +173,19 @@
         function resultadoVendas()
         {
             var searchData = {
-                'searchDate' : $('input[name=searchDate]').val()
+                'dataInicio' : $('input[name=data_inicio]').val(),
+                'dataFim' : $('input[name=data_fim]').val()
             };
 
             // Requisição ajax
             jQuery.ajax({
                 type: 'POST',
-                url: "{!! route('betting.resultVendas') !!}",
+                url: "{!! route('betting.resultVendasST') !!}",
                 data: searchData,
                 datatype: 'json'
             }).done(function (jsonResponse) {
+
+                console.log(jsonResponse['vendas_r'][0]['vendas_r']);
 
                     $('#vendas-r').text(jsonResponse['vendas_r'][0]['vendas_r']);
                     $('#vendas-c').text(jsonResponse['vendas_c'][0]['vendas_c']);
