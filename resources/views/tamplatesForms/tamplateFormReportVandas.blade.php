@@ -6,7 +6,7 @@
                 <?php $data = new \DateTime('now') ?>
                 <?php $dataInicio =  isset($request['data_inicio']) ? $request['data_inicio'] : ""; ?>
 				{!! Form::label('data_inicio', 'Início') !!}
-				{!! Form::text('data_inicio', $dataInicio , array('class' => 'form-control date datepicker')) !!}
+				{!! Form::text('data_inicio', null , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
             <div class="col-md-2">
@@ -41,7 +41,6 @@
             <div class="form-group col-md-2">
                 <label for="exportar">Exportar </label>
                 <select id="exportar" class="form-control" name="exportar">
-                    <option value="">Nenhum</option>
                     <option value="1">PDF</option>
                     <option value="2">Excel</option>
                 </select>
@@ -110,7 +109,7 @@
 </div>
 @section('js')
     @parent
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendas.js')}}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendas.js')}}"></script>--}}
     <script type="text/javascript">
         var table = $('#vendas-grid').DataTable({
             processing: true,

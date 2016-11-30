@@ -53,4 +53,15 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany(Permission ::class);
     }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeUsers($query, $value)
+    {
+        return $query
+            ->select(['id', 'name']);
+    }
 }

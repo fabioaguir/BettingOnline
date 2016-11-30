@@ -152,4 +152,57 @@ class ReportService
         #retorno
         return $result;
     }
+
+    /**
+     * @param array $models
+     * @return array
+     */
+    public function loadUser(array $models, $ajax = false) : array
+    {
+        #Declarando variáveis de uso
+        $result    = [];
+        $expressao = [];
+
+        #Criando e executando as consultas
+        foreach ($models as $model) {
+            # separando as strings
+            $explode   = explode("|", $model);
+
+            # verificando a condição
+            if(count($explode) > 1) {
+                $model     = $explode[0];
+                $expressao = explode(",", $explode[1]);
+            }
+
+            #qualificando o namespace
+            $nameModel = "\\Softage\\Entities\\$model";
+
+            #Verificando se existe sobrescrita do nome do model
+            $model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('name', 'asc')->get(['name', 'id']);
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::orderBy('name', 'asc')->get(['name', 'id']);
+                }
+            } else {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('name', 'id');
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('name', 'id');
+                }
+            }
+
+            # Limpando a expressão
+            $expressao = [];
+        }
+
+        #retorno
+        return $result;
+    }
 }

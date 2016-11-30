@@ -24,7 +24,6 @@
             <div class="form-group col-md-2">
                 <label for="exportar">Exportar </label>
                 <select id="exportar" class="form-control" name="exportar">
-                    <option value="">Nenhum</option>
                     <option value="1">PDF</option>
                     <option value="2">Excel</option>
                 </select>
@@ -90,7 +89,7 @@
 </div>
 @section('js')
     @parent
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendasPremiadas.js')}}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportVendasPremiadas.js')}}"></script>--}}
     <script type="text/javascript">
         var table = $('#vendas-grid').DataTable({
             processing: true,
