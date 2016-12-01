@@ -24,7 +24,6 @@
                     <label class="col-sm-1 control-label" for="exportar">Exportar</label>
                     <div class="col-sm-2">
                         <select id="exportar" class="form-control" name="exportar">
-                            <option value="">Nenhum</option>
                             <option value="1">PDF</option>
                             <option value="2">Excel</option>
                         </select>
@@ -93,7 +92,7 @@
 @section('js')
     @parent
     <script type="text/javascript" src="{{ asset('js/reports/apostas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportApostas.js')}}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportApostas.js')}}"></script>--}}
     <script type="text/javascript">
 
         var table = $('#apostas-grid').DataTable({

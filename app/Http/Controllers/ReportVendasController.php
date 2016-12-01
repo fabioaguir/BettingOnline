@@ -96,7 +96,10 @@ class ReportVendasController extends Controller
         })
         ->addColumn('action', function ($row) {
             $html = "";
-            $html .= '<a href="cancelarVenda/'.$row->id.'" class="btn btn-xs btn-primary cancelar"><i class="glyphicon glyphicon-edit"></i> Cancelar</a> ';
+            
+            if($row->status == '1') {
+                $html .= '<a href="cancelarVenda/'.$row->id.'" class="btn btn-xs btn-primary cancelar"><i class="glyphicon glyphicon-edit"></i> Cancelar</a> ';
+            }
             return $html;
         })->make(true);
     }
@@ -120,6 +123,7 @@ class ReportVendasController extends Controller
             'vendas.valor_total as valor_total',
             'vendas.retorno as retorno',
             'premiacoes.nome as premiacao_nome',
+            'status_vendas.id as status',
         ]);
 
         return $consulta;
@@ -160,8 +164,8 @@ class ReportVendasController extends Controller
             ->join('pessoas', 'conf_vendas.vendedor_id', '=', 'pessoas.id')
             ->join('areas', 'areas.id', '=', 'pessoas.area_id')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
-            ->whereBetween('vendas.data', array($dataIni, $dataFim))
-            ->where('status_vendas.id', '=', '1');
+            ->whereBetween('vendas.data', array($dataIni, $dataFim));
+            //->where('status_vendas.id', '=', '1');
 
         if($dados['area'] != 0) {
             $query->where('areas.id', $dados['area']);

@@ -3,10 +3,12 @@ $(document).ready(function () {
     $('#formReportVendas').validate({
         rules: {
             'data_inicio': {
-                required: true
+                //required: true,
+                date: true
             },
             'data_fim': {
-                required: true
+                //required: true,
+                date: true
             },
             'exportar': {
                 required: true

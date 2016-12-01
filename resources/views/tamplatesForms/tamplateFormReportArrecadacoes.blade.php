@@ -14,16 +14,19 @@
                     {!! Form::text('data_fim', $data->format('d/m/Y') , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('arrecadador', 'Arrecadador') !!}
-                    {!! Form::text('arrecadador', null , array('class' => 'form-control')) !!}
-                </div>
+            <div class="form-group col-md-4">
+                <?php $area =  isset($request['area']) ? $request['area'] : ""; ?>
+                {!! Form::label('arrecadador', 'Arrecadador ') !!}
+                {!! Form::select('arrecadador', (['0' => 'Nenhum'] + $loadFields['arrecadador']->toArray()), $area,array('class' => 'form-control')) !!}
+            </div>
+            <div class="form-group col-md-4">
+                <?php $area =  isset($request['area']) ? $request['area'] : ""; ?>
+                {!! Form::label('user', 'Usuário ') !!}
+                {!! Form::select('user', (['0' => 'Nenhum'] + $loadFields2['user']->toArray()), $area,array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
                 <label for="exportar">Exportar </label>
                 <select id="exportar" class="form-control" name="exportar">
-                    <option value="">Nenhum</option>
                     <option value="1">PDF</option>
                     <option value="2">Excel</option>
                 </select>
@@ -86,7 +89,7 @@
 </div>
 @section('js')
     @parent
-    <script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportArrecadacoes.js')}}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/validation_form_reportArrecadacoes.js')}}"></script>--}}
     <script type="text/javascript">
         var table = $('#arrecadacoes-grid').DataTable({
             processing: true,
@@ -100,7 +103,8 @@
                 data: function (d) {
                     d.data_inicio = $('input[name=data_inicio]').val();
                     d.data_fim = $('input[name=data_fim]').val();
-                    d.arrecadador = $('input[name=arrecadador]').val();
+                    d.arrecadador = $('select[name=arrecadador] option:selected').val();
+                    d.user = $('select[name=user] option:selected').val();
                 }
             },
             language: {
@@ -134,7 +138,8 @@
             var searchData = {
                 'data_inicio' : $('#data_inicio').val(),
                 'data_fim' : $('#data_fim').val(),
-                'arrecadador' : $('#arrecadador').val()
+                'arrecadador' : $('select[name=arrecadador] option:selected').val(),
+                'user' : $('select[name=user] option:selected').val(),
             };
 
             // Requisição ajax

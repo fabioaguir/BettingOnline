@@ -44,7 +44,16 @@ class ReportArrecadacoesController extends Controller
     /**
      * @var array
      */
-    private $loadFields = [];
+    private $loadFields = [
+        'Arrecadador|Arrecadadores,2'
+    ];
+
+    /**
+     * @var array
+     */
+    private $loadFields2 = [
+        'User'
+    ];
 
     public function __construct(ReportService $service, ParametrosRepository $parametros)
     {
@@ -59,9 +68,10 @@ class ReportArrecadacoesController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
-
+        $loadFields2 = $this->service->loadUser($this->loadFields2);
+        
         #Retorno para view
-        return view('reports.reportArrecadacoes', compact('loadFields'));
+        return view('reports.reportArrecadacoes', compact('loadFields', 'loadFields2'));
     }
 
     /**
@@ -138,8 +148,8 @@ class ReportArrecadacoesController extends Controller
             ->join('areas', 'areas.id', '=', 'vendedor.area_id')
             ->whereBetween('arrecadacoes.data', array($dataIni, $dataFim))
             ->Where(function ($query) {
-                $query->orWhere('users.name', 'like', "%{$this->data['arrecadador']}%")
-                ->orWhere('arrecadador.nome', 'like', "%{$this->data['arrecadador']}%");
+                $query->orWhere('arrecadacoes.user_id', '=', "{$this->data['user']}")
+                ->orWhere('arrecadacoes.arrecadador_id', '=', "{$this->data['arrecadador']}");
             });
 
         return $query;

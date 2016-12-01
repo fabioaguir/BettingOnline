@@ -31,4 +31,16 @@ class Arrecadador extends Model implements Transformable
         return $this->belongsTo(Status::class, 'status_id');
     }
 
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeArrecadadores($query, $value)
+    {
+        return $query
+            ->select(['id', 'nome'])
+            ->where('tipo_pessoa_id', 2);
+    }
+
 }
