@@ -81,7 +81,7 @@ class VendedorService
 
         $data['config']['vendedor_id']= $vendedor->id;
         $data['config']['status_id']= '1';
-        $data['config']['data']= $dateObj->format('d-m-Y');
+        $data['config']['data'] = $dateObj->format('Y-m-d');
         $data['config'] = $this->tratamentoCampos($data['config']);
         $confVendas = $this->repoConfVendas->create($data['config']);
 
@@ -106,7 +106,7 @@ class VendedorService
         $dateObj = new \DateTime('now');
 
         $data['status_id']= '1';
-        $data['data']= $dateObj->format('d-m-Y');
+        $data['data']= $dateObj->format('Y-m-d');
 
         //buscando registro com status igual a 1
         $validacao = $this->repoConfVendas->findWhere(['status_id' => '1', 'vendedor_id' => $data['vendedor_id']]);

@@ -65,9 +65,9 @@ class CotacoesService
             $partida = $this->partidasRepository->find($data['partida_id']);
 
             if($diferenca > 0.50) {
-                $partida->multipla = true;
+                $partida->simples = false;
             } else {
-                $partida->multipla = false;
+                $partida->simples = true;
             }
 
             $partida->save();
@@ -116,9 +116,9 @@ class CotacoesService
             $partida = $this->partidasRepository->find($data['partida_id']);
 
             if($diferenca > 0.50) {
-                $partida->multipla = true;
+                $partida->simples = false;
             } else {
-                $partida->multipla = false;
+                $partida->simples = true;
             }
 
             $partida->save();
