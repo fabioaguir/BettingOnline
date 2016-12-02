@@ -231,7 +231,6 @@ class PartidasController extends Controller
                 ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
                 ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
                 ->where('partidas.data', $data->format('Y-m-d'))
-                ->orderBy('time_casa.nome')
                 ->whereExists(function ($query) {
                     $query->select('apostas.id')
                         ->from('apostas')
@@ -268,6 +267,7 @@ class PartidasController extends Controller
                 ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
                 ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
                 ->where('partidas.data', $data->format('Y-m-d'))
+                ->orderBy('time_casa.nome', 'asc')
                 ->select([
                     'partidas.id',
                     'time_casa.nome as timeCasa',
