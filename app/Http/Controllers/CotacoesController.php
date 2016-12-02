@@ -111,8 +111,12 @@ class CotacoesController extends Controller
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
 
+        $modalidades = \DB::table('modalidades')->get();
+
+        //dd($modalidades);
+
         #Retorno para view
-        return view('cotacoes.create', compact('loadFields'));
+        return view('cotacoes.create', compact('loadFields', 'modalidades'));
     }
 
     /**

@@ -53,6 +53,10 @@ class PartidasService
      */
     public function update(array $data, int $id) : Partidas
     {
+
+        # Aplicando regras de negócios
+        $this->rnFieldsForeignKey($data);
+
         #Atualizando no banco de dados
         $partida = $this->repository->update($data, $id);
 

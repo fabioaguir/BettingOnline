@@ -48,7 +48,7 @@ class CotacoesService
             ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
             ->where('partidas.id', '=', $data['partida_id'])
             ->where('modalidades.t_casa', '=', true)
-            ->first();
+            ->get();
 
 
         //Valida se o time fora está na lista de times em alta
@@ -57,11 +57,11 @@ class CotacoesService
             ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
             ->where('partidas.id', '=', $data['partida_id'])
             ->where('modalidades.t_fora', '=', true)
-            ->first();
+            ->get();
 
         //Caso o time casa ou fora esteja na lista de times em alta, a partida recebe status de partida multipla
-        if($validarTimeAltaCasa != null && $validarTimeAltaFora != null) {
-            $diferenca = abs($validarTimeAltaCasa->valor - $validarTimeAltaFora->valor);
+        if(count($validarTimeAltaCasa) >= 1 && count($validarTimeAltaFora) >= 1) {
+            $diferenca = abs($validarTimeAltaCasa[0]->valor - $validarTimeAltaFora[0]->valor);
             $partida = $this->partidasRepository->find($data['partida_id']);
 
             if($diferenca > 0.50) {
@@ -99,7 +99,7 @@ class CotacoesService
             ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
             ->where('partidas.id', '=', $data['partida_id'])
             ->where('modalidades.t_casa', '=', true)
-            ->first();
+            ->get();
 
 
         //Valida se o time fora está na lista de times em alta
@@ -108,11 +108,11 @@ class CotacoesService
             ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
             ->where('partidas.id', '=', $data['partida_id'])
             ->where('modalidades.t_fora', '=', true)
-            ->first();
+            ->get();
 
         //Caso o time casa ou fora esteja na lista de times em alta, a partida recebe status de partida multipla
-        if($validarTimeAltaCasa != null && $validarTimeAltaFora != null) {
-            $diferenca = abs($validarTimeAltaCasa->valor - $validarTimeAltaFora->valor);
+        if(count($validarTimeAltaCasa) >= 1 && count($validarTimeAltaFora) >= 1) {
+            $diferenca = abs($validarTimeAltaCasa[0]->valor - $validarTimeAltaFora[0]->valor);
             $partida = $this->partidasRepository->find($data['partida_id']);
 
             if($diferenca > 0.50) {

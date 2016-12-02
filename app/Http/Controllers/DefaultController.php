@@ -61,7 +61,7 @@ class DefaultController extends Controller
             ->join('times as time_casa', 'time_casa.id', '=', 'partidas.time_casa_id')
             ->join('times as time_fora', 'time_fora.id', '=', 'partidas.time_fora_id')
             ->join('campeonatos', 'campeonatos.id', '=', 'partidas.campeonato_id')
-            ->join('processadas', 'processadas.id', '=', 'partidas.processada_id')
+            ->leftJoin('processadas', 'processadas.id', '=', 'partidas.processada_id')
             ->leftJoin('apostas', 'apostas.partida_id', '=', 'partidas.id')
             ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'processadas.id')
             ->whereDate('partidas.data', '=', $data)
