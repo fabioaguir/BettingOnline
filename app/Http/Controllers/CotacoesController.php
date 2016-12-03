@@ -38,8 +38,11 @@ class CotacoesController extends Controller
      * Arrays de models para carregamento
      */
     private $loadFields = [
-        'Status',
         'Modalidades'
+    ];
+
+    private $loadFields2 = [
+        'Status',
     ];
 
     /**
@@ -110,13 +113,12 @@ class CotacoesController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+        $loadFields2 = $this->service->load2($this->loadFields2);
 
-        $modalidades = \DB::table('modalidades')->get();
-
-        //dd($modalidades);
+        $modalidades = \DB::table('modalidades')->orderBy('modalidades.id', 'asc')->get();
 
         #Retorno para view
-        return view('cotacoes.create', compact('loadFields', 'modalidades'));
+        return view('cotacoes.create', compact('loadFields', 'modalidades', 'loadFields2'));
     }
 
     /**
