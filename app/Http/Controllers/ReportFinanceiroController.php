@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Softage\Http\Requests;
 use Softage\Services\VendedorService;
 use Yajra\Datatables\Datatables;
+use Softage\Uteis\SerbinarioDateFormat;
 
 class ReportFinanceiroController extends Controller
 {
@@ -80,7 +81,11 @@ class ReportFinanceiroController extends Controller
             ->filter(function ($query) use ($request) {
                 // Filtranto por vestibular
                 if ($request->has('data_inicio') && $request->has('data_fim')) {
-                    $query->whereBetween('conf_vendas.data', array($request->get('data_inicio'), $request->get('data_fim')));
+                    //Tratando as datas
+                    $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
+                    $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
+
+                    $query->whereBetween('conf_vendas.data', array($dataIni, $dataFim));
                 }
 
                 if($request->has('area') && $request->get('area') != 0) {
@@ -116,7 +121,11 @@ class ReportFinanceiroController extends Controller
 
             # Verificando a se o período foi passado por parâmetro
             if ($request->has('data_inicio') && $request->has('data_fim')) {
-                $query->whereBetween('conf_vendas.data',  array($request->get('data_inicio'), $request->get('data_fim')));
+
+                $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
+                $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
+
+                $query->whereBetween('conf_vendas.data',  array($dataIni, $dataFim));
             }
 
             if($request->has('area') && $request->get('area') != 0) {
@@ -165,7 +174,11 @@ class ReportFinanceiroController extends Controller
 
             # Verificando a se o período foi passado por parâmetro
             if ($request->has('dataInicio') && $request->has('dataFim')) {
-                $query->whereBetween('conf_vendas.data',  array($request->get('dataInicio'), $request->get('dataFim')));
+
+                $dataIni = SerbinarioDateFormat::toUsa($request->get('dataInicio'), 'date');
+                $dataFim = SerbinarioDateFormat::toUsa($request->get('dataFim'), 'date');
+
+                $query->whereBetween('conf_vendas.data',  array($dataIni, $dataFim));
             }
 
             # Verificando a se o período foi passado por parâmetro
