@@ -27,6 +27,7 @@ class CotacoesController extends Controller
      * @var CotacoesService
      */
     private $service;
+    
     /**
      * @var CotacoesValidator
      */
@@ -115,10 +116,23 @@ class CotacoesController extends Controller
         $loadFields = $this->service->load($this->loadFields);
         $loadFields2 = $this->service->load2($this->loadFields2);
 
+        #Retorno para view
+        return view('cotacoes.create', compact('loadFields', 'loadFields2'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createMultiplo()
+    {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+        $loadFields2 = $this->service->load2($this->loadFields2);
+
         $modalidades = \DB::table('modalidades')->orderBy('modalidades.id', 'asc')->get();
 
         #Retorno para view
-        return view('cotacoes.create', compact('loadFields', 'modalidades', 'loadFields2'));
+        return view('cotacoes.createMultiplo', compact('loadFields', 'modalidades', 'loadFields2'));
     }
 
     /**
@@ -136,6 +150,28 @@ class CotacoesController extends Controller
 
             #Executando a ação
             $this->service->store($data);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($this->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function storeMultiplo(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+            
+            #Executando a ação
+            $this->service->storeMultiplo($data);
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");

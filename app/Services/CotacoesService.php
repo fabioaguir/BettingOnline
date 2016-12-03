@@ -28,7 +28,7 @@ class CotacoesService
         $this->repository = $repository;
         $this->partidasRepository = $partidasRepository;
     }
-    
+
     /**
      * @param array $data
      * @return Cotacoes
@@ -38,7 +38,7 @@ class CotacoesService
     {
         # Aplicando regras de negócios
         $this->rnFieldsForeignKey($data);
-        
+
         #Salvando o registro pincipal
         $cotacao =  $this->repository->create($data);
 
@@ -48,7 +48,7 @@ class CotacoesService
             ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
             ->where('partidas.id', '=', $data['partida_id'])
             ->where('modalidades.t_casa', '=', true)
-            ->first();
+            ->get();
 
 
         //Valida se o time fora está na lista de times em alta
@@ -57,11 +57,11 @@ class CotacoesService
             ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
             ->where('partidas.id', '=', $data['partida_id'])
             ->where('modalidades.t_fora', '=', true)
-            ->first();
+            ->get();
 
         //Caso o time casa ou fora esteja na lista de times em alta, a partida recebe status de partida multipla
-        if($validarTimeAltaCasa != null && $validarTimeAltaFora != null) {
-            $diferenca = abs($validarTimeAltaCasa->valor - $validarTimeAltaFora->valor);
+        if(count($validarTimeAltaCasa) >= 1 && count($validarTimeAltaFora) >= 1) {
+            $diferenca = abs($validarTimeAltaCasa[0]->valor - $validarTimeAltaFora[0]->valor);
             $partida = $this->partidasRepository->find($data['partida_id']);
 
             if($diferenca > 0.50) {
@@ -72,6 +72,75 @@ class CotacoesService
 
             $partida->save();
         }
+
+        #Verificando se foi criado no banco de dados
+        if(!$cotacao) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        #Retorno
+        return $cotacao;
+    }
+    
+    /**
+     * @param array $data
+     * @return Cotacoes
+     * @throws \Exception
+     */
+    public function storeMultiplo(array $data) : Cotacoes
+    {
+        for($i = 0; $i < count($data['id']); $i++) {
+
+            //Valida se o campo valor n está preenchido, caso não, o mesmo recebe valor 0
+            if($data['valor'][$i] == "") {
+                $valor = 0.00;
+            } else {
+                $valor = $data['valor'][$i];
+            }
+
+            //Criar o array de dados a ser inserido de cada cotação
+            $dados = [
+                'partida_id' => $data['partida_id'],
+                'valor' => $valor,
+                'modalidade_id' => $data['id'][$i],
+                'status_id' => $data['status'][$i],
+            ];
+
+            #Salvando o registro pincipal
+            $cotacao =  $this->repository->create($dados);
+
+            //Valida se o time casa está na lista de times em alta
+            $validarTimeAltaCasa = \DB::table('cotacoes')
+                ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+                ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+                ->where('partidas.id', '=', $data['partida_id'])
+                ->where('modalidades.t_casa', '=', true)
+                ->first();
+
+
+            //Valida se o time fora está na lista de times em alta
+            $validarTimeAltaFora = \DB::table('cotacoes')
+                ->join('modalidades', 'modalidades.id', '=', 'cotacoes.modalidade_id')
+                ->join('partidas', 'partidas.id', '=', 'cotacoes.partida_id')
+                ->where('partidas.id', '=', $data['partida_id'])
+                ->where('modalidades.t_fora', '=', true)
+                ->first();
+
+            //Caso o time casa ou fora esteja na lista de times em alta, a partida recebe status de partida multipla
+            if($validarTimeAltaCasa != null && $validarTimeAltaFora != null) {
+                $diferenca = abs($validarTimeAltaCasa->valor - $validarTimeAltaFora->valor);
+                $partida = $this->partidasRepository->find($data['partida_id']);
+
+                if($diferenca > 0.50) {
+                    $partida->simples = false;
+                } else {
+                    $partida->simples = true;
+                }
+
+                $partida->save();
+            }
+        }
+
 
         #Verificando se foi criado no banco de dados
         if(!$cotacao) {

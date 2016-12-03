@@ -101,7 +101,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'CotacoesController@index']);
             Route::post('grid', ['as' => 'grid', 'uses' => 'CotacoesController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'CotacoesController@create']);
+            Route::get('createMultiplo', ['as' => 'createMultiplo', 'uses' => 'CotacoesController@createMultiplo']);
             Route::post('store', ['as' => 'store', 'uses' => 'CotacoesController@store']);
+            Route::post('storeMultiplo', ['as' => 'storeMultiplo', 'uses' => 'CotacoesController@storeMultiplo']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'CotacoesController@update']);
             Route::get('destroy/{id}', ['as' => 'edit', 'uses' => 'CotacoesController@destroy']);
