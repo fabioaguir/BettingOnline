@@ -44,7 +44,7 @@
 
                     {!! Form::model($model, ['route'=> ['betting.cotacoes.update', $model->id], 'id' => 'formCotacao', 'class' => 'form-horizontal row-border','enctype' => 'multipart/form-data']) !!}
                     <div class="panel-body">
-                        @include('tamplatesForms.tamplateFormCotacoesMultiplo')
+                        @include('tamplatesForms.tamplateFormCotacoes')
                     </div>
                     <div class="panel-footer">
                         <div class="row">

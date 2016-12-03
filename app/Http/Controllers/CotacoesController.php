@@ -194,9 +194,10 @@ class CotacoesController extends Controller
             
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+            $loadFields2 = $this->service->load2($this->loadFields2);
 
             #retorno para view
-            return view('cotacoes.edit', compact('model', 'loadFields'));
+            return view('cotacoes.edit', compact('model', 'loadFields', 'loadFields2'));
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
