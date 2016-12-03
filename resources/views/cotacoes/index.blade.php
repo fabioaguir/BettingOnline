@@ -39,7 +39,7 @@
                     <div class="panel-heading">
                         <h2>Lista de partidas</h2><br />
                         <a href="{{ route('betting.cotacoes.create')}}" class="btn btn-primary">Nova Cotação</a>
-                        <a href="{{ route('betting.cotacoes.createMultiplo')}}" class="btn btn-primary">Nova Cotação Multipla</a>
+                        <a href="{{ route('betting.cotacoes.createMultiplo')}}" class="btn btn-primary">Nova Cotação Múltipla</a>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>

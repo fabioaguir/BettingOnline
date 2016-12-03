@@ -37,7 +37,7 @@
 
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Cadastrar Cotação Multipla</h2>
+                        <h2>Cadastrar Cotação Múltipla</h2>
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
