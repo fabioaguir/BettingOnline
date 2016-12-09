@@ -6,7 +6,7 @@ $(document).ready(function(){
     //Touchspin
     $("input.touchspin1").TouchSpin({
         min: 0,
-        max: 100,
+        max: 99999999999999999999999999,
         step: 0.1,
         decimals: 2,
         boostat: 5,
@@ -15,7 +15,7 @@ $(document).ready(function(){
     });
     $("input.touchspin2").TouchSpin({
         min: 0,
-        max: 100,
+        max: 99999999999999999999999999,
         step: 0.1,
         decimals: 2,
         boostat: 5,

@@ -16,6 +16,7 @@ class CreateChipesTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('nome', 255)->nullable();
+			$table->string('serial', 255)->nullable();
 			$table->timestamps();
 		});
 	}

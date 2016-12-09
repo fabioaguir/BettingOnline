@@ -54,7 +54,7 @@ class ChipesController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('chipes')->select(['id', 'nome']);
+        $rows = \DB::table('chipes')->select(['id', 'nome', 'serial']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {

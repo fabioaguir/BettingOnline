@@ -13,7 +13,8 @@ class Chipes extends Model implements Transformable
     protected $table    = 'chipes';
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'serial'
     ];
 
     /**

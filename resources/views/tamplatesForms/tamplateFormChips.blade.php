@@ -3,9 +3,15 @@
         <div class="row">
             <div>
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('nome', 'Número', array('class' => 'col-sm-2 control-label')) !!}
                     <div class="col-sm-5">
                         {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('serial', 'Serial', array('class' => 'col-sm-2 control-label')) !!}
+                    <div class="col-sm-5">
+                        {!! Form::text('serial', Session::getOldInput('serial')  , array('class' => 'form-control')) !!}
                     </div>
                 </div>
             </div>

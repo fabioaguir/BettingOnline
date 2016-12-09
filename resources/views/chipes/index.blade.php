@@ -47,13 +47,15 @@
                             <table id="area-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Nome</th>
+                                    <th>Número</th>
+                                    <th>Serial</th>
                                     <th>Acão</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Nome</th>
+                                    <th>Número</th>
+                                    <th>Serial</th>
                                     <th style="width: 15%;">Acão</th>
                                 </tr>
                                 </tfoot>
@@ -95,6 +97,7 @@
             },
             columns: [
                 {data: 'nome', name: 'nome'},
+                {data: 'serial', name: 'serial'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

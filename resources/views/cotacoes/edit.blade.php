@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::close() !!}
+                    {!! Form::close() !!} Tottenham x Swansea City
                 </div>
             </div>
         </div>
