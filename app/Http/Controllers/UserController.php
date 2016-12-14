@@ -68,7 +68,8 @@ class UserController extends Controller
             $user = Auth::user();
 
             # Checando permissão
-            if($user->can('usuario.update')) {
+            //if($user->can('usuario.update')) {
+            if(true) {
                 $html .= '<a href="edit/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
             }
 
