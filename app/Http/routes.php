@@ -18,7 +18,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('index'  , ['as' => 'index', 'uses' => 'DefaultController@index']);
 
         //Rotas para Dashboard
-        Route::post('dashboard'  , ['middleware' => 'permission:dashboard', 'as' => 'dashboard', 'uses' => 'DefaultController@dashboard']);
+        Route::post('dashboard'  , ['as' => 'dashboard', 'uses' => 'DefaultController@dashboard']);
         Route::post('resultVendas'  , ['as' => 'resultVendas', 'uses' => 'DefaultController@resultadosVendas']);
 
         //Rotas para sete da sorte
