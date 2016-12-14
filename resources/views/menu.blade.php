@@ -148,23 +148,45 @@
             {{-- Dropdowns do menu do topo --}}
             <div class="yamm navbar-left navbar-collapse collapse in">
                 <ul class="nav navbar-nav">
+                    @permission('report.resultados|report.financeiro|report.vendas|report.vendas.premiadas|report.apostas.partidas|report.apostas.partidas|report.arrecadacoes|report.modalidades')
                     <li class="dropdown" id="widget-classicmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas/Relatórios<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            @permission('report.resultados')
                             <li><a href="{{ route('betting.report.reportPartidasView') }} ">Resultados</a></li>
                             <li class="divider"></li>
+                            @endpermission
+
+                            @permission('report.financeiro')
                             <li><a href="{{ route('betting.report.reportFinanceiroView') }} ">Financeiro</a></li>
                             <li class="divider"></li>
+                            @endpermission
+
+                            @permission('report.vendas')
                             <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
                             <li class="divider"></li>
+                            @endpermission
+
+                            @permission('report.vendas.premiadas')
                             <li><a href="{{ route('betting.report.reportVendasPremiadasView') }} ">Vendas Premiadas</a></li>
                             <li class="divider"></li>
+                            @endpermission
+
+                            @permission('report.apostas.partidas')
                             <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
                             <li class="divider"></li>
+                            @endpermission
+
+                            @permission('report.arrecadacoes')
                             <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
+                            @endpermission
                         </ul>
                     </li>
+                    @endpermission
+
+                    @permission('sete.sorte.select')
                     <li><a href="{{ route('betting.seteSorte') }}">Sete da sorte</a></li>
+                    @endpermission
                 </ul>
             </div>
 
