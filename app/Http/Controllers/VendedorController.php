@@ -4,6 +4,7 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -105,10 +106,22 @@ class VendedorController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
-            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
-            if(isset($row->conf_id)){
-                $html .= '<a href="zerar/'.$row->conf_id.'" class="btn btn-xs btn-warning zerar"><i class="glyphicon glyphicon-edit"></i> Zerar</a>';
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('vendedor.update')) {
+                $html .= '<a href="edit/' . $row->id . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
             }
+
+            if(isset($row->conf_id)) {
+                if ($user->can('vendedor.zerar')) {
+                    $html .= '<a href="zerar/' . $row->conf_id . '" class="btn btn-xs btn-warning zerar"><i class="glyphicon glyphicon-edit"></i> Zerar</a>';
+
+                }
+            }
+
             return $html;
         })->make(true);
     }

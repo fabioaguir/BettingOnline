@@ -5,6 +5,7 @@ namespace Softage\Http\Controllers;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Http\Requests;
 use Softage\Http\Controllers\Controller;
 use Softage\Services\UserService;
@@ -60,7 +61,18 @@ class UserController extends Controller
 
         #Editando a grid
         return Datatables::of($users)->addColumn('action', function ($user) {
-            return '<a href="edit/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            # Html de retorno
+            $html = "";
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('usuario.update')) {
+                $html .= '<a href="edit/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            }
+
+            return $html;
         })->make(true);
     }
 

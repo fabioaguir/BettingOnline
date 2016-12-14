@@ -4,6 +4,7 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Services\AreaService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -59,11 +60,22 @@ class AreasController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
-            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('area.update')) {
+                $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            }
+
             # Verificando se existe vinculo com o currículo
             $area = $this->service->find($row->id);
+
             if(count($area->vendedores) == 0) {
-                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
+                if($user->can('area.destroy')) {
+                    $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
+                }
             }
             return $html;
         })->make(true);

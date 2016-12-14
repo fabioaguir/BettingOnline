@@ -4,6 +4,7 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Http\Requests;
 use Softage\Http\Controllers\Controller;
 use Softage\Services\RoleService;
@@ -18,11 +19,6 @@ class RoleController extends Controller
     private $service;
 
     /**
-     * @var UserValidator
-     */
-   // private $validator;
-
-    /**
      * @var array
      */
     private $loadFields = [
@@ -30,13 +26,12 @@ class RoleController extends Controller
     ];
 
     /**
+     * RoleController constructor.
      * @param RoleService $service
-     * @param UserValidator $validator
      */
     public function __construct(RoleService $service)
     {
         $this->service   = $service;
-        //$this->validator = $validator;
     }
 
     /**
@@ -57,15 +52,30 @@ class RoleController extends Controller
 
         #Editando a grid
         return Datatables::of($roles)->addColumn('action', function ($role) {
-            return '<a href="edit/'.$role->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            # Html de retorno
+            $html = "";
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('role.update')) {
+                $html .= '<a href="edit/'.$role->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            }
+            
+            return $html;
         })->make(true);
     }
 
+    /**
+     * @return mixed
+     */
     public function create()
     {
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
-
+        $loadFields['permission'] = \DB::table('permissions')->select('id', 'name', 'model', 'slug')->get();
+        $loadFields['model'] = \DB::table('permissions')->groupBy('model')->orderBy('model')->lists('model');
+        
         #Retorno para view
         return view('role.create', compact('loadFields'));
     }
@@ -80,17 +90,14 @@ class RoleController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
             #Executando a ação
             $this->service->store($data);
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        } catch (ValidatorException $e) {print_r($e->getMessage()); exit;
+        } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($this->validator->errors())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -106,7 +113,8 @@ class RoleController extends Controller
             $role = $this->service->find($id);
 
             #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
+            $loadFields['permission'] = \DB::table('permissions')->select('id', 'name', 'model', 'slug')->get();
+            $loadFields['model'] = \DB::table('permissions')->groupBy('model')->orderBy('model')->lists('model');
 
             #retorno para view
             return view('role.edit', compact('role', 'loadFields'));
@@ -125,9 +133,6 @@ class RoleController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);

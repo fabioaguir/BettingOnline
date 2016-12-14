@@ -4,6 +4,7 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Services\CampeonatosService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -58,12 +59,24 @@ class CampeonatosController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Html de retorno
             $html = "";
-            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('campeonatos.update')) {
+                $html .= '<a href="edit/' . $row->id . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            }
+
             # Verificando se existe vinculo com partidas
             $campeonato = $this->service->find($row->id);
             if(count($campeonato->partidas) == 0) {
-                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
+                # Checando permissão
+                if($user->can('campeonatos.destroy')) {
+                    $html .= '<a href="delete/' . $row->id . '" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a>';
+                }
             }
             return $html;
         })->make(true);

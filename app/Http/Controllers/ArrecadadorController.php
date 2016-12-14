@@ -4,6 +4,7 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Services\ArrecadadorService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -68,7 +69,15 @@ class ArrecadadorController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
-            $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('arrecadador.update')) {
+                $html .= '<a href="edit/' . $row->id . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            }
+
             return $html;
         })->make(true);
     }

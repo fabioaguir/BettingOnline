@@ -51,8 +51,14 @@
 
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                <button class="btn-primary btn" style="margin-left: -7px">Salvar</button>
-                <a class="btn-success btn" id="btnConcludeGol">Finalizar</a>
+                @permission('resultado.create')
+                    <button class="btn-primary btn" style="margin-left: -7px">Salvar</button>
+                @endpermission
+
+                @permission('resultado.finish')
+                    <a class="btn-success btn" id="btnConcludeGol">Finalizar</a>
+                @endpermission
+
                 <a class="btn-default btn" href="{{ route('betting.gols.index')}}">Voltar</a>
             </div>
         </div>

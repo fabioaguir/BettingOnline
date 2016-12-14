@@ -27,10 +27,15 @@
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Lista de usuários</h2><br />
+
+                        @permission('usuario.create')
                         <a href="{{ route('betting.user.create')}}" class="btn btn-primary">Novo Usuário</a>
+                        @endpermission
+
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
+
                     <div class="panel-body">
                         <div class="table-responsive no-padding">
                             <table id="user-grid" class="display table table-bordered" cellspacing="0" width="100%">

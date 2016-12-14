@@ -50,7 +50,8 @@ class RoleService
 
     /**
      * @param array $data
-     * @return array
+     * @return Role
+     * @throws \Exception
      */
     public function store(array $data) : Role
     {
@@ -89,7 +90,8 @@ class RoleService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Role
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Role
     {

@@ -4,6 +4,7 @@ namespace Softage\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Services\TimesAltaService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -63,8 +64,17 @@ class TimesAltaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Html de retorno
             $html = "";
-            $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a> ';
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('times.alta.destroy')) {
+                $html .= '<a href="delete/' . $row->id . '" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-edit"></i> Deletar</a> ';
+            }
+
             return $html;
         })->make(true);
     }

@@ -38,8 +38,14 @@
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Lista de partidas</h2><br />
-                        <a href="{{ route('betting.cotacoes.create')}}" class="btn btn-primary">Nova Cotação</a>
-                        <a href="{{ route('betting.cotacoes.createMultiplo')}}" class="btn btn-primary">Nova Cotação Múltipla</a>
+                        @permission('cotacao.create')
+                            <a href="{{ route('betting.cotacoes.create')}}" class="btn btn-primary">Nova Cotação</a>
+                        @endpermission
+
+                        @permission('cotacao.create.multiple')
+                            <a href="{{ route('betting.cotacoes.createMultiplo')}}" class="btn btn-primary">Nova Cotação Múltipla</a>
+                        @endpermission
+
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>

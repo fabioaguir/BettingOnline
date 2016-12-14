@@ -38,10 +38,15 @@
                 <div class="panel panel-default" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Lista de vendedores</h2><br />
+
+                        @permission('vendedor.create')
                         <a href="{{ route('betting.vendedor.create')}}" class="btn btn-primary">Novo Vendedor</a>
+                        @endpermission
+
                         <div class="panel-ctrls" data-actions-container=""
                              data-action-collapse='{"target": ".panel-body"}'></div>
                     </div>
+
                     <div class="panel-body">
                         <div class="table-responsive no-padding">
                             <table id="area-grid" class="display table table-bordered" cellspacing="0" width="100%">

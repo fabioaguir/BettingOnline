@@ -5,6 +5,7 @@ namespace Softage\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Repositories\GolsRepository;
 use Softage\Services\GolsService;
 use Softage\Http\Requests;
@@ -90,9 +91,17 @@ class GolsController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Html de retorno
-           // $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
-            $html = '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+            $html = '';
 
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('resultado.destroy')) {
+                // $html  = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+                $html = '<a href="destroy/' . $row->id . '" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+            }
+            
             # retorno
             return $html;
         })->make(true);

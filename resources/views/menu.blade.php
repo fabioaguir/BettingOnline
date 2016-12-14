@@ -254,55 +254,136 @@
                                 <nav class="widget-body">
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Menu</span></li>
-                                        <li><a href="{{ route('betting.index') }} "><i class="ti ti-home"></i><span>Dashboard</span></a></li>
-                                        <li><a href="{{ route('betting.parametro.save') }} "><i class="ti ti-settings"></i><span>Parâmetros</span></a></li>
+                                        @permission('dashboard')
+                                            <li><a href="{{ route('betting.index') }} "><i class="ti ti-home"></i><span>Dashboard</span></a></li>
+                                        @endpermission
+
+                                        @permission('parametro.update')
+                                            <li><a href="{{ route('betting.parametro.save') }} "><i class="ti ti-settings"></i><span>Parâmetros</span></a></li>
+                                        @endpermission
+
+                                        @permission('area.select')
                                         <li><a href="{{ route('betting.area.index') }} "><i class="ti  ti-location-pin"></i><span>Áreas</span></a></li>
+                                        @endpermission
+
+                                        @permission('vendedor.select|arrecadador.select')
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-user"></i><span>Pessoas</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('betting.vendedor.index') }} ">Vendedores</a></li>
-                                                <li><a href="{{ route('betting.arrecadador.index') }} ">Arrecadadores</a></li>
+                                                @permission('vendedor.select')
+                                                    <li><a href="{{ route('betting.vendedor.index') }} ">Vendedores</a></li>
+                                                @endpermission
+
+                                                @permission('arrecadador.select')
+                                                    <li><a href="{{ route('betting.arrecadador.index') }} ">Arrecadadores</a></li>
+                                                @endpermission
                                             </ul>
                                         </li>
-                                        <li><a href="{{ route('betting.partidas.index') }} "><i class="ti  ti-clipboard"></i><span>Partidas</span></a></li>
-                                        <li><a href="{{ route('betting.gols.index') }} "><i class="ti  ti-cup"></i><span>Resultados</span></a></li>
-                                        <li><a href="{{ route('betting.modalidades.index') }} "><i class="ti ti-control-play"></i><span>Modalidades</span></a></li>
-                                        <li><a href="{{ route('betting.cotacoes.index') }} "><i class="ti ti-control-play"></i><span>Cotações</span></a></li>
-                                        <li><a href="{{ route('betting.timesAlta.index') }} "><i class="ti ti-control-play"></i><span>Times em alta</span></a></li>
+                                        @endpermission
+
+                                        @permission('partida.select')
+                                            <li><a href="{{ route('betting.partidas.index') }} "><i class="ti  ti-clipboard"></i><span>Partidas</span></a></li>
+                                        @endpermission
+
+                                        @permission('resultado.select')
+                                            <li><a href="{{ route('betting.gols.index') }} "><i class="ti  ti-cup"></i><span>Resultados</span></a></li>
+                                        @endpermission
+
+                                        @permission('modalidade.select')
+                                            <li><a href="{{ route('betting.modalidades.index') }} "><i class="ti ti-control-play"></i><span>Modalidades</span></a></li>
+                                        @endpermission
+
+                                        @permission('cotacao.select')
+                                            <li><a href="{{ route('betting.cotacoes.index') }} "><i class="ti ti-control-play"></i><span>Cotações</span></a></li>
+                                        @endpermission
+
+                                        @permission('times.alta.select')
+                                            <li><a href="{{ route('betting.timesAlta.index') }} "><i class="ti ti-control-play"></i><span>Times em alta</span></a></li>
+                                        @endpermission
+
+                                        @permission('report.resultados|report.financeiro|report.vendas|report.vendas.premiadas|report.apostas.partidas|report.apostas.partidas|report.arrecadacoes|report.modalidades')
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-files"></i><span>Consultas/Relatórios</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('betting.report.reportPartidasView') }} ">Resultados</a></li>
-                                                <li><a href="{{ route('betting.report.reportFinanceiroView') }} ">Financeiro</a></li>
-                                                <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
-                                                <li><a href="{{ route('betting.report.reportVendasPremiadasView') }} ">Vendas Premiadas</a></li>
-                                                <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
-                                                <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
-                                                <li><a target="_blank" href="{{ route('betting.report.reportModalidades') }} ">Modalidades</a></li>
+                                                @permission('report.resultados')
+                                                    <li><a href="{{ route('betting.report.reportPartidasView') }} ">Resultados</a></li>
+                                                @endpermission
+
+                                                @permission('report.financeiro')
+                                                    <li><a href="{{ route('betting.report.reportFinanceiroView') }} ">Financeiro</a></li>
+                                                @endpermission
+
+                                                @permission('report.vendas')
+                                                    <li><a href="{{ route('betting.report.reportVendasView') }} ">Vendas</a></li>
+                                                @endpermission
+
+                                                @permission('report.vendas.premiadas')
+                                                    <li><a href="{{ route('betting.report.reportVendasPremiadasView') }} ">Vendas Premiadas</a></li>
+                                                @endpermission
+
+                                                @permission('report.apostas.partidas')
+                                                    <li><a href="{{ route('betting.report.reportApostasView') }} ">Apostas x Partidas</a></li>
+                                                @endpermission
+
+                                                @permission('report.arrecadacoes')
+                                                    <li><a href="{{ route('betting.report.reportArrecadacoesView') }} ">Arrecadações</a></li>
+                                                @endpermission
+
+                                                @permission('report.modalidades')
+                                                    <li><a target="_blank" href="{{ route('betting.report.reportModalidades') }} ">Modalidades</a></li>
+                                                @endpermission
                                             </ul>
                                         </li>
+                                        @endpermission
+
+                                        @permission('times.select|campeonatos.select')
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-flag-alt"></i><span>Times/Campeonatos</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('betting.time.index') }} ">Times</a></li>
-                                                <li><a href="{{ route('betting.campeonato.index') }} ">Campeonatos</a></li>
+                                                @permission('times.select')
+                                                    <li><a href="{{ route('betting.time.index') }} ">Times</a></li>
+                                                @endpermission
+
+                                                @permission('campeonatos.select')
+                                                    <li><a href="{{ route('betting.campeonato.index') }} ">Campeonatos</a></li>
+                                                @endpermission
                                             </ul>
                                         </li>
+                                        @endpermission
+
+                                        @permission('chips.select|impressoras.select|tablets.select')
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-wallet"></i><span>Periféricos</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('betting.chipe.index') }} ">Chipes</a></li>
-                                                <li><a href="{{ route('betting.impressora.index') }} ">Impressoras</a></li>
-                                                <li><a href="{{ route('betting.tablet.index') }} ">Tablets</a></li>
+                                                @permission('chips.select')
+                                                    <li><a href="{{ route('betting.chipe.index') }} ">Chipes</a></li>
+                                                @endpermission
+
+                                                @permission('impressoras.select')
+                                                    <li><a href="{{ route('betting.impressora.index') }} ">Impressoras</a></li>
+                                                @endpermission
+
+                                                @permission('tablets.select')
+                                                    <li><a href="{{ route('betting.tablet.index') }} ">Tablets</a></li>
+                                                @endpermission
                                             </ul>
                                         </li>
+                                        @endpermission
+
+                                        @permission('usuario.select|perfil.select')
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-shield"></i><span>Administrador</span></a>
                                             <ul class="acc-menu">
-                                                <li><a href="{{ route('betting.user.index')}} ">Usuário</a></li>
-                                                <li><a href="{{ route('betting.role.index') }}">Perfis</a></li>
+                                                @permission('usuario.select')
+                                                    <li><a href="{{ route('betting.user.index')}} ">Usuário</a></li>
+                                                @endpermission
+
+                                                @permission('perfil.select')
+                                                    <li><a href="{{ route('betting.role.index') }}">Perfis</a></li>
+                                                @endpermission
                                             </ul>
                                         </li>
+                                        @endpermission
                                         {{-- menu extras --}}
                                         {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span

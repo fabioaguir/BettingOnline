@@ -121,14 +121,14 @@
                                     <div role="tabpanel" class="tab-pane" id="perfil">
                                         <br/>
 
-                                        <div id="tree-permission">
-                                            <ul>
+                                        <div>
+                                            <ul style="list-style: none">
                                                 @if(isset($loadFields['role']))
                                                     @foreach($loadFields['role'] as $id => $role)
                                                         @if(\in_array($role, $user->roles->lists('name')->all()))
-                                                            <li><input type="checkbox" name="role[]" checked value="{{ $id  }}"> {{ $role }} </li>
+                                                            <li style="display: inline; margin-right: 10px;"><input type="checkbox" name="role[]" checked value="{{ $id  }}"> {{ $role }} </li>
                                                         @else
-                                                            <li><input type="checkbox" name="role[]" value="{{ $id  }}"> {{ $role }} </li>
+                                                            <li style="display: inline; margin-right: 10px;"><input type="checkbox" name="role[]" value="{{ $id  }}"> {{ $role }} </li>
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -161,14 +161,5 @@
     <script type="text/javascript">
         var elem = document.querySelector('.js-switch-info');
         var init = new Switchery(elem);
-
-        $(document).ready(function () {
-            $("#tree-role, #tree-permission").tree();
-
-            $('#user a').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            });
-        });
     </script>
 @endsection

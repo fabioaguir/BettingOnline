@@ -40,6 +40,7 @@
                         <h2>Lista dos times em alta</h2><br />
                     </div>
                     <div class="panel-body">
+                        @permission('times.alta.create')
                         <div class="row">
                             <div class="col-md-12">
                                 <form role="form" class="form-horizontal">
@@ -56,6 +57,8 @@
                                 </form>
                             </div>
                         </div>
+                        @endpermission
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive no-padding">

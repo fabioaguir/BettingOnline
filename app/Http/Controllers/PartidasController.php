@@ -5,6 +5,7 @@ namespace Softage\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Softage\Repositories\PartidasRepository;
 use Softage\Services\PartidasService;
 use Softage\Http\Requests;
@@ -89,14 +90,26 @@ class PartidasController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Html de retorno
-            $html = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            $html = "";
+
+            # Recuperando o usuário;
+            $user = Auth::user();
+
+            # Checando permissão
+            if($user->can('partida.update')) {
+                # Html de retorno
+                $html = '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a> ';
+            }
 
             # Recuperando a partida
             $partida = $this->repository->find($row->id);
 
             # Validando a possibilidade de remoção
             if(!count($partida->gols) > 0 && !count($partida->cotacoes) > 0 && !count($partida->apostas) > 0) {
-                $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+                # Checando permissão
+                if($user->can('partida.destroy')) {
+                    $html .= '<a href="destroy/'.$row->id.'" class="btn btn-xs btn-danger delete"><i class="glyphicon glyphicon-delete"></i> Remover</a>';
+                }
             }
 
             # retorno
