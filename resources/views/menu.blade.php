@@ -392,20 +392,20 @@
                                         </li>
                                         @endpermission
 
-                                        {{--@permission('usuario.select|perfil.select')--}}
+                                        @permission('usuario.select|perfil.select')
                                         <li>
                                             <a href="javascript:;"><i class="ti ti-shield"></i><span>Administrador</span></a>
                                             <ul class="acc-menu">
-                                                {{--@permission('usuario.select')--}}
+                                                @permission('usuario.select')
                                                     <li><a href="{{ route('betting.user.index')}} ">Usuário</a></li>
-                                                {{--@endpermission--}}
+                                                @endpermission
 
-                                                {{--@permission('perfil.select')--}}
+                                                @permission('perfil.select')
                                                     <li><a href="{{ route('betting.role.index') }}">Perfis</a></li>
-                                                {{--@endpermission--}}
+                                                @endpermission
                                             </ul>
                                         </li>
-                                        {{--@endpermission--}}
+                                        @endpermission
                                         {{-- menu extras --}}
                                         {{--<li class="nav-separator"><span>Extras</span></li>
                                 <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span

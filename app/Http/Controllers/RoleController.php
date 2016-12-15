@@ -59,8 +59,7 @@ class RoleController extends Controller
             $user = Auth::user();
 
             # Checando permissão
-            //if($user->can('role.update')) {
-            if(true) {
+            if($user->can('perfil.update')) {
                 $html .= '<a href="edit/'.$role->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
             }
             
