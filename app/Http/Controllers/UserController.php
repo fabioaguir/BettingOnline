@@ -60,7 +60,7 @@ class UserController extends Controller
         $users = \DB::table('users')->select(['id', 'name', 'email']);
 
         #Editando a grid
-        return Datatables::of($users)->addColumn('action', function ($user) {
+        return Datatables::of($users)->addColumn('action', function ($row) {
             # Html de retorno
             $html = "";
 
@@ -68,9 +68,8 @@ class UserController extends Controller
             $user = Auth::user();
 
             # Checando permissão
-            //if($user->can('usuario.update')) {
-            if(true) {
-                $html .= '<a href="edit/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            if($user->can('usuario.update')) {
+                $html .= '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
             }
 
             return $html;
