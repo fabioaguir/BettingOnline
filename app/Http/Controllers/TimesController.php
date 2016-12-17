@@ -12,6 +12,7 @@ use Softage\Http\Requests\AreasCreateRequest;
 use Softage\Http\Requests\AreasUpdateRequest;
 use Softage\Validators\ChipesValidator;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
 
 
 class TimesController extends Controller
