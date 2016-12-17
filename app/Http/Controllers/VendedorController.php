@@ -100,7 +100,8 @@ class VendedorController extends Controller
                 'conf_vendas.comissao as comissao',
                 'conf_vendas.cotacao as cotacao',
                 'conf_vendas.id as conf_id',
-                \DB::raw("(SELECT SUM(vendas.valor_total) FROM vendas WHERE vendas.conf_venda_id = conf_vendas.id ) as valor_total")
+                \DB::raw("(SELECT SUM(vendas.valor_total) FROM vendas WHERE vendas.conf_venda_id = conf_vendas.id
+                  AND vendas.status_v_id = 1 ) as valor_total")
             ]);
 
         #Editando a grid
@@ -146,7 +147,8 @@ class VendedorController extends Controller
                 'status.nome as status',
                 'status.id as status_id',
                 \DB::raw("to_char(conf_vendas.data, 'DD/MM/YYYY') as data"),
-                \DB::raw("(SELECT SUM(vendas.valor_total) FROM vendas WHERE vendas.conf_venda_id = conf_vendas.id ) as total")
+                \DB::raw("(SELECT SUM(vendas.valor_total) FROM vendas WHERE vendas.conf_venda_id = conf_vendas.id
+                  AND vendas.status_v_id = 1) as total")
             ]);
 
         #Editando a grid
