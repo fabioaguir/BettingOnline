@@ -48,7 +48,7 @@
                         {!! Form::open(['route'=>'betting.report.getReportPartidas', 'method' => "GET", "class" => "form-inline"]) !!}
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group">{{ dd($datas['dataInicio']) }}
+                                    <div class="form-group">
                                         {!! Form::label('data_inicio', 'Início') !!}
                                         {!! Form::text('data_inicio', $datas['dataInicio'] ?? "", array('class' => 'form-control date datepicker')) !!}
                                     </div>
@@ -73,6 +73,7 @@
 
                         <div class="row">
                             <div class="col-md-8">
+                                {{ dd($rows) }}
                                 @if(isset($rows))
                                 <div class="table-responsive no-padding">
                                     <table id="report-partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
