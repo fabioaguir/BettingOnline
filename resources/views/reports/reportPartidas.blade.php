@@ -77,6 +77,7 @@
                                 <div class="table-responsive no-padding">
                                     <table id="report-partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                         @foreach($rows as $row)
+                                           @if(count($row['partidas']) > 1)
                                             <tr>
                                                 <td class="campeonato" colspan="2"><?php echo mb_strtoupper($row['nome'], 'UTF-8') ?></td>
                                             </tr>
@@ -86,6 +87,7 @@
                                                     <td class="resultado">{{ $partida->time_casa  }} {{ $partida->gols_casa  }} x {{ $partida->gols_fora  }} {{ $partida->time_fora  }}</td>
                                                 </tr>
                                             @endforeach
+                                            @endif
                                         @endforeach
                                     </table>
                                 </div>

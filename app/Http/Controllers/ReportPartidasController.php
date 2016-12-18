@@ -18,8 +18,8 @@ class ReportPartidasController extends Controller
         $rows = [];
 
         # Tratando os parametros
-        $dataInicio = $request->get('data_inicio') ?? null;
-        $dataFim    = $request->get('data_fim') ?? null;
+        $dataInicio = $request->get('data_inicio') ? \DateTime::createFromFormat('d/m/Y', $request->get('data_inicio')) : null;
+        $dataFim    = $request->get('data_fim') ? \DateTime::createFromFormat('d/m/Y', $request->get('data_fim')) : null;
         $exportar   = $request->get('exportar') ?? null;
 
         # Array de datas
@@ -51,7 +51,7 @@ class ReportPartidasController extends Controller
 
             # Validando a condição do período
             if($dataInicio && $dataFim) {
-                $queryPartidas->where('partidas.data', '>=', $dataInicio)->where('partidas.data', '<=', $dataFim);
+                $queryPartidas->where('partidas.data', '>=', $dataInicio->format('Y-m-d'))->where('partidas.data', '<=', $dataFim->format('Y-m-d'));
             }
 
             # Preenchendo o array
