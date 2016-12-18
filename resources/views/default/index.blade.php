@@ -40,22 +40,44 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-sm-3">
-                                        <div class="input-group">
-                                            <input style="margin-left: 8px" placeholder="Data" class="form-control mask datepicker" data-inputmask="'alias': 'date'" type="text"
-                                                   id="searchDate" name="searchDate">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-info" id="btnSearch" type="button">Buscar</button>
+                            <div class="col-md-6">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <div class="input-group" style="margin-top: 80px">
+                                                <input style="margin-left: 8px" placeholder="Data" class="form-control mask datepicker" data-inputmask="'alias': 'date'" type="text"
+                                                       id="searchDate" name="searchDate">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-info" id="btnSearch" type="button">Buscar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="info-tile info-tile-alt tile-success">
+                                                <div class="tile-icon"><i class="ti ti-check-box"></i></div>
+                                                <div class="tile-heading"><span>Vendas realizadas</span></div>
+                                                <div class="tile-body"><span id="vendas-r"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="info-tile info-tile-alt tile-danger">
+                                                <div class="tile-icon"><i class="ti  ti-close"></i></div>
+                                                <div class="tile-heading"><span>Vendas canceladas</span></div>
+                                                <div class="tile-body"><span id="vendas-c"></span></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-7">
+                            <div class="col-md-12">
                                 <div class="table-responsive no-padding">
                                     <table id="dashboard-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                         <thead>
@@ -74,37 +96,17 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>Tabela</th>
-                                            <th>Hora</th>
+                                            <th style="width: 25%">Tabela</th>
+                                            <th style="width: 7%">Hora</th>
                                             <th>Partida</th>
-                                            <th>Processada</th>
-                                            <th>Apostas</th>
-                                            <th>Casa</th>
-                                            <th>Fora</th>
-                                            <th>Empate</th>
+                                            <th style="width: 10%">Processada</th>
+                                            <th style="width: 8%">Apostas</th>
+                                            <th style="width: 6%">Casa</th>
+                                            <th style="width: 6%">Fora</th>
+                                            <th style="width: 7%">Empate</th>
                                         </tr>
                                         </tfoot>
                                     </table>
-                                </div>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="info-tile info-tile-alt tile-success">
-                                                <div class="tile-icon"><i class="ti ti-check-box"></i></div>
-                                                <div class="tile-heading"><span>Vendas realizadas</span></div>
-                                                <div class="tile-body"><span id="vendas-r"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="info-tile info-tile-alt tile-danger">
-                                                <div class="tile-icon"><i class="ti  ti-close"></i></div>
-                                                <div class="tile-heading"><span>Vendas canceladas</span></div>
-                                                <div class="tile-body"><span id="vendas-c"></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
