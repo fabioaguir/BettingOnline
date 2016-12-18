@@ -21,7 +21,7 @@ class ReportPartidasController extends Controller
         $dataInicio = $request->get('data_inicio') ?? null;
         $dataFim    = $request->get('data_fim') ?? null;
         $exportar   = $request->get('exportar') ?? null;
-        dd($dataInicio);
+
         # Array de datas
         $datas = [
             'dataInicio' => $dataInicio,
