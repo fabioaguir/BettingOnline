@@ -77,8 +77,7 @@
                                 <div class="table-responsive no-padding">
                                     <table id="report-partidas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                         @foreach($rows as $row)
-                                            {{ dd($rows) }}
-                                           @if(count($row['partidas']) > 1)
+                                           @if(count($row['partidas']) > 0)
                                             <tr>
                                                 <td class="campeonato" colspan="2"><?php echo mb_strtoupper($row['nome'], 'UTF-8') ?></td>
                                             </tr>
