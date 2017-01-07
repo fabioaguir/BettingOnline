@@ -136,12 +136,17 @@ class ReportVendasController extends Controller
      */
     public function querySum(Request $request)
     {
+        //Tratando as datas
+        $dataIni = SerbinarioDateFormat::toUsa($request['data_inicio'], 'date');
+        $dataFim = SerbinarioDateFormat::toUsa($request['data_fim'], 'date');
+
         $query = $this->struturaQuery($request);
 
         $sum = $query->select([
             \DB::raw("SUM(vendas.valor_total) as total_vendido"),
             \DB::raw("(SELECT SUM(vendas.retorno) FROM vendas JOIN conf_vendas as conf ON vendas.conf_venda_id = conf.id
-             WHERE vendas.conf_venda_id = conf.id AND vendas.premiacao_id = 1 ) as total_retorno")
+             WHERE vendas.conf_venda_id = conf.id AND vendas.premiacao_id = 1 AND
+              vendas.data between '".$dataIni."' and '".$dataFim."' ) as total_retorno")
         ])->get();
 
         return $sum;
