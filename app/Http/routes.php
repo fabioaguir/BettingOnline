@@ -204,6 +204,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('pdfVendas', ['as' => 'pdfVendas', 'uses' => 'ReportVendasController@pdfVendas']);
             Route::get('cupomVendas/{d}', ['as' => 'cupomVendas', 'uses' => 'ReportVendasController@cupomVendas']);
             Route::get('cancelarVenda/{d}', ['as' => 'cancelarVenda', 'uses' => 'ReportVendasController@cancelarVenda']);
+            Route::get('reativarVenda/{d}', ['as' => 'reativarVenda', 'uses' => 'ReportVendasController@reativarVenda']);
             Route::get('reportApostasView', ['middleware' => 'permission:report.apostas.partidas', 'as' => 'reportApostasView', 'uses' => 'ReportApostasController@reportApostasView']);
             Route::post('reportApostasSearch', ['as' => 'reportApostasSearch', 'uses' => 'ReportApostasController@reportApostasSearch']);
             Route::post('pdfApostas', ['as' => 'pdfApostas', 'uses' => 'ReportApostasController@pdfApostas']);

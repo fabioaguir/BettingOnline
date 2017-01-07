@@ -99,6 +99,8 @@ class ReportVendasController extends Controller
             
             if($row->status == '1') {
                 $html .= '<a href="cancelarVenda/'.$row->id.'" class="btn btn-xs btn-primary cancelar"><i class="glyphicon glyphicon-edit"></i> Cancelar</a> ';
+            } else if ($row->status == '2') {
+                $html .= '<a href="reativarVenda/'.$row->id.'" class="btn btn-xs btn-danger reativar"><i class="glyphicon glyphicon-edit"></i> Reativar</a> ';
             }
             return $html;
         })->make(true);
@@ -136,20 +138,26 @@ class ReportVendasController extends Controller
      */
     public function querySum(Request $request)
     {
-        //Tratando as datas
-        $dataIni = SerbinarioDateFormat::toUsa($request['data_inicio'], 'date');
-        $dataFim = SerbinarioDateFormat::toUsa($request['data_fim'], 'date');
 
-        $query = $this->struturaQuery($request);
+        # query para total de vendas
+        $query1 = $this->struturaQuery($request);
+        
+        # query para total de retorno
+        $query2 = $this->struturaQuery($request);
 
-        $sum = $query->select([
+        # pegando o total de vendas ativas
+        $query1->where('vendas.status_v_id', '=', '1');
+        $totalVendido = $query1->select([
             \DB::raw("SUM(vendas.valor_total) as total_vendido"),
-            \DB::raw("(SELECT SUM(vendas.retorno) FROM vendas JOIN conf_vendas as conf ON vendas.conf_venda_id = conf.id
-             WHERE vendas.conf_venda_id = conf.id AND vendas.premiacao_id = 1 AND
-              vendas.data between '".$dataIni."' and '".$dataFim."' ) as total_retorno")
-        ])->get();
+        ])->first();
 
-        return $sum;
+        # pegando o total de retorno vendas ativas
+        $query2->where('vendas.premiacao_id', '=', '1');
+        $totalRetorno = $query2->select([
+            \DB::raw("SUM(vendas.retorno) as total_retorno"),
+        ])->first();
+
+        return response()->json(['totalV' => $totalVendido, 'totalR' => $totalRetorno]);
     }
 
     /**
@@ -267,6 +275,34 @@ class ReportVendasController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cancelamento realizada com sucesso!");
+        } catch (\Throwable $e) {
+            dd('sdsd');
+            return redirect()->back()->withErros($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function reativarVenda($id)
+    {
+        try {
+
+            # Recuperando o registro do banco de dados
+            $vendas = $this->vendasRepository->find($id);
+
+            # verificando se o registro foi recuperado
+            if(!$vendas) {
+                throw new \Exception('Venda não encontrado!');
+            }
+
+            # Removendo o registro do banco de dados
+            $vendas->status_v_id = '1';
+            $vendas->save();
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Reativação realizada com sucesso!");
         } catch (\Throwable $e) {
             dd('sdsd');
             return redirect()->back()->withErros($e->getMessage());

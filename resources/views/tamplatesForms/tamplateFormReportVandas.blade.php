@@ -179,12 +179,12 @@
                 datatype: 'json'
             }).done(function (jsonResponse) {
 
-                if(!jsonResponse[0]['total_vendido'] && !jsonResponse[0]['total_retorno']) {
+                if(!jsonResponse['totalV']['total_vendido'] && !jsonResponse['totalR']['total_retorno']) {
                     $('td.total-vendido').html(" ");
                     $('td.total-retorno').html(" ");
                 } else {
-                    $('td.total-vendido').html("<b>"+jsonResponse[0]['total_vendido']+"</b>");
-                    $('td.total-retorno').html("<b>"+jsonResponse[0]['total_retorno']+"</b>");
+                    $('td.total-vendido').html("<b>"+jsonResponse['totalV']['total_vendido']+"</b>");
+                    $('td.total-retorno').html("<b>"+jsonResponse['totalR']['total_retorno']+"</b>");
                 }
 
             });
@@ -232,6 +232,18 @@
             event.preventDefault();
             var url = $(this).attr('href');
             bootbox.confirm("Tem certeza do cancelamento da venda?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
+        });
+
+        $(document).on('click', 'a.reativar', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da reativação da venda?", function (result) {
                 if (result) {
                     location.href = url
                 } else {
