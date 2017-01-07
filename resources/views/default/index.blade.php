@@ -160,7 +160,7 @@
                 {data: 'hora', name: 'partidas.hora'},
                 {data: 'partida', name: 'partida'},
                 {data: 'status', name: 'processadas.nome'},
-                {data: 'qtd_apostas', name: 'qtd_apostas'},
+                {data: 'qtdApostas', name: 'qtdApostas', orderable: false, searchable: false},
                 {data: 'casa', name: 'casa', orderable: false, searchable: false},
                 {data: 'fora', name: 'fora', orderable: false, searchable: false},
                 {data: 'empate', name: 'empate', orderable: false, searchable: false}
