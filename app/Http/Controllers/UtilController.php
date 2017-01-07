@@ -65,7 +65,7 @@ class UtilController extends Controller
             $qb->skip($pageValue);
             $qb->take(30);
             $qb->orderBy('nome', 'asc');
-            $qb->where($fieldName,'like', "%$searchValue%");
+            $qb->where($fieldName,'ILIKE', "%$searchValue%");
 
             #Validando os campos de where
             if($fieldWhere != null && $valueWhere != null) {
