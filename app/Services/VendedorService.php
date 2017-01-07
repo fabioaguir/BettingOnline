@@ -181,6 +181,19 @@ class VendedorService
         $result->status_id = '2';
         $result->save();
 
+        # Criando uma nova configuração de vendas
+        $dadosConfvendas = array();
+        $dadosConfvendas['limite_vendas'] = $result->limite_vendas;
+        $dadosConfvendas['comissao'] = $result->comissao;
+        $dadosConfvendas['cotacao'] = $result->cotacao;
+        $dadosConfvendas['tipo_cotacao_id'] = $result->tipo_cotacao_id;
+        $dadosConfvendas['vendedor_id'] = $result->vendedor_id;
+        $dadosConfvendas['status_id'] = '1';
+        $dadosConfvendas['data'] = $result->data;
+
+        //salvando o registro no banco de configuração de vendas
+        $this->repoConfVendas->create($dadosConfvendas);
+
         //Pegando o total das vendas
         $totalVendido = \DB::table('vendas')
             ->join('conf_vendas', 'conf_vendas.id', '=', 'vendas.conf_venda_id')

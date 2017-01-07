@@ -63,12 +63,14 @@ class DefaultController extends Controller
             ->join('campeonatos', 'campeonatos.id', '=', 'partidas.campeonato_id')
             ->leftJoin('processadas', 'processadas.id', '=', 'partidas.processada_id')
             ->leftJoin('apostas', 'apostas.partida_id', '=', 'partidas.id')
-            ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'processadas.id')
+            ->leftJoin('vendas', 'apostas.venda_id', '=', 'vendas.id')
+            ->groupBy('apostas.partida_id', 'partidas.id', 'time_casa.id', 'time_fora.id', 'campeonatos.id', 'processadas.id', 'vendas.id')
             ->whereDate('partidas.data', '=', $data)
             ->select([
                 'partidas.id as id',
                 \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
-                \DB::raw("count(apostas.id) as qtd_apostas"),
+                \DB::raw("(CASE vendas.status_v_id WHEN 1 THEN count(apostas.id) END ) as qtd_apostas"),
+                //\DB::raw("count(apostas.id) as qtd_apostas"),
                 'campeonatos.nome as campeonato',
                 'partidas.hora as hora',
                 'processadas.nome as status',
