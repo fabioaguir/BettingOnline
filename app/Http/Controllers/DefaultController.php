@@ -69,7 +69,7 @@ class DefaultController extends Controller
             ->select([
                 'partidas.id as id',
                 \DB::raw("concat(time_casa.nome,' x ',time_fora.nome) as partida"),
-                \DB::raw("(CASE vendas.status_v_id WHEN 1 THEN count(apostas.id) END ) as qtd_apostas"),
+                \DB::raw("(CASE vendas.status_v_id WHEN 1 THEN SUM(count(apostas.id)) END ) as qtd_apostas"),
                 //\DB::raw("count(apostas.id) as qtd_apostas"),
                 'campeonatos.nome as campeonato',
                 'partidas.hora as hora',
