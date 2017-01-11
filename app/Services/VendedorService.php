@@ -181,6 +181,9 @@ class VendedorService
         $result->status_id = '2';
         $result->save();
 
+        //Recuperando a data de hoje
+        $date = new \DateTime('now');
+
         # Criando uma nova configuração de vendas
         $dadosConfvendas = array();
         $dadosConfvendas['limite_vendas'] = $result->limite_vendas;
@@ -189,7 +192,7 @@ class VendedorService
         $dadosConfvendas['tipo_cotacao_id'] = $result->tipo_cotacao_id;
         $dadosConfvendas['vendedor_id'] = $result->vendedor_id;
         $dadosConfvendas['status_id'] = '1';
-        $dadosConfvendas['data'] = $result->data;
+        $dadosConfvendas['data'] = $date->format('d-m-Y');
 
         //salvando o registro no banco de configuração de vendas
         $this->repoConfVendas->create($dadosConfvendas);
