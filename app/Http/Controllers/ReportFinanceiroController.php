@@ -229,7 +229,7 @@ class ReportFinanceiroController extends Controller
 
         } else if ($dados['exportar'] == '2') {
 
-            \Excel::create('Relatório de vendas', function($excel) {
+            \Excel::create('Relatório financeiro', function($excel) {
 
                 $excel->sheet('Excel', function($sheet) {
 
