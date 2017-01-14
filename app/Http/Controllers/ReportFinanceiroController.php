@@ -86,7 +86,6 @@ class ReportFinanceiroController extends Controller
             //Tratando as datas
             $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
             $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
-            //dd(array($dataIni, $dataFim));
             $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
         }
 

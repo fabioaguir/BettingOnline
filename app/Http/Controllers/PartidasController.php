@@ -41,6 +41,9 @@ class PartidasController extends Controller
     private $loadFields = [
         'Times',
         'Campeonatos',
+    ];
+
+    private $loadFields2 = [
         'Status'
     ];
 
@@ -124,9 +127,10 @@ class PartidasController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+        $loadFields2 = $this->service->load2($this->loadFields2);
 
         #Retorno para view
-        return view('partidas.create', compact('loadFields'));
+        return view('partidas.create', compact('loadFields', 'loadFields2'));
     }
 
     /**
@@ -166,9 +170,10 @@ class PartidasController extends Controller
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+            $loadFields2 = $this->service->load2($this->loadFields2);
 
             #retorno para view
-            return view('partidas.edit', compact('model', 'loadFields'));
+            return view('partidas.edit', compact('model', 'loadFields', 'loadFields2'));
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
