@@ -43,6 +43,18 @@ class ReportFinanceiroController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function reportFinanceiroView()
+    {
+        # Recuperando os loads fields
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('reports.reportFinanceiro', compact('loadFields'));
+    }
+
+    /**
      * Método resonsável por retornar a query
      *
      * @return mixed
@@ -59,6 +71,142 @@ class ReportFinanceiroController extends Controller
     }
 
     /**
+     * @param $idVendedor
+     * @return mixed
+     */
+    private function getConfVendasId($idVendedor,  $dataIni, $dataFin)
+    {
+        # Fazendo a consulta para recuperar os
+        # ids das configurações de vendas
+        $query = $this->getQuery()
+            ->where('pessoas.id', $idVendedor);
+
+        // Filtranto por período
+        if ($dataIni && $dataFin) {
+            //Tratando as datas
+            $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
+            $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
+            $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+        }
+
+        # Recuperndo o resultado da query
+        $confVendas = $query->lists('conf_vendas.id');
+
+        # Retorno
+        return $confVendas;
+    }
+
+    /**
+     * @param $idVendedor
+     * @param $confVendas
+     * @return float
+     */
+    private function comissao($idVendedor, $confVendas)
+    {
+        # Fazendo a consulta
+        $query = \DB::table('conf_vendas')
+            ->where('vendedor_id', $idVendedor)
+            ->whereIn('conf_vendas.id', array_unique($confVendas))
+            ->select([\DB::raw('SUM(conf_vendas.comissao) as comissao')])
+            ->first();
+
+        # Retorno
+        return $query->comissao ?? 0.00;
+    }
+
+    /**
+     * @param $idVendedor
+     * @param $dataIni
+     * @param $dataFin
+     * @return mixed
+     */
+    public function getPremiacao($idVendedor, $dataIni, $dataFin)
+    {
+        # Fazendo a consulta
+        $query = $this->getQuery()
+            ->where('pessoas.id', $idVendedor)
+            ->where('premiacao_id', 1)
+            ->select([\DB::raw('SUM(vendas.retorno) as premiacao')]);
+
+        // Filtranto por período
+        if ($dataIni && $dataFin) {
+            //Tratando as datas
+            $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
+            $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
+            $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+        }
+
+        # Recuperndo o resultado da query e retornando
+        return $query->first()->premiacao ?? 0.00;
+    }
+
+    /**
+     * @param $idVendedor
+     * @param $dataIni
+     * @param $dataFin
+     * @return mixed
+     */
+    public function getComissao($idVendedor, $dataIni, $dataFin)
+    {
+        # Fazendo a consulta
+        $query = $this->getQuery()
+            ->where('pessoas.id', $idVendedor)
+            ->select([\DB::raw('SUM(vendas.valor_total) as valor')]);
+
+        // Filtranto por período
+        if ($dataIni && $dataFin) {
+            //Tratando as datas
+            $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
+            $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
+            $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+        }
+
+        # Recuperndo o resultado da query
+        $result = $query->first();
+
+        # Recuperando o id das configurações de vendas
+        $confVendas = $this->getConfVendasId($idVendedor, $dataIni, $dataFin);
+
+        # Retorno
+        return $result->valor * (($this->comissao($idVendedor, $confVendas)/100));
+    }
+
+    /**
+     * @param $idVendedor
+     * @param $dataIni
+     * @param $dataFin
+     * @return mixed
+     */
+    private function getValorFinal($idVendedor, $dataIni, $dataFin)
+    {
+        # Fazendo a consulta
+        $query = $this->getQuery()
+            ->where('pessoas.id', $idVendedor)
+            ->select([\DB::raw('SUM(vendas.valor_total) as valor')]);
+
+        // Filtranto por período
+        if ($dataIni && $dataFin) {
+            //Tratando as datas
+            $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
+            $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
+            $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+        }
+
+        # Recuperndo o resultado da query
+        $result = $query->first();
+
+        # Recuperando a premiação
+        $resultPremiacao = $this->getPremiacao($idVendedor, $dataIni, $dataFin);
+
+        # Recuperando o id das configurações de vendas
+        $confVendas = $this->getConfVendasId($idVendedor, $dataIni, $dataFin);
+
+        # Calculando o valor final e Retorno
+        return ($result->valor - ($result->valor * (($this->comissao($idVendedor, $confVendas)/100))))
+                - $resultPremiacao;
+    }
+
+    /**
      * @return mixed
      */
     public function grid(Request $request)
@@ -70,21 +218,32 @@ class ReportFinanceiroController extends Controller
                 'pessoas.id as id',
                 'pessoas.nome as nome',
                 'areas.nome as nome_area',
-                \DB::raw('SUM(vendas.retorno) as premiacao'),
-                \DB::raw('to_char(((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100)::real, \'9999999999D99\') as comissao'),
-                \DB::raw('SUM(vendas.valor_total) valor_total'),
-                \DB::raw('to_char((SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * SUM(conf_vendas.comissao))/100) - SUM(vendas.retorno))::real, \'9999999999D99\') as valor_final')
+                \DB::raw('SUM(vendas.valor_total) as valor_total')
             ]);
         
         #Editando a grid
         return Datatables::of($rows)
+            ->addColumn('premiacao', function ($row) use ($request) {
+                # retorno
+                return number_format($this->getPremiacao($row->id, $request->get('data_inicio'),
+                    $request->get('data_fim'), 2, ',', '.'));
+            })
+            ->addColumn('comissao', function ($row) use ($request) {
+                # Retorno
+                return number_format($this->getComissao($row->id, $request->get('data_inicio'),
+                    $request->get('data_fim')), 2, ',', '.');
+            })
+            ->addColumn('valor_final', function ($row) use ($request) {
+                # Retorno
+                return number_format($this->getValorFinal($row->id, $request->get('data_inicio'),
+                    $request->get('data_fim')), 2, ',', '.');
+            })
             ->filter(function ($query) use ($request) {
                 // Filtranto por vestibular
                 if ($request->has('data_inicio') && $request->has('data_fim')) {
                     //Tratando as datas
                     $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
                     $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
-                    //dd(array($dataIni, $dataFim));
                     $query->whereBetween('vendas.data', array($dataIni, $dataFim));
                 }
 
@@ -105,28 +264,23 @@ class ReportFinanceiroController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function queryFinanceiro(Request $request)
+    public function reportFinanceiroSum(Request $request)
     {
         try {
             # Criando a query principal
             $query = $this->getQuery()
                 ->groupBy('pessoas.id', 'areas.id')
                 ->select([
-                    'pessoas.id as id',
-                    'pessoas.nome as nome',
-                    'areas.nome as nome_area',
-                    \DB::raw('SUM(vendas.retorno) as premiacao'),
-                    \DB::raw('to_char(((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100)::real, \'9999999999D99\') as comissao'),
+                    'pessoas.id',
                     \DB::raw('SUM(vendas.valor_total) valor_total'),
-                    \DB::raw('to_char((SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * SUM(conf_vendas.comissao))/100) - SUM(vendas.retorno))::real, \'9999999999D99\') as valor_final')
                 ]);
 
-            # Verificando a se o período foi passado por parâmetro
+            // Filtranto por períodos
             if ($request->has('data_inicio') && $request->has('data_fim')) {
+                //Tratando as datas
                 $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
                 $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
-
-                $query->whereBetween('vendas.data',  array($dataIni, $dataFim));
+                $query->whereBetween('vendas.data', array($dataIni, $dataFim));
             }
 
             # Verificando a se a área foi passado por parâmetro
@@ -139,8 +293,36 @@ class ReportFinanceiroController extends Controller
                 $query->where('pessoas.id', $request->get('vendedor'));
             }
 
-            # Retorno
-            return $query->get();
+            # Variáveis de soma
+            $sumPremiacao  = 0;
+            $sumComissao   = 0;
+            $sumvalorTotal = 0;
+            $sumvalorFinal = 0;
+
+            # Percorrendo o o retorno da query
+            foreach ($query->get() as $row) {
+                $sumPremiacao  += $this->getPremiacao($row->id, $request->get('data_inicio'), $request->get('data_fim'));
+                $sumComissao   += $this->getComissao($row->id, $request->get('data_inicio'), $request->get('data_fim'));
+                $sumvalorTotal += $row->valor_total;
+                $sumvalorFinal +=  $this->getValorFinal($row->id, $request->get('data_inicio'), $request->get('data_fim'));
+            }
+
+            # Variável de retorno
+            $result = (object) [
+                'premiacao' => number_format($sumPremiacao, 2, ',', '.'),
+                'comissao' => number_format($sumComissao, 2, ',', '.'),
+                'valor_final' => number_format($sumvalorFinal, 2, ',', '.'),
+                'valor_total' => number_format($sumvalorTotal, 2, ',', '.')
+            ];
+
+            # Verificando o tipo de requisição
+            if($request->has('tipo_requisicao') && $request->get('tipo_requisicao') == '1') {
+                # Retorno
+                return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $result]);
+            } else {
+                # Retorno
+                return $result;
+            }
         } catch (\Throwable $e) {
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
@@ -148,45 +330,29 @@ class ReportFinanceiroController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function reportFinanceiroView()
-    {
-        # Recuperando os loads fields
-        $loadFields = $this->service->load($this->loadFields);
-
-        #Retorno para view
-        return view('reports.reportFinanceiro', compact('loadFields'));
-    }
-
-    /**
      * @param Request $request
      * @return mixed
      */
-    public function reportFinanceiroSum(Request $request)
+    public function queryFinanceiro(Request $request)
     {
         try {
             # Criando a query principal
             $query = $this->getQuery()
+                ->groupBy('pessoas.id', 'areas.id')
                 ->select([
-                    \DB::raw('SUM(vendas.retorno) as premiacao'),
-                    \DB::raw('to_char(((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100)::real, \'9999999999D99\') as comissao'),
+                    'pessoas.id',
+                    'pessoas.nome',
+                    'areas.nome as nome_area',
                     \DB::raw('SUM(vendas.valor_total) valor_total'),
-                    \DB::raw('to_char((SUM(vendas.valor_total) - ((SUM(vendas.valor_total) * sum(conf_vendas.comissao))/100) - SUM(vendas.retorno))::real, \'9999999999D99\') as valor_final')
                 ]);
 
-            # Verificando a se o período foi passado por parâmetro
-            if ($request->has('dataInicio') && $request->has('dataFim')) {
-                $dataIni = SerbinarioDateFormat::toUsa($request->get('dataInicio'), 'date');
-                $dataFim = SerbinarioDateFormat::toUsa($request->get('dataFim'), 'date');
-
-                $query->whereBetween('vendas.data',  array($dataIni, $dataFim));
+            // Filtranto por períodos
+            if ($request->has('data_inicio') && $request->has('data_fim')) {
+                //Tratando as datas
+                $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
+                $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
+                $query->whereBetween('vendas.data', array($dataIni, $dataFim));
             }
-
-//            # Verificando a se o período foi passado por parâmetro
-//            if ($request->has('data_inicio') && $request->has('data_fim')) {
-//                $query->whereBetween('conf_vendas.data',  array($request->get('data_inicio'), $request->get('data_fim')));
-//            }
 
             # Verificando a se a área foi passado por parâmetro
             if($request->has('area') && $request->get('area') != 0) {
@@ -198,16 +364,33 @@ class ReportFinanceiroController extends Controller
                 $query->where('pessoas.id', $request->get('vendedor'));
             }
 
-            # Verificando o tipo de requisição
-            if($request->has('tipo_requisicao') && $request->get('tipo_requisicao') == '1') {
-                # Retorno
-                return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $query->get()]);
-            } else {
-                # Retorno
-                return $query->first();
+            # Array dos dados
+            $result = [];
+            $count = 0;
+
+            # Recupeando os dados da query
+            $rows = $query->get();
+
+            # Percorrendo o o retorno da query
+            foreach ($rows as $row) {
+                # Armazenando os dados
+                $result[$count]['nome'] = $row->nome;
+                $result[$count]['nome_area'] = $row->nome_area;
+                $result[$count]['premiacao'] = ($result[$count]['sumPremiacao'] ?? 0.00) + $this->getPremiacao($row->id, $request->get('data_inicio'), $request->get('data_fim'));
+                $result[$count]['comissao'] = ($result[$count]['sumComissao'] ?? 0.00) + $this->getComissao($row->id, $request->get('data_inicio'), $request->get('data_fim'));
+                $result[$count]['valor_total'] = ($result[$count]['sumvalorTotal'] ?? 0.00) + $row->valor_total;
+                $result[$count]['valor_final'] =  ($result[$count]['sumvalorFinal'] ?? 0.00) + $this->getValorFinal($row->id, $request->get('data_inicio'), $request->get('data_fim'));
+
+                # Convertendo
+                $result[$count] = (object) $result[$count];
+
+                # Incrementando
+                $count++;
             }
 
-        } catch (\Throwable $e) {
+            # Retorno
+            return $result;
+        } catch (\Throwable $e) {dd( $e);
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
         }
@@ -223,27 +406,19 @@ class ReportFinanceiroController extends Controller
         $dados = $request->request->all();
 
         $financeiro = $this->queryFinanceiro($request);
-        $sum    = $this->reportFinanceiroSum($request);
-
+        $sum = $this->reportFinanceiroSum($request);
+        
         $this->queryFinanceiro = $financeiro;
         $this->querySum = $sum;
         
         if($dados['exportar'] == '1') {
-
             return \PDF::loadView('reports.reportFinanceiroPDF', ['financeiros' => $financeiro, 'sum' => $sum])->stream();
-
         } else if ($dados['exportar'] == '2') {
-
-            \Excel::create('Relatório financeiro', function($excel) {
-
+            \Excel::create('Relatório de vendas', function($excel) {
                 $excel->sheet('Excel', function($sheet) {
-
                     $sheet->loadView('reports.reportFinanceiroExcel', array('financeiros' => $this->queryFinanceiro, 'sum' => $this->querySum));
-
                 });
-
             })->download('xls');
         }
-
     }
 }

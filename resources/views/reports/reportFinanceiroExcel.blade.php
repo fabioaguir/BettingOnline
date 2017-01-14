@@ -43,9 +43,9 @@
         <tr>
             <td>{{$financeiro->nome}}</td>
             <td>{{$financeiro->nome_area}}</td>
-            <td>{{$financeiro->premiacao}}</td>
-            <td>{{$financeiro->comissao}}</td>
             <td>{{$financeiro->valor_total}}</td>
+            <td>{{$financeiro->comissao}}</td>
+            <td>{{$financeiro->premiacao}}</td>
             <td>{{$financeiro->valor_final}}</td>
         </tr>
     @endforeach
