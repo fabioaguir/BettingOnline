@@ -84,14 +84,16 @@ class ReportFinanceiroController extends Controller
                     //Tratando as datas
                     $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
                     $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
-
-                    $query->whereBetween('conf_vendas.data', array($dataIni, $dataFim));
+                    //dd(array($dataIni, $dataFim));
+                    $query->whereBetween('vendas.data', array($dataIni, $dataFim));
                 }
 
+                # Verificando a se a area foi passado por parâmetro
                 if($request->has('area') && $request->get('area') != 0) {
                     $query->where('areas.id', $request->get('area'));
                 }
 
+                # Verificando a se o vendedor foi passado por parâmetro
                 if($request->has('vendedor') && $request->get('vendedor') != 0) {
                     $query->where('pessoas.id', $request->get('vendedor'));
                 }
@@ -121,17 +123,18 @@ class ReportFinanceiroController extends Controller
 
             # Verificando a se o período foi passado por parâmetro
             if ($request->has('data_inicio') && $request->has('data_fim')) {
-
                 $dataIni = SerbinarioDateFormat::toUsa($request->get('data_inicio'), 'date');
                 $dataFim = SerbinarioDateFormat::toUsa($request->get('data_fim'), 'date');
 
-                $query->whereBetween('conf_vendas.data',  array($dataIni, $dataFim));
+                $query->whereBetween('vendas.data',  array($dataIni, $dataFim));
             }
 
+            # Verificando a se a área foi passado por parâmetro
             if($request->has('area') && $request->get('area') != 0) {
                 $query->where('areas.id', $request->get('area'));
             }
 
+            # Verificando a se o vendedor foi passado por parâmetro
             if($request->has('vendedor') && $request->get('vendedor') != 0) {
                 $query->where('pessoas.id', $request->get('vendedor'));
             }
@@ -174,26 +177,28 @@ class ReportFinanceiroController extends Controller
 
             # Verificando a se o período foi passado por parâmetro
             if ($request->has('dataInicio') && $request->has('dataFim')) {
-
                 $dataIni = SerbinarioDateFormat::toUsa($request->get('dataInicio'), 'date');
                 $dataFim = SerbinarioDateFormat::toUsa($request->get('dataFim'), 'date');
 
-                $query->whereBetween('conf_vendas.data',  array($dataIni, $dataFim));
+                $query->whereBetween('vendas.data',  array($dataIni, $dataFim));
             }
 
-            # Verificando a se o período foi passado por parâmetro
-            if ($request->has('data_inicio') && $request->has('data_fim')) {
-                $query->whereBetween('conf_vendas.data',  array($request->get('data_inicio'), $request->get('data_fim')));
-            }
+//            # Verificando a se o período foi passado por parâmetro
+//            if ($request->has('data_inicio') && $request->has('data_fim')) {
+//                $query->whereBetween('conf_vendas.data',  array($request->get('data_inicio'), $request->get('data_fim')));
+//            }
 
+            # Verificando a se a área foi passado por parâmetro
             if($request->has('area') && $request->get('area') != 0) {
                 $query->where('areas.id', $request->get('area'));
             }
 
+            # Verificando a se o vendedor foi passado por parâmetro
             if($request->has('vendedor') && $request->get('vendedor') != 0) {
                 $query->where('pessoas.id', $request->get('vendedor'));
             }
 
+            # Verificando o tipo de requisição
             if($request->has('tipo_requisicao') && $request->get('tipo_requisicao') == '1') {
                 # Retorno
                 return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $query->get()]);
