@@ -57,12 +57,12 @@
     <tbody>
     @foreach($financeiros as $financeiro)
         <tr>
-            <td>{{$financeiro->nome}}</td>
-            <td>{{$financeiro->nome_area}}</td>
-            <td>{{$financeiro->premiacao}}</td>
-            <td>{{$financeiro->comissao}}</td>
-            <td>{{$financeiro->valor_total}}</td>
-            <td>{{$financeiro->valor_final}}</td>
+            <td>{{ $financeiro->nome }}</td>
+            <td>{{ $financeiro->nome_area }}</td>
+            <td>{{ number_format($financeiro->premiacao, 2, ',', '.') }}</td>
+            <td>{{ number_format($financeiro->comissao, 2, ',', '.') }}</td>
+            <td>{{ number_format($financeiro->valor_total, 2, ',', '.') }}</td>
+            <td>{{ number_format($financeiro->valor_final, 2, ',', '.') }}</td>
         </tr>
     @endforeach
     </tbody>

@@ -29,6 +29,7 @@
                     {!! Form::select('vendedor', (['Selecione um vendedor'] + $loadFields['vendedor']->toArray()), null, array('class' => 'form-control')) !!}
                 </div>
             </div>
+
             <div class="form-group col-md-2">
                 <label for="exportar">Exportar </label>
                 <select id="exportar" class="form-control" name="exportar">
@@ -37,6 +38,7 @@
                 </select>
             </div>
         </div>
+
         <div class="row">
             <div class="col-sm-2">
                 <button type="submit" style="margin-top: -5px" class="btn-primary btn search">Consultar</button>
@@ -48,6 +50,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-sm-4">
         <table class="table table-bordered" cellspacing="0" width="100%">
@@ -159,11 +162,11 @@
         function loadTotais()
         {
             var searchData = {
-                'dataInicio' : $('#data_inicio').val(),
-                'dataFim' : $('#data_fim').val(),
+                'data_inicio' : $('#data_inicio').val(),
+                'data_fim' : $('#data_fim').val(),
                 'area' : $('#area').val(),
                 'vendedor' : $('#vendedor').val(),
-                'tipo_requisicao' : '1'
+                'tipo_requisicao' : 1
             };
 
             // Requisição ajax
@@ -180,10 +183,10 @@
                     $('td.total-premio').html(" ");
                     $('td.total-final').html(" ");
                 } else {
-                    $('td.total-apurado').html("<b>"+ jsonResponse.data[0].valor_total+"</b>");
-                    $('td.total-comissao').html("<b>"+ jsonResponse.data[0].comissao +"</b>");
-                    $('td.total-premio').html("<b>"+ jsonResponse.data[0].premiacao +"</b>");
-                    $('td.total-final').html("<b>"+jsonResponse.data[0].valor_final +"</b>");
+                    $('td.total-apurado').html("<b>"+ jsonResponse.data.valor_total+"</b>");
+                    $('td.total-comissao').html("<b>"+ jsonResponse.data.comissao +"</b>");
+                    $('td.total-premio').html("<b>"+ jsonResponse.data.premiacao +"</b>");
+                    $('td.total-final').html("<b>"+jsonResponse.data.valor_final +"</b>");
                 }
 
             });
