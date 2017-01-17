@@ -42,7 +42,6 @@
         {{$aposta->data}} {{$aposta->hora}} <br />
         {{$aposta->nome_modalidade}} -
         @if($venda[0]->tipo_id == '1')
-            {{-- <?php $total = $aposta->valor_aposta * $aposta->valor_cotacao; ?>--}}
             {{$aposta->valor_cotacao}} <br />
         @elseif($venda[0]->tipo_id == '2')
             {{$aposta->valor_cotacao}} <br />
