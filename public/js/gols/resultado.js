@@ -11,6 +11,15 @@ function builderResultado(idPartida)
             // Dados de retorno
             var resultado = jsonResponse.data;
 
+            // Verificando se a partida foi finalizada
+            if(resultado[0].processada_id == 1) {
+                // Mostrando o título de partida finalizada
+                $('#textoDePartidaFinalizada').show();
+            } else {
+                // Escondendo o título de partida finalizada
+                $('#textoDePartidaFinalizada').hide();
+            }
+
             // Carregando o html de resultado
             $('#time_casa').html(resultado[0].time_casa);
             $('#time_fora').html(resultado[0].time_fora);

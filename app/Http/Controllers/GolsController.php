@@ -238,6 +238,7 @@ class GolsController extends Controller
                 ->select([
                     'time_casa.nome as time_casa',
                     'time_fora.nome as time_fora',
+                    'partidas.processada_id',
                     \DB::raw("(SELECT COUNT(gols.id) FROM gols WHERE gols.partida_id = partidas.id AND gols.time_id = time_casa.id) as gols_casa"),
                     \DB::raw("(SELECT COUNT(gols.id) FROM gols WHERE gols.partida_id = partidas.id AND gols.time_id = time_fora.id) as gols_fora")
                 ])
