@@ -192,7 +192,7 @@ class VendedorService
         $dadosConfvendas['tipo_cotacao_id'] = $result->tipo_cotacao_id;
         $dadosConfvendas['vendedor_id'] = $result->vendedor_id;
         $dadosConfvendas['status_id'] = '1';
-        $dadosConfvendas['data'] = $date->format('d-m-Y');
+        $dadosConfvendas['data'] = $date->format('Y-m-d');
 
         //salvando o registro no banco de configuração de vendas
         $this->repoConfVendas->create($dadosConfvendas);
