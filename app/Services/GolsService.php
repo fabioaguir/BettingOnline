@@ -98,7 +98,7 @@ class GolsService
         }
 
         # Alterando o status da partida
-        $partida->status_id = 1;
+        $partida->processada_id = 1;
         $partida->save();
 
         # Algoritmo para tratamento do resultado
