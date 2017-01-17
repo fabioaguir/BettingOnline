@@ -40,13 +40,13 @@
     <p>
         {{$aposta->time_casa}} X {{$aposta->time_fora}} <br />
         {{$aposta->data}} {{$aposta->hora}} <br />
+        {{$aposta->nome_modalidade}} -
         @if($venda[0]->tipo_id == '1')
-            <?php $total = $aposta->valor_aposta * $aposta->valor_cotacao; ?>
-            {{$aposta->valor_aposta}} x {{$aposta->valor_cotacao}} = {{$total}} <br />
+            {{-- <?php $total = $aposta->valor_aposta * $aposta->valor_cotacao; ?>--}}
+            {{$aposta->valor_cotacao}} <br />
         @elseif($venda[0]->tipo_id == '2')
-            {{$aposta->valor_aposta}} <br />
+            {{$aposta->valor_cotacao}} <br />
         @endif
-        {{$aposta->nome_modalidade}}
     </p>
     ---------------------------------------------
 @endforeach
