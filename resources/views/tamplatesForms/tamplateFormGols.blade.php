@@ -2,7 +2,7 @@
     <div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="searchDate">Data</label>
-            <div class="col-sm-8">
+                <div class="col-sm-8">
                 <div class="input-group">
                     @if(isset($model->id))
                         <input class="form-control mask" value="{{$model->partida->data}}" data-inputmask="'alias': 'date'" type="text" id="searchDate">

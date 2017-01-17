@@ -49,6 +49,8 @@
                                         </tr>
                                         </tbody>
                                     </table>
+
+                                    <h3 style="text-align: center" id="textoDePartidaFinalizada">Partida Finalizada</h3>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,9 @@
 // carregamento inicial da grid
 loadTable(0).ajax.url(laroute.route('betting.gols.grid', {'idPartida' : 0})).load();
 
+// Escondendo o título de partida finalizada
+$('#textoDePartidaFinalizada').hide();
+
 // Evento para quando clicar no botão de pesquisa
 $(document).on('click', '#btnSearch', function (event) {
     // Recuperando o valor da data

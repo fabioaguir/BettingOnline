@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Softage\Repositories\GolsRepository;
+use Softage\Repositories\PartidasRepository;
 use Softage\Services\GolsService;
 use Softage\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -39,6 +40,11 @@ class GolsController extends Controller
     private $loadFields = [
         'Tempos'
     ];
+    
+    /**
+     * @var PartidasRepository
+     */
+    private $partidasRepository;
 
     /**
      * GolsController constructor.
@@ -46,11 +52,15 @@ class GolsController extends Controller
      * @param GolsService $service
      * @param GolsValidator $validator
      */
-    public function __construct(GolsRepository $repository, GolsService $service, GolsValidator $validator)
+    public function __construct(GolsRepository $repository,
+                                GolsService $service,
+                                GolsValidator $validator, 
+                                PartidasRepository $partidasRepository)
     {
         $this->repository = $repository;
         $this->service    = $service;
         $this->validator  = $validator;
+        $this->partidasRepository = $partidasRepository;
     }
 
 
@@ -189,20 +199,22 @@ class GolsController extends Controller
             # Recuperando a requisição
             $data = $request->get('data');
 
-            # Recuperando o registro do banco de dados
-            $times = \DB::table('times')
-                ->join('partidas', function ($join) {
-                    $join->on('partidas.time_casa_id', '=', 'times.id')
-                        ->orOn('partidas.time_fora_id', '=', 'times.id');
-                })
-                ->select('times.id', 'times.nome')
-                ->where('partidas.id', $data)
-                ->get();
+            # Recuperando a partida
+            $partida = $this->partidasRepository->find($data);
 
             # verificando se o registro foi recuperado
-            if(!$times) {
+            if(!$partida) {
                 throw new \Exception('Times não encontrados!');
             }
+
+            # Array que armazenará os times
+            $times = [];
+
+            # Atribuindo o time da casa
+            $times[0] = $partida->casa;
+
+            # Atribuindo o time de fora
+            $times[1] = $partida->fora;
 
             #Retorno para a view
             return response()->json(['success' => true, 'data' => $times]);
@@ -226,6 +238,7 @@ class GolsController extends Controller
                 ->select([
                     'time_casa.nome as time_casa',
                     'time_fora.nome as time_fora',
+                    'partidas.processada_id',
                     \DB::raw("(SELECT COUNT(gols.id) FROM gols WHERE gols.partida_id = partidas.id AND gols.time_id = time_casa.id) as gols_casa"),
                     \DB::raw("(SELECT COUNT(gols.id) FROM gols WHERE gols.partida_id = partidas.id AND gols.time_id = time_fora.id) as gols_fora")
                 ])
