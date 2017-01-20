@@ -56,7 +56,7 @@ class AlgForSimple extends AlgResponsibility
         }
 
         # Setando o valor de retorno
-        $venda->retorno = $aposta->valor * $aposta->cotacao->valor;
+        //$venda->retorno = $aposta->valor * $aposta->cotacao->valor;
         $venda->save();
 
         # Alterando o status de premiada da aposta

@@ -33,10 +33,10 @@ class AlgForResult
      * @return bool
      */
     public function execute(Partidas $partida)
-    {
+    { 
         # Recuperando as modalidades compatíveis com a partida
         $modalidadesGenericas = $this->getModalidades($partida);
-        
+
         # Recuperando as apostas
         $apostas = $partida->apostas;
 
