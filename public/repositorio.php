@@ -22,7 +22,68 @@ class Repositorio{
 		}
 		pg_close($conn);
 	}
+ 
+ 	public function getCampeonatos($post){
+		$conn = pg_connect("host=54.218.74.108 port=5432 dbname=bettingonline user=postgres password=123456") or die ("0");
+		if (!$conn) {
+			echo "Erro na conexão com o banco de dados.";
+			exit;	
+		}
+   
+   $data = $post['dia'];
+   
+   if($data == ''){
+       $query = "select id || ' - ' || nome from campeonatos order by nome";
+   }else{
+      $data = str_replace('/', '-', $data);
+	    $data = date('Y-m-d', strtotime($data));
+      $query = "select id || ' - ' || nome from campeonatos where id in (select campeonato_id from partidas where data = '$data' group by campeonato_id) order by nome";
+   }
+      
+    $campeonatos = "";
+		$result = pg_query($conn, $query);
+   
+		while ( $row = pg_fetch_row($result)) {
+		  $campeonatos = $campeonatos . $row[0] . ";";
+		}
+    echo substr($campeonatos, 0, -1);
+		pg_close($conn);
+	}
 	
+ 	public function relPartidasDia($post){
+		$conn = pg_connect("host=54.218.74.108 port=5432 dbname=bettingonline user=postgres password=123456") or die ("0");
+		if (!$conn) {
+			echo "Erro na conexão com o banco de dados.";
+			exit;	
+		}
+   
+    $data = $post['dia'];
+		$data = str_replace('/', '-', $data);
+		$data = date('Y-m-d', strtotime($data));
+   
+     $ret = '';
+      
+     $result = pg_query($conn, "select campeonato_id, (select nome from campeonatos where campeonatos.id = campeonato_id) from partidas where data = '$data' group by campeonato_id");
+		 while ( $row = pg_fetch_row($result)) {
+		   $ret = $ret . "#;" . $row[1] . ";#;";
+          
+          $result2 = pg_query($conn, "select id, (select nome from times where times.id = time_casa_id) || ' x ' || (select nome from times where times.id = time_fora_id) || ' - ' || hora from partidas where data = '$data' and campeonato_id = $row[0]");
+		      while ( $row2 = pg_fetch_row($result2)) {
+            $ret = $ret . $row2[1] .";";
+
+            $result3 = pg_query($conn, "select (select 'C: ' || valor from cotacoes where partida_id = $row2[0] and modalidade_id = 4)|| ' - ' || (select 'E: ' || valor from cotacoes where partida_id = $row2[0] and modalidade_id = 5)|| ' - ' || (select 'F: ' || valor from cotacoes where partida_id = $row2[0] and modalidade_id = 6)");
+		        while ( $row3 = pg_fetch_row($result3)) {
+              $ret = $ret . $row3[0] .";;";            
+            
+            }
+          }
+	  }
+   
+    echo $ret;
+    
+		pg_close($conn);
+	}
+ 
 	public function getPartidas($post){
 		$conn = pg_connect("host=54.218.74.108 port=5432 dbname=bettingonline user=postgres password=123456") or die ("0");
 		if (!$conn) {
@@ -33,14 +94,13 @@ class Repositorio{
 		$data = $post['dataPartida'];
 		$data = str_replace('/', '-', $data);
 		$data = date('Y-m-d', strtotime($data));
-
 		$campeonato = $post['campeonato'];		
-		
 		$json = "[";
 		
-		$result = pg_query($conn, "select id, hora, (select nome from times where times.id = partidas.time_casa_id), (select nome from times where times.id = partidas.time_fora_id) from partidas where data = '$data' and campeonato_id = (select id from campeonatos where nome = '$campeonato')");
-		
+		$result = pg_query($conn, "select id, hora, (select nome from times where times.id = partidas.time_casa_id) as casa, (select nome from times where times.id = partidas.time_fora_id) from partidas where data = '$data' and campeonato_id = $campeonato order by casa");
+   
 		while ( $row = pg_fetch_row($result)) {
+   
 			$json = $json.'{"equipes":"'.$row[2].' x '.$row[3].'", "data_partida":"'.$post['dataPartida'].' - '.substr($row[1], 0, -3).'",';
 			
 			$cotacoes_especiais = '"cotacao_especial":"';
@@ -76,7 +136,8 @@ class Repositorio{
 		$tipo_aposta = 1;
 
 		$numAposta = $post['numAposta'];
-		
+    $idVendedor = $post['idVendedor'];  
+    		
 		$query = "select tipo_aposta_id from vendas where id = $numAposta";
 	
 		$result = pg_query($conn, $query);
@@ -95,10 +156,18 @@ class Repositorio{
 		$query = $query . '(select (select nome from campeonatos where campeonatos.id = partidas.campeonato_id) as Campeonato from partidas where partidas.id = partida_id),';
 		$query = $query . 'valor as valor_apostado, ';
 		$query = $query . '(select obs from vendas where vendas.id = venda_id),';
-		$query = $query . '(select status_v_id from vendas where vendas.id = venda_id), (select valor_total from vendas where vendas.id = venda_id) from ';
+		$query = $query . '(select status_v_id from vendas where vendas.id = venda_id), (select valor_total from vendas where vendas.id = venda_id), (select retorno from vendas where vendas.id = venda_id) from ';
 		$query = $query . 'apostas where venda_id =';
 		$query = $query . $numAposta;
 				
+    $var = pg_query($conn, "select count(1) from vendas where conf_venda_id = (select id from conf_vendas where vendedor_id = $idVendedor and status_id = 1) and id = $numAposta");
+    
+    $bool = pg_fetch_row($var);
+    
+    if($bool[0] <> 1){
+        $query = "";
+    }
+        
 		$result = pg_query($conn, $query);
 	
 		if($tipo_aposta == 1){
@@ -127,7 +196,13 @@ class Repositorio{
 				$total = $row[6];
 			}
 				
+     if($tipo_aposta == 1){
 			$premio = $premio + $row[3] * $row[6];
+		}else{
+   $premio = $row[10];
+   }
+   
+			
 			$info = $row[7];
 		}
 	
@@ -175,16 +250,16 @@ class Repositorio{
 		
 		$numVendedor = $post['numVendedor'];
 		
-		$query = "select sum(valor_total), (select limite_vendas from conf_vendas where vendedor_id = $numVendedor) ";
+		$query = "select sum(valor_total), (select limite_vendas from conf_vendas where vendedor_id = $numVendedor and status_id = 1) ";
 		
-		$query = $query . "from vendas where conf_venda_id = (select id from conf_vendas where vendedor_id = $numVendedor) ";
+		$query = $query . "from vendas where conf_venda_id = (select id from conf_vendas where vendedor_id = $numVendedor and status_id = 1) ";
 		
 		$result = pg_query($conn, $query);
 	
-		$ret = "0;0";
+		$ret = "01;1;0";
 	
 		while ($row = pg_fetch_row($result)) {
-			$ret = $row[0] . ";" . $row[1];
+			$ret = $row[0] . ";" . ($row[1] - $row[0]);
 		}
 	
 		echo $ret;
@@ -215,14 +290,16 @@ class Repositorio{
 			$vendas_id = $row[0];
 		}
 		
-		$query = "INSERT INTO vendas(id, data, obs, valor_total, retorno, status_v_id, premiacao_id, tipo_aposta_id, conf_venda_id, created_at, updated_at)";
-		$query = $query . "VALUES ($vendas_id, '$now', '$obs', $valor_total, $valor_retorno, 1, 2, $tipo_aposta, (select id from conf_vendas where vendedor_id = $vendedor_id), '$now', '$now')";
+		$query = "INSERT INTO vendas(id, seq, data, obs, valor_total, retorno, status_v_id, premiacao_id, tipo_aposta_id, conf_venda_id, created_at, updated_at)";
+		$query = $query . "VALUES ($vendas_id, $vendas_id, '$now', '$obs', $valor_total, $valor_retorno, 1, 2, $tipo_aposta, (select id from conf_vendas where vendedor_id = $vendedor_id and status_id = 1), '$now', '$now')";
 			
 		pg_query($conn, $query);
 			
+  
+      
 		for ($i = 0; $i < count($jsonArray); $i++) {
 			$json = $jsonArray[$i];
-					
+				
 			$equipes = explode( " x ",$json->{'partida'});
 			$data = str_replace('/', '-', $json->{'data'});
 			$data = date('Y-m-d', strtotime($data));
@@ -271,6 +348,24 @@ class Repositorio{
 		pg_close($conn);
 		
 		echo $vendas_id;	
+	}
+ 
+  public function getRodape($post){
+		$conn = pg_connect("host=54.218.74.108 port=5432 dbname=bettingonline user=postgres password=123456") or die ("0");
+		if (!$conn) {
+			echo "Erro na conexão com o banco de dados.";
+			exit;	
+		}
+
+		$result = pg_query($conn, "select mensagen_rodape from parametros");
+		$row = pg_fetch_row($result);
+
+		if(!$row[0]){
+			echo "0";
+		}else{
+			echo $row[0];
+		}
+		pg_close($conn);
 	}
 }
 ?>	
