@@ -143,7 +143,14 @@ class ReportArrecadacoesController extends Controller
         $query = \DB::table('arrecadacoes')
             ->join('pessoas as vendedor', 'vendedor.id', '=', 'arrecadacoes.vendedor_id')
             ->leftJoin('pessoas as arrecadador', 'arrecadador.id', '=', 'arrecadacoes.arrecadador_id')
-            ->join('conf_vendas', 'conf_vendas.vendedor_id', '=', 'vendedor.id')
+            ->join(\DB::raw('conf_vendas'), function ($join) {
+                $join->on(
+                    'conf_vendas.id', '=',
+                    \DB::raw("(SELECT conf_atual.id FROM conf_vendas as conf_atual
+                    where conf_atual.vendedor_id = vendedor.id AND conf_atual.status_id = 1  ORDER BY conf_vendas.id DESC LIMIT 1)")
+                );
+            })
+            //->join('conf_vendas', 'conf_vendas.vendedor_id', '=', 'vendedor.id')
             ->leftJoin('users', 'users.id', '=', 'arrecadacoes.user_id')
             ->join('areas', 'areas.id', '=', 'vendedor.area_id')
             ->whereBetween('arrecadacoes.data', array($dataIni, $dataFim))
@@ -151,6 +158,8 @@ class ReportArrecadacoesController extends Controller
                 $query->orWhere('arrecadacoes.user_id', '=', "{$this->data['user']}")
                 ->orWhere('arrecadacoes.arrecadador_id', '=', "{$this->data['arrecadador']}");
             });
+
+        //dd(count($query));
 
         return $query;
     }
