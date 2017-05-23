@@ -107,7 +107,7 @@ class AlgForSevenSort extends AlgResponsibility
 
         # Atualizando os dados da venda
         $venda->premiacao_id = 1;
-        $venda->retorno = ($venda->valor_total * $somaValoresCotacao) + $valorBonus; // somar com o valor do bonus por partida 7 da sorte
+        //$venda->retorno = ($venda->valor_total * $somaValoresCotacao) + $valorBonus; // somar com o valor do bonus por partida 7 da sorte
         $venda->save();
 
         # Retorno

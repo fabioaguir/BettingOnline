@@ -91,7 +91,7 @@ class AlgForMultiple extends AlgResponsibility
 
         # Atualizando os dados da venda
         $venda->premiacao_id = 1;
-        $venda->retorno = $venda->valor_total * $somaValoresCotacao;
+        //$venda->retorno = $venda->valor_total * $somaValoresCotacao;
         $venda->save();
 
         # Retorno

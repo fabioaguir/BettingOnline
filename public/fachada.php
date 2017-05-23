@@ -9,13 +9,16 @@ if(isset($_POST["acao"])){
             Repositorio::getAposta($_POST);
             break;
         case "getCampeonatos":
-            getCampeonatos($_POST);
+            Repositorio::getCampeonatos($_POST);
             break;
         case "getFinanceiro":
             Repositorio::getFinanceiro($_POST);
             break;
         case "apostasVencedoras":
             apostasVencedoras($_POST);
+            break;
+        case "getRodape":
+            Repositorio::getRodape($_POST);
             break;
         case "cancelarAposta":
             Repositorio::cancelarAposta($_POST);
@@ -28,6 +31,9 @@ if(isset($_POST["acao"])){
             break;
         case "con":
             Repositorio::con();
+            break;
+        case "relPartidasDia":
+            Repositorio::relPartidasDia($_POST);
             break;
 		case "insApostas":
             Repositorio::insApostas($_POST);
