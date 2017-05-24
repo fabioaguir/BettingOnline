@@ -233,7 +233,7 @@ class ReportVendasController extends Controller
             ->join('tipo_apostas', 'tipo_apostas.id', '=', 'vendas.tipo_aposta_id')
             ->where('vendas.id', '=', $id)
             ->select([
-                \DB::raw("to_char(vendas.data, 'DD/MM/YYYY HH:MI:SS') as data"),
+                \DB::raw("to_char(vendas.data, 'DD/MM/YYYY') as data"),
                 'pessoas.nome as vendedor',
                 'status_vendas.nome as status_nome',
                 'status_vendas.id as status_id',
