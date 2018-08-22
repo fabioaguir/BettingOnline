@@ -138,7 +138,7 @@ class ReportArrecadacoesController extends Controller
         //Tratando as datas
         $dataIni = SerbinarioDateFormat::toUsa($this->data['data_inicio'], 'date');
         $dataFim = SerbinarioDateFormat::toUsa($this->data['data_fim'], 'date');
-        
+
         #Criando a consulta
         $query = \DB::table('arrecadacoes')
             ->join('pessoas as vendedor', 'vendedor.id', '=', 'arrecadacoes.vendedor_id')
@@ -153,13 +153,19 @@ class ReportArrecadacoesController extends Controller
             //->join('conf_vendas', 'conf_vendas.vendedor_id', '=', 'vendedor.id')
             ->leftJoin('users', 'users.id', '=', 'arrecadacoes.user_id')
             ->join('areas', 'areas.id', '=', 'vendedor.area_id')
-            ->whereBetween('arrecadacoes.data', array($dataIni, $dataFim))
-            ->Where(function ($query) {
-                $query->orWhere('arrecadacoes.user_id', '=', "{$this->data['user']}")
-                ->orWhere('arrecadacoes.arrecadador_id', '=', "{$this->data['arrecadador']}");
-            });
+            ->whereBetween('arrecadacoes.data', array($dataIni, $dataFim));
 
-        //dd(count($query));
+        if (($this->data->has('user') && $this->data->get('user')) != 0) {
+            $query->Where(function ($query) {
+                $query->orWhere('arrecadacoes.user_id', '=', "{$this->data['user']}");
+            });
+        }
+
+        if (($this->data->has('arrecadador') && $this->data->get('arrecadador')) != 0) {
+            $query->Where(function ($query) {
+                $query->orWhere('arrecadacoes.arrecadador_id', '=', "{$this->data['arrecadador']}");
+            });
+        }
 
         return $query;
     }

@@ -53,6 +53,6 @@ return [
      * Appends a prefix to URLs. By default the prefix is an empty string.
     *
     */
-    'prefix' => '/ApostasOnline/public/index.php',
+    'prefix' => '/bettingonline/public/index.php',
     //'prefix' => '/public/index.php',
 ];

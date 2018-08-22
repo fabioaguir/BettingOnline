@@ -103,10 +103,12 @@ class ReportFinanceiroController extends Controller
      */
     private function comissao($idVendedor, $confVendas)
     {
+
         # Fazendo a consulta
         $query = \DB::table('conf_vendas')
             ->where('vendedor_id', $idVendedor)
-            ->whereIn('conf_vendas.id', array_unique($confVendas))
+            //->whereIn('conf_vendas.id', array_unique($confVendas))
+            ->where('conf_vendas.id', "=", $confVendas)
             ->select([\DB::raw('SUM(conf_vendas.comissao) as comissao')])
             ->first();
 
@@ -148,27 +150,44 @@ class ReportFinanceiroController extends Controller
      */
     public function getComissao($idVendedor, $dataIni, $dataFin)
     {
-        # Fazendo a consulta
-        $query = $this->getQuery()
-            ->where('pessoas.id', $idVendedor)
-            ->select([\DB::raw('SUM(vendas.valor_total) as valor')]);
 
-        // Filtranto por período
-        if ($dataIni && $dataFin) {
-            //Tratando as datas
-            $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
-            $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
-            $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
-        }
-
-        # Recuperndo o resultado da query
-        $result = $query->first();
+        $comissao = "0.0";
 
         # Recuperando o id das configurações de vendas
-        $confVendas = $this->getConfVendasId($idVendedor, $dataIni, $dataFin);
+        $confVendas = array_values(array_unique($this->getConfVendasId($idVendedor, $dataIni, $dataFin)));
+       // dd(count($confVendas));
+
+        for($i = 0; $i < count($confVendas); $i++){
+            # Recuperndo o resultado da query
+
+            # Fazendo a consulta
+            $query = $this->getQuery()
+                ->where('pessoas.id', $idVendedor)
+                ->select([\DB::raw('SUM(vendas.valor_total) as valor')]);
+
+            // Filtranto por período
+            if ($dataIni && $dataFin) {
+                //Tratando as datas
+                $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
+                $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
+                $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+            }
+
+            $query->where('vendas.conf_venda_id', $confVendas[$i]);
+
+            $result = $query->first();
+           // $comissao = $comissao + $result->valor;
+           // dd( $this->comissao($idVendedor, $confVendas[1]));
+           // dd(($result->valor * $this->comissao($idVendedor, $confVendas[$i])));
+            //dd(($result->valor * $this->comissao($idVendedor, $confVendas[$i])) / 100);
+
+            $comissao = $comissao + ($result->valor * $this->comissao($idVendedor, $confVendas[$i])) / 100;
+        }
+
+       // dd($comissao);
 
         # Retorno
-        return $result->valor * (($this->comissao($idVendedor, $confVendas)/100));
+        return $comissao;
     }
 
     /**
@@ -179,31 +198,39 @@ class ReportFinanceiroController extends Controller
      */
     private function getValorFinal($idVendedor, $dataIni, $dataFin)
     {
-        # Fazendo a consulta
-        $query = $this->getQuery()
-            ->where('pessoas.id', $idVendedor)
-            ->select([\DB::raw('SUM(vendas.valor_total) as valor')]);
+        $comissao = 0;
+        $total    = 0;
 
-        // Filtranto por período
-        if ($dataIni && $dataFin) {
-            //Tratando as datas
-            $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
-            $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
-            $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+        # Recuperando o id das configurações de vendas
+        $confVendas = array_values(array_unique($this->getConfVendasId($idVendedor, $dataIni, $dataFin)));
+
+        for($i = 0; $i < count($confVendas); $i++){
+
+            # Fazendo a consulta
+            $query = $this->getQuery()
+                ->where('pessoas.id', $idVendedor)
+                ->select([\DB::raw('SUM(vendas.valor_total) as valor')]);
+
+            // Filtranto por período
+            if ($dataIni && $dataFin) {
+                //Tratando as datas
+                $dataIniUsa = SerbinarioDateFormat::toUsa($dataIni, 'date');
+                $dataFimUsa = SerbinarioDateFormat::toUsa($dataFin, 'date');
+                $query->whereBetween('vendas.data', array($dataIniUsa, $dataFimUsa));
+            }
+
+            # Recuperndo o resultado da query
+            $query->where('vendas.conf_venda_id', "=", $confVendas[$i]);
+            $result = $query->first();
+            $total = $total + $result->valor;
+            $comissao = $comissao + ($result->valor * $this->comissao($idVendedor, $confVendas[$i])) / 100;
         }
-
-        # Recuperndo o resultado da query
-        $result = $query->first();
 
         # Recuperando a premiação
         $resultPremiacao = $this->getPremiacao($idVendedor, $dataIni, $dataFin);
 
-        # Recuperando o id das configurações de vendas
-        $confVendas = $this->getConfVendasId($idVendedor, $dataIni, $dataFin);
-
         # Calculando o valor final e Retorno
-        return ($result->valor - ($result->valor * (($this->comissao($idVendedor, $confVendas)/100))))
-                - $resultPremiacao;
+        return ($total - $comissao) - $resultPremiacao;
     }
 
     /**
