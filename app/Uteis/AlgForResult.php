@@ -83,6 +83,22 @@ class AlgForResult
         return ['golsCasa' => $golsCasa, 'golsFora' => $golsFora];
     }
 
+    private function getGolsTempos(Partidas $partida, $gols)
+    {
+        $golsCasaPrimeiroTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->casa->id == $gol->time_id) && $gol->tempo_id = 1; })->count();
+        $golsForaPrimeiroTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->fora->id == $gol->time_id) && $gol->tempo_id = 1; })->count();
+
+        $golsCasaSegundoTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->casa->id == $gol->time_id) && $gol->tempo_id = 2; })->count();
+        $golsForaSegundoTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->fora->id == $gol->time_id) && $gol->tempo_id = 2; })->count();
+
+        return [
+            'golsCasaPrimeiroTempo' => $golsCasaPrimeiroTempo,
+            'golsForaPrimeiroTempo' => $golsForaPrimeiroTempo,
+            'golsCasaSegundoTempo' => $golsCasaSegundoTempo,
+            'golsForaSegundoTempo' => $golsForaSegundoTempo
+        ];
+    }
+
     /**
      * @param Partidas $partida
      */
@@ -146,9 +162,12 @@ class AlgForResult
         # Recuperando os gols da partida
         $arrayGols = $this->getGolsThePartida($partida, $partida->gols);
 
+        # Recuperando os gols da partida por tempo
+        $arrayGolsPorTempo = $this->getGolsTempos($partida, $partida->gols);
+
         # Ação que verifica as modalidades as modalidades
         # compatíveis com indução são retornadas
-        $modalidadesByInduction = $modalidades->filter(function ($modalidade) use ($arrayGols, $partida) {
+        $modalidadesByInduction = $modalidades->filter(function ($modalidade) use ($arrayGols, $partida, $arrayGolsPorTempo) {
             # Filtrando as modalidades da partida pela modalidade premiada em questão
             $resultFilterCotacao = $partida->cotacoes->filter(function ($cotacao) use ($modalidade) {
                 return $cotacao->modalidade->id == $modalidade->id;
@@ -190,6 +209,24 @@ class AlgForResult
                     break;
                 case 8 :
                     if(($arrayGols['golsCasa'] == 0) && ($arrayGols['golsFora'] == 0)) $resultBoolean = true;
+                    break;
+                case 9 :
+                    if(($arrayGols['golsCasa'] > 0 && $arrayGols['golsFora'] > 0) && ($arrayGols['golsCasa'] > $arrayGols['golsFora'])) $resultBoolean = true;
+                    break;
+                case 10 :
+                    if(($arrayGols['golsCasa'] > 0 && $arrayGols['golsFora'] > 0) && ($arrayGols['golsCasa'] < $arrayGols['golsFora'])) $resultBoolean = true;
+                    break;
+                case 11 :
+                    if(($arrayGolsPorTempo['golsCasaPrimeiroTempo'] > $arrayGolsPorTempo['golsForaPrimeiroTempo'])) $resultBoolean = true;
+                    break;
+                case 12 :
+                    if(($arrayGolsPorTempo['golsCasaPrimeiroTempo'] < $arrayGolsPorTempo['golsForaPrimeiroTempo'])) $resultBoolean = true;
+                    break;
+                case 13 :
+                    if(($arrayGolsPorTempo['golsCasaSegundoTempo'] > $arrayGolsPorTempo['golsForaSegundoTempo'])) $resultBoolean = true;
+                    break;
+                case 14 :
+                    if(($arrayGolsPorTempo['golsCasaSegundoTempo'] < $arrayGolsPorTempo['golsForaSegundoTempo'])) $resultBoolean = true;
                     break;
             }
 
