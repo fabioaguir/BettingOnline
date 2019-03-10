@@ -161,7 +161,8 @@ class ReportVendasPremiadasController extends Controller
             ->join('areas', 'areas.id', '=', 'pessoas.area_id')
             ->join('status_vendas', 'status_vendas.id', '=', 'vendas.status_v_id')
             ->whereBetween('vendas.data', array($dataIni, $dataFim))
-            ->where('status_vendas.id', '=', '1');
+            ->where('status_vendas.id', '=', '1')
+            ->where('vendas.premiacao_id', '=', '1');
 
         /*if($dados['area'] != 0) {
             $query->where('areas.id', $dados['area']);

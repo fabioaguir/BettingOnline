@@ -85,11 +85,12 @@ class AlgForResult
 
     private function getGolsTempos(Partidas $partida, $gols)
     {
-        $golsCasaPrimeiroTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->casa->id == $gol->time_id) && $gol->tempo_id = 1; })->count();
-        $golsForaPrimeiroTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->fora->id == $gol->time_id) && $gol->tempo_id = 1; })->count();
+        $golsCasaPrimeiroTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->casa->id == $gol->time_id) && $gol->tempo_id != 2; })->count();
+        $golsForaPrimeiroTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->fora->id == $gol->time_id) && $gol->tempo_id != 2; })->count();
 
-        $golsCasaSegundoTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->casa->id == $gol->time_id) && $gol->tempo_id = 2; })->count();
-        $golsForaSegundoTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->fora->id == $gol->time_id) && $gol->tempo_id = 2; })->count();
+        $golsCasaSegundoTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->casa->id == $gol->time_id) && $gol->tempo_id != 1; })->count();
+        $golsForaSegundoTempo = $gols->filter(function ($gol) use ($partida) { return ($partida->fora->id == $gol->time_id) && $gol->tempo_id != 1; })->count();
+
 
         return [
             'golsCasaPrimeiroTempo' => $golsCasaPrimeiroTempo,
@@ -183,7 +184,6 @@ class AlgForResult
 
             # Variável que armazenará o retorno booleano
             $resultBoolean = false;
-
             # escolha da ação correspondente
             switch($tipoInducaoId) {
                 case 1 :
